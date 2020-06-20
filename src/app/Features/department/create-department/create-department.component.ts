@@ -43,7 +43,6 @@ export class CreateDepartmentComponent implements OnInit {
   }
 
   CreateButtonClicked = function (data) {
-    //this.messageService.add({ severity: 'success', summary: 'Department Created', detail: 'Via MessageService' });
     this.loading = true;
     console.log(data);
     this.AddDept.addDepartment(data)
@@ -56,5 +55,4 @@ export class CreateDepartmentComponent implements OnInit {
         this.ResetForm();
       });
   }
-
 }

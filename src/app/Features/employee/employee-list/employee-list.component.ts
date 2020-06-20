@@ -12,20 +12,20 @@ export class EmployeeListComponent implements OnInit {
 
   EmployeeList: any[];
   constructor(private employeeService: EmployeeService,
-     private layoutservice: LayoutService, 
-     private searchSerrvice: SearchService) { }
+    private layoutservice: LayoutService,
+    public searchSerrvice: SearchService) { }
 
   ngOnInit(): void {
     this.layoutservice.UpdateLayout(true, true, true, true);
-    this.employeeService.GetEmployeeData().subscribe((res) => { 
-      
-      console.log(res) 
-      this.EmployeeList=res.dataObj;
-    
+    this.employeeService.GetEmployeeData().subscribe((res) => {
+      this.EmployeeList = res.dataObj;
+      this.EmployeeList.forEach((element) => {
+        element.FullName = element.employee.employeeFname + " " + element.employee.employeeMname;
+      })
+      console.log(this.EmployeeList);
+      this.searchSerrvice.SetSource(this.EmployeeList);
+      this.searchSerrvice.Key = "FullName";
     });
-
-    this.searchSerrvice.SetSource(this.EmployeeList);
-    this.searchSerrvice.Key = "test1";
 
   }
 

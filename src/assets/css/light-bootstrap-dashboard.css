@@ -223,7 +223,17 @@ body,
 
     min-height: 100vh;
 }
-
+.wrapperlgbox {
+    position: relative;
+    height: 130vh;
+    padding: 73px 0px;
+    display: block;
+    overflow: hidden;
+    background-color: #007775;
+}
+.login-backgound {
+    background-color: #007775;
+}
 body {
     background: #F7F5FC;
 }

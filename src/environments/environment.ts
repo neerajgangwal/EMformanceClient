@@ -17,7 +17,8 @@ export const environment = {
   GetDesignations:"getDesignation",
   AddEmployee:"addEmployee",
   getSkill:"getSkill",
-  
+  getTask:"getTask",
+  signup:"addUser"
 };
 
 /*
