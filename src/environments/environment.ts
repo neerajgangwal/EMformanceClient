@@ -2,8 +2,22 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { ProjectListComponent } from 'src/app/Features/project/project-list/project-list.component';
+
 export const environment = {
-  production: false
+  production: false,
+  url:"http://3.133.244.20:8080/evaluatemyperformance/emf/",
+  login:"login",
+  addUser:"addUser",
+  employeeData:"getEmployeeList",
+  ProjectList:"getProjectList",
+  CreateDepartment:"addDepartment",
+  getDepartment:"getDepartment?departmentId=-1",
+  CreateRole:"addDesignation",
+  GetDesignations:"getDesignation",
+  AddEmployee:"addEmployee",
+  getSkill:"getSkill",
+  
 };
 
 /*

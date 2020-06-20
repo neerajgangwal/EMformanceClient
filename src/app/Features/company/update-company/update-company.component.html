@@ -1,0 +1,71 @@
+<div class="wrapper login-bg">
+    <div class="overlay">
+        <div class="sidebar">
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <nav class="navbar navbar-default navbar-fixed">
+                <!-- <div class="container-fluid">
+                    <div class="navbar-header">
+                      
+                        <a class="navbar-brand" href="#"><img src="assets/img/logo.png" alt=""></a>
+                    </div>
+                    
+                </div>-->
+            </nav>
+            <div class="login">
+                <div class="welcome-heading">
+                    <h3 class="heading-1">Company information
+                        <span class="text-left">Help us setup your account</span></h3>
+
+                    <div class=""><img src="assets/img/login-logo.png"></div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="form-wrapper">
+                    <form [formGroup]="CompanyForm" (ngSubmit)="OnSubmit(CompanyForm.value)">
+                        <div class="form-group">
+                            <label for="">Company Name *</label>
+                            <input type="text" class="form-control" placeholder="Enter Your Company Name"
+                                formControlName="CompanyName">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="">Portal Name *</label>
+                            <input type="text" class="form-control" placeholder="Enter Your Portal Name"
+                                formControlName="PortalName">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="">Industry *</label>
+                            <div class="Industry">
+                                <select class="form-control" formControlName="Industry">
+                                    <option value="">Select industry</option>
+                                    <option value="">Project1</option>
+                                    <option value="">Project2</option>
+                                    <option value="">Project3</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Mobile *</label>
+                            <input type="text" class="form-control" placeholder="Enter Your Mobile Number"
+                                formControlName="Mobile">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" name="submit" value="Update" class="btn btn-primary">
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

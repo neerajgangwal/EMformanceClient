@@ -1,0 +1,68 @@
+<div class="main-panel">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-full-width">
+                        <ul class="checkbox-list">
+                            <li>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 50px;">
+                                                
+                                            </td>
+                                            <td style="width:280px;"> Projects Name</td>
+                                            <td style="width: 150px;" class="gray-text">Start Date</td>
+                                            <td style="width: 150px;" class="gray-text">Due Date</td>
+                                            <td style="width: 140px;" class="gray-text">Team</td>
+                                            <td style="width: 104px;">Priorities</td>
+                                            <td style="width: 110px;">
+                                                Status
+                                            </td>
+                                            <td style="width: 180px;" class="gray-text"> Action</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </li>
+                            <li  *ngFor="let project of searchservice.SearchResults">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 50px;">
+                                                <div class="checkbox">
+                                                    <input id="checkbox11" type="checkbox">
+                                                    <label for="checkbox11"></label>
+                                                </div>
+                                            </td>
+                                            <td style="width:292px;">{{project.projectName}}</td>
+                                            <td style="width: 150px;" class="gray-text">{{project.projectStartDate}}</td>
+                                            <td style="width: 150px;" class="gray-text">{{project.projectDueDate}}</td>
+                                            <td style="width: 140px;" class="gray-text projectthumb">
+                                                <div class="team-thumb"></div>
+                                                <div class="team-thumb"></div>
+                                                <div class="more-thumb">
+                                                    3+</div>
+                                            </td>
+                                            <td style="width: 92px;"><span
+                                                    class="prioritybox completedcolor">{{project.projectPriority}}</span></td>
+                                            <td style="width: 110px;">
+                                                <span class="statusbox greencolor">Completed</span>
+                                            </td>
+                                            <td style="width: 180px;" class="gray-text act"> <i class="icon-View"></i>
+                                                <i class="icon-edit"></i>
+                                                <i class="icon-Delete"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </li>
+                          
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

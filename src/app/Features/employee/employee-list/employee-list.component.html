@@ -1,0 +1,43 @@
+<div class="main-panel">
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+					<h3 class="top-heading">Employee List </h3>
+				</div>
+			</div>
+			<div class="emlist">
+				<ul class="team-member team-listvew">
+					<li class="list-heading">
+						<ul>
+							<li>
+								Employee Name
+							</li>
+							<li>Department</li>
+							<li>Designation </li>
+							<li>Actions </li>
+						</ul>
+					</li>
+					<li class="list-heading list-content" *ngFor="let data of EmployeeList">
+						<ul>
+							<li>
+								<div class="team-thumb"></div>
+								<h4>{{data.employee.employeeFname+" "+data.employee.employeeMname}}
+									<a href="#">{{data.employee.employeeEmail}}</a></h4>
+							</li>
+							<li>{{data.department.departmentName}}</li>
+							<li>{{data.designation.designationName}}</li>
+							<li>
+								<i class="icon-View"></i>
+								<i class="icon-edit"></i>
+								<i class="icon-Delete"></i>
+
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+</div>

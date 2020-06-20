@@ -1,0 +1,63 @@
+<div class="main-panel">
+
+    <div class="content">
+        <div class="container-fluid">
+            <p-toast></p-toast>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h3 class="top-heading">Create Department</h3>
+                </div>
+            </div>
+            <div class="form-container" [formGroup]="DepartmentForm">
+                <div class="form-section">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+
+                            <label for="">Department Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Department Name"
+                                formControlName="departmentName">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 pull-left">
+                        <button  class="subbtn btn btn-primary"
+                        (click)="CreateButtonClicked(DepartmentForm.value)">Create Department
+                        <!-- <p-progressSpinner [style]="{width: '20px', height: '20px'}" strokeWidth="8" animationDuration=".5s"></p-progressSpinner> -->
+                    
+                    </button>
+                    </div>
+                </div>
+            </div>
+            <div class="emlist">
+                <ul class="team-member team-listvew">
+                    <li class="list-heading">
+                        <ul>
+
+                            <li class="dpname">Department </li>
+                            <li class="dpname">Actions </li>
+                        </ul>
+
+
+                    </li>
+
+                    <li class="list-heading list-content" *ngFor="let dept of searchService.SearchResults">
+                        <ul>
+
+                            <li class="dpname">{{dept.departmentName}}</li>
+                            <li class="dpname">
+
+                                <i class="icon-edit"></i>
+                                <i class="icon-Delete"></i>
+
+                            </li>
+                        </ul>
+
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
