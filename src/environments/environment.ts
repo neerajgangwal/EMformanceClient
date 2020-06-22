@@ -18,7 +18,8 @@ export const environment = {
   AddEmployee:"addEmployee",
   getSkill:"getSkill",
   getTask:"getTask",
-  signup:"addUser"
+  signup:"addUser",
+  addCompany:"addCompany"
 };
 
 /*

@@ -33,7 +33,7 @@ export class SignupComponent implements OnInit {
     this.signupService.SignupFunction(data).subscribe((res)=>{
       if(res.errorCode==0)
       {
-       this.router.navigateByUrl('/login');
+       this.router.navigateByUrl('/company/update');
       }
       else{
        this.messageService.add({ severity: 'error', summary: 'signup failed', detail: 'Via MessageService' });
