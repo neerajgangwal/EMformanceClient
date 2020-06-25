@@ -125,10 +125,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _company_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ./company.service */
+    "./src/app/Features/company/company.service.ts");
 
     var CompanyComponent = /*#__PURE__*/function () {
-      function CompanyComponent() {
+      function CompanyComponent(companyService) {
         _classCallCheck(this, CompanyComponent);
+
+        this.companyService = companyService;
       }
 
       _createClass(CompanyComponent, [{
@@ -140,7 +148,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     CompanyComponent.ɵfac = function CompanyComponent_Factory(t) {
-      return new (t || CompanyComponent)();
+      return new (t || CompanyComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_company_service__WEBPACK_IMPORTED_MODULE_1__["CompanyService"]));
     };
 
     CompanyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
@@ -170,7 +178,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           styleUrls: ['./company.component.css']
         }]
       }], function () {
-        return [];
+        return [{
+          type: _company_service__WEBPACK_IMPORTED_MODULE_1__["CompanyService"]
+        }];
       }, null);
     })();
     /***/
@@ -270,6 +280,81 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   },
 
   /***/
+  "./src/app/Features/company/company.service.ts":
+  /*!*****************************************************!*\
+    !*** ./src/app/Features/company/company.service.ts ***!
+    \*****************************************************/
+
+  /*! exports provided: CompanyService */
+
+  /***/
+  function srcAppFeaturesCompanyCompanyServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "CompanyService", function () {
+      return CompanyService;
+    });
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ../../../environments/environment */
+    "./src/environments/environment.ts");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+
+    var CompanyService = function CompanyService(httpClient) {
+      _classCallCheck(this, CompanyService);
+
+      this.httpClient = httpClient;
+
+      this.addCompany = function (data) {
+        return this.httpClient.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].url + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].addCompany, data);
+      };
+    };
+
+    CompanyService.ɵfac = function CompanyService_Factory(t) {
+      return new (t || CompanyService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]));
+    };
+
+    CompanyService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
+      token: CompanyService,
+      factory: CompanyService.ɵfac,
+      providedIn: 'root'
+    });
+    /*@__PURE__*/
+
+    (function () {
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](CompanyService, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
+        args: [{
+          providedIn: 'root'
+        }]
+      }], function () {
+        return [{
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
+        }];
+      }, null);
+    })();
+    /***/
+
+  },
+
+  /***/
   "./src/app/Features/company/update-company/update-company.component.ts":
   /*!*****************************************************************************!*\
     !*** ./src/app/Features/company/update-company/update-company.component.ts ***!
@@ -300,15 +385,46 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/forms */
     "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    /* harmony import */
+
+
+    var _company_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../company.service */
+    "./src/app/Features/company/company.service.ts");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
     var UpdateCompanyComponent = /*#__PURE__*/function () {
-      function UpdateCompanyComponent(fb) {
+      function UpdateCompanyComponent(fb, companyService, router) {
         _classCallCheck(this, UpdateCompanyComponent);
 
         this.fb = fb;
+        this.companyService = companyService;
+        this.router = router;
 
         this.OnSubmit = function (data) {
+          var _this = this;
+
           console.log(data);
+          this.companyService.addCompany(data).subscribe(function (res) {
+            console.log(res);
+
+            if (res.errorCode == 0) {
+              _this.router.navigateByUrl('/department/create');
+            } else {
+              _this.messageService.add({
+                severity: 'error',
+                summary: 'company update failed',
+                detail: 'Via MessageService'
+              });
+            }
+          }, function (error) {
+            console.log(error);
+          });
         };
       }
 
@@ -316,10 +432,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "ngOnInit",
         value: function ngOnInit() {
           this.CompanyForm = this.fb.group({
-            CompanyName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-            PortalName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-            Industry: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-            Mobile: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]
+            companyName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            portalName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            industryType: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            adminMobile: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            adminEmail: [''],
+            companyDomain: [''],
+            contactPerson: [''],
+            apiURLPrefix: ['']
           });
         }
       }]);
@@ -328,7 +448,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     UpdateCompanyComponent.ɵfac = function UpdateCompanyComponent_Factory(t) {
-      return new (t || UpdateCompanyComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]));
+      return new (t || UpdateCompanyComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_company_service__WEBPACK_IMPORTED_MODULE_2__["CompanyService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]));
     };
 
     UpdateCompanyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
@@ -336,7 +456,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selectors: [["app-update-company"]],
       decls: 41,
       vars: 1,
-      consts: [[1, "login-bg"], [1, "overlay"], [1, "main-panel"], [1, "login"], [1, "welcome-heading"], [1, "heading-1"], [1, "text-left"], [1, ""], ["src", "assets/img/login-logo.png"], [1, "clearfix"], [1, "form-wrapper"], [3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", ""], ["type", "text", "placeholder", "Enter Your Company Name", "formControlName", "CompanyName", 1, "form-control"], ["type", "text", "placeholder", "Enter Your Portal Name", "formControlName", "PortalName", 1, "form-control"], [1, "Industry"], ["formControlName", "Industry", 1, "form-control"], ["value", ""], ["type", "text", "placeholder", "Enter Your Mobile Number", "formControlName", "Mobile", 1, "form-control"], ["type", "submit", "name", "submit", "value", "Update", 1, "btn", "btn-primary"]],
+      consts: [[1, "login-bg"], [1, "overlay"], [1, "main-panel"], [1, "login"], [1, "welcome-heading"], [1, "heading-1"], [1, "text-left"], [1, ""], ["src", "assets/img/login-logo.png"], [1, "clearfix"], [1, "form-wrapper"], [3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", ""], ["type", "text", "placeholder", "Enter Your Company Name", "formControlName", "companyName", 1, "form-control"], ["type", "text", "placeholder", "Enter Your Portal Name", "formControlName", "portalName", 1, "form-control"], [1, "Industry"], ["formControlName", "industryType", 1, "form-control"], ["value", ""], ["value", "Project1"], ["value", "Project2"], ["value", "Project3"], ["type", "text", "placeholder", "Enter Your Mobile Number", "formControlName", "adminMobile", 1, "form-control"], ["type", "submit", "name", "submit", "value", "Update", 1, "btn", "btn-primary"]],
       template: function UpdateCompanyComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -421,19 +541,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](29, "option", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](29, "option", 19);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](30, "Project1");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](31, "option", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](31, "option", 20);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](32, "Project2");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](33, "option", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](33, "option", 21);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](34, "Project3");
 
@@ -453,13 +573,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](38, "input", 19);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](38, "input", 22);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](39, "div", 12);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](40, "input", 20);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](40, "input", 23);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -498,6 +618,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }], function () {
         return [{
           type: _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]
+        }, {
+          type: _company_service__WEBPACK_IMPORTED_MODULE_2__["CompanyService"]
+        }, {
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
         }];
       }, null);
     })();

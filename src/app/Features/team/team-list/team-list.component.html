@@ -1,0 +1,46 @@
+<div class="main-panel">
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-10">
+					<h3 class="top-heading">Team List </h3>
+
+				</div>
+				<div class="col-md-2"><input type="submit" value="Create Team" class="team btn btn-primary"></div>
+			</div>
+			<div class="emlist">
+				<ul class="team-member team-listvew">
+					<li class="team-heading">
+						<ul>
+							<li>
+								Team Name
+							</li>
+							 <li>Actions
+					</li>
+				</ul>
+				</li>
+
+				<li class="team-heading list-content" *ngFor="let data of searchservice.SearchResults">
+					<ul>
+						<li >
+							{{data.teamName}}
+						</li>
+						<li>
+							<i class="icon-View"></i>
+							<i class="icon-edit"></i>
+							<i class="icon-Delete"></i>
+
+						</li>
+					</ul>
+
+				</li>
+				
+
+
+				</ul>
+			</div>
+		</div>
+	</div>
+
+</div>
+

@@ -160,7 +160,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           console.log(data);
           this.signupService.SignupFunction(data).subscribe(function (res) {
             if (res.errorCode == 0) {
-              _this.router.navigateByUrl('/login');
+              _this.router.navigateByUrl('/company/update');
             } else {
               _this.messageService.add({
                 severity: 'error',

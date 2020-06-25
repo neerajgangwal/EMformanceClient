@@ -54,14 +54,18 @@ CompanyRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdef
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CompanyComponent", function() { return CompanyComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _company_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./company.service */ "./src/app/Features/company/company.service.ts");
+
 
 
 class CompanyComponent {
-    constructor() { }
+    constructor(companyService) {
+        this.companyService = companyService;
+    }
     ngOnInit() {
     }
 }
-CompanyComponent.ɵfac = function CompanyComponent_Factory(t) { return new (t || CompanyComponent)(); };
+CompanyComponent.ɵfac = function CompanyComponent_Factory(t) { return new (t || CompanyComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_company_service__WEBPACK_IMPORTED_MODULE_1__["CompanyService"])); };
 CompanyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CompanyComponent, selectors: [["app-company"]], decls: 2, vars: 0, template: function CompanyComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "company works!");
@@ -74,7 +78,7 @@ CompanyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineC
                 templateUrl: './company.component.html',
                 styleUrls: ['./company.component.css']
             }]
-    }], function () { return []; }, null); })();
+    }], function () { return [{ type: _company_service__WEBPACK_IMPORTED_MODULE_1__["CompanyService"] }]; }, null); })();
 
 
 /***/ }),
@@ -125,6 +129,43 @@ CompanyModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInje
 
 /***/ }),
 
+/***/ "./src/app/Features/company/company.service.ts":
+/*!*****************************************************!*\
+  !*** ./src/app/Features/company/company.service.ts ***!
+  \*****************************************************/
+/*! exports provided: CompanyService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CompanyService", function() { return CompanyService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+
+
+
+
+class CompanyService {
+    constructor(httpClient) {
+        this.httpClient = httpClient;
+        this.addCompany = function (data) {
+            return this.httpClient.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].url + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].addCompany, data);
+        };
+    }
+}
+CompanyService.ɵfac = function CompanyService_Factory(t) { return new (t || CompanyService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"])); };
+CompanyService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: CompanyService, factory: CompanyService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](CompanyService, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }]; }, null); })();
+
+
+/***/ }),
+
 /***/ "./src/app/Features/company/update-company/update-company.component.ts":
 /*!*****************************************************************************!*\
   !*** ./src/app/Features/company/update-company/update-company.component.ts ***!
@@ -137,28 +178,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UpdateCompanyComponent", function() { return UpdateCompanyComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+/* harmony import */ var _company_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../company.service */ "./src/app/Features/company/company.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+
+
 
 
 
 
 class UpdateCompanyComponent {
-    constructor(fb) {
+    constructor(fb, companyService, router) {
         this.fb = fb;
+        this.companyService = companyService;
+        this.router = router;
         this.OnSubmit = function (data) {
             console.log(data);
+            this.companyService.addCompany(data).subscribe((res) => {
+                console.log(res);
+                if (res.errorCode == 0) {
+                    this.router.navigateByUrl('/department/create');
+                }
+                else {
+                    this.messageService.add({ severity: 'error', summary: 'company update failed', detail: 'Via MessageService' });
+                }
+            }, (error) => {
+                console.log(error);
+            });
         };
     }
     ngOnInit() {
         this.CompanyForm = this.fb.group({
-            CompanyName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-            PortalName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-            Industry: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-            Mobile: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            companyName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            portalName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            industryType: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            adminMobile: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            adminEmail: [''],
+            companyDomain: [''],
+            contactPerson: [''],
+            apiURLPrefix: ['']
         });
     }
 }
-UpdateCompanyComponent.ɵfac = function UpdateCompanyComponent_Factory(t) { return new (t || UpdateCompanyComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"])); };
-UpdateCompanyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: UpdateCompanyComponent, selectors: [["app-update-company"]], decls: 41, vars: 1, consts: [[1, "login-bg"], [1, "overlay"], [1, "main-panel"], [1, "login"], [1, "welcome-heading"], [1, "heading-1"], [1, "text-left"], [1, ""], ["src", "assets/img/login-logo.png"], [1, "clearfix"], [1, "form-wrapper"], [3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", ""], ["type", "text", "placeholder", "Enter Your Company Name", "formControlName", "CompanyName", 1, "form-control"], ["type", "text", "placeholder", "Enter Your Portal Name", "formControlName", "PortalName", 1, "form-control"], [1, "Industry"], ["formControlName", "Industry", 1, "form-control"], ["value", ""], ["type", "text", "placeholder", "Enter Your Mobile Number", "formControlName", "Mobile", 1, "form-control"], ["type", "submit", "name", "submit", "value", "Update", 1, "btn", "btn-primary"]], template: function UpdateCompanyComponent_Template(rf, ctx) { if (rf & 1) {
+UpdateCompanyComponent.ɵfac = function UpdateCompanyComponent_Factory(t) { return new (t || UpdateCompanyComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_company_service__WEBPACK_IMPORTED_MODULE_2__["CompanyService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"])); };
+UpdateCompanyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: UpdateCompanyComponent, selectors: [["app-update-company"]], decls: 41, vars: 1, consts: [[1, "login-bg"], [1, "overlay"], [1, "main-panel"], [1, "login"], [1, "welcome-heading"], [1, "heading-1"], [1, "text-left"], [1, ""], ["src", "assets/img/login-logo.png"], [1, "clearfix"], [1, "form-wrapper"], [3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", ""], ["type", "text", "placeholder", "Enter Your Company Name", "formControlName", "companyName", 1, "form-control"], ["type", "text", "placeholder", "Enter Your Portal Name", "formControlName", "portalName", 1, "form-control"], [1, "Industry"], ["formControlName", "industryType", 1, "form-control"], ["value", ""], ["value", "Project1"], ["value", "Project2"], ["value", "Project3"], ["type", "text", "placeholder", "Enter Your Mobile Number", "formControlName", "adminMobile", 1, "form-control"], ["type", "submit", "name", "submit", "value", "Update", 1, "btn", "btn-primary"]], template: function UpdateCompanyComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
@@ -199,13 +261,13 @@ UpdateCompanyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵd
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](27, "option", 18);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](28, "Select industry");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](29, "option", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](29, "option", 19);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](30, "Project1");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](31, "option", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](31, "option", 20);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](32, "Project2");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](33, "option", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](33, "option", 21);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](34, "Project3");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -215,10 +277,10 @@ UpdateCompanyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵd
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](36, "label", 13);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](37, "Mobile *");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](38, "input", 19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](38, "input", 22);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](39, "div", 12);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](40, "input", 20);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](40, "input", 23);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -237,7 +299,7 @@ UpdateCompanyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵd
                 templateUrl: './update-company.component.html',
                 styleUrls: ['./update-company.component.css']
             }]
-    }], function () { return [{ type: _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"] }]; }, null); })();
+    }], function () { return [{ type: _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"] }, { type: _company_service__WEBPACK_IMPORTED_MODULE_2__["CompanyService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }]; }, null); })();
 
 
 /***/ })

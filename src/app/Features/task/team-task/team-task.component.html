@@ -1,1 +1,187 @@
-<p>team-task works!</p>
+<div class="main-panel">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3 class="top-heading">Team Task List</h3>
+                </div>
+                <div class="col-md-2">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by Project<b
+                                class="caret"></b></button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="javascript:void(0);">Action</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Another action</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2"><input type="submit" value="Create Task" class="team btn btn-primary"></div>
+            </div>
+            <div class="col-md-9">
+                <div class="emlist">
+
+                    <ul class="team-member team-listvew">
+                        <li class="mytask-heading">
+                            <ul>
+                                <li>
+                                    Task Name
+                                </li>
+                                <li>Priority</li>
+                                <li>Created Date</li>
+                                <li>Actions </li>
+                            </ul>
+
+
+                        </li>
+
+                        <li class="mytask-heading list-content" *ngFor="let data of searchservice.SearchResults">
+                            <ul>
+                                <li>{{data.taskHeading}}</li>
+
+                                <li><span class="prioritybox redcolor">{{data.taskPriority}}</span></li>
+                                <li>{{data.taskCreatedDate}}</li>
+                                <li>
+
+                                    <i class="icon-View"></i>
+
+
+                                </li>
+                            </ul>
+
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">My Team</h4>
+                    </div>
+                    <div class="content team-list">
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="assets/img/faces/face-1.jpg" alt="...">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">Amanda Kherr</h4>
+                                <p>Designer</p>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="assets/img/faces/face-2.jpg" alt="...">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">Angel Johnson</h4>
+                                <p>Designer</p>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="assets/img/faces/face-3.jpg" alt="...">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">Babak Kherr</h4>
+                                <p>Designer</p>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="assets/img/faces/face-4.jpg" alt="...">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">Baha Johnson</h4>
+                                <p>Designer</p>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="assets/img/faces/face-5.jpg" alt="...">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">Angel Johnson</h4>
+                                <p>Designer</p>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="assets/img/faces/face-6.jpg" alt="...">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">Babak Kherr</h4>
+                                <p>Designer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="slide-popup" id="add-task">
+    <div class="slide-close">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+    </div>
+    <div class="slide-content">
+        <h3>Create Task</h3>
+        <form [formGroup]="TaskGroup">
+            <div class="form-group">
+                <label for="">Task title</label>
+                <input type="text" class="form-control" formControlName="taskHeading" placeholder="Enter task title here">
+            </div>
+            <div class="form-group">
+                <label for="">Task Description</label>
+                <textarea Class="form-control" formControlName="taskDescription" placeholder="Enter Task details here" rows="4" cols="50" >
+                </textarea>
+            </div>
+            <div class="form-group">
+                <label for="">upload file</label>
+                <div class="file-upload">
+                    <input type="text" class="form-control" formControlName="taskAttachment" readonly placeholder="File details here">
+                    <div class="input-group-btn">
+                        <span class="file-upload btn btn-success">
+                            <span class="upl" id="upload">upload</span>
+                            <input type="file" class="upload up" id="up" />
+                        </span><!-- btn-orange -->
+                    </div><!-- btn -->
+                </div><!-- group -->
+            </div><!-- form-group -->
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-5">
+                        <label for="">date</label>
+                        <input type="date" class="form-control">
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <span class="to-padding">to</span>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="">due Date</label>
+                        <input type="date" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="CREATE TASK" class="btn btn-primary">
+        </form>
+    </div>
+</div>

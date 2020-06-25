@@ -4,12 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './Shared/layout/layout.module';
-import {RouterModule} from '@angular/router';
+import { RouterModule} from '@angular/router';
 import { EvaluateModule } from './Features/evaluate/evaluate.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ToastModule} from 'primeng/toast';
-import {MessageService} from 'primeng/api';
-import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,11 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
-    RouterModule,BrowserAnimationsModule, EvaluateModule,ToastModule,ProgressSpinnerModule
+    RouterModule,
+    BrowserAnimationsModule,
+    EvaluateModule,
+    ToastModule,
+    ProgressSpinnerModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

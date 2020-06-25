@@ -14,4 +14,9 @@ export class TaskService {
     {
       return this.httpclient.post(environment.url+environment.getTask,{})
     }
+    CreateTask=function(data)
+    {
+      return this.httpclient.post(environment.url+environment.createTask,data)
+    }
+  
 }

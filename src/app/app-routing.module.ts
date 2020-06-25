@@ -9,7 +9,9 @@ const routes: Routes = [{ path: 'login', loadChildren: () => import('./Features/
 { path: 'project', loadChildren: () => import('./Features/project/project.module').then(m => m.ProjectModule) },
 { path: 'department', loadChildren: () => import('./Features/department/department.module').then(m => m.DepartmentModule) },
 { path: 'role', loadChildren: () => import('./Features/role/role.module').then(m => m.RoleModule) },
-{ path: 'task-routing', loadChildren: () => import('./Features/task/task.module').then(m => m.TaskModule) }];
+{ path: 'task', loadChildren: () => import('./Features/task/task.module').then(m => m.TaskModule) },
+{ path: 'team', loadChildren: () => import('./Features/team/team.module').then(m => m.TeamModule) },
+{ path: 'goals', loadChildren: () => import('./Features/goals/goals.module').then(m => m.GoalsModule) }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

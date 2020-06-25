@@ -1334,6 +1334,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       return ["/project/list"];
     };
 
+    var _c7 = function _c7() {
+      return ["/task/my-task"];
+    };
+
+    var _c8 = function _c8() {
+      return ["/task/team-task"];
+    };
+
+    var _c9 = function _c9() {
+      return ["/team/list"];
+    };
+
     var SideNavComponent = /*#__PURE__*/function () {
       function SideNavComponent() {
         _classCallCheck(this, SideNavComponent);
@@ -1369,8 +1381,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       type: SideNavComponent,
       selectors: [["app-side-nav"]],
       decls: 103,
-      vars: 14,
-      consts: [[1, "sidemenu"], ["href", "#", 1, "brand-logo"], ["src", "assets/img/logooo.png", "alt", ""], [1, "nav", "navbar-sidemenu"], [3, "routerLink"], [1, "icon-Department"], [1, "nav-item"], [1, "nav-link"], [1, "icon-Employee"], [1, "caret"], [1, "collapse"], [1, "collapse-inner"], [1, "collapse-item", 3, "routerLink"], ["href", "#", 1, "nav-link"], [1, "icon-Feedback"], [1, "icon-Projects"], [1, "icon-list"], ["href", "buttons.html", 1, "collapse-item"], ["href", "cards.html", 1, "collapse-item"], [1, "icon-Goals"], [1, "icon-Evaluate"], [1, "icon-skill"], ["href", "blank-team.html"], [1, "icon-Team"], [1, "sidebar"], [1, "sidebar-wrapper"], [1, "nav"]],
+      vars: 20,
+      consts: [[1, "sidemenu"], ["href", "#", 1, "brand-logo"], ["src", "assets/img/logooo.png", "alt", ""], [1, "nav", "navbar-sidemenu"], [3, "routerLink"], [1, "icon-Department"], [1, "nav-item"], [1, "nav-link"], [1, "icon-Employee"], [1, "caret"], [1, "collapse"], [1, "collapse-inner"], [1, "collapse-item", 3, "routerLink"], ["href", "#", 1, "nav-link"], [1, "icon-Feedback"], [1, "icon-Projects"], [1, "icon-list"], [1, "icon-Goals"], ["href", "buttons.html", 1, "collapse-item"], ["href", "cards.html", 1, "collapse-item"], [1, "icon-Evaluate"], [1, "icon-skill"], [1, "icon-Team"], [1, "sidebar"], [1, "sidebar-wrapper"], [1, "nav"]],
       template: function SideNavComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -1513,13 +1525,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](47, "div", 11);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](48, "a", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](48, "a", 12);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](49, "My Task");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](50, "a", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](50, "a", 12);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](51, "Team Task");
 
@@ -1535,7 +1547,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](53, "a", 13);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](54, "i", 19);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](54, "i", 17);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](55, " Goals ");
 
@@ -1547,13 +1559,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](58, "div", 11);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](59, "a", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](59, "a", 18);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](60, "My Goal");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](61, "a", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](61, "a", 19);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](62, "Team Goal");
 
@@ -1581,13 +1593,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](69, "div", 11);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](70, "a", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](70, "a", 18);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](71, "My Goal");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](72, "a", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](72, "a", 19);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](73, "Team Goal");
 
@@ -1615,13 +1627,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](80, "div", 11);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](81, "a", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](81, "a", 18);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](82, "My Feedback");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](83, "a", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](83, "a", 19);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](84, "Team Feedback Management");
 
@@ -1649,13 +1661,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](91, "div", 11);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](92, "a", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](92, "a", 18);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](93, "My Skill");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](94, "a", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](94, "a", 19);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](95, "Evaluate Employee Skills");
 
@@ -1669,9 +1681,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](96, "li");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](97, "a", 22);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](97, "a", 4);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](98, "i", 23);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](98, "i", 22);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](99, " Team ");
 
@@ -1683,11 +1695,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](100, "div", 24);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](100, "div", 23);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](101, "div", 25);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](101, "div", 24);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](102, "ul", 26);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](102, "ul", 25);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -1697,31 +1709,43 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         if (rf & 2) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](7, _c0));
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](10, _c0));
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](10);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](8, _c1));
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](11, _c1));
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](9, _c2));
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](12, _c2));
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](9);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](10, _c3));
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](13, _c3));
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](11, _c4));
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](14, _c4));
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](9);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](12, _c5));
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](15, _c5));
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](13, _c6));
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](16, _c6));
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](9);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](17, _c7));
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](18, _c8));
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](47);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](19, _c9));
         }
       },
       directives: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterLinkWithHref"]],
@@ -1855,7 +1879,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         });
       }
     }, {
-      path: 'task-routing',
+      path: 'task',
       loadChildren: function loadChildren() {
         return __webpack_require__.e(
         /*! import() | Features-task-task-module */
@@ -1863,6 +1887,28 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         /*! ./Features/task/task.module */
         "./src/app/Features/task/task.module.ts")).then(function (m) {
           return m.TaskModule;
+        });
+      }
+    }, {
+      path: 'team',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | Features-team-team-module */
+        "Features-team-team-module").then(__webpack_require__.bind(null,
+        /*! ./Features/team/team.module */
+        "./src/app/Features/team/team.module.ts")).then(function (m) {
+          return m.TeamModule;
+        });
+      }
+    }, {
+      path: 'goals',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | Features-goals-goals-module */
+        "Features-goals-goals-module").then(__webpack_require__.bind(null,
+        /*! ./Features/goals/goals.module */
+        "./src/app/Features/goals/goals.module.ts")).then(function (m) {
+          return m.GoalsModule;
         });
       }
     }];
@@ -2389,7 +2435,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       AddEmployee: "addEmployee",
       getSkill: "getSkill",
       getTask: "getTask",
-      signup: "addUser"
+      createTask: "addTask",
+      signup: "addUser",
+      addCompany: "addCompany",
+      getTeam: "getTeam",
+      addGoal: "addGoal"
     };
     /*
      * For easier debugging in development mode, you can import the following file

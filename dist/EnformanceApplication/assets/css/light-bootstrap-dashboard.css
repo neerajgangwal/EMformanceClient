@@ -220,20 +220,26 @@ h1 .subtitle {
 body,
 .wrapper {
     position: relative;
-
-    min-height: 100vh;
+    top: 0;
 }
+.wrapper {
+    position: relative;
+    top: 0;
+
+    padding-left: 300px;
+}
+
+.navbar{margin-bottom:0px;}
+
 .wrapperlgbox {
     position: relative;
-    height: 130vh;
-    padding: 73px 0px;
+    background-color: #007775;
+    padding: 10px 0px;
     display: block;
     overflow: hidden;
-    background-color: #007775;
+	background-color: #007775;
 }
-.login-backgound {
-    background-color: #007775;
-}
+
 body {
     background: #F7F5FC;
 }
@@ -307,20 +313,7 @@ input:focus {
     margin-top: 50px;
 }
 
-.wrapper {
-    position: relative;
-    top: 0;
 
-    height: 130vh;
-    padding-left: 300px;
-}
-.wrapperlgbox {
-    position: relative;
-    top: 0;
-
-    height: 130vh;
-   
-}
 a.navbar-brand img {
     height: 49px;
 }

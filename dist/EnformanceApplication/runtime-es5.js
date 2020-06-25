@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"Features-company-company-module":"Features-company-company-module","Features-department-department-module":"Features-department-department-module","Features-employee-employee-module":"Features-employee-employee-module","Features-login-login-module":"Features-login-login-module","Features-project-project-module":"Features-project-project-module","Features-role-role-module":"Features-role-role-module","Features-signup-signup-module":"Features-signup-signup-module","Features-task-task-module":"Features-task-task-module"}[chunkId]||chunkId) +    "-es5.js"
+/******/ 		return __webpack_require__.p + "" + ({"Features-company-company-module":"Features-company-company-module","Features-department-department-module":"Features-department-department-module","Features-employee-employee-module":"Features-employee-employee-module","Features-goals-goals-module":"Features-goals-goals-module","Features-login-login-module":"Features-login-login-module","Features-project-project-module":"Features-project-project-module","Features-role-role-module":"Features-role-role-module","Features-signup-signup-module":"Features-signup-signup-module","Features-task-task-module":"Features-task-task-module","Features-team-team-module":"Features-team-team-module"}[chunkId]||chunkId) +    "-es5.js"
 /******/ 	}
 /******/
 /******/ 	// The require function

@@ -54,8 +54,8 @@
             </a>
             <div class="collapse">
                 <div class="collapse-inner">
-                    <a class="collapse-item" href="buttons.html">My Task</a>
-                    <a class="collapse-item" href="cards.html">Team Task</a>
+                    <a class="collapse-item" [routerLink]="['/task/my-task']">My Task</a>
+                    <a class="collapse-item" [routerLink]="['/task/team-task']">Team Task</a>
                 </div>
             </div>
         </li>
@@ -113,7 +113,7 @@
         </li>
       
         <li>
-            <a href="blank-team.html">
+            <a [routerLink]="['/team/list']">
                 <i class="icon-Team"></i>
                 Team
             </a>
