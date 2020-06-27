@@ -157,7 +157,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           console.log(data);
           this.loginService.LoginFunction(data).subscribe(function (res) {
             if (res.errorCode == 0) {
-              _this.router.navigateByUrl('/employee/list');
+              _this.router.navigateByUrl('/department/create');
             } else {
               _this.messageService.add({
                 severity: 'error',

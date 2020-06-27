@@ -33,7 +33,7 @@ export class UpdateCompanyComponent implements OnInit {
       console.log(res);
       if(res.errorCode==0)
       {
-       this.router.navigateByUrl('/department/create');
+       this.router.navigateByUrl('/login');
       }
       else{
        this.messageService.add({ severity: 'error', summary: 'company update failed', detail: 'Via MessageService' });

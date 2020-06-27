@@ -414,7 +414,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             console.log(res);
 
             if (res.errorCode == 0) {
-              _this.router.navigateByUrl('/department/create');
+              _this.router.navigateByUrl('/login');
             } else {
               _this.messageService.add({
                 severity: 'error',

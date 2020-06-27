@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
      this.loginService.LoginFunction(data).subscribe((res) => {
        if(res.errorCode==0)
        {
-        this.router.navigateByUrl('/employee/list');
+        this.router.navigateByUrl('/department/create');
        }
        else{
         this.messageService.add({ severity: 'error', summary: 'Login failed', detail: 'Via MessageService' });
