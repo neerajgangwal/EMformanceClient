@@ -6,8 +6,25 @@ import {environment} from '../../../environments/environment'
 export class RoleService {
 
   constructor(private httpClient:HttpClient) { }
-  addRole=function()
+  addRole=function(data)
   {
-    return this.httpClient.get(environment.url+environment.CreateRole);
+    return this.httpClient.post(environment.url+environment.CreateRole,data);
   }
+
+  getOperations=function()
+  {
+    return this.httpClient.get(environment.url+environment.getOperations);
+  }
+
+  getElements=function()
+  {
+    return this.httpClient.get(environment.url+environment.getElements);
+  }
+
+  GetDepartments=function()
+  {
+    return this.httpClient.get(environment.url+environment.getDepartment);
+  }
+
+  
 }

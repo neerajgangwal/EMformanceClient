@@ -7,8 +7,12 @@ export class GoalsService {
 
   constructor(private httpclient:HttpClient) { }
 
-  addGoal=function()
+  addGoal=function(data)
   {
-    return this.httpclient.post(environment.url+environment.addGoal,{});
+    return this.httpclient.post(environment.url+environment.addGoal,data);
+  }
+  getGoal=function()
+  {
+    return this.httpclient.post(environment.getGoal+environment.url,{});
   }
 }

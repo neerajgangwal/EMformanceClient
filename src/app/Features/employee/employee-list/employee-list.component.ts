@@ -16,6 +16,7 @@ export class EmployeeListComponent implements OnInit {
     public searchSerrvice: SearchService) { }
 
   ngOnInit(): void {
+    this.searchSerrvice.SetSource(null);
     this.layoutservice.UpdateLayout(true, true, true, true);
     this.employeeService.GetEmployeeData().subscribe((res) => {
       this.EmployeeList = res.dataObj;

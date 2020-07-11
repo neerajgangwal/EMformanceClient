@@ -31,5 +31,10 @@ export class TeamListComponent implements OnInit {
     })
   }
 
+  ViewTeamMembers=function(teamId)
+  {
+      
+  }
+
 
 }

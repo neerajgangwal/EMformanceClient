@@ -16,13 +16,15 @@
                             <label for="">Company Name *</label>
                             <input type="text" class="form-control" placeholder="Enter Your Company Name"
                                 formControlName="companyName">
-
+                            <span class="error" *ngIf="!CompanyForm.controls['companyName'].valid&&(CompanyForm.controls['companyName'].dirty || CompanyForm.controls['companyName'].touched)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
+                                provide company name</span>
                         </div>
                         <div class="form-group">
-                            <label for="">Portal Name *</label>
+                            <label for="">Company Website *</label>
                             <input type="text" class="form-control" placeholder="Enter Your Portal Name"
                                 formControlName="portalName">
-
+                            <span *ngIf="!CompanyForm.controls['portalName'].valid&&(CompanyForm.controls['portalName'].dirty|| CompanyForm.controls['portalName'].touched)" class="error"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
+                                provide company Website</span>
                         </div>
                         <div class="form-group">
                             <label for="">Industry *</label>
@@ -34,21 +36,23 @@
                                     <option value="Project3">Project3</option>
                                 </select>
                             </div>
-
+                            <span *ngIf="!CompanyForm.controls['industryType'].valid&&(CompanyForm.controls['industryType'].dirty|| CompanyForm.controls['industryType'].touched)" class="error"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
+                                select Industy type</span>
                         </div>
 
                         <div class="form-group">
-                            <label for="">Mobile *</label>
+                            <label for="">Office Phone No *</label>
                             <input type="text" class="form-control" placeholder="Enter Your Mobile Number"
                                 formControlName="adminMobile">
+                                <span *ngIf="!CompanyForm.controls['adminMobile'].valid&&(CompanyForm.controls['adminMobile'].dirty|| CompanyForm.controls['adminMobile'].touched)" class="error"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
+                                    provide valid phone No.</span>
                         </div>
 
                         <div class="form-group">
-                            <input type="submit" name="submit" value="Update" class="btn btn-primary">
+                            <input type="submit" name="submit" value="Update" class="btn btn-primary" [disabled]="!CompanyForm.valid" >
                         </div>
 
                     </form>
-
                 </div>
             </div>
         </div>

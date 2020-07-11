@@ -1,201 +1,59 @@
 <div class="main-panel">
-			<div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-4">
-							 <h3 class="top-heading">Create Role</h3>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3 class="top-heading">Create Role</h3>
+                </div>
+            </div>
+            <div *ngIf="RoleForm" class="form-container" [formGroup]="RoleForm">
+                <div class="form-section">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="">Department Name</label>
+                            <select name="" id="" class="form-control" formControlName="departmentId">
+                                <option value="">Select Department</option>
+                                <option *ngFor="let department of DepartmentList" value="{{department.departmentId}}">
+                                    {{department.departmentName}}</option>
+                            </select>
                         </div>
                     </div>
-					<div class="form-container">
-                    <div class="form-section">
-					<div class="col-lg-6">
-						<div class="form-group" >
-                    <label for="">Department Name</label>
-                    <select name="" id="" class="form-control">
-                        <option value="">Select Department</option>
-                        <option value="">Project Manager</option>
-                        <option value="">Designer</option>
-                        <option value="">Designer</option>
-                    </select>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="">Add Roler</label>
+                            <input type="text" class="form-control" formControlName="designationName"
+                                placeholder="Enter Role Name">
+                        </div>
+                    </div>
+                    <div class="col-lg-12 permission-heading">
+                        <h4>Select Permission</h4>
+                    </div>
+                    <div class="permission-section" formArrayName="designationElementMappingList">
+                        <div class="col-lg-6" *ngFor="let element of ElementsList.controls;
+                        let elementIndex = index">
+                            <div class="rolesection" [formGroupName]="elementIndex">
+                                <div class="form-group">
+                                    <label for=""
+                                        class="pull-left headtxt">{{element.controls.elementName.value}}</label>
+                                    <div class="material-switch" formArrayName="roleElementOprationList" *ngFor="let operation of ElementOperationsList(elementIndex).controls;
+                                    let operationIndex = index">
+                                        <ng-container [formGroupName]="operationIndex">
+                                            <span>{{operation.controls.operationName.value}}</span><br>
+                                            <input id="{{element.controls.elementName.value+operation.controls.operationName.value}}" name="someSwitchOption001" formControlName="value"
+                                                type="checkbox" />
+                                            <label for="{{element.controls.elementName.value+operation.controls.operationName.value}}" class="label-default"></label>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-						</div>	
-					
-							<div class="col-lg-6">
-					<div class="form-group">
-						
-						 <label for="">Add Roler</label>
-                    <input type="text" class="form-control" placeholder="Enter Role Name">
-						
-						
-						</div>
-						</div>
-						
-						
-						<div class="col-lg-12 permission-heading"><h4>Select Permission</h4></div>
-							
-						<div class="permission-section"><div class="col-lg-6">
-							<div class="rolesection">
-						<div class="form-group">
-                    <label for="" class="pull-left headtxt">Employee Details Permissions</label>
-                     <div class="material-switch">
-							<span>Create</span><br>
-                            <input id="EmployeeDetailsPermissions-create" name="someSwitchOption001" type="checkbox"/>
-                            <label for="EmployeeDetailsPermissions-create" class="label-default"></label>
-                        </div>
-						<div class="material-switch">
-							<span>Edit</span><br>
-                            <input id="EmployeeDetailsPermissions-edit" name="someSwitchOption001" type="checkbox"/>
-                            <label for="EmployeeDetailsPermissions-edit" class="label-default"></label>
-                        </div>
-							
-													<div class="material-switch">
-							<span>Delete</span><br>
-                            <input id="EmployeeDetailsPermissions-delete" name="someSwitchOption001" type="checkbox"/>
-                            <label for="EmployeeDetailsPermissions-delete" class="label-default"></label>
-                        </div>
-							
+                <div class="col-lg-3 pull-right">
+                    <input type="submit" value="Create Role" class="subbtn btn btn-primary" (click)="CreateRole(RoleForm.value)">
+                    {{RoleForm.value|json}}
                 </div>
-							</div>
-						</div>
-							
-							<div class="col-lg-6">
-								<div class="rolesection">
-						<div class="form-group">
-                    <label for="" class="pull-left headtxt">Project Permission</label>
-                     <div class="material-switch">
-							<span>Create</span><br>
-                            <input id="ProjectPermission-create" name="someSwitchOption001" type="checkbox"/>
-                            <label for="ProjectPermission-create" class="label-default"></label>
-                        </div>
-						<div class="material-switch">
-							<span>Edit</span><br>
-                            <input id="ProjectPermission-edit" name="someSwitchOption001" type="checkbox"/>
-                            <label for="ProjectPermission-edit" class="label-default"></label>
-                        </div>
-							
-													<div class="material-switch">
-							<span>Delete</span><br>
-                            <input id="ProjectPermission-delete" name="someSwitchOption001" type="checkbox"/>
-                            <label for="ProjectPermission-delete" class="label-default"></label>
-                        </div>
-							
-                </div>
-								</div>
-						</div>	
-						</div>
-						
-						<div class="permission-section">
-						<div class="col-lg-6">
-						<div class="rolesection">
-						<div class="form-group">
-                    <label for="" class="pull-left headtxt">Post Job Permissions</label>
-                     <div class="material-switch">
-							<span>Create</span><br>
-                            <input id="PostJobPermissions-create" name="someSwitchOption001" type="checkbox"/>
-                            <label for="PostJobPermissions-create" class="label-default"></label>
-                        </div>
-						<div class="material-switch">
-							<span>Edit</span><br>
-                            <input id="PostJobPermissions-edit" name="someSwitchOption001" type="checkbox"/>
-                            <label for="PostJobPermissions-edit" class="label-default"></label>
-                        </div>
-							
-													<div class="material-switch">
-							<span>Delete</span><br>
-                            <input id="PostJobPermissions-delete" name="someSwitchOption001" type="checkbox"/>
-                            <label for="PostJobPermissions-delete" class="label-default"></label>
-                        </div>
-							
-                </div>
-							</div>
-						</div>	
-						
-					<div class="col-lg-6">
-						<div class="rolesection">
-						<div class="form-group">
-                    <label for="" class="pull-left headtxt">Team Permission</label>
-                     <div class="material-switch">
-							<span>Create</span><br>
-                            <input id="TeamPermission-create" name="someSwitchOption001" type="checkbox"/>
-                            <label for="TeamPermission-create" class="label-default"></label>
-                        </div>
-						<div class="material-switch">
-							<span>Edit</span><br>
-                            <input id="TeamPermission-edit" name="someSwitchOption001" type="checkbox"/>
-                            <label for="TeamPermission-edit" class="label-default"></label>
-                        </div>
-							
-													<div class="material-switch">
-							<span>Delete</span><br>
-                            <input id="TeamPermission-delete" name="someSwitchOption001" type="checkbox"/>
-                            <label for="TeamPermission-delete" class="label-default"></label>
-                        </div>
-							
-                </div>
-						</div>
-						</div>	
-						</div>
-						<div class="permission-section">
-						<div class="col-lg-6">
-							<div class="rolesection">
-						<div class="form-group">
-                    <label for="" class="pull-left headtxt">Resume Permissions</label>
-                     <div class="material-switch">
-							<span>Create</span><br>
-                            <input id="ResumePermissions-create" name="someSwitchOption001" type="checkbox"/>
-                            <label for="ResumePermissions-create" class="label-default"></label>
-                        </div>
-						<div class="material-switch">
-							<span>Edit</span><br>
-                            <input id="ResumePermissions-edit" name="someSwitchOption001" type="checkbox"/>
-                            <label for="ResumePermissions-edit" class="label-default"></label>
-                        </div>
-							
-													<div class="material-switch">
-							<span>Delete</span><br>
-                            <input id="ResumePermissions-delete" name="someSwitchOption001" type="checkbox"/>
-                            <label for="ResumePermissions-delete" class="label-default"></label>
-                        </div>
-							
-                </div>
-							</div>
-						</div>	
-						
-							
-						<div class="col-lg-6">
-							<div class="rolesection">
-						<div class="form-group">
-                    <label for="" class="pull-left headtxt">Skill Permission</label>
-                     <div class="material-switch">
-							<span>Create</span><br>
-                            <input id="SkillPermission-create" name="someSwitchOption001" type="checkbox"/>
-                            <label for="SkillPermission-create" class="label-default"></label>
-                        </div>
-						<div class="material-switch">
-							<span>Edit</span><br>
-                            <input id="SkillPermission-edit" name="someSwitchOption001" type="checkbox"/>
-                            <label for="SkillPermission-edit" class="label-default"></label>
-                        </div>
-							
-													<div class="material-switch">
-							<span>Delete</span><br>
-                            <input id="SkillPermission-delete" name="someSwitchOption001" type="checkbox"/>
-                            <label for="SkillPermission-delete" class="label-default"></label>
-                        </div>
-							
-                </div>
-							</div>
-						</div>	
-						</div>
-						</div>
-						<div class="col-lg-3 pull-right">
-				<input type="submit" value="Create Role" class="subbtn btn btn-primary">
-							</div>
-                </div>
-					
-					
             </div>
-            
         </div>
     </div>
-    
+</div>

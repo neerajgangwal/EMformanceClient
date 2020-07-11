@@ -28,18 +28,18 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <span class="shortname">AD</span>
                             <p>
-                                Arthur D
+                                {{userService.LoggedInUser.Name}}
                                 <b class="caret"></b>
                             </p>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
+                            <li><span style="cursor: pointer;" (click)="LogOutClicked()">Logout</span></li>
+                            <!-- <li><a href="#">Another action</a></li>
                             <li><a href="#">Something</a></li>
                             <li><a href="#">Another action</a></li>
                             <li><a href="#">Something</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">Separated link</a></li> -->
                         </ul>
                     </li>
                 </ul>

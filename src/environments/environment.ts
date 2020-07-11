@@ -21,7 +21,10 @@ export const environment = {
   signup:"addUser",
   addCompany:"addCompany",
   getTeam:"getTeam",
-  addGoal:"addGoal"
+  addGoal:"addGoal",
+  getGoal:"getGoal",
+  getElements:"getElements",
+  getOperations:"getOperation"
 };
 
 /*

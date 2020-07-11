@@ -1,1 +1,242 @@
-<p>my-goal works!</p>
+<div class="main-panel">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3 class="top-heading">My Goal</h3>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by Project<b
+                                class="caret"></b></button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="javascript:void(0);">Action</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Another action</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
+                        </div>
+
+                    </div>
+                </div>  
+                
+                <div class="col-md-2"><input type="submit" value="Add New Goal" class="team btn btn-primary"></div>           
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="card-outer">
+                                <h4>Work in Progress</h4>
+
+
+                                <div class="task-card">
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <p><span>Create dashboard of ProgressBar Helps you
+                                                            organize...</span></p>
+                                                </div>
+                                                <div class="col-md-3"><span
+                                                        class="statusbox greencolor">Completed</span></div>
+                                            </div>
+                                            <div class="date-section">14 May, 2020</div>
+                                            <p>The loream text itself is specifically created to be appealing to eyes.
+                                                Creating a positive.</p>
+
+                                            <div class="goal-action">
+                                                <ul>
+
+                                                    <li>
+
+                                                        <i class="icon-edit"></i>
+                                                        <i class="icon-Delete"></i>
+                                                        <i class="icon-comment managewidth"><span>14</span></i>
+                                                        <i class="icon-attachment managewidth"><span>14</span></i>
+
+                                                    </li>
+                                                </ul>
+
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row card-footer">
+
+                                        <div class="col-md-12">
+                                            <div class="skill-slider">
+                                                <span id="ex3CurrentSliderValLabel" class="skill-value"><span
+                                                        id="ex3SliderVal">100</span>%</span>
+                                                <input id="ex3" type="text" data-slider-min="0" data-slider-max="100"
+                                                    data-slider-step="1" data-slider-value="100" />
+                                            </div>
+                                            <div class="form-group">
+
+                                                <select name="" id="" class="form-control">
+                                                    <option value="">Hold</option>
+                                                    <option value="">Delay</option>
+                                                    <option value="">Over Due</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="card-outer">
+                                <h4>Completed</h4>
+
+
+                                <div class="task-card">
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <p><span>Create dashboard of ProgressBar Helps you
+                                                            organize...</span></p>
+                                                </div>
+                                                <div class="col-md-3"><span
+                                                        class="statusbox greencolor">Completed</span></div>
+                                            </div>
+                                            <div class="date-section">14 May, 2020</div>
+                                            <p>The loream text itself is specifically created to be appealing to eyes.
+                                                Creating a positive.</p>
+
+                                            <div class="goal-action">
+                                                <ul>
+
+                                                    <li>
+
+                                                        <i class="icon-edit"></i>
+                                                        <i class="icon-Delete"></i>
+                                                        <i class="icon-comment managewidth"><span>14</span></i>
+                                                        <i class="icon-attachment managewidth"><span>14</span></i>
+
+                                                    </li>
+                                                </ul>
+
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="slide-popup" id="add-task">
+    <div class="slide-close">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+    </div>
+    <div class="slide-content">
+        <h3>Create Goal</h3>
+        <form [formGroup]="goalgroup">
+            <div class="form-group">
+                <label for="">Goal title</label>
+                <input type="text" class="form-control" placeholder="Enter task title here">
+            </div>
+            <div class="form-group">
+                <label for="">Goal Description</label>
+                <textarea Class="form-control" rows="4" cols="50">
+ Enter Goal details here
+  </textarea>
+            </div>
+            <div class="form-group">
+                <label for="">upload file</label>
+                <div class="file-upload">
+                    <input type="text" class="form-control" readonly placeholder="File details here">
+                    <div class="input-group-btn">
+                        <span class="file-upload btn btn-success">
+                            <span class="upl" id="upload">upload</span>
+                            <input type="file" class="upload up" id="up" />
+                        </span><!-- btn-orange -->
+                    </div><!-- btn -->
+                </div><!-- group -->
+            </div><!-- form-group -->
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-5">
+                        <label for="">date</label>
+                        <input type="date" class="form-control">
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <span class="to-padding">to</span>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="">due Date</label>
+                        <input type="date" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="CREATE Goal" class="team btn btn-primary">
+        </form>
+    </div>
+</div>
+<div class="slide-popup" id="task-description">
+    <div class="slide-close">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+    </div>
+    <div class="slide-content">
+        <h3>Goal Description</h3>
+        <p><strong>Create dashboard of ProgressBar Helps you organize, assign, tasks, all from one central
+                platform</strong></p>
+        <span class="color-red"><i class="fa fa-clock-o"></i>Due : 14 FEB 20</span>
+        <h4><i class="icon-discription"></i> description</h4>
+        <p>Loream provides you with intelligently crafted filler text with decent and simple UI. The
+            loream text itself is specifically created to be appealing to eyes. Creating a positive
+            placebo for your project. Making your project attractive and irresistible even at
+            production phase. Try loream now!
+        </p>
+        <h4><i class="icon-attachment"></i> Attachment</h4>
+        <div class="attachment">
+            <img src="assets/img/img.png" alt="">
+            <span>attachments.png<b>10 KB</b></span>
+        </div>
+    </div>
+    <hr>
+    <div class="slide-content">
+        <div class="comment-item">
+            <div class="pro-thumb" style="background-image: url('assets/img/face-3.jpg');"></div>
+            <h5>Amanda Kherr</h5>
+            <strong>Designer</strong>
+            <p>Loream provides you with intelligently crafted filler text with decent and simple UI. The
+                loream text itself is specifically created to be appealing to eyes. Creating a positive
+                placebo for your project. Making your project attractive and irresistible even at
+                production phase. Try loream now!</p>
+            <a href="#" class="reply">reply</a>
+        </div>
+    </div>
+    <hr>
+    <div class="slide-content">
+        <div class="comment-item">
+            <div class="pro-thumb"></div>
+            <input type="text" class="form-control" placeholder="Write a comment">
+        </div>
+    </div>
+</div>
