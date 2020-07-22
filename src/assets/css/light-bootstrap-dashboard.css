@@ -5435,6 +5435,10 @@ input.btn.btn-primary.pro-del {
     right: 0;
 }
 
+#addteam-member.open-slide {
+    right: 0;
+}
+
 #requestfeedback.open-slide {
     right: 0;
 }
@@ -7093,7 +7097,7 @@ color:#FFA200;}
 }
 
 .team-heading ul li:first-child {
-    width: 84%;
+    width: 80%;
 }
 
 .team-listvew.team-member > li.team-heading.list-content {

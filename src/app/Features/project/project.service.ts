@@ -12,4 +12,8 @@ export class ProjectService {
   {
     return this.httpClient.get(environment.url+environment.ProjectList);
   }
+  CreateProject=function(data)
+  {
+    return this.httpClient.post(environment.url+environment.CreateProject,data);
+  }
 }

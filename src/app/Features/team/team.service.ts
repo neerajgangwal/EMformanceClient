@@ -10,4 +10,25 @@ export class TeamService {
   {
     return this.httpclient.post(environment.url+environment.getTeam,{});
   }
+
+  getProjects=function()
+  {
+    return this.httpclient.get(environment.url+environment.ProjectList);
+  }
+  createTeam=function(data)
+  {
+    return this.httpclient.post(environment.url+environment.createTeam,data);
+  }
+  getTeamMember=function()
+  {
+    return this.httpclient.get(environment.url+environment.getTeamMember);
+  }
+  addTeamMember=function(addTeamMember)
+  {
+    return this.httpclient.post(environment.url+environment.addTeamMember,addTeamMember);
+  }
+  getEmployeeData=function()
+  {
+    return this.httpclient.get(environment.url+environment.employeeData);
+  }
 }

@@ -7,9 +7,10 @@ import { CreateRoleComponent } from './create-role/create-role.component';
 import {HttpClientModule} from '@angular/common/http';
 import {RoleService} from './role.service';
 import {ReactiveFormsModule} from '@angular/forms';
+import { RoleListComponent } from './role-list/role-list.component';
 
 @NgModule({
-  declarations: [RoleComponent, CreateRoleComponent],
+  declarations: [RoleComponent, CreateRoleComponent, RoleListComponent],
   imports: [
     CommonModule,HttpClientModule,
     RoleRoutingModule,ReactiveFormsModule

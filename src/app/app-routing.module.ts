@@ -12,7 +12,10 @@ const routes: Routes = [
 { path: 'role', loadChildren: () => import('./Features/role/role.module').then(m => m.RoleModule) ,canActivate:[AuthGuard]},
 { path: 'task', loadChildren: () => import('./Features/task/task.module').then(m => m.TaskModule) ,canActivate:[AuthGuard]},
 { path: 'team', loadChildren: () => import('./Features/team/team.module').then(m => m.TeamModule) ,canActivate:[AuthGuard]},
-{ path: 'goals', loadChildren: () => import('./Features/goals/goals.module').then(m => m.GoalsModule) ,canActivate:[AuthGuard]}];
+{ path: 'goals', loadChildren: () => import('./Features/goals/goals.module').then(m => m.GoalsModule) ,canActivate:[AuthGuard]},
+{ path: 'ExitInterview', loadChildren: () => import('./Features/exit-interview/exit-interview.module').then(m => m.ExitInterviewModule) },
+{ path: 'Skill', loadChildren: () => import('./Features/skill/skill.module').then(m => m.SkillModule) },
+{ path: 'Feedback', loadChildren: () => import('./Features/feedback/feedback.module').then(m => m.FeedbackModule) }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

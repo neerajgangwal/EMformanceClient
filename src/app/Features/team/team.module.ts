@@ -6,13 +6,18 @@ import { TeamComponent } from './team.component';
 import { TeamListComponent } from './team-list/team-list.component';
 import { ProviderAst } from '@angular/compiler';
 import { TeamService } from './team.service';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {ToastModule} from 'primeng/toast';
+import {MessageService} from 'primeng/api';
 
 @NgModule({
   declarations: [TeamComponent, TeamListComponent],
   imports: [
     CommonModule,
-    TeamRoutingModule
+    TeamRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ToastModule
   ],
   providers:[
     TeamService

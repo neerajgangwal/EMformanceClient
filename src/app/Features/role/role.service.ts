@@ -26,5 +26,9 @@ export class RoleService {
     return this.httpClient.get(environment.url+environment.getDepartment);
   }
 
+  GetDesignations=function()
+  {
+    return this.httpClient.post(environment.url+environment.GetDesignations,{});
+  }
   
 }

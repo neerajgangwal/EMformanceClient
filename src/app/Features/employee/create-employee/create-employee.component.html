@@ -1,14 +1,7 @@
 <div class="main-panel">
-    <div class="content">
+    <div class="content" style="background-color:#DAEBEB;">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4">
-                    <h3 class="top-heading">Create Employee</h3>
-
-                </div>
-
-            </div>
-            <div class="form-container" [formGroup]="EmployeeForm" >
+            <div class="form-container" [formGroup]="EmployeeForm" *ngIf="EmployeeForm!=null">
                 <div class="form-section">
                     <div class="col-lg-12">
                         <div class="card wizard-card" data-color="orange" id="wizardProfile">
@@ -27,20 +20,25 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-
                             <label for="">First Name</label>
-                            <input type="text" class="form-control" formControlName="employeeFname" placeholder="Enter your first name">
-
-
+                            <input type="text" class="form-control" formControlName="employeeFname"
+                                placeholder="Enter your first name">
+                            <span class="error"
+                                *ngIf="!EmployeeForm.controls['employeeFname'].valid&&(EmployeeForm.controls['employeeFname'].dirty|| EmployeeForm.controls['employeeFname'].touched)"><i
+                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide first
+                                name</span>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
 
                             <label for="">Last Name</label>
-                            <input type="text" class="form-control" formControlName="employeeMname" placeholder="Enter Last Name">
-
-
+                            <input type="text" class="form-control" formControlName="employeeMname"
+                                placeholder="Enter Last Name">
+                            <span class="error"
+                                *ngIf="!EmployeeForm.controls['employeeMname'].valid&&(EmployeeForm.controls['employeeMname'].dirty|| EmployeeForm.controls['employeeMname'].touched)"><i
+                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide last
+                                name</span>
                         </div>
                     </div>
 
@@ -48,45 +46,77 @@
                         <div class="form-group">
 
                             <label for="">Email Address</label>
-                            <input type="text" class="form-control" formControlName="employeeEmail" placeholder="Enter Email Address">
-
-
+                            <input type="text" class="form-control" formControlName="employeeEmail"
+                                placeholder="Enter Email Address">
+                            <span class="error"
+                                *ngIf="!EmployeeForm.controls['employeeEmail'].valid&&(EmployeeForm.controls['employeeEmail'].dirty|| EmployeeForm.controls['employeeEmail'].touched)"><i
+                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide valid email
+                                address</span>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-
                             <label for="">Password</label>
-                            <input type="text" class="form-control" formControlName="employeePassword" placeholder="Enter Password">
-
-
+                            <input type="text" class="form-control" formControlName="employeePassword"
+                                placeholder="Enter Password">
+                            <span class="error"
+                                *ngIf="!EmployeeForm.controls['employeePassword'].valid&&(EmployeeForm.controls['employeePassword'].dirty|| EmployeeForm.controls['employeePassword'].touched)"><i
+                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide valid
+                                password</span>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-
-                            <label for="">Phone Number</label>
-                            <input type="text" class="form-control" formControlName="employeeMobileNo" placeholder="Enter Phone Number">
-
-
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="">Select Role</label>
-                            <select name="" id="" class="form-control" formControlName="designationId">
-                                <option value="">Select Roles</option>
-                                <option *ngFor="let designation of DesignationList" value="{{designation.designationId}}">{{designation.designationName}}</option>
-                            </select>
+                            <label for="">Employee Id</label>
+                            <input type="text" class="form-control" formControlName="employeeId"
+                                placeholder="Enter Employee Id">
+                            <span class="error"
+                                *ngIf="!EmployeeForm.controls['employeeId'].valid&&(EmployeeForm.controls['employeeId'].dirty|| EmployeeForm.controls['employeeId'].touched)"><i
+                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide valid
+                                employeeId</span>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="">Select Department</label>
-                            <select name="" id="" class="form-control" formControlName="departmentId" (change)="SelectDepartmentChanged(EmployeeForm.controls['departmentId'].value)" >
+                            <select name="" id="" class="form-control" formControlName="departmentId"
+                                (change)="SelectDepartmentChanged(EmployeeForm.controls['departmentId'].value)">
                                 <option value="">Select Department</option>
-                                <option *ngFor="let department of DepartmentList" value="{{department.departmentId}}">{{department.departmentName}}</option>
+                                <option *ngFor="let department of DepartmentList" value="{{department.departmentId}}">
+                                    {{department.departmentName}}</option>
                             </select>
+                            <span class="error"
+                                *ngIf="!EmployeeForm.controls['departmentId'].valid&&(EmployeeForm.controls['departmentId'].dirty|| EmployeeForm.controls['departmentId'].touched)"><i
+                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please select
+                                department</span>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="">Phone Number</label>
+                            <input type="text" class="form-control" formControlName="employeeMobileNo"
+                                placeholder="Enter Phone Number">
+                            <span class="error"
+                                *ngIf="!EmployeeForm.controls['employeeMobileNo'].valid&&(EmployeeForm.controls['employeeMobileNo'].dirty|| EmployeeForm.controls['employeeMobileNo'].touched)"><i
+                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide valid
+                                mobile number</span>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="">Select Role</label>
+                            <select name="" id="" class="form-control" formControlName="designationId"
+                                [disabled]="EmployeeForm.controls['departmentId'].value==''">
+                                <option value="">Select Roles</option>
+                                <option *ngFor="let designation of DesignationList"
+                                    value="{{designation.designationId}}">{{designation.designationName}}</option>
+                            </select>
+                            <span class="error"
+                                *ngIf="!EmployeeForm.controls['designationId'].valid&&(EmployeeForm.controls['designationId'].dirty|| EmployeeForm.controls['designationId'].touched)"><i
+                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please select role</span>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -94,199 +124,64 @@
                             <label for="fun" class="control-label text-right">Gender</label>
                             <div class="input-group">
                                 <div id="radioBtn" class="btn-group">
-                                    <a class="btn btn-primary gender btn-sm active" data-toggle="fun" [class.active]="EmployeeForm.controls['gender'].value=='Male'" [class.notActive]="EmployeeForm.controls['gender'].value!='Male'"
-                                        data-title="Y" (click)="RadioButtonClick('Male')" >Male</a>
-                                    <a class="btn btn-primary gender btn-sm notActive" (click)="RadioButtonClick('Female')" data-toggle="fun" [class.active]="EmployeeForm.controls['gender'].value=='Male'" [class.notActive]="EmployeeForm.controls['gender'].value!='Female'"
+                                    <a class="btn btn-primary gender btn-sm active" data-toggle="fun"
+                                        [class.active]="EmployeeForm.controls['gender'].value=='Male'"
+                                        [class.notActive]="EmployeeForm.controls['gender'].value!='Male'" data-title="Y"
+                                        (click)="RadioButtonClick('Male')">Male</a>
+                                    <a class="btn btn-primary gender btn-sm notActive"
+                                        (click)="RadioButtonClick('Female')" data-toggle="fun"
+                                        [class.active]="EmployeeForm.controls['gender'].value=='Male'"
+                                        [class.notActive]="EmployeeForm.controls['gender'].value!='Female'"
                                         data-title="X">Female</a>
-                                    <a class="btn btn-primary btn-sm gender notActive" (click)="RadioButtonClick('Other')" data-toggle="fun" [class.active]="EmployeeForm.controls['gender'].value=='Male'" [class.notActive]="EmployeeForm.controls['gender'].value!='Other'"
+                                    <a class="btn btn-primary btn-sm gender notActive"
+                                        (click)="RadioButtonClick('Other')" data-toggle="fun"
+                                        [class.active]="EmployeeForm.controls['gender'].value=='Male'"
+                                        [class.notActive]="EmployeeForm.controls['gender'].value!='Other'"
                                         data-title="N">Other</a>
                                 </div>
                                 <input type="hidden" name="fun" id="fun" formControlName="gender">
+                               
                             </div>
                         </div>
 
-                    </div>
-                    <div class="col-lg-12 permission-heading">
-                        <h4>Select Permission</h4>
-                    </div>
-
-                    <div class="permission-section">
-                        <div class="col-lg-6">
-                            <div class="rolesection">
-                                <div class="form-group">
-                                    <label for="" class="pull-left headtxt">Employee Details Permissions</label>
-                                    <div class="material-switch">
-                                        <span>Create</span><br>
-                                        <input id="EmployeeDetailsPermissions-create" name="someSwitchOption001"
-                                            type="checkbox" />
-                                        <label for="EmployeeDetailsPermissions-create" class="label-default"></label>
-                                    </div>
-                                    <div class="material-switch">
-                                        <span>Edit</span><br>
-                                        <input id="EmployeeDetailsPermissions-edit" name="someSwitchOption001"
-                                            type="checkbox" />
-                                        <label for="EmployeeDetailsPermissions-edit" class="label-default"></label>
-                                    </div>
-
-                                    <div class="material-switch">
-                                        <span>Delete</span><br>
-                                        <input id="EmployeeDetailsPermissions-delete" name="someSwitchOption001"
-                                            type="checkbox" />
-                                        <label for="EmployeeDetailsPermissions-delete" class="label-default"></label>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6">
-                            <div class="rolesection">
-                                <div class="form-group">
-                                    <label for="" class="pull-left headtxt">Project Permission</label>
-                                    <div class="material-switch">
-                                        <span>Create</span><br>
-                                        <input id="ProjectPermission-create" name="someSwitchOption001"
-                                            type="checkbox" />
-                                        <label for="ProjectPermission-create" class="label-default"></label>
-                                    </div>
-                                    <div class="material-switch">
-                                        <span>Edit</span><br>
-                                        <input id="ProjectPermission-edit" name="someSwitchOption001" type="checkbox" />
-                                        <label for="ProjectPermission-edit" class="label-default"></label>
-                                    </div>
-
-                                    <div class="material-switch">
-                                        <span>Delete</span><br>
-                                        <input id="ProjectPermission-delete" name="someSwitchOption001"
-                                            type="checkbox" />
-                                        <label for="ProjectPermission-delete" class="label-default"></label>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="permission-section">
-                        <div class="col-lg-6">
-                            <div class="rolesection">
-
-                                <div class="form-group">
-                                    <label for="" class="pull-left headtxt">Post Job Permissions</label>
-                                    <div class="material-switch">
-                                        <span>Create</span><br>
-                                        <input id="PostJobPermissions-create" name="someSwitchOption001"
-                                            type="checkbox" />
-                                        <label for="PostJobPermissions-create" class="label-default"></label>
-                                    </div>
-                                    <div class="material-switch">
-                                        <span>Edit</span><br>
-                                        <input id="PostJobPermissions-edit" name="someSwitchOption001"
-                                            type="checkbox" />
-                                        <label for="PostJobPermissions-edit" class="label-default"></label>
-                                    </div>
-
-                                    <div class="material-switch">
-                                        <span>Delete</span><br>
-                                        <input id="PostJobPermissions-delete" name="someSwitchOption001"
-                                            type="checkbox" />
-                                        <label for="PostJobPermissions-delete" class="label-default"></label>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="rolesection">
-                                <div class="form-group">
-                                    <label for="" class="pull-left headtxt">Team Permission</label>
-                                    <div class="material-switch">
-                                        <span>Create</span><br>
-                                        <input id="TeamPermission-create" name="someSwitchOption001" type="checkbox" />
-                                        <label for="TeamPermission-create" class="label-default"></label>
-                                    </div>
-                                    <div class="material-switch">
-                                        <span>Edit</span><br>
-                                        <input id="TeamPermission-edit" name="someSwitchOption001" type="checkbox" />
-                                        <label for="TeamPermission-edit" class="label-default"></label>
-                                    </div>
-
-                                    <div class="material-switch">
-                                        <span>Delete</span><br>
-                                        <input id="TeamPermission-delete" name="someSwitchOption001" type="checkbox" />
-                                        <label for="TeamPermission-delete" class="label-default"></label>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="permission-section">
-
-                        <div class="col-lg-6">
-                            <div class="rolesection">
-                                <div class="form-group">
-                                    <label for="" class="pull-left headtxt">Resume Permissions</label>
-                                    <div class="material-switch">
-                                        <span>Create</span><br>
-                                        <input id="ResumePermissions-create" name="someSwitchOption001"
-                                            type="checkbox" />
-                                        <label for="ResumePermissions-create" class="label-default"></label>
-                                    </div>
-                                    <div class="material-switch">
-                                        <span>Edit</span><br>
-                                        <input id="ResumePermissions-edit" name="someSwitchOption001" type="checkbox" />
-                                        <label for="ResumePermissions-edit" class="label-default"></label>
-                                    </div>
-
-                                    <div class="material-switch">
-                                        <span>Delete</span><br>
-                                        <input id="ResumePermissions-delete" name="someSwitchOption001"
-                                            type="checkbox" />
-                                        <label for="ResumePermissions-delete" class="label-default"></label>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-6">
-                            <div class="rolesection">
-                                <div class="form-group">
-                                    <label for="" class="pull-left headtxt">Skill Permission</label>
-                                    <div class="material-switch">
-                                        <span>Create</span><br>
-                                        <input id="SkillPermission-create" name="someSwitchOption001" type="checkbox" />
-                                        <label for="SkillPermission-create" class="label-default"></label>
-                                    </div>
-                                    <div class="material-switch">
-                                        <span>Edit</span><br>
-                                        <input id="SkillPermission-edit" name="someSwitchOption001" type="checkbox" />
-                                        <label for="SkillPermission-edit" class="label-default"></label>
-                                    </div>
-
-                                    <div class="material-switch">
-                                        <span>Delete</span><br>
-                                        <input id="SkillPermission-delete" name="someSwitchOption001" type="checkbox" />
-                                        <label for="SkillPermission-delete" class="label-default"></label>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 pull-right">
-                        <input type="button" value="Create Employee" class="subbtn btn btn-primary" (click)="CreateEmployee(EmployeeForm.value)">
                     </div>
                 </div>
-
+                <div class="form-container">
+                    <div class="form-section">
+                        <div class="col-lg-12 permission-heading">
+                            <h4>Select Permission</h4>
+                        </div>
+                        <div class="permission-section" formArrayName="employeeElementMappingList">
+                            <div class="col-lg-6" *ngFor="let element of ElementsList.controls;
+                            let elementIndex = index">
+                                <div class="rolesection" [formGroupName]="elementIndex">
+                                    <div class="form-group">
+                                        <label style="width: 30%;" for=""
+                                            class="pull-left headtxt">{{element.controls.elementName.value}}</label>
+                                        <div class="material-switch" formArrayName="employeeElementOperationList" *ngFor="let operation of ElementOperationsList(elementIndex).controls;
+                                        let operationIndex = index">
+                                            <ng-container [formGroupName]="operationIndex">
+                                                <span>{{operation.controls.operationName.value}}</span><br>
+                                                <input
+                                                    id="{{element.controls.elementName.value+operation.controls.operationName.value}}"
+                                                    name="someSwitchOption001" formControlName="value"
+                                                    type="checkbox" />
+                                                <label
+                                                    for="{{element.controls.elementName.value+operation.controls.operationName.value}}"
+                                                    class="label-default"></label>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 pull-right">
+                        <input type="submit" value="Create Employee" class="subbtn btn btn-primary" [disabled]="!EmployeeForm.valid"
+                             (click)="CreateEmployee(EmployeeForm.value)">
+                    </div>
+                </div>
             </div>
-
-
         </div>
-
     </div>
+</div>

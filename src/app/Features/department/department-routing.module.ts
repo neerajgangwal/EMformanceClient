@@ -5,7 +5,7 @@ import {DepartmentComponent} from './department.component'
 
 
 
-const routes: Routes = [{ path: 'create', component:CreateDepartmentComponent }];
+const routes: Routes = [{ path: 'create', component:CreateDepartmentComponent,data :{ Title:'Create Department' ,ShowHeader:true,ShowNavBar:true} }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

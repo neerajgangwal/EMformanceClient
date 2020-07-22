@@ -4,7 +4,7 @@
         <li>
             <a [routerLink]="['/department/create']">
                 <i class="icon-Department"></i>
-               Department
+                Department
             </a>
         </li>
         <li class="nav-item">
@@ -15,12 +15,12 @@
             </a>
             <div class="collapse">
                 <div class="collapse-inner">
-                    <a class="collapse-item" [routerLink]="['/employee/create']" >Create Employee</a>
-                    <a class="collapse-item" [routerLink]="['/employee/list']" >Employee List</a>
+                    <a class="collapse-item" [routerLink]="['/employee/create']">Create Employee</a>
+                    <a class="collapse-item" [routerLink]="['/employee/list']">Employee List</a>
                 </div>
             </div>
         </li>
-         <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" href="#">
                 <i class="icon-Feedback"></i>
                 Role
@@ -46,7 +46,7 @@
                 </div>
             </div>
         </li>
-         <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" href="#">
                 <i class="icon-list"></i>
                 Tasks
@@ -59,7 +59,7 @@
                 </div>
             </div>
         </li>
-         <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" href="#">
                 <i class="icon-Goals"></i>
                 Goals
@@ -72,7 +72,7 @@
                 </div>
             </div>
         </li>
-         <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" href="#">
                 <i class="icon-Evaluate"></i>
                 Evaluate Performance
@@ -85,7 +85,7 @@
                 </div>
             </div>
         </li>
-         <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" href="#">
                 <i class="icon-Feedback"></i>
                 Feedback
@@ -93,12 +93,12 @@
             </a>
             <div class="collapse">
                 <div class="collapse-inner">
-                    <a class="collapse-item" href="buttons.html">My Feedback</a>
-                    <a class="collapse-item" href="cards.html">Team Feedback Management</a>
+                    <a class="collapse-item" [routerLink]="['Feedback/MyFeedback']" >My Feedback</a>
+                    <a class="collapse-item" [routerLink]="['Feedback/TeamFeedback']">Team Feedback Management</a>
                 </div>
             </div>
         </li>
-         <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" href="#">
                 <i class="icon-skill"></i>
                 Skills
@@ -106,12 +106,26 @@
             </a>
             <div class="collapse">
                 <div class="collapse-inner">
-                    <a class="collapse-item" href="buttons.html">My Skill</a>
-                    <a class="collapse-item" href="cards.html">Evaluate Employee Skills</a>
+                    <a class="collapse-item" [routerLink]="['Skill/MySkill']">My Skill</a>
+                    <a class="collapse-item" [routerLink]="['Skill/EvaluateSkill']">Evaluate Employee Skills</a>
                 </div>
             </div>
         </li>
-      
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="icon-list"></i>
+                Exit Interview
+                <b class="caret"></b>
+            </a>
+            <div class="collapse">
+                <div class="collapse-inner">
+                    <a class="collapse-item" [routerLink]="['ExitInterview/SurveyForm']">Survey Form</a>
+                    <a class="collapse-item" [routerLink]="['ExitInterview/ExactResponse']">Exact Response</a>
+                    <a class="collapse-item" [routerLink]="['ExitInterview/GeneralResponse']">General Response</a>
+                </div>
+            </div>
+        </li>
+
         <li>
             <a [routerLink]="['/team/list']">
                 <i class="icon-Team"></i>

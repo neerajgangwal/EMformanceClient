@@ -6,7 +6,7 @@ import { UpdateCompanyComponent } from './update-company/update-company.componen
 import { ReactiveFormsModule } from '@angular/forms'
 const routes: Routes = [{ path: '', component: CompanyComponent },
 
-{ path: 'update', pathMatch: 'full', component: UpdateCompanyComponent }];
+{ path: 'update', pathMatch: 'full', component: UpdateCompanyComponent,data :{ Title:'' ,ShowHeader:false,ShowNavBar:false} }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes),

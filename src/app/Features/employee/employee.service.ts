@@ -25,4 +25,13 @@ export class EmployeeService {
   {
     return this.httpClient.post(environment.url+environment.AddEmployee,data);
   }
+  getOperations=function()
+  {
+    return this.httpClient.get(environment.url+environment.getOperations);
+  }
+
+  getElements=function()
+  {
+    return this.httpClient.get(environment.url+environment.getElements);
+  }
 }

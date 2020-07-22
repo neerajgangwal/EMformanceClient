@@ -1,10 +1,16 @@
 <div class="main-panel">
-	<div class="content">
+	<div class="content" style="background-color:#DAEBEB;">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-4">
-					<h3 class="top-heading">Employee List </h3>
+					<div class="search-form">
+						<i class="fa fa-search"></i>
+						<input type="text" class="form-control" placeholder="Search by name" (input)="FilterData($event)">
+					</div>
 				</div>
+
+				<div class="col-md-2 pull-right"><input type="submit" value="Create Team"
+						class="team btn btn-primary create-team"></div>
 			</div>
 			<div class="emlist">
 				<ul class="team-member team-listvew">
@@ -14,11 +20,11 @@
 								Employee Name
 							</li>
 							<li>Department</li>
-							<li>Designation </li>	
+							<li>Designation </li>
 							<li>Actions </li>
 						</ul>
 					</li>
-					<li class="list-heading list-content" *ngFor="let data of searchSerrvice.SearchResults">
+					<li class="list-heading list-content" *ngFor="let data of SearchResults">
 						<ul>
 							<li>
 								<div class="team-thumb"></div>
@@ -38,5 +44,55 @@
 			</div>
 		</div>
 	</div>
-
 </div>
+	<!-- <div class="slide-popup" id="task-description">
+	<div class="slide-close">
+		<i class="fa fa-angle-left" aria-hidden="true"></i>
+	</div>
+	<div class="slide-wrapper">
+		<div class="slide-content">
+			<h3>Create Team</h3>
+			<form>
+				<div class="form-group">
+					<label for="">select project</label>
+					<select name="" id="#" class="form-control">
+						<option value="">Sim Project</option>
+						<option value="">Sim Project</option>
+						<option value="">Sim Project</option>
+						<option value="">Sim Project</option>
+						<option value="">Sim Project</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="">select team member</label>
+					<div class="selectwith-button">
+						<div class="custom-select-wrapper">
+							<div class="custom-select">
+								<div class="custom-select__trigger"><span>Amanda Kherr <b>Designer</b></span>
+									<div class="arrow"></div>
+								</div>
+								<div class="custom-options">
+									<span class="custom-option selected" data-value="tesla">Amanda Kherr
+										<b>Designer</b></span>
+									<span class="custom-option" data-value="volvo">Amanda Kherr2
+										<b>Designer</b></span>
+									<span class="custom-option" data-value="mercedes">Amanda Kherr3
+										<b>Designer</b></span>
+								</div>
+							</div>
+						</div>
+						<button class="btn btn-primary">ADD</button>
+					</div>
+				</div>
+				<div class="form-group">
+					<ul class="selected-user">
+						<li><span class="user-thumb"></span>
+							<p>Amanda Kherr <b>Designer</b></p><i class="fa fa-times"></i>
+						</li>
+					</ul>
+				</div>
+				<input type="submit" value="Request feedback" class="btn btn-primary">
+			</form>
+		</div>
+	</div>
+</div> -->

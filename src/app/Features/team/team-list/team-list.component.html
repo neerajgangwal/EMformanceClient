@@ -1,12 +1,20 @@
 <div class="main-panel">
-	<div class="content">
+	<div class="content" style="background-color:#DAEBEB;">
 		<div class="container-fluid">
+			<p-toast></p-toast>
 			<div class="row">
-				<div class="col-md-10">
-					<h3 class="top-heading">Team List </h3>
 
+				<div class="col-md-4">
+					<div class="search-form">
+						<i class="fa fa-search"></i>
+						<input type="text" class="form-control" placeholder="Search by name"
+							(input)="FilterData($event)">
+					</div>
 				</div>
-				<div class="col-md-2"><input type="submit" value="Create Team" class="team btn btn-primary"></div>
+				<div class="col-md-2 pull-right">
+					<button class="team btn btn-primary create-team" (click)="CreateTeamButtonClicked()">Create
+						Team</button>
+				</div>
 			</div>
 			<div class="emlist">
 				<ul class="team-member team-listvew">
@@ -15,35 +23,31 @@
 							<li>
 								Team Name
 							</li>
-							<li>Actions
-							</li>
+							<li>Actions </li>
 						</ul>
 					</li>
-
-					<li class="team-heading list-content" *ngFor="let data of searchservice.SearchResults">
+					<li class="team-heading list-content" *ngFor="let data of SearchResults">
 						<ul>
 							<li>
 								{{data.teamName}}
 							</li>
 							<li>
-								<i class="icon-View"></i>
+								<i class="icon-View team" (click)="TeamMemberViewClicked()"></i>
 								<i class="icon-edit"></i>
+								<i id="addteam1" class="icon-Team" (click)="AddTeamMember(data.teamId)"></i>
 								<i class="icon-Delete"></i>
-
 							</li>
 						</ul>
 
 					</li>
-
-
-
 				</ul>
+
 			</div>
 		</div>
 	</div>
 
-</div>
 
+</div>
 <div class="slide-popup" id="add-task">
 	<div class="slide-close">
 		<i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -61,102 +65,71 @@
 
 
 				</li>
-
-				<li class="team-pop-view list-content">
-					<ul>
-						<li>
-							<div class="team-thumb"></div>
-							<h4>Amanda Kherr</h4>
-						</li>
-						<li>
-							<a href="#">angeljohnson@gmail.com</a>
-
-						</li>
-					</ul>
-
-				</li>
-				<li class="team-pop-view list-content">
-					<ul>
-						<li>
-							<div class="team-thumb"></div>
-							<h4>Amanda Kherr</h4>
-						</li>
-						<li>
-							<a href="#">angeljohnson@gmail.com</a>
-
-						</li>
-					</ul>
-
-				</li>
-				<li class="team-pop-view list-content">
-					<ul>
-						<li>
-							<div class="team-thumb"></div>
-							<h4>Amanda Kherr</h4>
-						</li>
-						<li>
-							<a href="#">angeljohnson@gmail.com</a>
-
-						</li>
-					</ul>
-
-				</li>
-				<li class="team-pop-view list-content">
-					<ul>
-						<li>
-							<div class="team-thumb"></div>
-							<h4>Amanda Kherr</h4>
-						</li>
-						<li>
-							<a href="#">angeljohnson@gmail.com</a>
-
-						</li>
-					</ul>
-
-				</li>
-				<li class="team-pop-view list-content">
-					<ul>
-						<li>
-							<div class="team-thumb"></div>
-							<h4>Amanda Kherr</h4>
-						</li>
-						<li>
-							<a href="#">angeljohnson@gmail.com</a>
-
-						</li>
-					</ul>
-
-				</li>
-				<li class="team-pop-view list-content">
-					<ul>
-						<li>
-							<div class="team-thumb"></div>
-							<h4>Amanda Kherr</h4>
-						</li>
-						<li>
-							<a href="#">angeljohnson@gmail.com</a>
-
-						</li>
-					</ul>
-
-				</li>
-				<li class="team-pop-view list-content">
-					<ul>
-						<li>
-							<div class="team-thumb"></div>
-							<h4>Amanda Kherr</h4>
-						</li>
-						<li>
-							<a href="#">angeljohnson@gmail.com</a>
-
-						</li>
-					</ul>
-
-				</li>
-
-
-
 			</ul>
+		</div>
+	</div>
+</div>
+<div class="slide-popup" id="task-description">
+	<div class="slide-close">
+		<i class="fa fa-angle-left" aria-hidden="true"></i>
+	</div>
+	<div class="slide-wrapper">
+		<div class="slide-content" *ngIf="CreateTeamForm!=null">
+
+			<h3>Create Team</h3>
+			<form [formGroup]="CreateTeamForm">
+
+				<div class="form-group">
+					<label for="">Select project</label>
+					<select class="form-control" formControlName="ProjectId">
+						<option value="" selected>Select Project</option>
+						<option *ngFor="let project of ProjectsList" value="{{project.projectId}}">
+							{{project.projectName}}</option>
+					</select>
+				</div>
+				
+				<div class="form-group">
+					<label for="">Team Name</label>
+					<input type="text" class="form-control" placeholder="Enter Team Name" formControlName="TeamName">
+				</div>
+
+				<input type="submit" value="Create Team" class="btn btn-primary"
+					(click)="CreateButtonClicked(CreateTeamForm.value)">
+			</form>
+		</div>
+	</div>
+</div>
+<div class="slide-popup" id="addteam-member">
+	<div class="slide-close">
+		<i class="fa fa-angle-left" aria-hidden="true"></i>
+	</div>
+	<div class="slide-wrapper">
+		<div class="slide-content">
+			<h3>Add Team Members</h3>
+			<form [formGroup]="AddTeamForm" *ngIf="AddTeamForm!=null"> 
+				<div class="form-group" >
+					<label for="">Select team member</label>
+					<div class="selectwith-button">
+						<div class="custom-select-wrapper">
+							<div class="custom-select">
+								<select class="form-control" formControlName="EmployeeId">
+									<option value="">Select Team Member</option>
+									<option *ngFor="let employee of EmployeeList" value="{{employee.employee.employeeId}}">{{employee.employee.employeeFname}} {{employee.employee.employeeMname}}</option>
+								</select>
+							</div>
+						</div>
+						<button class="btn btn-primary" (click)="AddMemberToTeamList(AddTeamForm.get('EmployeeId').value)">ADD</button>
+					</div>
+				</div>
+				<div class="form-group">
+					<ul class="selected-user">
+						<li *ngFor="let member of TeamMemberList"><span class="user-thumb"></span>
+							<p>{{member.employee.employeeFname}} {{member.employee.employeeMname}} <b>{{member.designation.designationName}}</b></p><i class="fa fa-times" (click)="RemoveMemberFromTeamList(member)"></i>
+						</li>
+					</ul>
+				</div>
+				<input type="submit" value="Add Team Members" class="btn btn-primary" (click)="AddTeamMemberClicked(AddTeamForm.value)">
+			</form>
 		</div>
 	</div>
 </div>

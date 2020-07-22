@@ -14,4 +14,9 @@ export class SignupService {
     return this.httpClient.post(this.url+environment.signup, data);
   }
 
+  ValidateToken=function(token)
+  {
+    return this.httpClient.get(this.url+environment.emailVerification+token);
+  }
+
 }

@@ -10,6 +10,7 @@ export const environment = {
   addUser:"addUser",
   employeeData:"getEmployeeList",
   ProjectList:"getProjectList",
+  CreateProject:"addProject",
   CreateDepartment:"addDepartment",
   getDepartment:"getDepartment?departmentId=-1",
   CreateRole:"addDesignation",
@@ -24,7 +25,11 @@ export const environment = {
   addGoal:"addGoal",
   getGoal:"getGoal",
   getElements:"getElements",
-  getOperations:"getOperation"
+  getOperations:"getOperation",
+  emailVerification:"emailVerification?tokenId=",
+  createTeam:"addTeam",
+  getTeamMember:"getTeamMember",
+  addTeamMember:"manageTeam"
 };
 
 /*

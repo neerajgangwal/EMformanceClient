@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="main-panel">
-            <div class="login">
+            <div class="login" [ngClass]="{'extraMargin': ShowValidationMessage}">
                 <div class="welcome-heading">
                     <h3 class="heading-1 signuplh">Start your Free Trial</h3>
 
@@ -16,23 +16,33 @@
 
                 <div class="clearfix"></div>
                 <div class="form-wrapper">
-                    <form [formGroup]="SignupForm" (ngSubmit)="OnSubmit(SignupForm.value)">
+                    <form *ngIf="ShowValidationMessage==false" [formGroup]="SignupForm"
+                        (ngSubmit)="OnSubmit(SignupForm.value)">
                         <div class="form-group">
                             <label for="">Name</label>
-                            <input type="text" class="form-control" placeholder="Enter Your Full Name" formControlName="name">
-                            <span class="error" *ngIf="!SignupForm.controls['name'].valid&&(SignupForm.controls['name'].dirty || SignupForm.controls['name'].touched)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
+                            <input type="text" class="form-control" placeholder="Enter Your Full Name"
+                                formControlName="name">
+                            <span class="error"
+                                *ngIf="!SignupForm.controls['name'].valid&&(SignupForm.controls['name'].dirty || SignupForm.controls['name'].touched)"><i
+                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
                                 provide Name</span>
                         </div>
                         <div class="form-group">
                             <label for="">Email</label>
-                            <input type="text" class="form-control" formControlName="email" placeholder="Enter Your Email Address">
-                            <span class="error" *ngIf="!SignupForm.controls['email'].valid&&(SignupForm.controls['email'].dirty || SignupForm.controls['email'].touched)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
+                            <input type="text" class="form-control" formControlName="email"
+                                placeholder="Enter Your Email Address">
+                            <span class="error"
+                                *ngIf="!SignupForm.controls['email'].valid&&(SignupForm.controls['email'].dirty || SignupForm.controls['email'].touched)"><i
+                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
                                 provide Email</span>
                         </div>
                         <div class="form-group">
                             <label for="">Password</label>
-                            <input type="password" class="form-control" formControlName="password" placeholder="Enter Your Password">
-                            <span class="error" *ngIf="!SignupForm.controls['password'].valid&&(SignupForm.controls['password'].dirty || SignupForm.controls['password'].touched)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
+                            <input type="password" class="form-control" formControlName="password"
+                                placeholder="Enter Your Password">
+                            <span class="error"
+                                *ngIf="!SignupForm.controls['password'].valid&&(SignupForm.controls['password'].dirty || SignupForm.controls['password'].touched)"><i
+                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
                                 provide Password</span>
                         </div>
 
@@ -49,14 +59,15 @@
 
                         <div class="frpass">I already have an account<a [routerLink]="['/login']">Login</a></div>
                     </form>
-
+                    <div *ngIf="ShowValidationMessage==true" style="font-size: larger;text-align: center;font-weight: bolder;">
+                        <div>Successfully registered <br> please check your email for verification link</div>
+                        <div style="text-align: center;">
+                            <i class="fa fa-check-circle"
+                                style="font-size:60px;color: #007775;"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-
-
-
         </div>
-
     </div>
 </div>

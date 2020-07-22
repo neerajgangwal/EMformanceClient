@@ -5,7 +5,7 @@ import {EvaluateComponent} from './evaluate.component'
 
 
 
-const routes: Routes = [{ path: '', component:EvaluateListComponent }];
+const routes: Routes = [{ path: '', component:EvaluateListComponent,data :{ Title:'Team List' ,ShowHeader:true,ShowNavBar:true} }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

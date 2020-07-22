@@ -1,0 +1,377 @@
+<div class="main-panel">
+    <div class="content" style="background-color:#DAEBEB;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="panel-group" id="accordion">
+                        <!-- panel1  -->
+                        <div class="panel panel-default" id="panel1">
+                            <div class="panel-heading" data-toggle="collapse" data-target="#collapse1">
+                                <h4 class="panel-title"><a style="font-weight:bold" data-toggle="collapse"
+                                        data-target="#collapse1">Create new Project</a></h4>
+                            </div>
+                            <div id="collapse1" class="panel-collapse collapse in fade">
+                                <div class="panel-body">
+                                    <div class="content">
+                                        <div class="container-fluid" *ngIf="CreateProjectForm!=null">
+                                            <div class="form-section" >
+                                                <div class="col-lg-12">
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group" [formGroup]="CreateProjectForm">
+                                                        <label for="">Project Name</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter Project Name" formControlName="projectName">
+                                                        <span class="error"><i class="fa fa-exclamation-triangle"
+                                                                aria-hidden="true"></i>Please provide company
+                                                            name</span>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="">Select Priority</label>
+                                                        <select name="" id="" class="form-control" formControlName="projectPriority">
+                                                            <option value="" selected>Select Priority</option>
+                                                            <option value="1">Low</option> 
+                                                            <option value="2">Medium</option> 
+                                                            <option value="3">High</option>                                                           
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group" formControlName="projectDescription">
+                                                        <label for="">Project Description</label>
+                                                        <textarea class="form-control" rows="4" cols="50" placeholder="Enter Task details here" formControlName="projectDescription"> 
+</textarea>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label for="">Project Timeline</label>
+                                                                <input type="date" class="form-control" formControlName="projectStartDate">
+                                                            </div>
+                                                            <div class="col-md-2 text-center">
+                                                                <span class="to-padding">to</span>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <label for="">&nbsp;</label>
+                                                                <input type="date" class="form-control" formControlName="projectDueDate">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+
+
+                                                        <label for="">Upload file</label>
+                                                        <div class="file-upload">
+                                                            <button class="file-upload-btn" type="button"
+                                                                onclick="$('.file-upload-input').trigger( 'click' )">Click
+                                                                here to upload</button>
+
+                                                            <div class="image-upload-wrap">
+                                                                <input class="file-upload-input" type='file'
+                                                                    onchange="readURL(this);" accept="image/*" />
+                                                                <div class="drag-text">
+                                                                    <span>Drop files here or Click to upload</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="file-upload-content">
+                                                                <img class="file-upload-image" src="#"
+                                                                    alt="your image" />
+                                                                <div class="image-title-wrap">
+                                                                    <button type="button" onclick="removeUpload()"
+                                                                        class="remove-image">Remove <span
+                                                                            class="image-title">Uploaded
+                                                                            Image</span></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-lg-3 pull-right">
+                                                    <input type="submit" value="Create Project" (click)="CreateProjectClicked(CreateProjectForm.value)"
+                                                        class="subbtn btn btn-primary">
+                                                </div>
+                                            </div>
+
+
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- panel2 -->
+
+                        <div class="panel panel-default" id="panel2" data-toggle="collapse" data-target="#collapse2">
+                            <div class="panel-heading" data-toggle="collapse" data-target="#collapse2">
+                                <h4 class="panel-title"><a style="font-weight:bold" data-toggle="collapse"
+                                        data-target="#collapse2" class="collapsed">Add team to
+                                        Project</a></h4>
+                            </div>
+                            <div id="collapse2" class="panel-collapse collapse fade">
+                                <div class="panel-body">
+                                    <div class="content">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <h4 class="top-heading">Employee List </h4>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="search-form">
+                                                        <i class="fa fa-search"></i>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Search by name">
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-2 toglebtn">
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-primary dropdown-toggle"
+                                                            id="dropdownMenuButton" type="button" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">Filter by
+                                                            Project<b class="caret"></b></button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item"
+                                                                href="javascript:void(0);">Action</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);">Another
+                                                                action</a>
+                                                            <a class="dropdown-item"
+                                                                href="javascript:void(0);">Something else here</a>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-primary dropdown-toggle"
+                                                            id="dropdownMenuButton" type="button" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">Select Project
+                                                            Role <b class="caret"></b></button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item"
+                                                                href="javascript:void(0);">Action</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);">Another
+                                                                action</a>
+                                                            <a class="dropdown-item"
+                                                                href="javascript:void(0);">Something else here</a>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <ul class="team-member team-listvew">
+                                                <li class="employee-add-heading">
+                                                    <ul>
+                                                        <li>
+                                                            Employee Name
+                                                        </li>
+                                                        <li>Department</li>
+                                                        <li>Designation </li>
+                                                        <li>Actions </li>
+                                                    </ul>
+
+
+                                                </li>
+
+                                                <li class="employee-add-heading list-content">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="team-thumb"></div>
+                                                            <h4>Amanda Kherr
+                                                                <a href="#">angeljohnson@gmail.com</a></h4>
+                                                        </li>
+                                                        <li>Creative Department</li>
+                                                        <li>Senior Designer</li>
+                                                        <li>
+                                                            <button class="btn btn-success response">Add to
+                                                                team</button>
+                                                            <button class="btn btn-success response">Assign
+                                                                task</button>
+                                                        </li>
+                                                    </ul>
+
+                                                </li>
+                                                <li class="employee-add-heading list-content">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="team-thumb"></div>
+                                                            <h4>Amanda Kherr
+                                                                <a href="#">angeljohnson@gmail.com</a></h4>
+                                                        </li>
+                                                        <li>Creative Department</li>
+                                                        <li>Senior Designer</li>
+                                                        <li>
+                                                            <button class="btn btn-success response">Add to
+                                                                team</button>
+                                                            <button class="btn btn-success response">Assign
+                                                                task</button>
+                                                        </li>
+                                                    </ul>
+
+                                                </li>
+                                                <li class="employee-add-heading list-content">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="team-thumb"></div>
+                                                            <h4>Amanda Kherr
+                                                                <a href="#">angeljohnson@gmail.com</a></h4>
+                                                        </li>
+                                                        <li>Creative Department</li>
+                                                        <li>Senior Designer</li>
+                                                        <li>
+                                                            <button class="btn btn-success response">Add to
+                                                                team</button>
+                                                            <button class="btn btn-success response">Assign
+                                                                task</button>
+                                                        </li>
+                                                    </ul>
+
+                                                </li>
+                                                <li class="employee-add-heading list-content">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="team-thumb"></div>
+                                                            <h4>Amanda Kherr
+                                                                <a href="#">angeljohnson@gmail.com</a></h4>
+                                                        </li>
+                                                        <li>Creative Department</li>
+                                                        <li>Senior Designer</li>
+                                                        <li>
+                                                            <button class="btn btn-success response">Add to
+                                                                team</button>
+                                                            <button class="btn btn-success response">Assign
+                                                                task</button>
+                                                        </li>
+                                                    </ul>
+
+                                                </li>
+                                                <li class="employee-add-heading list-content">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="team-thumb"></div>
+                                                            <h4>Amanda Kherr
+                                                                <a href="#">angeljohnson@gmail.com</a></h4>
+                                                        </li>
+                                                        <li>Creative Department</li>
+                                                        <li>Senior Designer</li>
+                                                        <li>
+                                                            <button class="btn btn-success response">Add to
+                                                                team</button>
+                                                            <button class="btn btn-success response">Assign
+                                                                task</button>
+                                                        </li>
+                                                    </ul>
+
+                                                </li>
+                                                <li class="employee-add-heading list-content">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="team-thumb"></div>
+                                                            <h4>Amanda Kherr
+                                                                <a href="#">angeljohnson@gmail.com</a></h4>
+                                                        </li>
+                                                        <li>Creative Department</li>
+                                                        <li>Senior Designer</li>
+                                                        <li>
+                                                            <button class="btn btn-success response">Add to
+                                                                team</button>
+                                                            <button class="btn btn-success response">Assign
+                                                                task</button>
+                                                        </li>
+                                                    </ul>
+
+                                                </li>
+                                                <li class="employee-add-heading list-content">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="team-thumb"></div>
+                                                            <h4>Amanda Kherr
+                                                                <a href="#">angeljohnson@gmail.com</a></h4>
+                                                        </li>
+                                                        <li>Creative Department</li>
+                                                        <li>Senior Designer</li>
+                                                        <li>
+                                                            <button class="btn btn-success response">Add to
+                                                                team</button>
+                                                            <button class="btn btn-success response">Assign
+                                                                task</button>
+                                                        </li>
+                                                    </ul>
+
+                                                </li>
+                                                <li class="employee-add-heading list-content">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="team-thumb"></div>
+                                                            <h4>Amanda Kherr
+                                                                <a href="#">angeljohnson@gmail.com</a></h4>
+                                                        </li>
+                                                        <li>Creative Department</li>
+                                                        <li>Senior Designer</li>
+                                                        <li>
+                                                            <button class="btn btn-success response">Add to
+                                                                team</button>
+                                                            <button class="btn btn-success response">Assign
+                                                                task</button>
+                                                        </li>
+                                                    </ul>
+
+                                                </li>
+                                                <li class="employee-add-heading list-content">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="team-thumb"></div>
+                                                            <h4>Amanda Kherr
+                                                                <a href="#">angeljohnson@gmail.com</a></h4>
+                                                        </li>
+                                                        <li>Creative Department</li>
+                                                        <li>Senior Designer</li>
+                                                        <li>
+                                                            <button class="btn btn-success response">Add to
+                                                                team</button>
+                                                            <button class="btn btn-success response">Assign
+                                                                task</button>
+                                                        </li>
+                                                    </ul>
+
+                                                </li>
+
+
+                                            </ul>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- panel3 -->
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>

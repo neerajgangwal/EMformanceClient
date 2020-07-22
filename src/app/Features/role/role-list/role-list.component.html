@@ -1,0 +1,55 @@
+<div class="main-panel">
+    <div class="content" style="background-color:#DAEBEB;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="search-form">
+                        <i class="fa fa-search"></i>
+                        <input type="text" class="form-control" placeholder="Search by name" (input)="FilterData($event)">
+                    </div>
+                </div>
+            </div>
+            <div class="emlist">
+                <ul class="team-member team-listvew">
+                    <li class="role-list-heading">
+                        <ul>
+                            <li>
+                                Role Name
+                            </li>
+                            <li>Actions </li>
+                        </ul>
+                    </li>
+                    <li class="role-list-heading list-content" *ngFor="let role of SearchResults">
+                        <ul >
+                            <li>{{role.designationName}}</li>
+                            <li>
+                                <i class="icon-View role-description"></i>
+                                <i class="icon-edit"></i>
+                                <i class="icon-Delete"></i>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="slide-popup" id="add-task">
+    <div class="slide-close">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+    </div>
+    <div class="slide-content">
+        <h3>Role Description</h3>
+
+        <ul>
+            <li>Role detials</li>
+            <li>Role detials</li>
+            <li>Role detials</li>
+            <li>Role detials</li>
+            <li>Role detials</li>
+            <li>Role detials</li>
+        </ul>
+
+
+    </div>
+</div>

@@ -1,14 +1,8 @@
 <div class="main-panel">
 
-    <div class="content">
-        <div class="container-fluid">
+<div class="content" style="background-color:#DAEBEB;">
+                <div class="container-fluid">
             <p-toast></p-toast>
-
-            <div class="row">
-                <div class="col-md-4">
-                    <h3 class="top-heading">Create Department</h3>
-                </div>
-            </div>
             <div class="form-container" [formGroup]="DepartmentForm">
                 <div class="form-section">
                     <div class="col-lg-6">
@@ -29,6 +23,14 @@
                 </div>
             </div>
             <div class="emlist">
+					    <div class="row" style="margin-left: 0px;">
+						<div class="col-md-4" style="margin-top: 10px;">
+							 <div class="search-form">
+                                <i class="fa fa-search"></i>
+                                <input style="background-color: #e9eff3;" type="text" class="form-control" placeholder="Search by name" (input)="FilterData($event)">
+                            </div>
+                        </div>
+						</div>
                 <ul class="team-member team-listvew">
                     <li class="list-heading">
                         <ul>
@@ -40,7 +42,7 @@
 
                     </li>
 
-                    <li class="list-heading list-content" *ngFor="let dept of searchService.SearchResults">
+                    <li class="list-heading list-content" *ngFor="let dept of SearchResults">
                         <ul>
 
                             <li class="dpname">{{dept.departmentName}}</li>

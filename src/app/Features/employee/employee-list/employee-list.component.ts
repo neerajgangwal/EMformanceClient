@@ -11,6 +11,10 @@ import { SearchService } from '../../../Services/search.service';
 export class EmployeeListComponent implements OnInit {
 
   EmployeeList: any[];
+  SearchResults: any[];
+  loading: true;
+  FilterKey: string;
+
   constructor(private employeeService: EmployeeService,
     private layoutservice: LayoutService,
     public searchSerrvice: SearchService) { }
@@ -24,11 +28,25 @@ export class EmployeeListComponent implements OnInit {
         element.FullName = element.employee.employeeFname + " " + element.employee.employeeMname;
       })
       console.log(this.EmployeeList);
-      this.searchSerrvice.SetSource(this.EmployeeList);
-      this.searchSerrvice.Key = "FullName";
+      this.SearchResults=this.EmployeeList;
+      this.FilterKey = "FullName";
     });
 
   }
 
+  public FilterData = function (event) {
+    var temp = this.EmployeeList
+    var data = event.target.value;
+    console.log(data);
+    console.log(temp);
+
+    this.SearchResults = temp.filter(item => {
+      console.log(item);
+      console.log(item[this.FilterKey]);
+      console.log(item[this.FilterKey].toLowerCase().startsWith(data.toLowerCase()));
+      return item[this.FilterKey].toLowerCase().includes(data.toLowerCase());
+    }
+    )
+  }
 
 }
