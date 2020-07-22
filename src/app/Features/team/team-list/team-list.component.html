@@ -58,13 +58,22 @@
 			<ul class="team-member team-listvew">
 				<li class="team-pop-view">
 					<ul>
-						<li>Team Name </li>
+						<li>Employee Name </li>
 						<li> Email </li>
-
 					</ul>
-
-
 				</li>
+
+				<li class="team-pop-view list-content">
+					<ul>
+						 <li>
+					   		<div class="team-thumb"></div> <h4>Amanda Kherr</h4>
+						</li>				
+						 <li> 
+					  		<a href="#">angeljohnson@gmail.com</a>			   
+						</li>
+					</ul>
+				   
+			   </li>
 			</ul>
 		</div>
 	</div>
@@ -81,7 +90,7 @@
 
 				<div class="form-group">
 					<label for="">Select project</label>
-					<select class="form-control" formControlName="ProjectId">
+					<select class="form-control" formControlName="projectId">
 						<option value="" selected>Select Project</option>
 						<option *ngFor="let project of ProjectsList" value="{{project.projectId}}">
 							{{project.projectName}}</option>
@@ -90,7 +99,7 @@
 				
 				<div class="form-group">
 					<label for="">Team Name</label>
-					<input type="text" class="form-control" placeholder="Enter Team Name" formControlName="TeamName">
+					<input type="text" class="form-control" placeholder="Enter Team Name" formControlName="teamName">
 				</div>
 
 				<input type="submit" value="Create Team" class="btn btn-primary"

@@ -3,7 +3,7 @@ import { TeamService } from '../team.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as $ from 'jquery';
 import { MessageService } from 'primeng/api';
-
+import {UserService} from '../../../Services/user.service';
 
 @Component({
   selector: 'app-team-list',
@@ -30,6 +30,7 @@ export class TeamListComponent implements OnInit {
     private teamservice: TeamService,
     private messageService: MessageService,
     private fb: FormBuilder,
+    private userService:UserService
   ) { }
 
   ngOnInit(): void {
@@ -62,14 +63,18 @@ export class TeamListComponent implements OnInit {
   }
   ResetForm = function () {
     this.CreateTeamForm.reset();
+    this.CreateTeamForm.patchValue({
+      projectId:''
+    })
   }
 
   InitilizeCreateTeamForm = function () {
     this.CreateTeamForm = this.fb.group({
-      ProjectId: ['', Validators.required],
-      TeamName: ['', Validators.required],
-      departmentId: [1]
-
+      projectId: ['', Validators.required],
+      teamName: ['', Validators.required],
+      departmentId: [1],
+      teamCreatedBy:[this.userService.LoggedInUser.Id],
+      teamUpdatedBy:[this.userService.LoggedInUser.Id]
     })
   }
 
