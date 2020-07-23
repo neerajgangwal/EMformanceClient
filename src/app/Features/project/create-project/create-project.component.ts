@@ -25,7 +25,7 @@ export class CreateProjectComponent implements OnInit {
   ngOnInit(): void {
     this.CreateProjectForm=this.fb.group({
       projectName:['',Validators.required],
-      projectPriority:['0',Validators.required],
+      projectPriority:['',Validators.required],
       projectDescription:['',Validators.required],
       projectAttachment:['',Validators.required],
       projectStartDate:['',Validators.required],
@@ -44,11 +44,17 @@ export class CreateProjectComponent implements OnInit {
     console.log(data);
     this.projectservice.CreateProject(data).subscribe((res)=>
     {
+      if(res.errorCode==0){
+      
       console.log(res);
       this.ProjectList.push(res.dataObj);
       this.searchResults=this.ProjectList;
-      this.messageservice.add({ severity: 'success', summary: 'Department Created', detail: 'Via MessageService' });
+      this.messageservice.add({ severity: 'success', summary: 'project Created', detail: 'Via MessageService' });
       this.ResetForm();
+      }
+      else{
+        
+      }
     })
   }
 

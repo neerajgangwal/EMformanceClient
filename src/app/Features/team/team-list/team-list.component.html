@@ -32,9 +32,9 @@
 								{{data.teamName}}
 							</li>
 							<li>
-								<i class="icon-View team" (click)="TeamMemberViewClicked()"></i>
+								<i class="icon-View team" (click)="ViewIconClicked(data.teamId)"></i>
 								<i class="icon-edit"></i>
-								<i id="addteam1" class="icon-Team" (click)="AddTeamMember(data.teamId)"></i>
+								<i id="addteam1" class="icon-Team" (click)="AddTeamIcon(data.teamId)"></i>
 								<i class="icon-Delete"></i>
 							</li>
 						</ul>
@@ -64,12 +64,12 @@
 				</li>
 
 				<li class="team-pop-view list-content">
-					<ul>
+					<ul *ngFor="let member of ViewTeamMemberList">
 						 <li>
-					   		<div class="team-thumb"></div> <h4>Amanda Kherr</h4>
+					   		<div class="team-thumb"></div> <h4>{{member.employeeName}}</h4>
 						</li>				
 						 <li> 
-					  		<a href="#">angeljohnson@gmail.com</a>			   
+					  		<a href="#">{{member.employeeEmail}}</a>			   
 						</li>
 					</ul>
 				   

@@ -83,6 +83,13 @@ export class CreateRoleComponent implements OnInit {
     return this.ElementsList.controls[elementIndex].get('roleElementOprationList') as FormArray;
   }
 
+  ResetForm=function()
+  {
+    this.RoleForm.reset();
+    this.InitializeForm();
+
+  }
+
   CreateRole(data) {
     var Roleobj = new RolePermissions();
     Roleobj.departmentId = data.departmentId;
@@ -108,7 +115,7 @@ export class CreateRoleComponent implements OnInit {
       if(res.errorCode==0)
       {
         this.messageService.add({ severity: 'success', summary: 'Role created successfully', detail: '' });
-        this.RoleForm.reset();
+        this.ResetForm()
       }
       else{
         this.messageService.add({ severity: 'error', summary: res.errorMsg, detail: '' });

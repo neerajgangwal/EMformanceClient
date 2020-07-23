@@ -29,7 +29,8 @@ export const environment = {
   emailVerification:"emailVerification?tokenId=",
   createTeam:"addTeam",
   getTeamMember:"getTeamMember",
-  addTeamMember:"manageTeam"
+  addTeamMember:"manageTeam",
+  getEmployeeData:"getEmployeeData"
 };
 
 /*

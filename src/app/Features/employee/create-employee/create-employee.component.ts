@@ -114,7 +114,7 @@ export class CreateEmployeeComponent implements OnInit {
       if (res.errorCode == 0) {
         console.log("success");
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Successfully created employee' });
-        this.EmployeeForm.reset();
+        this.resetForm();
         this.EmployeeForm.patchValue({
           gender: 'Male'
         });
@@ -158,6 +158,11 @@ export class CreateEmployeeComponent implements OnInit {
     return Empobj;
   }
 
+  resetForm=function()
+  {
+    this.EmployeeForm.reset();
+    this.InitializeForm();
+  }
   RadioButtonClick = function (data) {
     this.EmployeeForm.patchValue({
       gender: data
