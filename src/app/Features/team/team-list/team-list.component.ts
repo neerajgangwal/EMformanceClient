@@ -66,15 +66,12 @@ export class TeamListComponent implements OnInit {
       });
   }
   ResetForm = function () {
-    this.CreateTeamForm.reset();
-    this.CreateTeamForm.patchValue({
-      projectId: ''
-    })
+    this.InitilizeCreateTeamForm();
   }
 
   InitilizeCreateTeamForm = function () {
     this.CreateTeamForm = this.fb.group({
-      projectId: ['', Validators.required],
+      projectId: -1,
       teamName: ['', Validators.required],
       departmentId: [1],
       teamCreatedBy: [this.userService.LoggedInUser.Id],
@@ -140,7 +137,7 @@ export class TeamListComponent implements OnInit {
 
 
 
-  AddTeamMemberClicked(data) {
+  SaveTeamMembers(data) {
     console.log(data);
     var TeamMappingArray = [];
     this.TeamMemberList.forEach((element) => {
@@ -167,6 +164,12 @@ export class TeamListComponent implements OnInit {
 
   AddMemberToTeamList(id) {
     console.log(id);
+    for(let member of this.TeamMemberList)
+    {
+      if (member.employee.employeeId == id) {
+        return;
+      }
+    }
     this.EmployeeList.forEach((element) => {
 
       if (element.employee.employeeId == id) {

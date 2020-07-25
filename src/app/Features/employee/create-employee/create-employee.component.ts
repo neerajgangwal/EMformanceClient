@@ -4,8 +4,10 @@ import { EmployeeService } from '../employee.service';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { EmployeePermissions } from 'src/app/Entities/EmployeePermissions';
-import { RoleElement } from 'src/app/Entities/EmployeeRoleElement';
+import { EmployeeRoleElement } from 'src/app/Entities/EmployeeRoleElement';
 import { ElementOperation } from 'src/app/Entities/ElementOperation';
+import { RolePermissions } from 'src/app/Entities/RolePermissions';
+import { RoleElement } from 'src/app/Entities/RoleElement';
 
 @Component({
   selector: 'app-create-employee',
@@ -18,6 +20,7 @@ export class CreateEmployeeComponent implements OnInit {
   DesignationList: any[];
   OperationsData: any[];
   ElementsData: any[];
+  RolePermissions: RoleElement[] = [];
   constructor(private layoutService: LayoutService, private employeeService: EmployeeService, private fb: FormBuilder, private messageService: MessageService) { }
 
   ngOnInit() {
@@ -28,10 +31,10 @@ export class CreateEmployeeComponent implements OnInit {
           this.employeeService.getOperations().subscribe((res2) => {
             if (res2.errorCode == 0) {
               this.OperationsData = res2.dataObj;
-    console.log("Test")
+              console.log("Test")
 
-    console.log(this.Operations)
-    console.log(this.Elements)
+              console.log(this.Operations)
+              // console.log(this.Elements)
 
               this.InitializeForm();
               console.log(this.EmployeeForm.value);
@@ -54,12 +57,36 @@ export class CreateEmployeeComponent implements OnInit {
       employeeProfileImg: [''],
       employeeId: ['', Validators.required],
       gender: ['Male', Validators.required],
-      employeeElementMappingList: this.Elements
+      employeeElementMappingList: this.fb.array([])
     })
     this.employeeService.GetDepartments().subscribe((res) => {
       this.DepartmentList = res.dataObj;
       console.log(this.DepartmentList);
     });
+    this.InitializePermissionsForm();
+  }
+
+  InitializePermissionsForm = function () {
+    var el = this.Elements;
+    console.log(el.value);
+    this.EmployeeForm.controls["employeeElementMappingList"] = el;
+    // employeeElementMappingList = this.fb.array( this.Elements);
+  }
+
+  SelectRoleChanged(id) {
+    this.employeeService.getRolePermissions(id).subscribe(res => {
+      this.RolePermissions = res.dataObj.designationElementMappingList;
+      console.log(id);
+      this.InitializePermissionsForm();
+    });
+  }
+
+  UpdateRolePermissions() {
+    var el = this.Elements;
+    console.log(el.value);
+    this.EmployeeForm.patchValue({
+      employeeElementMappingList: this.Elements
+    })
   }
 
   get Elements(): FormArray {
@@ -68,23 +95,61 @@ export class CreateEmployeeComponent implements OnInit {
       elementsArray.push(this.fb.group({
         elementId: [element.elementId],
         elementName: [element.elementName],
-        employeeElementOperationList: this.Operations
+        employeeElementOperationList: this.Operations(element.elementId)
       }))
     })
     return elementsArray;
   }
 
-  get Operations(): FormArray {
+  Operations(elementId): FormArray {
+    var masterElement = this.GetElementByElementId(elementId);
+    console.log(masterElement);
+
     var operationsArray = this.fb.array([]);
     this.OperationsData.forEach(element => {
+      var operationValue = false;
+      if (this.getOperationByOperationId(element.operationId, masterElement)) {
+        operationValue = true;
+      }
+
       operationsArray.push(this.fb.group({
         operationId: [element.operationId],
         operationName: [element.operationName],
-        value: [false],
+        value: [operationValue],
       }))
     });
     return operationsArray;
   };
+
+
+  GetElementByElementId(elementId): RoleElement {
+    if (this.RolePermissions == null) {
+      return null;
+    }
+    for (let element of this.RolePermissions) {
+      if (element.elementId == elementId) {
+        return element;
+      }
+    }
+    return null;
+  }
+
+  getOperationByOperationId(operationId, element: RoleElement) {
+    var result = false
+    console.log("test123");
+    console.log(element);
+    if (element == null) {
+      result = false;
+    }
+    else {
+      var operations = element.roleElementOprationList.forEach((element) => {
+        if (element.operationId == operationId) {
+          result = true;
+        }
+      });
+    }
+    return result;
+  }
 
   get ElementsList() {
     return this.EmployeeForm.get('employeeElementMappingList') as FormArray;
@@ -122,7 +187,7 @@ export class CreateEmployeeComponent implements OnInit {
       else {
         this.messageService.add({ severity: 'error', summary: 'Failed', detail: res.errorMsg });
       }
-    },(err)=>{
+    }, (err) => {
       console.log(err);
       this.messageService.add({ severity: 'error', summary: 'Failed', detail: "Failed , please try again" });
     })
@@ -138,19 +203,19 @@ export class CreateEmployeeComponent implements OnInit {
     Empobj.employeeMobileNo = data.employeeMobileNo;
     Empobj.employeePassword = data.employeePassword;
     Empobj.employeeProfileImg = data.employeeProfileImg;
-    Empobj.employeeId = data.employeeId;
+    Empobj.employeeUserId = data.employeeId;
     Empobj.gender = data.gender;
     Empobj.employeeElementMappingList = [];
 
     data.employeeElementMappingList.forEach(elementdata => {
-      var element = new RoleElement();
+      var element = new EmployeeRoleElement();
       element.elementId = elementdata.elementId;
-      element.employeeElementOperationList = [];
+      element.employeeElementOprationList = [];
       elementdata.employeeElementOperationList.forEach(operationData => {
         if (operationData.value == true) {
           var opertaion = new ElementOperation();
           opertaion.operationId = operationData.operationId;
-          element.employeeElementOperationList.push(opertaion);
+          element.employeeElementOprationList.push(opertaion);
         }
       });
       Empobj.employeeElementMappingList.push(element);
@@ -158,9 +223,9 @@ export class CreateEmployeeComponent implements OnInit {
     return Empobj;
   }
 
-  resetForm=function()
-  {
+  resetForm = function () {
     this.EmployeeForm.reset();
+    this.RolePermissions=null;
     this.InitializeForm();
   }
   RadioButtonClick = function (data) {

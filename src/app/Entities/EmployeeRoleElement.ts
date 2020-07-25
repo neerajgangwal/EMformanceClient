@@ -1,7 +1,7 @@
 import {ElementOperation} from './ElementOperation';
-export class RoleElement
+export class EmployeeRoleElement
 {
     elementId:number;
-    employeeElementOperationList:ElementOperation[];
+    employeeElementOprationList:ElementOperation[];
 
 }

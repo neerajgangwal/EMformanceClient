@@ -18,6 +18,8 @@ export class CreateProjectComponent implements OnInit {
     ) { }
 
     CreateProjectForm:FormGroup;
+    AddTeamForm:FormGroup;
+
     ProjectList:any[];
     searchResults:any[];
 
@@ -32,6 +34,14 @@ export class CreateProjectComponent implements OnInit {
       projectDueDate:['',Validators.required]
     })
     
+  }
+
+  InitialiseAddTeamForm()
+  {
+    this.AddTeamForm=this.fb.group({
+
+      
+    })
   }
 
   ResetForm=function()

@@ -88,22 +88,26 @@
 			<h3>Create Team</h3>
 			<form [formGroup]="CreateTeamForm">
 
-				<div class="form-group">
-					<label for="">Select project</label>
-					<select class="form-control" formControlName="projectId">
-						<option value="" selected>Select Project</option>
-						<option *ngFor="let project of ProjectsList" value="{{project.projectId}}">
-							{{project.projectName}}</option>
-					</select>
-				</div>
 				
 				<div class="form-group">
 					<label for="">Team Name</label>
 					<input type="text" class="form-control" placeholder="Enter Team Name" formControlName="teamName">
+					<span class="error"
+					*ngIf="!CreateTeamForm.controls['teamName'].valid&&(CreateTeamForm.controls['teamName'].dirty|| CreateTeamForm.controls['teamName'].touched)"><i
+						class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide Team name</span>
+				</div>
+
+				<div class="form-group">
+					<label for="">Select project</label>
+					<select class="form-control" formControlName="projectId">
+						<option value=-1 selected>Select Project</option>
+						<option *ngFor="let project of ProjectsList" value="{{project.projectId}}">
+							{{project.projectName}}</option>
+					</select>
 				</div>
 
 				<input type="submit" value="Create Team" class="btn btn-primary"
-					(click)="CreateButtonClicked(CreateTeamForm.value)">
+					(click)="CreateButtonClicked(CreateTeamForm.value)" [disabled]="!CreateTeamForm.valid">
 			</form>
 		</div>
 	</div>
@@ -127,7 +131,7 @@
 								</select>
 							</div>
 						</div>
-						<button class="btn btn-primary" (click)="AddMemberToTeamList(AddTeamForm.get('EmployeeId').value)">ADD</button>
+						<button class="btn btn-primary" [disabled]="AddTeamForm.get('EmployeeId').value == ''" (click)="AddMemberToTeamList(AddTeamForm.get('EmployeeId').value)">ADD</button>
 					</div>
 				</div>
 				<div class="form-group">
@@ -137,7 +141,7 @@
 						</li>
 					</ul>
 				</div>
-				<input type="submit" value="Add Team Members" class="btn btn-primary" (click)="AddTeamMemberClicked(AddTeamForm.value)">
+				<input type="submit" value="Add Team Members" class="btn btn-primary" (click)="SaveTeamMembers(AddTeamForm.value)" [disabled]="TeamMemberList.length==0" >
 			</form>
 		</div>
 	</div>

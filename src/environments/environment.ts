@@ -30,7 +30,8 @@ export const environment = {
   createTeam:"addTeam",
   getTeamMember:"getTeamMember",
   addTeamMember:"manageTeam",
-  getEmployeeData:"getEmployeeData"
+  getEmployeeData:"getEmployeeData",
+  getDedsignationElementMapping:"getDesignationElements?designationId="
 };
 
 /*

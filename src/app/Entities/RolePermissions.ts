@@ -8,6 +8,5 @@ export class RolePermissions
     parentDesignationId:number;
     designationLevelNo:number;
     designationElementMappingList:RoleElement[];
-    
 }
     

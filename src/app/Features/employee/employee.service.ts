@@ -34,4 +34,9 @@ export class EmployeeService {
   {
     return this.httpClient.get(environment.url+environment.getElements);
   }
+
+  getRolePermissions=function(id)
+  {
+    return this.httpClient.get(environment.url+environment.getDedsignationElementMapping+id);
+  }
 }

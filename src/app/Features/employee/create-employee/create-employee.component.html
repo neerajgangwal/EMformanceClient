@@ -57,7 +57,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="">Password</label>
-                            <input type="text" class="form-control" formControlName="employeePassword"
+                            <input type="password" class="form-control" formControlName="employeePassword"
                                 placeholder="Enter Password">
                             <span class="error"
                                 *ngIf="!EmployeeForm.controls['employeePassword'].valid&&(EmployeeForm.controls['employeePassword'].dirty|| EmployeeForm.controls['employeePassword'].touched)"><i
@@ -109,6 +109,7 @@
                         <div class="form-group">
                             <label for="">Select Role</label>
                             <select name="" id="" class="form-control" formControlName="designationId"
+                                (change)="SelectRoleChanged(EmployeeForm.controls['designationId'].value)"
                                 [disabled]="EmployeeForm.controls['departmentId'].value==''">
                                 <option value="">Select Roles</option>
                                 <option *ngFor="let designation of DesignationList"
@@ -140,7 +141,7 @@
                                         data-title="N">Other</a>
                                 </div>
                                 <input type="hidden" name="fun" id="fun" formControlName="gender">
-                               
+
                             </div>
                         </div>
 
@@ -158,7 +159,8 @@
                                     <div class="form-group">
                                         <label style="width: 30%;" for=""
                                             class="pull-left headtxt">{{element.controls.elementName.value}}</label>
-                                        <div class="material-switch" formArrayName="employeeElementOperationList" *ngFor="let operation of ElementOperationsList(elementIndex).controls;
+                                        <div class="material-switch" formArrayName="employeeElementOperationList"
+                                            *ngFor="let operation of ElementOperationsList(elementIndex).controls;
                                         let operationIndex = index">
                                             <ng-container [formGroupName]="operationIndex">
                                                 <span>{{operation.controls.operationName.value}}</span><br>
@@ -177,8 +179,8 @@
                         </div>
                     </div>
                     <div class="col-lg-3 pull-right">
-                        <input type="submit" value="Create Employee" class="subbtn btn btn-primary" [disabled]="!EmployeeForm.valid"
-                             (click)="CreateEmployee(EmployeeForm.value)">
+                        <input type="submit" value="Create Employee" class="subbtn btn btn-primary"
+                            [disabled]="!EmployeeForm.valid" (click)="CreateEmployee(EmployeeForm.value)">
                     </div>
                 </div>
             </div>

@@ -100,12 +100,12 @@ export class CreateRoleComponent implements OnInit {
     data.designationElementMappingList.forEach(elementdata => {
       var element = new RoleElement();
       element.elementId = elementdata.elementId;
-      element.roleElementOperationList = [];
+      element.roleElementOprationList = [];
       elementdata.roleElementOprationList.forEach(operationData => {
         if (operationData.value == true) {
           var opertaion = new ElementOperation();
           opertaion.operationId = operationData.operationId;
-          element.roleElementOperationList.push(opertaion);
+          element.roleElementOprationList.push(opertaion);
         }
       });
       Roleobj.designationElementMappingList.push(element);
@@ -126,4 +126,6 @@ export class CreateRoleComponent implements OnInit {
     });
     console.log(Roleobj);
   }
+
+  
 }
