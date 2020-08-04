@@ -19,8 +19,9 @@ export class CreateDepartmentComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private AddDept: DepartmentService,
+    private DeleteDept: DepartmentService,
     private messageService: MessageService,
-  ) { } 
+  ) { }
 
   ngOnInit(): void {
     this.DepartmentForm = this.fb.group({
@@ -45,14 +46,39 @@ export class CreateDepartmentComponent implements OnInit {
       .subscribe((res) => {
         console.log(res);
         this.DepartmentList.push(res.dataObj);
-        this.SearchResults=this.DepartmentList
-        this.messageService.add({ severity: 'success', summary: 'Department Created', detail: 'Via MessageService' });
+        this.SearchResults = this.DepartmentList
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Department Created' });
         this.loading = false;
         this.ResetForm();
       });
   }
 
+  deleteIconClicked = function (data) {
+    this.DeleteDept.deleteDepartment(data.departmentId).subscribe((res => {
+      if(res.errorCode==0)
+      {
+      this.DepartmentList.splice(this.DepartmentList.indexOf(data), 1);
+      this.SearchResults = this.DepartmentList;
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Department deleted' });
+      }
+      else{
+        this.messageService.add({ severity: 'error', summary: 'Failed', detail: res.errorMsg });
+      }
+    }
+    ),(err)=>{
+      console.log(err);
+      this.messageService.add({ severity: 'error', summary: 'Failed', detail: "Something went wrong" });
+    });
+  }
+
+
+
+
+
+
+
   public FilterData = function (event) {
+    console.log(this.DepartmentList)
     var temp = this.DepartmentList
     var data = event.target.value;
     console.log(data);

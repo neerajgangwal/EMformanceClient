@@ -1,9 +1,12 @@
 <div class="main-panel">
-    <div class="content">
+    <div class="content" style="background-color:#DAEBEB;">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-8">
-                    <h3 class="top-heading">My Task List</h3>
+                <div class="col-md-4">
+                  <div class="search-form">
+                      <i class="fa fa-search"></i>
+                      <input type="text" class="form-control" placeholder="Search by name" (input)="FilterData($event)">
+                  </div>
 
                 </div>
                 <div class="col-md-2">
@@ -36,7 +39,7 @@
 
 
                     </li>
-                    <li class="mytask-heading list-content" *ngFor="let data of searchservice.SearchResults">  <ul>
+                    <li class="mytask-heading list-content" *ngFor="let data of SearchResults">  <ul>
                             <li>{{data.taskHeading}}</li>
 
                             <li><span class="prioritybox redcolor">{{data.taskPriority}}</span></li>
@@ -44,6 +47,8 @@
                             <li>
 
                                 <i class="icon-View"></i>
+                                <i class="icon-edit"></i>
+                                <i class="icon-delete"></i>
 
 
                             </li>

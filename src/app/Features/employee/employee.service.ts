@@ -37,6 +37,11 @@ export class EmployeeService {
 
   getRolePermissions=function(id)
   {
-    return this.httpClient.get(environment.url+environment.getDedsignationElementMapping+id);
+    return this.httpClient.get(environment.url+environment.getDesignationElementMapping+id);
+  }
+
+  deleteEmployee=function(id)
+  {
+    return this.httpClient.post(environment.url+environment.deleteEmployee,{employeeId:id})
   }
 }

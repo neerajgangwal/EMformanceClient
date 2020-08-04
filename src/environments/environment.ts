@@ -31,7 +31,20 @@ export const environment = {
   getTeamMember:"getTeamMember",
   addTeamMember:"manageTeam",
   getEmployeeData:"getEmployeeData",
-  getDedsignationElementMapping:"getDesignationElements?designationId="
+  getDesignationElementMapping:"getDesignationElements?designationId=",
+
+  //master-admin
+  getUserList:"getCompany",
+
+  //delete
+  deleteDepartment:"deleteDepartment",
+  deleteEmployee:"deleteEmployee",
+  deleteTask:"deleteTask",
+  deleteRole:"deleteDesignation",
+  deleteProject:"deleteProject",
+  deleteTeam:"deleteTeam",
+
+
 };
 
 /*

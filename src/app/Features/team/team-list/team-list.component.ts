@@ -23,11 +23,13 @@ export class TeamListComponent implements OnInit {
   employeeArray: any[] = [];
   testList: any[] = [];
   FilterKey: string;
+  editTeam:any[]=[];
 
 
   EmployeeList: any[];
   CreateTeamForm: FormGroup;
   AddTeamForm: FormGroup;
+  EditTeamForm:FormGroup;
 
   teamgroup: FormGroup;
   constructor(
@@ -90,7 +92,16 @@ export class TeamListComponent implements OnInit {
     this.TeamMemberList = [];
   }
 
-
+  InitilizeEditTeamForm=function()
+  {
+    this.EditTeamForm = this.fb.group({
+      projectId: -1,
+      teamName: ['', Validators.required],
+      departmentId: [1],
+      teamCreatedBy: [this.userService.LoggedInUser.Id],
+      teamUpdatedBy: [this.userService.LoggedInUser.Id]
+    })
+  }
 
 
 
@@ -201,6 +212,22 @@ export class TeamListComponent implements OnInit {
 
   }
 
+  editIconClicked(id)
+  {
+    
+    this.InitilizeEditTeamForm;
+    $('#edit-team').addClass('open-slide');
+    $('body').addClass('gray-over');
+    console.log(id);
+    this.teamservice.getTeam().subscribe((res)=>
+    {
+      if(res.dataObj.teamId==id)
+      {
+        this.editTeam=res.dataObj;
+      }
+    })
+  }
+
   getEmployeeFromList = function () {
     this.teamservice.getEmployeeData().subscribe((res) => {
       if (res.errorCode == 0) {
@@ -250,4 +277,28 @@ export class TeamListComponent implements OnInit {
       (err) => { console.log("outside error") });
 
   }
+
+ 
+  DeleteTeamIcon(data)
+  {
+    this.teamservice.deleteTeam(data).subscribe((res)=>
+    {
+      if(res.errorCode==0)
+      {
+      this.TeamList.splice(this.TeamList.indexOf(data),1);
+      this.SearchResults = this.TeamList;
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Team deleted' });
+      }
+      else{
+        this.messageService.add({ severity: 'error', summary: 'Failed', detail: res.errorMsg });
+      }
+    }
+    ,(err)=>{
+      console.log(err);
+      this.messageService.add({ severity: 'error', summary: 'Failed', detail: "Something went wrong" });
+    });
+
+  }
+
+
 }

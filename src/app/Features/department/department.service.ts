@@ -18,4 +18,8 @@ export class DepartmentService {
     return this.httpClient.get(environment.url+environment.getDepartment);
   }
   
+  deleteDepartment=function(id)
+  {
+    return this.httpClient.post(environment.url+environment.deleteDepartment,{departmentId:id});
+  }
 }

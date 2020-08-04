@@ -6,6 +6,7 @@ import {environment} from '../../../environments/environment'
 export class RoleService {
 
   constructor(private httpClient:HttpClient) { }
+
   addRole=function(data)
   {
     return this.httpClient.post(environment.url+environment.CreateRole,data);
@@ -30,5 +31,8 @@ export class RoleService {
   {
     return this.httpClient.post(environment.url+environment.GetDesignations,{});
   }
-  
+  deleteDesignation=function(id)
+  {
+    return this.httpClient.post(environment.url+environment.deleteRole,{designationId:id})
+  }
 }

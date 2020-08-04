@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { RoleService } from '../role.service';
 import { LayoutService } from '../../../Services/layout.service';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
-import { FullCalendar } from 'primeng';
 import { RolePermissions } from '../../../../app/Entities/RolePermissions';
 import { ElementOperation } from '../../../../app/Entities/ElementOperation';
 import { RoleElement } from '../../../../app/Entities/RoleElement';

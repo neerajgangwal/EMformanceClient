@@ -14,6 +14,9 @@ export class MyTaskComponent implements OnInit {
 
   TaskList:any[];
   taskgroup:FormGroup;
+  SearchResults: any[];
+  loading: true;
+  FilterKey: string;
   
   constructor(private taskservice:TaskService,
     private layoutservice:LayoutService,
@@ -21,13 +24,20 @@ export class MyTaskComponent implements OnInit {
     private fb:FormBuilder) { }
 
   ngOnInit(): void {
+    this.searchservice.SetSource(null);
     this.layoutservice.UpdateLayout(true,true,true,true);
     this.taskgroup=this.fb.group({
       taskHeading:['',Validators.required],
+      departmentId:['',Validators.required],
       taskDescription:['',Validators.required],
+      projectId:['',Validators.required],
+      assignedById:['',Validators.required],
+      assignedToId:['',Validators.required],
       taskStartDate:['',Validators.required],
       taskDueDate:['',Validators.required],
-      taskAttachment:['']
+      taskAttachment:['',Validators.required],
+      taskPriority:['',Validators.required],
+      taskStatus:['',Validators.required]
       
     }) 
 
@@ -35,8 +45,8 @@ export class MyTaskComponent implements OnInit {
     this.TaskList=res.dataObj;
 
     console.log(this.TaskList);
-    this.searchservice.SetSource(this.TaskList);
-    this.searchservice.Key="taskHeading";
+    this.SearchResults=this.TaskList;
+    this.FilterKey="taskHeading";
     })
 
     $('.team').on('click', function() {
@@ -51,12 +61,14 @@ export class MyTaskComponent implements OnInit {
   }
 
   CreateTask = function(data) {
-    console.log(data);
+    console.log("data"+data);
     this.taskservice.CreateTask(data).subscribe((res)=>{
-      console.log(res);
+      console.log("res"+res);
       if(res.errorCode==0)
       {
         console.log("success");
+        this.TaskList.push(res.dataObj);
+        console.log("task list"+this.TaskList);
         this.messageService.add({ severity: 'success', summary: 'Successfully created task', detail: 'Via MessageService' });
         this.taskgroup.reset();
        
@@ -67,4 +79,18 @@ export class MyTaskComponent implements OnInit {
     })
   }
 
+  public FilterData = function (event) {
+    var temp = this.TaskList
+    var data = event.target.value;
+    console.log(data);
+    console.log(temp);
+
+    this.SearchResults = temp.filter(item => {
+      console.log(item);
+      console.log(item[this.FilterKey]);
+      console.log(item[this.FilterKey].toLowerCase().startsWith(data.toLowerCase()));
+      return item[this.FilterKey].toLowerCase().includes(data.toLowerCase());
+    }
+    )
+  }
 }

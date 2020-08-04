@@ -35,4 +35,9 @@ export class TeamService {
   {
     return this.httpclient.get(environment.url+environment.employeeData);
   }
+
+  deleteTeam=function(data)
+  {
+    return this.httpclient.post(environment.url+environment.deleteTeam,{teamId:data.teamId})
+  }
 }
