@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {AuthGuard} from './Shared/auth.guard';
+import { EditProjectComponent } from './Features/project/edit-project/edit-project.component';
 
 const routes: Routes = [
 { path: 'login', loadChildren: () => import('./Features/login/login.module').then(m => m.LoginModule) }, 
@@ -27,6 +28,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

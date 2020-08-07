@@ -18,6 +18,11 @@ export class DepartmentService {
     return this.httpClient.get(environment.url+environment.getDepartment);
   }
   
+  updateDepartment=function(data)
+  {
+    return this.httpClient.post(environment.url+environment.updateDepartment,data)
+  }
+
   deleteDepartment=function(id)
   {
     return this.httpClient.post(environment.url+environment.deleteDepartment,{departmentId:id});

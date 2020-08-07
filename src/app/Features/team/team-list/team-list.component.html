@@ -30,10 +30,12 @@
 						<ul>
 							<li>
 								{{data.teamName}}
+
 							</li>
+							
 							<li>
 								<i class="icon-View team" (click)="ViewIconClicked(data.teamId)"></i>
-								<i class="icon-edit" (click)="editIconClicked(data.teamId)"></i>
+								<i class="icon-edit" (click)="editIconClicked(data)"></i>
 								<i id="addteam1" class="icon-Team" (click)="AddTeamIcon(data.teamId)"></i>
 								<i class="icon-Delete" (click)="DeleteTeamIcon(data)"></i>
 							</li>
@@ -86,9 +88,7 @@
 		<div class="slide-content" *ngIf="CreateTeamForm!=null">
 
 			<h3>Create Team</h3>
-			<form [formGroup]="CreateTeamForm">
-
-				
+			<form [formGroup]="CreateTeamForm">			
 				<div class="form-group">
 					<label for="">Team Name</label>
 					<input type="text" class="form-control" placeholder="Enter Team Name" formControlName="teamName">
@@ -96,16 +96,14 @@
 					*ngIf="!CreateTeamForm.controls['teamName'].valid&&(CreateTeamForm.controls['teamName'].dirty|| CreateTeamForm.controls['teamName'].touched)"><i
 						class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide Team name</span>
 				</div>
-
 				<div class="form-group">
 					<label for="">Select project</label>
 					<select class="form-control" formControlName="projectId">
-						<option value=-1 selected>Select Project</option>
+						<option value=-1 selected>select Project </option>
 						<option *ngFor="let project of ProjectsList" value="{{project.projectId}}">
 							{{project.projectName}}</option>
-					</select>
+						</select>
 				</div>
-
 				<input type="submit" value="Create Team" class="btn btn-primary"
 					(click)="CreateButtonClicked(CreateTeamForm.value)" [disabled]="!CreateTeamForm.valid">
 			</form>
@@ -117,29 +115,28 @@
 		<i class="fa fa-angle-left" aria-hidden="true"></i>
 	</div>
 	<div class="slide-wrapper">
-		<div class="slide-content" *ngIf="EditTeamForm!=null">
+		<div class="slide-content">
 
 			<h3>Edit Team</h3>
-			<form [formGroup]="EditTeamForm" *ngFor="let data of editTeam">
-
-				
+			<form [formGroup]="EditTeamForm" *ngIf="EditTeamForm!=null">			
 				<div class="form-group">
 					<label for="">Team Name</label>
-					<input type="text" class="form-control" placeholder="{{data.teamName}}" formControlName="teamName">
-					
+					<input type="text" class="form-control" placeholder="Enter Team Name" formControlName="teamName">
+					<span class="error" *ngIf="!EditTeamForm.controls['teamName'].valid&&(EditTeamForm.controls['teamName'].dirty|| EditTeamForm.controls['teamName'].touched)"><i
+						class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide Team name</span>
 				</div>
 
 				<div class="form-group">
 					<label for="">Select project</label>
 					<select class="form-control" formControlName="projectId">
-						<option value=-1 selected>Select Project</option>
+						<option value=-1>No Project</option>
 						<option *ngFor="let project of ProjectsList" value="{{project.projectId}}">
 							{{project.projectName}}</option>
 					</select>
 				</div>
 
-				<input type="submit" value="Create Team" class="btn btn-primary"
-					(click)="CreateButtonClicked(CreateTeamForm.value)" [disabled]="!CreateTeamForm.valid">
+				<input type="submit" value="Edit Team" class="btn btn-primary"
+					(click)="editSaveButtonClicked(EditTeamForm.value)" [disabled]="!EditTeamForm.valid">
 			</form>
 		</div>
 	</div>

@@ -11,9 +11,23 @@ export class EmployeeService {
     return this.httpClient.get(environment.url+environment.employeeData);
   }
 
+  GetEmployeeById=function(id){
+    return this.httpClient.post(environment.url+environment.getEmployeeData,{employeeId:id});
+  }
+
   GetDepartments=function()
   {
     return this.httpClient.get(environment.url+environment.getDepartment);
+  }
+
+  GetDepartment=function(id)
+  {
+    return this.httpClient.get(environment.url+environment.getDepartmentById+id);
+  }
+
+  GetDesignation=function(id)
+  {
+    return this.httpClient.post(environment.url+environment.GetDesignations,{designationId:id});
   }
 
   GetRolesForDepartmentId=function(id)
@@ -24,6 +38,11 @@ export class EmployeeService {
   CreateEmployee=function(data)
   {
     return this.httpClient.post(environment.url+environment.AddEmployee,data);
+  }
+
+  UpdateEmployee=function(data)
+  {
+    return this.httpClient.post(environment.url+environment.updateEmployee,data);
   }
   getOperations=function()
   {
@@ -43,5 +62,10 @@ export class EmployeeService {
   deleteEmployee=function(id)
   {
     return this.httpClient.post(environment.url+environment.deleteEmployee,{employeeId:id})
+  }
+
+  getEmployeeElementMapping=function(id)
+  {
+    return this.httpClient.get(environment.url+environment.getEmployeeElementsMapping+id);
   }
 }

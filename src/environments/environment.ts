@@ -9,10 +9,11 @@ export const environment = {
   login:"login",
   addUser:"addUser",
   employeeData:"getEmployeeList",
-  ProjectList:"getProjectList",
+  ProjectList:"getProjectList?projectId=",
   CreateProject:"addProject",
   CreateDepartment:"addDepartment",
   getDepartment:"getDepartment?departmentId=-1",
+  getDepartmentById:"getDepartment?departmentId=",
   CreateRole:"addDesignation",
   GetDesignations:"getDesignation",
   AddEmployee:"addEmployee",
@@ -32,7 +33,7 @@ export const environment = {
   addTeamMember:"manageTeam",
   getEmployeeData:"getEmployeeData",
   getDesignationElementMapping:"getDesignationElements?designationId=",
-
+  getEmployeeElementsMapping:"getEmployeeElements?employeeId=",
   //master-admin
   getUserList:"getCompany",
 
@@ -43,6 +44,14 @@ export const environment = {
   deleteRole:"deleteDesignation",
   deleteProject:"deleteProject",
   deleteTeam:"deleteTeam",
+
+  //update
+  updateTeam:"updateTeam",
+  updateDesignation:"updateDesignation",
+  updateTask:"updateTask",
+  updateProject:"updateProject",
+  updateDepartment:"updateDepartment",
+  updateEmployee:"updateEmployee"
 
 
 };

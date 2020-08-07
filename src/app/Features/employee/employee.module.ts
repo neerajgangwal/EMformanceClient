@@ -10,9 +10,11 @@ import {EmployeeService} from './employee.service';
 import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ToastModule} from 'primeng/toast';
+import { ViewEmployeeComponent } from './view-employee/view-employee.component';
+import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 
 @NgModule({
-  declarations: [EmployeeComponent, CreateEmployeeComponent, EmployeeListComponent],
+  declarations: [EmployeeComponent, CreateEmployeeComponent, EmployeeListComponent, ViewEmployeeComponent, EditEmployeeComponent],
   imports: [
     CommonModule,
     EmployeeRoutingModule,HttpClientModule,ReactiveFormsModule,ToastModule

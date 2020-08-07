@@ -22,11 +22,9 @@
                                                         <label for="">Project Name</label>
                                                         <input type="text" class="form-control"
                                                             placeholder="Enter Project Name" formControlName="projectName">
-                                                        <!-- <span class="error"><i class="fa fa-exclamation-triangle"
-                                                                aria-hidden="true"></i>Please provide company
-                                                            name</span> -->
-
-                                                    </div>
+                                                            <span class="error" *ngIf="!CreateProjectForm.controls['projectName'].valid&&(CreateProjectForm.controls['projectName'].dirty|| CreateProjectForm.controls['projectName'].touched)"><i
+                                                                class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide Project name</span>
+                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
@@ -36,15 +34,16 @@
                                                             <option value="Low  (Low,Medium,High)">Low</option> 
                                                             <option value="Medium  (Low,Medium,High)">Medium</option> 
                                                             <option value="High  (Low,Medium,High)">High</option>                                                           
-
                                                         </select>
+                                                       
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group" formControlName="projectDescription">
                                                         <label for="">Project Description</label>
-                                                        <textarea class="form-control" rows="4" cols="50" placeholder="Enter Task details here" formControlName="projectDescription"> 
-</textarea>
+                                                        <textarea class="form-control" rows="4" cols="50" placeholder="Enter Project details here" formControlName="projectDescription"></textarea>
+                                                        <span class="error" *ngIf="!CreateProjectForm.controls['projectDescription'].valid&&(CreateProjectForm.controls['projectDescription'].dirty|| CreateProjectForm.controls['projectDescription'].touched)"><i
+                                                            class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide project description</span>
                                                     </div>
 
                                                     <div class="form-group">
@@ -52,6 +51,8 @@
                                                             <div class="col-md-5">
                                                                 <label for="">Project Timeline</label>
                                                                 <input type="date" class="form-control" formControlName="projectStartDate">
+                                                                <span class="error" *ngIf="!CreateProjectForm.controls['projectStartDate'].valid&&(CreateProjectForm.controls['projectStartDate'].dirty|| CreateProjectForm.controls['projectStartDate'].touched)"><i
+                                                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please select start date</span>
                                                             </div>
                                                             <div class="col-md-2 text-center">
                                                                 <span class="to-padding">to</span>
@@ -59,6 +60,8 @@
                                                             <div class="col-md-5">
                                                                 <label for="">&nbsp;</label>
                                                                 <input type="date" class="form-control" formControlName="projectDueDate">
+                                                                <span class="error" *ngIf="!CreateProjectForm.controls['projectDueDate'].valid&&(CreateProjectForm.controls['projectDueDate'].dirty|| CreateProjectForm.controls['projectDueDate'].touched)"><i
+                                                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please select start date</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -95,7 +98,7 @@
                                                 </div>
                                                 <div class="col-lg-3 pull-right">
                                                     <input type="submit" value="Create Project" (click)="CreateProjectClicked(CreateProjectForm.value)"
-                                                        class="subbtn btn btn-primary">
+                                                        class="subbtn btn btn-primary" [disabled]="!CreateProjectForm.valid">
                                                 </div>
                                             </div>
                                         </div>

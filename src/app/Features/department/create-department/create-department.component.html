@@ -1,21 +1,23 @@
 <div class="main-panel">
-
 <div class="content" style="background-color:#DAEBEB;">
                 <div class="container-fluid">
-            <p-toast></p-toast>
             <div class="form-container" [formGroup]="DepartmentForm">
                 <div class="form-section">
                     <div class="col-lg-6">
                         <div class="form-group">
-
                             <label for="">Department Name</label>
                             <input type="text" class="form-control" placeholder="Enter Department Name"
                                 formControlName="departmentName">
+                                <span class="error"
+                                *ngIf="!DepartmentForm.controls['departmentName'].valid&&(DepartmentForm.controls['departmentName'].dirty|| DepartmentForm.controls['departmentName'].touched)"><i
+                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide department name
+                                </span>
                         </div>
+                       
                     </div>
                     <div class="col-lg-3 pull-left">
                         <button  class="subbtn btn btn-primary"
-                        (click)="CreateButtonClicked(DepartmentForm.value)">Create Department
+                        (click)="CreateButtonClicked(DepartmentForm.value)" [disabled]="!DepartmentForm.valid">Create Department
                         <!-- <p-progressSpinner [style]="{width: '20px', height: '20px'}" strokeWidth="8" animationDuration=".5s"></p-progressSpinner> -->
                     
                     </button>
@@ -48,7 +50,7 @@
                             <li class="dpname">{{dept.departmentName}}</li>
                             <li class="dpname">
 
-                                <i class="icon-edit"></i>
+                                <i class="icon-edit" (click)="editIconClicked(dept)"></i>
                                 <i class="icon-Delete" (click)="deleteIconClicked(dept)"></i>
 
                             </li>
@@ -60,6 +62,32 @@
                 </ul>
             </div>
         </div>
-    </div>
+</div>
 
+
+</div>
+<p-toast></p-toast>
+
+<div class="slide-popup" id="edit-team">
+	<div class="slide-close">
+		<i class="fa fa-angle-left" aria-hidden="true"></i>
+	</div>
+	<div class="slide-wrapper">
+		<div class="slide-content">
+
+			<h3>Edit Department</h3>
+			<form [formGroup]="EditForm" *ngIf="EditForm!=null" >			
+				<div class="form-group">
+					<label for="">Department Name</label>
+                    <input type="text" class="form-control" placeholder="Enter department Name" formControlName="departmentName">
+                    <span class="error"
+                    *ngIf="!EditForm.controls['departmentName'].valid&&(EditForm.controls['departmentName'].dirty|| EditForm.controls['departmentName'].touched)"><i
+                        class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide department name
+                    </span>
+				</div>
+
+				<input type="submit" value="Save Department" class="btn btn-primary" (click)="editSaveButtonClicked(EditForm.value)">
+			</form>
+		</div>
+	</div>
 </div>

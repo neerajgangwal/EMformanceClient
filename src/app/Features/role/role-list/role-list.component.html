@@ -5,7 +5,8 @@
                 <div class="col-md-4">
                     <div class="search-form">
                         <i class="fa fa-search"></i>
-                        <input type="text" class="form-control" placeholder="Search by name" (input)="FilterData($event)">
+                        <input type="text" class="form-control" placeholder="Search by name"
+                            (input)="FilterData($event)">
                     </div>
                 </div>
             </div>
@@ -20,11 +21,11 @@
                         </ul>
                     </li>
                     <li class="role-list-heading list-content" *ngFor="let role of SearchResults">
-                        <ul >
+                        <ul>
                             <li>{{role.designationName}}</li>
                             <li>
-                                <i class="icon-View role-description"></i>
-                                <i class="icon-edit"></i>
+                                <i class="icon-View" (click)="viewRoleClicked(role)"></i>
+                                <i class="icon-edit" (click)="editIconClicked(role.designationId)"></i>
                                 <i class="icon-Delete" (click)="deleteIconClicked(role)"></i>
                             </li>
                         </ul>
@@ -40,16 +41,13 @@
     </div>
     <div class="slide-content">
         <h3>Role Description</h3>
-
         <ul>
-            <li>Role detials</li>
-            <li>Role detials</li>
-            <li>Role detials</li>
-            <li>Role detials</li>
-            <li>Role detials</li>
-            <li>Role detials</li>
+            <li *ngFor="let element of ViewPermissions">{{GetElementName(element.elementId)}}
+                <ul>
+                    <li *ngFor="let operation of element.roleElementOprationList">
+                        {{GetOperationName(operation.operationId)}}</li>
+                </ul>
+            </li>
         </ul>
-
-
     </div>
 </div>

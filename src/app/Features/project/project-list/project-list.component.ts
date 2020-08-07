@@ -4,6 +4,8 @@ import {LayoutService} from '../../../Services/layout.service'
 import {SearchService} from '../../../Services/search.service';
 import { MessageService } from 'primeng/api';
 import * as $ from 'jquery' ;
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-project-list',
@@ -21,20 +23,40 @@ export class ProjectListComponent implements OnInit {
   constructor(private projectservice:ProjectService,
     private layoutservice:LayoutService,
     public searchservice:SearchService,
-    private messageService: MessageService) {}
+    private messageService: MessageService,
+    private router:Router
+    
+    ) {}
 
   ngOnInit(): void {
-
+    var id=-1;
      this.layoutservice.UpdateLayout(true,true,true,true);
-     this.projectservice.GetProjectList().subscribe((res)=>{    
+     this.projectservice.GetProjectList(id).subscribe((res)=>{    
       console.log(res);
       this.projectList=res.dataObj;
       console.log(this.projectList);
       this.SearchResults = this.projectList;
       this.FilterKey = "projectName";
     });
-
+    $('.slide-close').on('click', function() {
+      $(this).parent().removeClass('open-slide');
+      $('body').removeClass('gray-over');
+  });
   
+  }
+
+
+  ViewIconClicked(data)
+  {  $('#add-task').addClass('open-slide');
+     $('body').addClass('gray-over');
+      console.log(data);
+      this.viewList=data;
+      console.log(this.viewList);
+  }
+
+  editIconClicked(id){
+    console.log("inside edit click"+id);
+    this.router.navigate(['project', 'edit'], { queryParams: { 'id':id} });
   }
 
   deleteIconClicked(data)
@@ -59,13 +81,6 @@ export class ProjectListComponent implements OnInit {
 
   }
 
-  ViewIconClicked(data)
-  {  $('#add-task').addClass('open-slide');
-     $('body').addClass('gray-over');
-      console.log(data);
-      this.viewList=data;
-      console.log(this.viewList);
-  }
 
   public FilterData = function (event) {
     var temp = this.projectList
@@ -83,5 +98,6 @@ export class ProjectListComponent implements OnInit {
     }
     )
   }
+
 
 }

@@ -3,6 +3,7 @@ import { EmployeeService } from '../employee.service';
 import { LayoutService } from '../../../Services/layout.service';
 import { SearchService } from '../../../Services/search.service';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-list',
@@ -19,7 +20,8 @@ export class EmployeeListComponent implements OnInit {
   constructor(private employeeService: EmployeeService,
     private layoutservice: LayoutService,
     public searchSerrvice: SearchService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router:Router
     ) { }
 
   ngOnInit(): void {
@@ -63,7 +65,15 @@ export class EmployeeListComponent implements OnInit {
 
 
 
+  editEmployeeIconClicked(id)
+  {
+    this.router.navigate(['employee', 'edit'], { queryParams: { 'id': id } });
+  }
 
+  viewIconClicked(id)
+  {
+    this.router.navigate(['employee', 'view'], { queryParams: { 'id': id } });
+  }
 
 
 

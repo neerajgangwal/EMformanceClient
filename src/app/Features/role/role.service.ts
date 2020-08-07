@@ -31,8 +31,23 @@ export class RoleService {
   {
     return this.httpClient.post(environment.url+environment.GetDesignations,{});
   }
+
   deleteDesignation=function(id)
   {
     return this.httpClient.post(environment.url+environment.deleteRole,{designationId:id})
+  }
+  GetDesignationById=function(id)
+  {
+    return this.httpClient.post(environment.url+environment.GetDesignations,{designationId:id});
+  }
+
+  GetDesignationElementsById=function(id)
+  {
+    return this.httpClient.get(environment.url+environment.getDesignationElementMapping+id);
+  }
+
+  UpdateDesignation=function(data)
+  {
+    return this.httpClient.post(environment.url+environment.updateDesignation,data);
   }
 }

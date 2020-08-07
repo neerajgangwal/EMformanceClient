@@ -34,8 +34,8 @@
 							<li>{{data.department.departmentName}}</li>
 							<li>{{data.designation.designationName}}</li>
 							<li>
-								<i class="icon-View"></i>
-								<i class="icon-edit"></i>
+								<i class="icon-View" (click)="viewIconClicked(data.employee.employeeId)"></i>
+								<i class="icon-edit" (click)="editEmployeeIconClicked(data.employee.employeeId)"></i>
 								<i class="icon-Delete" (click)="deleteIconClicked(data)"></i>
 							</li>
 						</ul>

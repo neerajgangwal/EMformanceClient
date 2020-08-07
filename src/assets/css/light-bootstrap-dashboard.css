@@ -5431,7 +5431,31 @@ input.btn.btn-primary.pro-del {
     right: 0;
 }
 
+#add-team-task.open-slide {
+    right: 0;
+}
+
 #task-description.open-slide {
+    right: 0;
+}
+
+#task-team-description.open-slide {
+    right: 0;
+}
+
+#edit-team.open-slide {
+    right: 0;
+}
+
+#edit-task.open-slide {
+    right: 0;
+}
+
+#edit-team-task.open-slide {
+    right: 0;
+}
+
+#edit-project.open-slide {
     right: 0;
 }
 
@@ -7139,7 +7163,7 @@ color:#FFA200;}
 }
 
 .mytask-heading ul li:first-child {
-    width: 58%;
+    width: 50%;
 }
 .mytask-heading ul li:first-child + li {
     width: 13%;

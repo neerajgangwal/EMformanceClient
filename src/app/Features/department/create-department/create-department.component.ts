@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DepartmentService } from '../department.service'
 import { LayoutService } from '../../../Services/layout.service'
 import { MessageService } from 'primeng/api';
+import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-create-department',
@@ -16,6 +18,7 @@ export class CreateDepartmentComponent implements OnInit {
   SearchResults: any[];
   loading: true;
   FilterKey: string;
+  EditForm:FormGroup;
 
   constructor(private fb: FormBuilder,
     private AddDept: DepartmentService,
@@ -32,7 +35,26 @@ export class CreateDepartmentComponent implements OnInit {
       this.DepartmentList = res.dataObj;
       this.SearchResults = res.dataObj;
       this.FilterKey = "departmentName";
+
+      $('.slide-close').on('click', function () {
+        $(this).parent().removeClass('open-slide');
+        $('body').removeClass('gray-over');
+      });
     });
+   
+  }
+
+  initialiseEditForm=function(data)
+  {
+    this.EditForm=this.fb.group({
+      departmentId:[data.departmentId,Validators.required],
+      departmentName: [data.departmentName, Validators.required]
+    })
+    console.log("departmentid "+data.departmentId);
+    console.log("departmentName "+data.departmentName);
+
+
+
   }
 
   ResetForm = function () {
@@ -53,6 +75,42 @@ export class CreateDepartmentComponent implements OnInit {
       });
   }
 
+  editIconClicked=function(data)
+  {
+    this.initialiseEditForm(data);
+    console.log("data "+data)
+    $('body').addClass('gray-over');
+    $('#edit-team').addClass('open-slide');
+  }
+  editSaveButtonClicked=function(data)
+  {
+    data.activateFlag=1;
+    console.log("save"+data.projectId);
+    this.AddDept.updateDepartment(data).subscribe((res) => {
+      if (res.errorCode == 0) {
+        this.initialiseEditForm(res.dataObj);
+        for (let index = 0; index < this.DepartmentList.length; index++) {
+          const element = this.DepartmentList[index];
+          console.log("element.departmentId"+element.departmentId);
+          console.log("data.departmentId"+data.departmentId);
+          if(element.departmentId==data.departmentId)
+          {
+            this.DepartmentList[index]=res.dataObj;
+          }
+        }
+        this.SearchResults = this.DepartmentList
+        this.messageService.add({ severity: 'success', summary: 'department updated', detail: 'department created successfully' });
+        this.ResetForm();
+      }
+      else {
+        this.messageService.add({ severity: 'error', summary: 'Failed', detail: res.errorMsg });
+      }
+    }, (error) => {
+      console.log(error);
+      this.messageService.add({ severity: 'error', summary: 'Failed', detail: 'Something went wrong please try after some time' });
+    });
+  }
+
   deleteIconClicked = function (data) {
     this.DeleteDept.deleteDepartment(data.departmentId).subscribe((res => {
       if(res.errorCode==0)
@@ -70,12 +128,6 @@ export class CreateDepartmentComponent implements OnInit {
       this.messageService.add({ severity: 'error', summary: 'Failed', detail: "Something went wrong" });
     });
   }
-
-
-
-
-
-
 
   public FilterData = function (event) {
     console.log(this.DepartmentList)

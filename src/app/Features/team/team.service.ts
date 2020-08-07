@@ -13,7 +13,7 @@ export class TeamService {
 
   getProjects=function()
   {
-    return this.httpclient.get(environment.url+environment.ProjectList);
+    return this.httpclient.get(environment.url+environment.ProjectList+"-1");
   }
 
   createTeam=function(data)
@@ -39,5 +39,10 @@ export class TeamService {
   deleteTeam=function(data)
   {
     return this.httpclient.post(environment.url+environment.deleteTeam,{teamId:data.teamId})
+  }
+
+  updateTeam=function(data)
+  {
+    return this.httpclient.post(environment.url+environment.updateTeam,data)
   }
 }

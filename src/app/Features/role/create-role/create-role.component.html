@@ -1,7 +1,7 @@
 <div class="main-panel">
     <div class="content" style="background-color:#DAEBEB;">
         <div class="container-fluid">
-          
+
             <div *ngIf="RoleForm" class="form-container" [formGroup]="RoleForm">
                 <div class="form-section">
                     <div class="col-lg-6">
@@ -23,38 +23,41 @@
                     </div>
 
                 </div>
-
-
-            <div class="form-container">
-                <div class="form-section">
-                    <div class="col-lg-12 permission-heading">
-                        <h4>Select Permission</h4>
-                    </div>
-                    <div class="permission-section" formArrayName="designationElementMappingList">
-                        <div class="col-lg-6" *ngFor="let element of ElementsList.controls;
+                <div class="form-container">
+                    <div class="form-section">
+                        <div class="col-lg-12 permission-heading">
+                            <h4>Select Permission</h4>
+                        </div>
+                        <div class="permission-section" formArrayName="designationElementMappingList">
+                            <div class="col-lg-6" *ngFor="let element of ElementsList.controls;
                         let elementIndex = index">
-                            <div class="rolesection" [formGroupName]="elementIndex">
-                                <div class="form-group">
-                                    <label style="width: 30%;" for=""
-                                        class="pull-left headtxt">{{element.controls.elementName.value}}</label>
-                                    <div class="material-switch" formArrayName="roleElementOprationList" *ngFor="let operation of ElementOperationsList(elementIndex).controls;
+                                <div class="rolesection" [formGroupName]="elementIndex">
+                                    <div class="form-group">
+                                        <label style="width: 30%;" for=""
+                                            class="pull-left headtxt">{{element.controls.elementName.value}}</label>
+                                        <div class="material-switch" formArrayName="roleElementOprationList" *ngFor="let operation of ElementOperationsList(elementIndex).controls;
                                     let operationIndex = index">
-                                        <ng-container [formGroupName]="operationIndex">
-                                            <span>{{operation.controls.operationName.value}}</span><br>
-                                            <input id="{{element.controls.elementName.value+operation.controls.operationName.value}}" name="someSwitchOption001" formControlName="value"
-                                                type="checkbox" />
-                                            <label for="{{element.controls.elementName.value+operation.controls.operationName.value}}" class="label-default"></label>
-                                        </ng-container>
+                                            <ng-container [formGroupName]="operationIndex">
+                                                <span>{{operation.controls.operationName.value}}</span><br>
+                                                <input
+                                                    id="{{element.controls.elementName.value+operation.controls.operationName.value}}"
+                                                    name="someSwitchOption001" formControlName="value"
+                                                    type="checkbox" />
+                                                <label
+                                                    for="{{element.controls.elementName.value+operation.controls.operationName.value}}"
+                                                    class="label-default"></label>
+                                            </ng-container>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 pull-right">
-                    <input type="submit" value="Create Role" class="subbtn btn btn-primary" (click)="CreateRole(RoleForm.value)">
+                    <div class="col-lg-3 pull-right">
+                        <input type="submit" value="Create Role" class="subbtn btn btn-primary"
+                            (click)="CreateRole(RoleForm.value)">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

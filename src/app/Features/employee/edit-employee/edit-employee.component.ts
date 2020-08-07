@@ -8,13 +8,14 @@ import { EmployeeRoleElement } from 'src/app/Entities/EmployeeRoleElement';
 import { ElementOperation } from 'src/app/Entities/ElementOperation';
 import { RolePermissions } from 'src/app/Entities/RolePermissions';
 import { RoleElement } from 'src/app/Entities/RoleElement';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-create-employee',
-  templateUrl: './create-employee.component.html',
-  styleUrls: ['./create-employee.component.css']
+  selector: 'app-edit-employee',
+  templateUrl: './edit-employee.component.html',
+  styleUrls: ['./edit-employee.component.css']
 })
-export class CreateEmployeeComponent implements OnInit {
+export class EditEmployeeComponent implements OnInit {
   EmployeeForm: FormGroup
   DepartmentList: any[];
   DesignationList: any[];
@@ -23,15 +24,74 @@ export class CreateEmployeeComponent implements OnInit {
   RolePermissions: RoleElement[] = [];
   PermissionsData: Map<number, number[]>
 
-  constructor(private layoutService: LayoutService, private employeeService: EmployeeService, private fb: FormBuilder, private messageService: MessageService) { }
+  constructor(private layoutService: LayoutService, private employeeService: EmployeeService, private fb: FormBuilder, private messageService: MessageService, private route: ActivatedRoute) { }
+
+
+
+
+  ngOnInit() {
+    this.route.queryParamMap.subscribe(params => {
+      var id = params.get("id");
+      this.employeeService.getElements()
+        .subscribe((res) => {
+          if (res.errorCode == 0) {
+            this.ElementsData = res.dataObj;
+            this.employeeService.getOperations().subscribe((res2) => {
+              if (res2.errorCode == 0) {
+                this.OperationsData = res2.dataObj;
+
+                this.employeeService.GetEmployeeById(id).subscribe(res => {
+                  var employee = res.dataObj[0];
+                  this.employeeService.getEmployeeElementMapping(id).subscribe(res => {
+                    this.CreateHashMap(res.dataObj.employeeElementMappingList)
+                    this.InitializeForm(employee);
+                  })
+                })
+              };
+            });
+          }
+        });
+    });
+  }
+
+
+  InitializeForm = function (employee) {
+
+      this.EmployeeForm = this.fb.group({
+        employeeId:[employee.employeeId, Validators.required],
+        designationId: [employee.designationId, Validators.required],
+        departmentId: [employee.departmentId, Validators.required],
+        employeeFname: [employee.employeeFname, Validators.required],
+        employeeMname: [employee.employeeMname, Validators.required],
+        employeeEmail: [employee.employeeEmail, [Validators.required, Validators.email]],
+        employeePassword: [employee.employeePassword, Validators.required],
+        employeeMobileNo: [employee.employeeMobileNo, Validators.required],
+        employeeProfileImg: [employee.employeeProfileImg],
+        employeeUserId: [employee.employeeUserId, Validators.required],
+        gender: [employee.gender, Validators.required],
+        employeeElementMappingList: this.Elements
+      });
+    
+
+    this.employeeService.GetDepartments().subscribe((res) => {
+      this.DepartmentList = res.dataObj;
+      console.log(this.DepartmentList);
+    });
+    
+    this.SelectDepartmentChanged(employee.departmentId);
+  }
+
+
+  SelectRoleChanged(id) {
+  }
 
   CreateHashMap(data) {
     this.PermissionsData = new Map<number, number[]>();
     for (let index = 0; index < data.length; index++) {
       const element = data[index];
       var operations = [];
-      for (let index2 = 0; index2 < element.roleElementOprationList.length; index2++) {
-        const operation = element.roleElementOprationList[index2];
+      for (let index2 = 0; index2 < element.employeeElementOprationList.length; index2++) {
+        const operation = element.employeeElementOprationList[index2];
         operations.push(operation.operationId);
       }
       this.PermissionsData.set(element.elementId, operations);
@@ -49,76 +109,6 @@ export class CreateEmployeeComponent implements OnInit {
     }
     return false;
   }
-
-
-  ngOnInit() {
-    this.employeeService.getElements()
-      .subscribe((res) => {
-        if (res.errorCode == 0) {
-          this.ElementsData = res.dataObj;
-          this.employeeService.getOperations().subscribe((res2) => {
-            if (res2.errorCode == 0) {
-              this.OperationsData = res2.dataObj;
-              this.InitializeForm();
-              console.log(this.EmployeeForm.value);
-            };
-          });
-        }
-      });
-  }
-
-
-  InitializeForm = function () {
-    if(this.EmployeeForm)
-    {
-      var employee=this.EmployeeForm.value;
-      this.EmployeeForm = this.fb.group({
-        designationId: [employee.designationId, Validators.required],
-        departmentId: [employee.departmentId, Validators.required],
-        employeeFname: [employee.employeeFname, Validators.required],
-        employeeMname: [employee.employeeMname, Validators.required],
-        employeeEmail: [employee.employeeEmail, [Validators.required, Validators.email]],
-        employeePassword: [employee.employeePassword, Validators.required],
-        employeeMobileNo: [employee.employeeMobileNo, Validators.required],
-        employeeProfileImg: [employee.employeeProfileImg],
-        employeeUserId: [employee.employeeUserId, Validators.required],
-        gender: [employee.gender, Validators.required],
-        employeeElementMappingList: this.Elements
-      });
-    }
-    else{
-      this.EmployeeForm = this.fb.group({
-        designationId: ['', Validators.required],
-        departmentId: ['', Validators.required],
-        employeeFname: ['', Validators.required],
-        employeeMname: ['', Validators.required],
-        employeeEmail: ['', [Validators.required, Validators.email]],
-        employeePassword: ['', Validators.required],
-        employeeMobileNo: ['', Validators.required],
-        employeeProfileImg: [''],
-        employeeUserId: ['', Validators.required],
-        gender: ['Male', Validators.required],
-        employeeElementMappingList: this.Elements
-      });
-    }
-    
-    this.employeeService.GetDepartments().subscribe((res) => {
-      this.DepartmentList = res.dataObj;
-      console.log(this.DepartmentList);
-    });
-  }
-
-
-  SelectRoleChanged(id) {
-    this.employeeService.getRolePermissions(id).subscribe(res => {
-      this.CreateHashMap(res.dataObj.designationElementMappingList);
-      console.log(id);
-      this.InitializeForm();
-    });
-  }
-
-
-
 
   get Elements(): FormArray {
     var elementsArray = this.fb.array([]);
@@ -163,11 +153,11 @@ export class CreateEmployeeComponent implements OnInit {
     });
   }
 
-  CreateEmployee = function (data) {
+ UpdateEmployee = function (data) {
     console.log("TestData");
     console.log(data);
     var convertedData = this.MapDataToEntity(data);
-    this.employeeService.CreateEmployee(convertedData).subscribe((res) => {
+    this.employeeService.UpdateEmployee(convertedData).subscribe((res) => {
       console.log(res);
       if (res.errorCode == 0) {
         console.log("success");
@@ -196,7 +186,8 @@ export class CreateEmployeeComponent implements OnInit {
     Empobj.employeeMobileNo = data.employeeMobileNo;
     Empobj.employeePassword = data.employeePassword;
     Empobj.employeeProfileImg = data.employeeProfileImg;
-    Empobj.employeeUserId = data.employeeId;
+    Empobj.employeeUserId = data.employeeUserId;
+    Empobj.employeeId=data.employeeId
     Empobj.gender = data.gender;
     Empobj.employeeElementMappingList = [];
 
@@ -217,8 +208,8 @@ export class CreateEmployeeComponent implements OnInit {
   }
 
   resetForm = function () {
+    this.router.navigate(['employee', 'list']);
     this.EmployeeForm.reset();
-    this.PermissionsData=null;
     this.InitializeForm();
   }
   RadioButtonClick = function (data) {

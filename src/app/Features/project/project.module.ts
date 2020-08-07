@@ -9,12 +9,13 @@ import {ProjectService} from './project.service';
 import { HttpClientModule } from "@angular/common/http";
 import {ReactiveFormsModule} from '@angular/forms';
 import { CreateProjectComponent } from './create-project/create-project.component';
+import { EditProjectComponent } from './edit-project/edit-project.component';
 
 
 
 
 @NgModule({
-  declarations: [ProjectComponent, ProjectListComponent, CreateProjectComponent],
+  declarations: [ProjectComponent, ProjectListComponent, CreateProjectComponent, EditProjectComponent],
   imports: [
     CommonModule,
     ProjectRoutingModule,HttpClientModule,ReactiveFormsModule

@@ -9,7 +9,7 @@ export class AdminProjectService {
    
   GetProjectList=function()
   {
-    return this.httpClient.get(environment.url+environment.ProjectList);
+    return this.httpClient.get(environment.url+environment.ProjectList+"-1");
   }
 
 }

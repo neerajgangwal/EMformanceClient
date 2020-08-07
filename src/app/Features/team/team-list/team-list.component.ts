@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as $ from 'jquery';
 import { MessageService } from 'primeng/api';
 import { UserService } from '../../../Services/user.service';
-import { element } from 'protractor';
 
 
 
@@ -67,22 +66,16 @@ export class TeamListComponent implements OnInit {
         }
       });
   }
-  ResetForm = function () {
-    this.InitilizeCreateTeamForm();
-  }
 
   InitilizeCreateTeamForm = function () {
     this.CreateTeamForm = this.fb.group({
       projectId: -1,
       teamName: ['', Validators.required],
-      departmentId: [1],
+      departmentId: [1,Validators.required],
       teamCreatedBy: [this.userService.LoggedInUser.Id],
       teamUpdatedBy: [this.userService.LoggedInUser.Id]
     })
   }
-
-
-
 
   InitilizeAddTeamForm = function (teamId) {
     this.AddTeamForm = this.fb.group({
@@ -92,38 +85,54 @@ export class TeamListComponent implements OnInit {
     this.TeamMemberList = [];
   }
 
-  InitilizeEditTeamForm=function()
+  InitilizeEditTeamForm=function(data)
   {
-    this.EditTeamForm = this.fb.group({
-      projectId: -1,
-      teamName: ['', Validators.required],
+      this.EditTeamForm = this.fb.group({
+      teamId:[data.teamId],
+      projectId: [data.projectId],   
+      teamName: [data.teamName,Validators.required],
       departmentId: [1],
       teamCreatedBy: [this.userService.LoggedInUser.Id],
-      teamUpdatedBy: [this.userService.LoggedInUser.Id]
+      teamUpdatedBy: [this.userService.LoggedInUser.Id],
     })
   }
 
-
-
-  public FilterData = function (event) {
-    var temp = this.TeamList
-    var data = event.target.value;
-    console.log(data);
-    console.log(temp);
-
-    this.SearchResults = temp.filter(item => {
-      console.log(item);
-      console.log(item[this.FilterKey]);
-      console.log(item[this.FilterKey].toLowerCase().startsWith(data.toLowerCase()));
-      return item[this.FilterKey].toLowerCase().includes(data.toLowerCase());
-    }
-    )
+  ResetForm = function () {
+    this.InitilizeCreateTeamForm();
   }
 
   CreateTeamButtonClicked() {
     this.InitilizeCreateTeamForm();
     $('#task-description').addClass('open-slide');
     $('body').addClass('gray-over');
+  }
+
+  getEmployeeFromList = function () {
+    this.teamservice.getEmployeeData().subscribe((res) => {
+      if (res.errorCode == 0) {
+        this.EmployeeList = res.dataObj;
+        console.log("---------------");
+        console.log(this.EmployeeList);
+        console.log("---------------");
+        console.log(this.ViewTeamMemberList);
+        console.log("---------------");
+
+        this.ViewTeamMemberList.forEach((element) => {
+          for(let employee of this.EmployeeList)
+          {
+            if (element.employeeId == employee.employee.employeeId) {
+              element.employeeName = employee.employee.employeeFname + employee.employee.employeeMname;
+              element.employeeEmail = employee.employee.employeeEmail;
+              break;
+            }
+          }
+        });
+        console.log(this.ViewTeamMemberList);
+      }
+      else {
+
+      }
+    })
   }
 
   CreateButtonClicked = function (data) {
@@ -145,8 +154,6 @@ export class TeamListComponent implements OnInit {
       this.messageService.add({ severity: 'error', summary: 'Failed', detail: 'Something went wrong please try after some time' });
     });
   }
-
-
 
   SaveTeamMembers(data) {
     console.log(data);
@@ -193,8 +200,6 @@ export class TeamListComponent implements OnInit {
     this.TeamMemberList.splice(this.TeamMemberList.indexOf(element), 1);
   }
 
-
-
   ViewIconClicked(id) {
     $('#add-task').addClass('open-slide');
     $('body').addClass('gray-over');
@@ -212,51 +217,42 @@ export class TeamListComponent implements OnInit {
 
   }
 
-  editIconClicked(id)
+   editIconClicked(data)
   {
-    
-    this.InitilizeEditTeamForm;
+    this.InitilizeEditTeamForm(data);
     $('#edit-team').addClass('open-slide');
     $('body').addClass('gray-over');
-    console.log(id);
-    this.teamservice.getTeam().subscribe((res)=>
-    {
-      if(res.dataObj.teamId==id)
-      {
-        this.editTeam=res.dataObj;
-      }
-    })
+    console.log("edit icon "+data);
   }
 
-  getEmployeeFromList = function () {
-    this.teamservice.getEmployeeData().subscribe((res) => {
+  editSaveButtonClicked=function(data)
+  {
+    data.activateFlag=1;
+    console.log("save"+data.projectId);
+    this.teamservice.updateTeam(data).subscribe((res) => {
       if (res.errorCode == 0) {
-        this.EmployeeList = res.dataObj;
-        console.log("---------------");
-        console.log(this.EmployeeList);
-        console.log("---------------");
-        console.log(this.ViewTeamMemberList);
-        console.log("---------------");
-
-        this.ViewTeamMemberList.forEach((element) => {
-          for(let employee of this.EmployeeList)
+        this.InitilizeEditTeamForm(res.dataObj);
+        for (let index = 0; index < this.TeamList.length; index++) {
+          const element = this.TeamList[index];
+          console.log("element.teamId"+element.teamId);
+          console.log("data.teamId"+data.teamId);
+          if(element.teamId==data.teamId)
           {
-            if (element.employeeId == employee.employee.employeeId) {
-              element.employeeName = employee.employee.employeeFname + employee.employee.employeeMname;
-              element.employeeEmail = employee.employee.employeeEmail;
-              break;
-            }
+            this.TeamList[index]=res.dataObj;
           }
-        });
-        console.log(this.ViewTeamMemberList);
+        }
+        this.SearchResults = this.TeamList
+        this.messageService.add({ severity: 'success', summary: 'Team updated', detail: 'Team created successfully' });
+        this.ResetForm();
       }
       else {
-
+        this.messageService.add({ severity: 'error', summary: 'Failed', detail: res.errorMsg });
       }
-    })
+    }, (error) => {
+      console.log(error);
+      this.messageService.add({ severity: 'error', summary: 'Failed', detail: 'Something went wrong please try after some time' });
+    });
   }
-
-
 
   AddTeamIcon(teamId) {
     $('#addteam-member').addClass('open-slide');
@@ -277,7 +273,6 @@ export class TeamListComponent implements OnInit {
       (err) => { console.log("outside error") });
 
   }
-
  
   DeleteTeamIcon(data)
   {
@@ -300,5 +295,18 @@ export class TeamListComponent implements OnInit {
 
   }
 
+  public FilterData = function (event) {
+    var temp = this.TeamList
+    var data = event.target.value;
+    console.log(data);
+    console.log(temp);
 
+    this.SearchResults = temp.filter(item => {
+      console.log(item);
+      console.log(item[this.FilterKey]);
+      console.log(item[this.FilterKey].toLowerCase().startsWith(data.toLowerCase()));
+      return item[this.FilterKey].toLowerCase().includes(data.toLowerCase());
+    }
+    )
+  }
 }

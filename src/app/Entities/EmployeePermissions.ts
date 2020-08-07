@@ -6,6 +6,7 @@ export class EmployeePermissions
     employeeFname:string;
     employeeMname:string;
     employeeUserId:string;
+    employeeId:number;
     designationId:number;
     employeeEmail:string;
     employeePassword:string;
