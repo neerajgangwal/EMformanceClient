@@ -13,6 +13,9 @@ export class LoginService {
     return this.httpClient.post(this.url+environment.login, data);
   }
 
+  getCompany=function(email){
+    return this.httpClient.post(this.url+environment.getCompany, {adminEmail: email});
+  }
   TestFunction = function () {
     console.log("test");
     return this.httpClient.get(this.url+"getProjectList");

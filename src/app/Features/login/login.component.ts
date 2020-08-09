@@ -36,12 +36,15 @@ export class LoginComponent implements OnInit {
     this.loginService.LoginFunction(data).subscribe((res) => {
       if (res.errorCode == 0) {
         this.loginService.getCompany(res.dataObj.email).subscribe((res2) => {
-          if (res.errorCode == 0) {
+          if (res2.errorCode == 0) {
             var user = new User();
             user.Id = res.dataObj.userId;
             user.Name = res.dataObj.name;
             user.EmailId = res.dataObj.email;
-            user.PortalName=res2.dataObj.portalName;
+            user.PortalName = res2.dataObj[0].portalName;
+            console.log(res2)
+            console.log("test");
+            console.log(user);
             localStorage.setItem("access_token", JSON.stringify(user));
             this.router.navigateByUrl('/department/create');
           }
