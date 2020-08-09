@@ -1,41 +1,42 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
 import {environment} from '../../../environments/environment';
+import { UserService } from 'src/app/Services/user.service';
 
 
 @Injectable()
 export class ProjectService {
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient,private userService:UserService) { }
 
   GetProjectList=function(id)
   {
-    return this.httpClient.get(environment.url+environment.ProjectList+id);
+    return this.httpClient.get(this.userService.LoggedInUser.PortalName+environment.ProjectList+id);
   }
 
   GetProjectListById=function(id)
   {
-    return this.httpClient.get(environment.url+environment.ProjectList+id);
+    return this.httpClient.get(this.userService.LoggedInUser.PortalName+environment.ProjectList+id);
   }
 
   CreateProject=function(data)
   {
-    return this.httpClient.post(environment.url+environment.CreateProject,data);
+    return this.httpClient.post(this.userService.LoggedInUser.PortalName+environment.CreateProject,data);
   }
 
   deleteProject=function(data)
   {
-    return this.httpClient.post(environment.url+environment.deleteProject,{projectId: data.projectId});
+    return this.httpClient.post(this.userService.LoggedInUser.PortalName+environment.deleteProject,{projectId: data.projectId});
   }
 
   getEmployeeList=function()
   {
-    return this.httpClient.get(environment.url+environment.employeeData);
+    return this.httpClient.get(this.userService.LoggedInUser.PortalName+environment.employeeData);
   }
 
   updateProject=function(data)
   {
-    return this.httpClient.post(environment.url+environment.updateProject,data);
+    return this.httpClient.post(this.userService.LoggedInUser.PortalName+environment.updateProject,data);
 
   }
 }

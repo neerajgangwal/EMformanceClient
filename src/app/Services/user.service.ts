@@ -36,7 +36,7 @@ export class UserService {
     this._user.Id=user.Id;
     this._user.Name=user.Name;
     this._user.EmailId=user.EmailId;
-    this._user.PortalName=user.PortalName;
+    this._user.PortalName=user.PortalName+'/';
     return true;
   }
 
