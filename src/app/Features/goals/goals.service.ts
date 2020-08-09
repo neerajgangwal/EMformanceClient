@@ -13,6 +13,14 @@ export class GoalsService {
   }
   getGoal=function()
   {
-    return this.httpclient.post(environment.getGoal+environment.url,{});
+    return this.httpclient.post(environment.url+environment.getGoal,{});
+  }
+  deleteGoal=function(data)
+  {
+    return this.httpclient.post(environment.url+environment.deleteGoal,{goalId:data})
+  }
+  updateGoal=function(data)
+  {
+    return this.httpclient.post(environment.url+environment.updateGoal,data)
   }
 }

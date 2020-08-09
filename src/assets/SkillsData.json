@@ -1,0 +1,6 @@
+{
+    "errorcode" : 0,
+    "dataObj":[
+    {"skillId":1,"skillName":"TestSkill"},
+    {"skillId":2,"skillName":"hibernate"}]
+}

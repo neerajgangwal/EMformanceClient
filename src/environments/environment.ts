@@ -44,6 +44,7 @@ export const environment = {
   deleteRole:"deleteDesignation",
   deleteProject:"deleteProject",
   deleteTeam:"deleteTeam",
+  deleteGoal:"deleteGoal",
 
   //update
   updateTeam:"updateTeam",
@@ -51,7 +52,16 @@ export const environment = {
   updateTask:"updateTask",
   updateProject:"updateProject",
   updateDepartment:"updateDepartment",
-  updateEmployee:"updateEmployee"
+  updateEmployee:"updateEmployee",
+  updateGoal:"updateGoal",
+
+
+  getSkills:"getSkill",
+  addSkill:"addSkill",
+  getEmployeeSkill:"getEmployeeSkill",
+  mapEmployeeSkill:"mapEmployeeSkill",
+  deleteSkill:"deleteSkill",
+  updateSkill:"updateSkill"
 
 
 };

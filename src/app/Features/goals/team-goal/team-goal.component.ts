@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { LayoutService } from '../../../Services/layout.service';
-import { GoalsService } from '../goals.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {LayoutService} from '../../../Services/layout.service';
+import {GoalsService} from '../goals.service';
+import {FormBuilder,FormGroup,Validators} from '@angular/forms';
 import * as $ from 'jquery';
 import { UserService } from 'src/app/Services/user.service';
 import { MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'app-my-goal',
-  templateUrl: './my-goal.component.html',
-  styleUrls: ['./my-goal.component.css']
+  selector: 'app-team-goal',
+  templateUrl: './team-goal.component.html',
+  styleUrls: ['./team-goal.component.css']
 })
-export class MyGoalComponent implements OnInit {
-
+export class TeamGoalComponent implements OnInit {
   goallist: any[];
   createGoalForm: FormGroup;
   editGoalForm: FormGroup;
@@ -259,5 +258,6 @@ export class MyGoalComponent implements OnInit {
     }
     )
   }
+
 
 }

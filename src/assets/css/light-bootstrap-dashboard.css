@@ -5427,10 +5427,14 @@ input.btn.btn-primary.pro-del {
 }
 
 
+
 #add-task.open-slide {
     right: 0;
 }
 
+#add-description.open-slide {
+    right: 0;
+}
 #add-team-task.open-slide {
     right: 0;
 }

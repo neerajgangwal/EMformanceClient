@@ -15,7 +15,7 @@ const routes: Routes = [
 { path: 'team', loadChildren: () => import('./Features/team/team.module').then(m => m.TeamModule) ,canActivate:[AuthGuard]},
 { path: 'goals', loadChildren: () => import('./Features/goals/goals.module').then(m => m.GoalsModule) ,canActivate:[AuthGuard]},
 { path: 'ExitInterview', loadChildren: () => import('./Features/exit-interview/exit-interview.module').then(m => m.ExitInterviewModule) },
-{ path: 'Skill', loadChildren: () => import('./Features/skill/skill.module').then(m => m.SkillModule) },
+{ path: 'Skill', loadChildren: () => import('./Features/skill/skill.module').then(m => m.SkillModule),canActivate:[AuthGuard] },
 { path: 'Feedback', loadChildren: () => import('./Features/feedback/feedback.module').then(m => m.FeedbackModule) },
 { path: 'admin/employee', loadChildren: () => import('./Features/admin/admin-employee/admin-employee.module').then(m => m.AdminEmployeeModule) },
 { path: 'admin/Project', loadChildren: () => import('./Features/admin/admin-project/admin-project.module').then(m => m.AdminProjectModule) },
