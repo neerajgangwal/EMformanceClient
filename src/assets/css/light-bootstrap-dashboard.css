@@ -1329,7 +1329,7 @@ textarea.form-control {
     height: 90px !important;
 }
 .form-control:focus {
-    height: 50px;
+    height: 46px;
     padding: 10px 10px 10px 16px;
     color: #565656;
     border: 1px solid #E9EFF3;
@@ -5427,19 +5427,19 @@ input.btn.btn-primary.pro-del {
 }
 
 
-
 #add-task.open-slide {
     right: 0;
 }
 
-#add-description.open-slide {
-    right: 0;
-}
 #add-team-task.open-slide {
     right: 0;
 }
 
 #task-description.open-slide {
+    right: 0;
+}
+
+#add-description.open-slide {
     right: 0;
 }
 
@@ -6767,7 +6767,11 @@ border-radius: 6px;}
 
 .navbar-sidemenu li a:hover,
 .navbar-sidemenu li.active a {
-    background-color: #0c9492;
+    background-color: #FA6A19;
+	font-size:20px;
+	border: solid;
+    border-color: coral;
+    border-radius: 50px;
 }
 
 .navbar-sidemenu li i {

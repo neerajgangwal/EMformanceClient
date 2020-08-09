@@ -4,7 +4,7 @@ import { LoginService } from './login.service';
 import { LayoutService } from '../../Services/layout.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import {User} from '../../Entities/User';
+import { User } from '../../Entities/User';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,21 +13,21 @@ import {User} from '../../Entities/User';
 export class LoginComponent implements OnInit {
   LoginForm: FormGroup;
   constructor(private fb: FormBuilder, private loginService: LoginService,
-    private layoutService: LayoutService, private router: Router, private messageService: MessageService) { 
-      this.router.events.subscribe(
-        (event) => {
-               if (event instanceof NavigationEnd) {
-                 this.ngOnInit();
-               }
-        });
-    }
+    private layoutService: LayoutService, private router: Router, private messageService: MessageService) {
+    this.router.events.subscribe(
+      (event) => {
+        if (event instanceof NavigationEnd) {
+          this.ngOnInit();
+        }
+      });
+  }
 
 
   ngOnInit() {
     console.log("login");
     this.layoutService.UpdateLayout(false, false, false, false);
     this.LoginForm = this.fb.group({
-      email: ['', [Validators.required,Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
@@ -35,12 +35,23 @@ export class LoginComponent implements OnInit {
   onSubmit = function (data) {
     this.loginService.LoginFunction(data).subscribe((res) => {
       if (res.errorCode == 0) {
-        var user=new User();
-        user.Id=res.dataObj.userId;
-        user.Name=res.dataObj.name;
-        user.EmailId=res.dataObj.email;
-        localStorage.setItem("access_token", JSON.stringify(user));
-        this.router.navigateByUrl('/department/create');
+        this.loginService.getCompany(res.dataObj.email).subscribe((res2) => {
+          if (res.errorCode == 0) {
+            var user = new User();
+            user.Id = res.dataObj.userId;
+            user.Name = res.dataObj.name;
+            user.EmailId = res.dataObj.email;
+            user.PortalName=res2.dataObj.portalName;
+            localStorage.setItem("access_token", JSON.stringify(user));
+            this.router.navigateByUrl('/department/create');
+          }
+          else {
+            this.messageService.add({ severity: 'error', summary: 'Get company failed', detail: 'Via MessageService' });
+          }
+        },
+          (err) => {
+            this.messageService.add({ severity: 'error', summary: 'Get company failed', detail: 'Via MessageService' });
+          })
       }
       else {
         this.messageService.add({ severity: 'error', summary: 'Login failed', detail: 'Via MessageService' });

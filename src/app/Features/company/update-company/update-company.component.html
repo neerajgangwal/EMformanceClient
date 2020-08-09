@@ -24,16 +24,18 @@
                             <input type="text" class="form-control" placeholder="Enter Your Portal Name"
                                 formControlName="portalName">
                             <span *ngIf="!CompanyForm.controls['portalName'].valid&&(CompanyForm.controls['portalName'].dirty|| CompanyForm.controls['portalName'].touched)" class="error"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
-                                provide company Website</span>
+                                provide valid company Website</span>
                         </div>
                         <div class="form-group">
                             <label for="">Industry *</label>
                             <div class="Industry">
                                 <select class="form-control" formControlName="industryType">
                                     <option value="">Select industry</option>
-                                    <option value="Project1">Project1</option>
-                                    <option value="Project2">Project2</option>
-                                    <option value="Project3">Project3</option>
+                                    <option value="IT Services">IT Services</option>
+                                    <option value="Finance">Finance</option>
+                                    <option value="Manufacturing">Manufacturing</option>
+									<option value="Hospitality">Hospitality</option>
+									<option value="Health Care">Health Care</option>
                                 </select>
                             </div>
                             <span *ngIf="!CompanyForm.controls['industryType'].valid&&(CompanyForm.controls['industryType'].dirty|| CompanyForm.controls['industryType'].touched)" class="error"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please

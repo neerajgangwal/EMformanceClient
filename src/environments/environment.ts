@@ -61,7 +61,10 @@ export const environment = {
   getEmployeeSkill:"getEmployeeSkill",
   mapEmployeeSkill:"mapEmployeeSkill",
   deleteSkill:"deleteSkill",
-  updateSkill:"updateSkill"
+  updateSkill:"updateSkill",
+
+
+  getCompany:"getCompany"
 
 
 };

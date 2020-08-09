@@ -30,7 +30,7 @@ export class UpdateCompanyComponent implements OnInit {
       var email = params.get("emailId");
       this.CompanyForm = this.fb.group({
         companyName: ['', Validators.required],
-        portalName: ['', Validators.required],
+        portalName: ['', [Validators.required,Validators.pattern('(https?://)([\\da-z.-]+)')]],
         industryType: ['', Validators.required],
         adminMobile: ['', Validators.compose([Validators.required, Validators.minLength(10),Validators.pattern('[0-9]+')])],
         adminEmail: [email],
