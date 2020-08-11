@@ -64,7 +64,13 @@ export const environment = {
   updateSkill:"updateSkill",
 
 
+  addFeedabck:"addFeedabck",
+  getMyfeedback:"getMyFeedback?employeeId=",
+  getRequestedFeedback:"getRequestedFeedback?employeeId=",
+  getMyFeedback:"getMyFeedback?employeeId=",
+
   getCompany:"getCompany"
+
 
 
 };

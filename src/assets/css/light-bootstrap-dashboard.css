@@ -5200,10 +5200,7 @@ input.btn.btn-primary.pro-del {
 }
 
 .feedback-area {
-    position: relative;
-
-    margin-top: 20px;
-}
+    position: relative;}
 
 .feedback-area textarea,
 .feedback-area textarea:focus {
@@ -5214,6 +5211,10 @@ input.btn.btn-primary.pro-del {
 
     border: 2px solid #0073c6;
     background-color: #f0f4f8;
+}
+.feedback-list li div span i{background: none;
+color:#fff;
+	line-height: 0;
 }
 
 .btn.btn-normal {
@@ -5431,39 +5432,7 @@ input.btn.btn-primary.pro-del {
     right: 0;
 }
 
-#add-team-task.open-slide {
-    right: 0;
-}
-
 #task-description.open-slide {
-    right: 0;
-}
-
-#add-description.open-slide {
-    right: 0;
-}
-
-#task-team-description.open-slide {
-    right: 0;
-}
-
-#edit-team.open-slide {
-    right: 0;
-}
-
-#edit-task.open-slide {
-    right: 0;
-}
-
-#edit-team-task.open-slide {
-    right: 0;
-}
-
-#edit-project.open-slide {
-    right: 0;
-}
-
-#addteam-member.open-slide {
     right: 0;
 }
 
@@ -5822,6 +5791,7 @@ input.btn.btn-primary.pro-del {
 input.team.btn.btn-primary.add-feedback {
     margin-bottom: 8%;
 }
+.selectwith-button select{width: 80%;}
 @media (max-width: 991px) {
     .navbar-default .navbar-toggle .icon-bar {
         background-color: #fff;
@@ -6216,7 +6186,9 @@ input.team.btn.btn-primary.add-feedback {
 
     padding-right: 130px;
 }
-
+.selectwith-button.removepad{padding-right:0;}
+.selectwith-button.removepad .btn.btn-primary{top:26px;}
+ ul.selected-user{padding:0;}
 .selectwith-button .btn.btn-primary {
     position: absolute;
     top: 0;
@@ -6596,12 +6568,16 @@ margin-bottom: 20px;
 .material-switch .label-default{background-color:#FA6A19;}
 .material-switch{display:inline-block;
 margin-right: 26px;}
+.material-switch.marright{display:inline-block; margin-right: 10px; padding: 10px 0 0 0;}
 .material-switch span{margin-bottom: 14px; display: inline-block; color:#14171A;}
 .headtxt{width:60%;}
+.headtxtsimily{width:100%;}
 .permission-heading h4{font-weight: 700; margin: 0px 0px 15px 0px;}
 .permission-heading h4 span{font-weight: 400;
     display: inline-block;
     font-size: 16px;}
+.smily-section{width: 32.3%; display: inline-block; margin-right: 10px; margin-bottom: 10px;}
+.smily-section.nonmar{margin-right: 0px;}
 .material-switch > input[type="checkbox"] {
     display: none;   
 }
@@ -6610,7 +6586,8 @@ margin-top:0px;}
 .permission-section {
     display: inline-block;
     width: 100%;
-	padding: 15px 0 15px 0;
+	padding: 0px;
+	margin: 15px;
 }
 .material-switch > label {
     cursor: pointer;
@@ -6767,11 +6744,7 @@ border-radius: 6px;}
 
 .navbar-sidemenu li a:hover,
 .navbar-sidemenu li.active a {
-    background-color: #FA6A19;
-	font-size:20px;
-	border: solid;
-    border-color: coral;
-    border-radius: 50px;
+    background-color: #0c9492;
 }
 
 .navbar-sidemenu li i {
@@ -7129,7 +7102,7 @@ color:#FFA200;}
 }
 
 .team-heading ul li:first-child {
-    width: 80%;
+    width: 84%;
 }
 
 .team-listvew.team-member > li.team-heading.list-content {
@@ -7171,7 +7144,7 @@ color:#FFA200;}
 }
 
 .mytask-heading ul li:first-child {
-    width: 50%;
+    width: 58%;
 }
 .mytask-heading ul li:first-child + li {
     width: 13%;
@@ -7511,6 +7484,149 @@ padding: 0px;}
 .error{color:#d21f18; font-size: 16px; margin-top: 4px; display: block; position: absolute; width: 100%;}
 .error i{margin-right: 8px;}
 /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+.multiselect-wrapper {
+	width: 180px;
+	display: inline-block;
+	white-space: nowrap;
+	font-size: 12px;
+	font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+}
+
+.multiselect-wrapper .multiselect-input {
+	width: 100%;
+	padding-right: 50px;
+}
+
+.multiselect-wrapper label {
+	display: block;
+	font-size: 12px;
+	font-weight : 600;
+}
+
+.multiselect-wrapper .multiselect-list {
+	z-index: 1;
+	position: absolute;
+	display: none;
+	background-color: white;
+	border: 1px solid grey;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	margin-top: -2px;
+}
+
+	.multiselect-wrapper .multiselect-list.active {
+		display: block;
+	}
+
+	.multiselect-wrapper .multiselect-list > span {
+		font-weight: bold;
+	}
+
+	.multiselect-wrapper .multiselect-list .multiselect-checkbox {
+		margin-right: 2px;
+	}
+
+	.multiselect-wrapper .multiselect-list > span,
+	.multiselect-wrapper .multiselect-list li {
+		cursor: default;
+	}
+
+.multiselect-wrapper .multiselect-list {
+	padding: 5px;
+	min-width: 200px;
+}
+
+.multiselect-wrapper ul {
+	list-style: none;
+	display: block;
+	position: relative;
+	padding: 0px;
+	margin: 0px;
+	max-height: 200px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+	.multiselect-wrapper ul li {
+		padding-right: 20px;
+		display: block;
+	}
+
+		.multiselect-wrapper ul li.active {
+			background-color: rgb(0, 102, 255);
+			color: white;
+		}
+
+		.multiselect-wrapper ul li:hover {
+			background-color: rgb(0, 102, 255);
+			color: white;
+		}
+
+.multiselect-input-div {
+	height: 34px;
+}
+
+	.multiselect-input-div input{
+		border: 1px solid #ababab;
+		background : #fff;
+		margin: 5px 0 6px 0;
+		padding: 5px;
+		vertical-align:middle;
+	}
+
+.multiselect-count {
+	position: relative;
+	text-align: center;
+	border-radius: 2px;
+	background-color: lightblue;
+	display: inline-block !important;
+	padding: 2px 7px;
+	left: -45px;
+}
+
+.multiselect-wrapper.disabled .multiselect-dropdown-arrow {
+	border-top: 5px solid lightgray;
+}
+
+.multiselect-wrapper.disabled .multiselect-count {
+	background-color: lightgray;
+}
+
+.multiselect-dropdown-arrow {
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 5px solid black;
+	position: absolute;
+	line-height: 20px;
+	text-align: center;
+	display: inline-block !important;
+	margin-top: 17px;
+	margin-left: -42px;
+}
+.fb-profile img.fb-image-lg{
+    z-index: 0;
+    width: 100%;  
+    margin-bottom: 10px;
+	max-height: 300px;
+}
+.fb-profile{background:#fff;}
+.fb-profile .nav-tabs{background:#fff;}
+.fb-image-profile
+{
+    margin: -90px 10px 0px 50px;
+    z-index: 9;
+    width: 12%; 
+	border-radius: 50%;
+}
+.profile-name{font-size:32px;}
+.fb-profile .nav-tabs {background: #fff; padding: 0 0 0 54px;}
+.feedback-list .skill-slider span{font-size:16px;}
+#feedback-request h4{font-weight: 600;}
+.permission-list ul li{font-size: 16px; padding: 4px 0;}
+.feedback-list .skill-list{margin-bottom: 40px;}
+/* multiselect*/
 @media (max-width: 1280px) {
 	.list-heading ul li:first-child{width: calc(100% - 638px);}
 	.list-heading ul li:first-child + li{width: calc(100% - 820px);}

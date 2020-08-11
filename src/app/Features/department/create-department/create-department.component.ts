@@ -41,7 +41,7 @@ export class CreateDepartmentComponent implements OnInit {
         $('body').removeClass('gray-over');
       });
     });
-   
+
   }
 
   initialiseEditForm=function(data)
@@ -67,11 +67,21 @@ export class CreateDepartmentComponent implements OnInit {
     this.AddDept.addDepartment(data)
       .subscribe((res) => {
         console.log(res);
+        if(res.errorCode==0)
+        {
         this.DepartmentList.push(res.dataObj);
         this.SearchResults = this.DepartmentList
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Department Created' });
         this.loading = false;
         this.ResetForm();
+        }
+        else{
+          this.messageService.add({ severity: 'error', summary: 'Failed', detail: res.errorMsg });
+        }
+      },(err)=>{
+        console.log(err)
+        this.messageService.add({ severity: 'error', summary: 'Failed', detail: 'Something failed in api' });
+
       });
   }
 
