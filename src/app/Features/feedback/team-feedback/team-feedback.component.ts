@@ -79,6 +79,7 @@ export class TeamFeedbackComponent implements OnInit {
       ],
       feedbackStatus: [1, Validators.required],
       feedbackParameteres: [this.SelectedList, Validators.required],
+      blindRequest:[false]
     });
     this.intialiseAddParameter();
   };

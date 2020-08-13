@@ -201,7 +201,7 @@
                                 <ul class="feedback-list">
                                     <li *ngFor="let data of MyFeedbackList">
                                         <div class="media">
-                                            <div class="media-left">
+                                            <div class="media-left" *ngIf="data.blindRequest==false">
                                                 <a href="#">
                                                     <img class="media-object" src="assets/img/faces/face-1.jpg"
                                                         alt="...">
@@ -209,7 +209,7 @@
                                             </div>
                                             <div class="media-body">
                                                 <div class="row">
-                                                    <div class="col-md-4" *ngIf="data.blindrequest==null || data.blindRequest==false">
+                                                    <div class="col-md-4" *ngIf="data.blindRequest==false">
                                                         <h4 class="media-heading">{{GetEmployeeNameBasedOnId(data.feedbackFromId)}}</h4>
                                                         <p class="gray-text">{{getDesignationNameForEmployee(data.feedbackFromId)}}</p>
                                                         <p><a
