@@ -21,20 +21,24 @@ export class EditProjectComponent implements OnInit {
     private messageservice:MessageService,
     private userService:UserService,
     private SearchService:SearchService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+
     ) { }
 
     EditProjectForm:FormGroup;
     ProjectList:any[];
     SearchResults: any[];
+    DepartmentList:any[];
     loading: true;
     FilterKey: string;
     Details;
 
 
 
+
   ngOnInit(): void {
 
+    this.getDepartment();
     this.SearchService.SetSource(null);
     this.route.queryParamMap.subscribe(params => {
       var id = params.get("id");
@@ -53,10 +57,18 @@ export class EditProjectComponent implements OnInit {
 
 }
 
+getDepartment=function()
+  {
+    this.projectservice.getDepartment().subscribe((res)=>
+    {
+      this.DepartmentList=res.dataObj;
+    })
+  }
+
   initiliseProjectForm=function()
   {
     var date = new Date();
-    this.EditProjectForm=this.fb.group({
+     this.EditProjectForm=this.fb.group({
      projectId:[this.Details["projectId"],Validators.required],
      projectName:[this.Details["projectName"],Validators.required],
      projectPriority:[this.Details["projectPriority"],Validators.required],

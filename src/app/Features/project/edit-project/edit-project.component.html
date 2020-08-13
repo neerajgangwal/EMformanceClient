@@ -10,112 +10,115 @@
                 <div class="panel-body">
                   <div class="content" *ngIf="EditProjectForm!=null">
                     <div class="container-fluid">
-                      <div class="form-section" [formGroup]="EditProjectForm">
+                      <div class="form-section"  [formGroup]="EditProjectForm">
                         <div class="col-lg-12">
                         </div>
                         <div class="col-lg-6">
-                          <div class="form-group">
-                            <label for="">Project Name</label>
-                            <input type="text" class="form-control" placeholder="Enter Project Name"
-                              formControlName="projectName">
-                            <span class="error"
-                              *ngIf="!EditProjectForm.controls['projectName'].valid&&(EditProjectForm.controls['projectName'].dirty|| EditProjectForm.controls['projectName'].touched)"><i
-                                class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide Project
-                              name</span>
-
-                          </div>
+                            <div class="form-group">
+                                <label for="">Project Name*</label>
+                                <input type="text" class="form-control"
+                                    placeholder="Enter Project Name" formControlName="projectName">
+                                    <span class="error" *ngIf="!EditProjectForm.controls['projectName'].valid&&(EditProjectForm.controls['projectName'].dirty|| EditProjectForm.controls['projectName'].touched)"><i
+                                        class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide Project name</span>
+                             </div>
                         </div>
                         <div class="col-lg-6">
-                          <div class="form-group">
-                            <label for="">Select Priority*</label>
-                            <select name="" id="" class="form-control" formControlName="projectPriority">
-                              <option value="" selected>Select Priority</option>
-                              <option value="Low">Low</option>
-                              <option value="Medium">Medium</option>
-                              <option value="High">High</option>
-                            </select>
+                            <div class="form-group">
+                                <label for="">Select Priority*</label>
+                                <select name="" id="" class="form-control" formControlName="projectPriority">
+                                    <option value="" selected>Select Priority</option>
+                                    <option value="Low">Low</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="High">High</option>
+                                </select>
 
-                          </div>
-                        </div>
-                        <div class="col-lg-6">
-                          <div class="form-group">
-                            <label for="">Select Status*</label>
-                            <select name="" id="" class="form-control" formControlName="projectStatus">
-                              <option value="" selected>Select Project</option>
-                              <option value="Created">Created</option>
-                              <option value="Active">Active</option>
-                              <option value="Completed">Completed</option>
-                            </select>
-
-                          </div>
-                        </div>
-                        <div class="col-lg-6">
-                          <div class="form-group">
-                            <label for="">Project Description</label>
-                            <textarea class="form-control" rows="4" cols="50" placeholder="Enter Task details here"
-                              formControlName="projectDescription"></textarea>
-                            <span class="error"
-                              *ngIf="!EditProjectForm.controls['projectDescription'].valid&&(EditProjectForm.controls['projectDescription'].dirty|| EditProjectForm.controls['projectDescription'].touched)"><i
-                                class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide Project
-                              description</span>
-                          </div>
-
-                          <div class="form-group">
-                            <div class="row">
-                              <div class="col-md-5">
-                                <label for="">Project Timeline</label>
-                                <input type="date" class="form-control" formControlName="projectStartDate">
-                                <span class="error"
-                                  *ngIf="!EditProjectForm.controls['projectStartDate'].valid&&(EditProjectForm.controls['projectStartDate'].dirty|| EditProjectForm.controls['projectStartDate'].touched)"><i
-                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide Project
-                                  description</span>
-                              </div>
-                              <div class="col-md-2 text-center">
-                                <span class="to-padding">to</span>
-                              </div>
-                              <div class="col-md-5">
-                                <label for="">&nbsp;</label>
-                                <input type="date" class="form-control" formControlName="projectDueDate">
-                                <span class="error"
-                                  *ngIf="!EditProjectForm.controls['projectDueDate'].valid&&(EditProjectForm.controls['projectDueDate'].dirty|| EditProjectForm.controls['projectDueDate'].touched)"><i
-                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide Project
-                                  description</span>
-                              </div>
                             </div>
-                          </div>
-
                         </div>
                         <div class="col-lg-6">
                           <div class="form-group">
+                              <label for="">Select Department*</label>
+                              <select name="" id="" class="form-control" formControlName="departmentId">
+                                  <option value="" selected>Select Department</option>
+                                  <option *ngFor="let department of DepartmentList" value="{{department.departmentId}}">{{department.departmentName}}</option>
+                              </select>
 
-                            <label for="">Upload file</label>
-                            <div class="file-upload">
-                              <button class="file-upload-btn" type="button"
-                                onclick="$('.file-upload-input').trigger( 'click' )">Click
-                                here to upload</button>
-
-                              <div class="image-upload-wrap">
-                                <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*"
-                                  formControlName="projectAttachment" />
-                                <div class="drag-text">
-                                  <span>Drop files here or Click to upload</span>
-                                </div>
-                              </div>
-                              <div class="file-upload-content">
-                                <img class="file-upload-image" src="#" alt="your image" />
-                                <div class="image-title-wrap">
-                                  <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
-                                      class="image-title">Uploaded
-                                      Image</span></button>
-                                </div>
-                              </div>
-                            </div>
                           </div>
+                      </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                              <label for="">Select Status*</label>
+                              <select name="" id="" class="form-control" formControlName="projectStatus">
+                                  <option value="" selected>Select Project</option>
+                                  <option value="Created">Created</option>
+                                  <option value="Active">Active</option>
+                                  <option value="Completed">Completed</option>
+                              </select>
+
+                          </div>
+                       </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="">Project Description*</label>
+                                <textarea class="form-control"  formControlName="projectDescription" rows="4" cols="50" placeholder="Enter Project details here" ></textarea>
+                                <span class="error" *ngIf="!EditProjectForm.controls['projectDescription'].valid&&(EditProjectForm.controls['projectDescription'].dirty|| EditProjectForm.controls['projectDescription'].touched)"><i
+                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide project description</span>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label for="">Project Timeline*</label>
+                                        <input type="date" class="form-control" formControlName="projectStartDate">
+                                        <span class="error" *ngIf="!EditProjectForm.controls['projectStartDate'].valid&&(EditProjectForm.controls['projectStartDate'].dirty|| EditProjectForm.controls['projectStartDate'].touched)"><i
+                                            class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please select start date</span>
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        <span class="to-padding">to</span>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label for="">&nbsp;</label>
+                                        <input type="date" class="form-control" formControlName="projectDueDate">
+                                        <span class="error" *ngIf="!EditProjectForm.controls['projectDueDate'].valid&&(EditProjectForm.controls['projectDueDate'].dirty|| EditProjectForm.controls['projectDueDate'].touched)"><i
+                                            class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please select Due date</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+
+                                <label for="">Upload file</label>
+                                <div class="file-upload">
+                                    <button class="file-upload-btn" type="button"
+                                        onclick="$('.file-upload-input').trigger( 'click' )">Click
+                                        here to upload</button>
+
+                                    <div class="image-upload-wrap">
+                                        <input class="file-upload-input" type='file'
+                                            onchange="readURL(this);" accept="image/*" />
+                                        <div class="drag-text">
+                                            <span>Drop files here or Click to upload</span>
+                                        </div>
+                                    </div>
+                                    <div class="file-upload-content">
+                                        <img class="file-upload-image" src="#"
+                                            alt="your image" />
+                                        <div class="image-title-wrap">
+                                            <button type="button" onclick="removeUpload()"
+                                                class="remove-image">Remove <span
+                                                    class="image-title">Uploaded
+                                                    Image</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-lg-3 pull-right">
-                          <input type="submit" value="Save Project" (click)="saveProjectClicked(EditProjectForm.value)"
-                            class="subbtn btn btn-primary">{{EditProjectForm.value|json}} </div>
-                      </div>
+                            <input type="submit" value="Save Project" (click)="saveProjectClicked(EditProjectForm.value)"
+                                class="subbtn btn btn-primary" [disabled]="!EditProjectForm.valid">
+                        </div>
+                    </div>
                     </div>
                   </div>
                 </div>

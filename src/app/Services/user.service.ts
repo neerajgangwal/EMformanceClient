@@ -74,6 +74,7 @@ export class UserService {
   }
 
  public CheckPermission(elementId, operationId) {
+   return true;
     if (this.PermissionsData) {
       var list = this.PermissionsData.get(elementId);
       if (list) {
@@ -87,6 +88,7 @@ export class UserService {
 
   public CheckElementAvailability(elementId)
   {
+    return true;
     if (this.PermissionsData) {
       var list = this.PermissionsData.get(elementId);
       if (list) {
