@@ -6,6 +6,7 @@ export class User
     Name:string;
     EmailId:string;
     CompanyId:number;
+    CompanyInfo:string;
     PortalName:string;
     Permissions:any[];
 }

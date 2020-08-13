@@ -44,18 +44,19 @@ export class LoginComponent implements OnInit {
     this.loginService.LoginFunction(data).subscribe(
       (res) => {
         if (res.errorCode == 0) {
-          this.loginService.getCompany(res.dataObj.email).subscribe(
+          this.loginService.getEmployee(res.dataObj.email, res.dataObj.companyInfo).subscribe(
             (res2) => {
               if (res2.errorCode == 0) {
                 this.loginService
-                  .getPermissions(res2.dataObj[0].portalName,res.dataObj.userId)
+                  .getPermissions(res.dataObj.companyInfo, res2.dataObj[0].employeeId)
                   .subscribe((res3) => {
                     if (res3.errorCode == 0) {
+
                       var user = new User();
-                      user.Id = res.dataObj.userId;
+                      user.Id = res2.dataObj[0].employeeId;
                       user.Name = res.dataObj.name;
                       user.EmailId = res.dataObj.email;
-                      user.PortalName = res2.dataObj[0].portalName;
+                      user.PortalName = res.dataObj.companyInfo;
                       user.Permissions = res3.dataObj.employeeElementMappingList;
                       console.log(res2);
                       console.log('test');

@@ -5436,9 +5436,19 @@ color:#fff;
     right: 0;
 }
 
+#task-team-description.open-slide {
+  right: 0;
+}
+
+
 #edit-team.open-slide {
   right: 0;
 }
+
+#edit-team-task.open-slide {
+  right: 0;
+}
+
 
 #edit-task.open-slide {
   right: 0;

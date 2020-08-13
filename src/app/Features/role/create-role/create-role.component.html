@@ -18,7 +18,8 @@
                         <div class="form-group">
                             <label for="">Add Role</label>
 
-                                <p-autoComplete formControlName="designationName"  placeholder="Enter Role Name" [suggestions]="FilteredRoleList" (completeMethod)="FilterRoles($event)"></p-autoComplete>
+                                <p-autoComplete
+                                 formControlName="designationName"  placeholder="Enter Role Name" [suggestions]="FilteredRoleList" (completeMethod)="FilterRoles($event)"></p-autoComplete>
 
                         </div>
                     </div>
@@ -62,3 +63,6 @@
             </div>
         </div>
     </div>
+    <style>
+
+    </style>

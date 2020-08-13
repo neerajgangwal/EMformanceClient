@@ -40,6 +40,7 @@ export class UserService {
     this._user.Id = user.Id;
     this._user.Name = user.Name;
     this._user.EmailId = user.EmailId;
+    this._user.CompanyInfo=user.PortalName;
     this._user.PortalName =
       'http://3.133.244.20:8080/' + user.PortalName + '/emf/';
     this.LoggedInUserPermissions(user.Permissions);
@@ -74,7 +75,6 @@ export class UserService {
   }
 
  public CheckPermission(elementId, operationId) {
-   return true;
     if (this.PermissionsData) {
       var list = this.PermissionsData.get(elementId);
       if (list) {
@@ -88,7 +88,6 @@ export class UserService {
 
   public CheckElementAvailability(elementId)
   {
-    return true;
     if (this.PermissionsData) {
       var list = this.PermissionsData.get(elementId);
       if (list) {

@@ -192,7 +192,7 @@ export class EditEmployeeComponent implements OnInit {
     Empobj.employeeMobileNo = data.employeeMobileNo;
     Empobj.employeePassword = data.employeePassword;
     Empobj.employeeProfileImg = data.employeeProfileImg;
-    Empobj.employeeUserId = data.employeeUserId;
+    Empobj.employeeUserId = data.employeeCode;
     Empobj.employeeId=data.employeeId
     Empobj.gender = data.gender;
     Empobj.employeeElementMappingList = [];

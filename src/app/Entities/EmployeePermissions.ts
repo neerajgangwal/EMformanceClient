@@ -5,7 +5,7 @@ export class EmployeePermissions
     departmentId:number;
     employeeFname:string;
     employeeMname:string;
-    employeeUserId:string;
+    employeeCode:string;
     employeeId:number;
     designationId:number;
     employeeEmail:string;

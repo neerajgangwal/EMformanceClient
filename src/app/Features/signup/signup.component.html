@@ -1,73 +1,105 @@
 <div class=" login-bg">
-    <div class="overlay">
-        <div class="sidebar">
-            <div class="sidebar-wrapper">
-                <ul class="nav">
-                </ul>
-            </div>
-        </div>
-        <div class="main-panel">
-            <div class="login" [ngClass]="{'extraMargin': ShowValidationMessage}">
-                <div class="welcome-heading">
-                    <h3 class="heading-1 signuplh">Start your Free Trial</h3>
-
-                    <div class=""><img src="assets/img/login-logo.png"></div>
-                </div>
-
-                <div class="clearfix"></div>
-                <div class="form-wrapper">
-                    <form *ngIf="ShowValidationMessage==false" [formGroup]="SignupForm"
-                        (ngSubmit)="OnSubmit(SignupForm.value)">
-                        <div class="form-group">
-                            <label for="">Name</label>
-                            <input type="text" class="form-control" placeholder="Enter Your Full Name"
-                                formControlName="name">
-                            <span class="error"
-                                *ngIf="!SignupForm.controls['name'].valid&&(SignupForm.controls['name'].dirty || SignupForm.controls['name'].touched)"><i
-                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
-                                provide Name</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Email</label>
-                            <input type="text" class="form-control" formControlName="email"
-                                placeholder="Enter Your Email Address">
-                            <span class="error"
-                                *ngIf="!SignupForm.controls['email'].valid&&(SignupForm.controls['email'].dirty || SignupForm.controls['email'].touched)"><i
-                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
-                                provide Email</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Password</label>
-                            <input type="password" class="form-control" formControlName="password"
-                                placeholder="Enter Your Password">
-                            <span class="error"
-                                *ngIf="!SignupForm.controls['password'].valid&&(SignupForm.controls['password'].dirty || SignupForm.controls['password'].touched)"><i
-                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
-                                provide Password</span>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="checkbox">
-                                <input id="checkbox1" type="checkbox">
-                                <label for="checkbox1">I agree to the <a href="#">Terms of services</a> and <a
-                                        href="#">Privacy Policy.</a>
-                                </label>
-                            </div><br>
-                            <input type="submit" name="submit" class="btn btn-primary" [disabled]="!SignupForm.valid">
-
-                        </div>
-
-                        <div class="frpass">I already have an account <a [routerLink]="['/login']">Login</a></div>
-                    </form>
-                    <div *ngIf="ShowValidationMessage==true" style="font-size: larger;text-align: center;font-weight: bolder;">
-                        <div>Successfully registered <br> please check your email for verification link</div>
-                        <div style="text-align: center;">
-                            <i class="fa fa-check-circle"
-                                style="font-size:60px;color: #007775;"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="overlay">
+    <div class="sidebar">
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+        </ul>
+      </div>
     </div>
+    <div class="main-panel">
+      <div class="login" [ngClass]="{'extraMargin': ShowValidationMessage}">
+        <div class="welcome-heading">
+          <h3 class="heading-1 signuplh">Start your Free Trial</h3>
+
+          <div class=""><img src="assets/img/login-logo.png"></div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="form-wrapper">
+          <form *ngIf="ShowValidationMessage==false" [formGroup]="SignupForm" (ngSubmit)="OnSubmit(SignupForm.value)">
+            <div class="form-group">
+              <label for="">Name</label>
+              <input type="text" class="form-control" placeholder="Enter Your Full Name" formControlName="name">
+              <span class="error"
+                *ngIf="!SignupForm.controls['name'].valid&&(SignupForm.controls['name'].dirty || SignupForm.controls['name'].touched)"><i
+                  class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
+                provide Name</span>
+            </div>
+            <div class="form-group">
+              <label for="">Email</label>
+              <input type="text" class="form-control" formControlName="email" placeholder="Enter Your Email Address">
+              <span class="error"
+                *ngIf="!SignupForm.controls['email'].valid&&(SignupForm.controls['email'].dirty || SignupForm.controls['email'].touched)"><i
+                  class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
+                provide Email</span>
+            </div>
+            <div class="form-group">
+              <label for="">Password</label>
+              <input type="password" class="form-control" formControlName="password" placeholder="Enter Your Password">
+              <span class="error"
+                *ngIf="!SignupForm.controls['password'].valid&&(SignupForm.controls['password'].dirty || SignupForm.controls['password'].touched)"><i
+                  class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
+                provide Password</span>
+            </div>
+            <div class="form-group">
+              <label for="">Company Name *</label>
+              <input type="text" class="form-control" placeholder="Enter Your Company Name" formControlName="companyName">
+              <span class="error"
+                *ngIf="!SignupForm.controls['companyName'].valid&&(SignupForm.controls['companyName'].dirty || SignupForm.controls['companyName'].touched)"><i
+                  class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
+                provide company name</span>
+            </div>
+            <div class="form-group">
+              <label for="">Company Website *</label>
+              <input type="text" class="form-control" placeholder="Enter Your Portal Name" formControlName="portalName">
+              <span class="error"
+                *ngIf="!SignupForm.controls['portalName'].valid&&(SignupForm.controls['portalName'].dirty || SignupForm.controls['portalName'].touched)"><i
+                  class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
+                provide valid Portal Name</span>
+            </div>
+            <div class="form-group">
+              <label for="">Industry *</label>
+              <select class="form-control" formControlName="industryType">
+                <option value="">Select industry</option>
+                <option value="IT Services">IT Services</option>
+                <option value="Finance">Finance</option>
+                <option value="Manufacturing">Manufacturing</option>
+                <option value="Hospitality">Hospitality</option>
+                <option value="Health Care">Health Care</option>
+              </select>
+              <span
+                *ngIf="!SignupForm.controls['industryType'].valid&&(SignupForm.controls['industryType'].dirty|| SignupForm.controls['industryType'].touched)"
+                class="error"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
+                select Industy type</span>
+            </div>
+            <div class="form-group">
+              <label for="">Office Phone No *</label>
+              <input type="text" class="form-control" placeholder="Enter Your Mobile Number"
+                formControlName="adminMobile">
+              <span
+                *ngIf="!SignupForm.controls['adminMobile'].valid&&(SignupForm.controls['adminMobile'].dirty|| SignupForm.controls['adminMobile'].touched)"
+                class="error"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
+                provide valid phone No.</span>
+            </div>
+            <div class="form-group">
+              <div class="checkbox">
+                <input id="checkbox1" type="checkbox" formControlName="termsCheckBox" >
+                <label for="checkbox1">I agree to the <a href="#">Terms of services</a> and <a href="#">Privacy
+                    Policy.</a>
+                </label>
+              </div><br>
+              <input type="submit" name="submit" class="btn btn-primary" [disabled]="!SignupForm.valid || !SignupForm.controls['termsCheckBox'].value">
+            </div>
+            <div class="frpass">I already have an account <a [routerLink]="['/login']">Login</a></div>
+          </form>
+          <div *ngIf="ShowValidationMessage==true" style="font-size: larger;text-align: center;font-weight: bolder;">
+            <div>Successfully registered <br> please check your email for verification link</div>
+            <div style="text-align: center;">
+              <i class="fa fa-check-circle" style="font-size:60px;color: #007775;"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -8,6 +8,7 @@ import { EmployeeRoleElement } from 'src/app/Entities/EmployeeRoleElement';
 import { ElementOperation } from 'src/app/Entities/ElementOperation';
 import { RolePermissions } from 'src/app/Entities/RolePermissions';
 import { RoleElement } from 'src/app/Entities/RoleElement';
+import { UserService } from 'src/app/Services/user.service';
 
 @Component({
   selector: 'app-create-employee',
@@ -23,7 +24,10 @@ export class CreateEmployeeComponent implements OnInit {
   RolePermissions: RoleElement[] = [];
   PermissionsData: Map<number, number[]>
 
-  constructor(private layoutService: LayoutService, private employeeService: EmployeeService, private fb: FormBuilder, private messageService: MessageService) { }
+  constructor(private layoutService: LayoutService, private employeeService: EmployeeService, private fb: FormBuilder,
+    private messageService: MessageService,
+    private userService: UserService
+  ) { }
 
   CreateHashMap(data) {
     this.PermissionsData = new Map<number, number[]>();
@@ -69,9 +73,8 @@ export class CreateEmployeeComponent implements OnInit {
 
 
   InitializeForm = function () {
-    if(this.EmployeeForm)
-    {
-      var employee=this.EmployeeForm.value;
+    if (this.EmployeeForm) {
+      var employee = this.EmployeeForm.value;
       this.EmployeeForm = this.fb.group({
         designationId: [employee.designationId, Validators.required],
         departmentId: [employee.departmentId, Validators.required],
@@ -86,7 +89,7 @@ export class CreateEmployeeComponent implements OnInit {
         employeeElementMappingList: this.Elements
       });
     }
-    else{
+    else {
       this.EmployeeForm = this.fb.group({
         designationId: ['', Validators.required],
         departmentId: ['', Validators.required],
@@ -101,7 +104,7 @@ export class CreateEmployeeComponent implements OnInit {
         employeeElementMappingList: this.Elements
       });
     }
-    
+
     this.employeeService.GetDepartments().subscribe((res) => {
       this.DepartmentList = res.dataObj;
       console.log(this.DepartmentList);
@@ -176,6 +179,19 @@ export class CreateEmployeeComponent implements OnInit {
         this.EmployeeForm.patchValue({
           gender: 'Male'
         });
+        var signupData = {
+          userRole: "NON-ADMIN",
+          companyInfo: this.userService.LoggedInUser.CompanyInfo,
+          name: data.employeeFname,
+          password: data.employeePassword,
+          email: data.employeeEmail
+        }
+        this.employeeService.CreateSignUp(signupData).subscribe((res2) => {
+          if (res2.errorCode == 0) {
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Successfully created employee signup' });
+          }
+        })
+
       }
       else {
         this.messageService.add({ severity: 'error', summary: 'Failed', detail: res.errorMsg });
@@ -196,7 +212,7 @@ export class CreateEmployeeComponent implements OnInit {
     Empobj.employeeMobileNo = data.employeeMobileNo;
     Empobj.employeePassword = data.employeePassword;
     Empobj.employeeProfileImg = data.employeeProfileImg;
-    Empobj.employeeUserId = data.employeeId;
+    Empobj.employeeCode = data.employeeId;
     Empobj.gender = data.gender;
     Empobj.employeeElementMappingList = [];
 
@@ -218,7 +234,7 @@ export class CreateEmployeeComponent implements OnInit {
 
   resetForm = function () {
     this.EmployeeForm.reset();
-    this.PermissionsData=null;
+    this.PermissionsData = null;
     this.InitializeForm();
   }
   RadioButtonClick = function (data) {

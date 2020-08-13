@@ -80,7 +80,7 @@ getDepartment=function()
      projectCreatedBy:[this.Details["projectCreatedBy"],Validators.required],
      projectCreatedDate:[this.Details["projectCreatedDate"],Validators.required],
      projectUpdatedDate:[date,Validators.required],
-
+     departmentId:[this.Details["departmentId"]]
    })
   }
   public FilterData = function (event) {

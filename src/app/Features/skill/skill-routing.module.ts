@@ -5,7 +5,7 @@ import { SkillComponent } from './skill.component';
 import { MySkillComponent } from './my-skill/my-skill.component';
 import { EvaluateSkillComponent } from './evaluate-skill/evaluate-skill.component';
 
-const routes: Routes = [{ path: 'MySkill', component: MySkillComponent,data :{ Title:'Team List' ,ShowHeader:true,ShowNavBar:true} },
+const routes: Routes = [{ path: 'MySkill', component: MySkillComponent,data :{ Title:'My Skills' ,ShowHeader:true,ShowNavBar:true} },
 { path: 'EvaluateSkill', component: EvaluateSkillComponent,data :{ Title:'Team List' ,ShowHeader:true,ShowNavBar:true} }
 ];
 

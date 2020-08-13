@@ -76,4 +76,9 @@ export class EmployeeService {
     GetAllTheSkills=function(){
       return this.httpClient.post(this.userService.LoggedInUser.PortalName+ environment.getSkill,{});
     }
+
+    CreateSignUp=function(data)
+    {
+        return this.httpClient.post(environment.url+environment.signup,data);
+    }
 }

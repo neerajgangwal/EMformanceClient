@@ -6,6 +6,8 @@
 export const environment = {
   production: false,
   url:"http://3.133.244.20:8080/evaluatemyperformance/emf/",
+  urlPrefix:"http://3.133.244.20:8080/",
+  urlSuffix:"/emf/",
   login:"login",
   addUser:"addUser",
   employeeData:"getEmployeeList",

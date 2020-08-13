@@ -24,4 +24,9 @@ export class LoginService {
   getPermissions=function(portalName,id){
     return this.httpClient.get( 'http://3.133.244.20:8080/' + portalName + '/emf/'+environment.getEmployeeElementsMapping+id);
   }
+
+  getEmployee=function(email,portalName)
+  {
+    return this.httpClient.post(environment.urlPrefix+portalName+environment.urlSuffix+environment.getEmployeeData,{employeeEmail:email});
+  }
 }

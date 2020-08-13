@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+/* .p-autocomplete
+{
+  height: 46px;
+  padding: 10px 10px 10px 16px;
+  color: #57586E;
+  border: 1px solid #607D8B;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: #fff;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+} */
+
+.ui-autocomplete-input.ng-star-inserted {
+  height: 46px;
+  padding: 10px 10px 10px 16px;
+  color: #57586E;
+  border: 1px solid #607D8B;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: #fff;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}

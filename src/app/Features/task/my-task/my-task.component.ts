@@ -204,10 +204,10 @@ export class MyTaskComponent implements OnInit {
 
   editIconClicked(data)
   {
-    console.log("snehan"+data)
-    this.InitilizeEditTaskForm(data);
     $('#edit-task').addClass('open-slide');
     $('body').addClass('gray-over');
+    console.log("snehan"+data)
+    this.InitilizeEditTaskForm(data);
     console.log("edit icon "+data);
   }
 

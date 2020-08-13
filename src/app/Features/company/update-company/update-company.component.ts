@@ -32,7 +32,7 @@ export class UpdateCompanyComponent implements OnInit {
         companyName: ['', Validators.required],
         portalName: ['', [Validators.required,Validators.pattern('(https?://)([\\da-z.-]+)')]],
         industryType: ['', Validators.required],
-        adminMobile: [''],
+        adminMobile: ['', Validators.compose([Validators.required, Validators.minLength(10),Validators.pattern('[0-9]+')])],
         adminEmail: [email],
         companyDomain: [''],
         contactPerson: [id],

@@ -20,4 +20,23 @@ export class SignupService {
     return this.httpClient.get(this.url+environment.emailVerification+token);
   }
 
+  addCompany=function(data)
+  {
+    return this.httpClient.post(environment.url+environment.addCompany,data);
+  }
+
+  CreateEmployee=function(company,data)
+  {
+    return this.httpClient.post(environment.urlPrefix+company+environment.urlSuffix+environment.AddEmployee,data)
+  }
+  getOperations=function(company)
+  {
+    return this.httpClient.get(environment.urlPrefix+company+environment.urlSuffix+environment.getOperations);
+  }
+
+  getElements=function(company)
+  {
+    return this.httpClient.get(environment.urlPrefix+company+environment.urlSuffix+environment.getElements);
+  }
+
 }

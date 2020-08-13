@@ -209,13 +209,16 @@
                                             </div>
                                             <div class="media-body">
                                                 <div class="row">
-                                                    <div class="col-md-4">
-                                                        <h4 class="media-heading">{{GetEmployeeEmailBasedOnId(data.feedbackFromId)}}</h4>
+                                                    <div class="col-md-4" *ngIf="data.blindrequest==null || data.blindRequest==false">
+                                                        <h4 class="media-heading">{{GetEmployeeNameBasedOnId(data.feedbackFromId)}}</h4>
                                                         <p class="gray-text">{{getDesignationNameForEmployee(data.feedbackFromId)}}</p>
                                                         <p><a
                                                                 href="mailto:angeljohnson@gmail.com">{{GetEmployeeEmailBasedOnId(data.feedbackFromId)}}</a>
                                                         </p>
                                                     </div>
+                                                    <div class="col-md-4" *ngIf="data.blindRequest==true">
+                                                      <h4 class="media-heading">Anonymous</h4>
+                                                  </div>
                                                     <div class="col-md-7">
                                                         <p>{{data.description}}</p>
                                                     </div>
