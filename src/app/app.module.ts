@@ -10,11 +10,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-
+import {PipesModule} from '../app/Shared/pipes/pipes.module';
 @NgModule({
   declarations: [
     AppComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -24,7 +23,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     BrowserAnimationsModule,
     EvaluateModule,
     ToastModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    PipesModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

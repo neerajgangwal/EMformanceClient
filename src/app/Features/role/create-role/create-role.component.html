@@ -17,8 +17,9 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="">Add Role</label>
-                            <input type="text" class="form-control" formControlName="designationName"
-                                placeholder="Enter Role Name">
+
+                                <p-autoComplete formControlName="designationName"  placeholder="Enter Role Name" [suggestions]="FilteredRoleList" (completeMethod)="FilterRoles($event)"></p-autoComplete>
+
                         </div>
                     </div>
 

@@ -27,7 +27,7 @@
             </div>
             <div class="emlist">
                 <ul class="team-member team-listvew">
-                    <li class="mytask-heading"> 
+                    <li class="mytask-heading">
                         <ul>
                             <li>
                                 Task Name
@@ -39,15 +39,15 @@
 
 
                     </li>
-                    <li class="mytask-heading list-content" *ngFor="let data of SearchResults"> 
+                    <li class="mytask-heading list-content" *ngFor="let data of SearchResults">
                          <ul>
                             <li>{{data.taskHeading}}</li>
                             <li><span class="prioritybox redcolor">{{data.taskPriority}}</span></li>
                             <li>{{data.taskCreatedDate}}</li>
                             <li>
-                                <i class="icon-View" (click)="viewIconClicked(data.taskId)"></i>
-                                <i class="icon-edit" (click)="editIconClicked(data)"></i>
-                                <i class="icon-Delete" (click)="DeleteTeamIcon(data)"></i>
+                                <i class="icon-View" *ngIf="userservice.CheckPermission(userservice.Elements.Task,userservice.Operations.View)" (click)="viewIconClicked(data.taskId)"></i>
+                                <i class="icon-edit" *ngIf="userservice.CheckPermission(userservice.Elements.Task,userservice.Operations.Edit)" (click)="editIconClicked(data)"></i>
+                                <i class="icon-Delete" *ngIf="userservice.CheckPermission(userservice.Elements.Task,userservice.Operations.Delete)" (click)="DeleteTeamIcon(data)"></i>
                             </li>
                         </ul>
 
@@ -75,7 +75,7 @@
                 <span class="error" *ngIf="!createTaskForm.controls['projectId'].valid&&(createTaskForm.controls['projectId'].dirty|| createTaskForm.controls['projectId'].touched)"><i
                                     class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please select
                                 project </span>
-            </div>            
+            </div>
             <div class="form-group">
                 <label for="">Task title</label>
                 <input type="text" class="form-control" placeholder="Enter task title here" formControlName="taskHeading">
@@ -96,9 +96,9 @@
                 <label for="">Select Priority</label>
                 <select name="" id="" class="form-control" formControlName="taskPriority">
                     <option value="" selected>Select Priority</option>
-                    <option value="Low  (Low,Medium,High)">Low</option> 
-                    <option value="Medium  (Low,Medium,High)">Medium</option> 
-                    <option value="High  (Low,Medium,High)">High</option>                                                           
+                    <option value="Low  (Low,Medium,High)">Low</option>
+                    <option value="Medium  (Low,Medium,High)">Medium</option>
+                    <option value="High  (Low,Medium,High)">High</option>
 
                 </select>
             </div>
@@ -137,7 +137,7 @@
                     </div>
                 </div>
             </div>
-            <input type="submit" value="CREATE TASK" class="team btn btn-primary" (click)="createTaskSave(createTaskForm.value)" [disabled]="!createTaskForm.valid">
+            <input type="submit" value="CREATE TASK" class="team btn btn-primary" (click)="createTaskSave(createTaskForm.value)" >
         </form>
     </div>
 </div>
@@ -155,7 +155,7 @@
                     <option *ngFor="let project of ProjectsList" value="{{project.projectId}}">
                         {{project.projectName}}</option>
                 </select>
-            </div>           
+            </div>
             <div class="form-group">
                 <label for="">Task title</label>
                 <input type="text" class="form-control" placeholder="Enter task title here" formControlName="taskHeading">
@@ -167,9 +167,9 @@
             <div class="form-group">
                 <label for="">Select Priority</label>
                 <select name="" id="" class="form-control" formControlName="taskPriority">
-                    <option value="Low  (Low,Medium,High)">Low</option> 
-                    <option value="Medium  (Low,Medium,High)">Medium</option> 
-                    <option value="High  (Low,Medium,High)">High</option>                                                           
+                    <option value="Low  (Low,Medium,High)">Low</option>
+                    <option value="Medium  (Low,Medium,High)">Medium</option>
+                    <option value="High  (Low,Medium,High)">High</option>
 
                 </select>
             </div>

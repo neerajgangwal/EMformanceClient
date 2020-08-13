@@ -42,7 +42,7 @@ export class TeamTaskComponent implements OnInit {
 
       console.log(this.TaskList);
       this.SearchResults=this.TaskList;
-      this.FilterKey="taskHeading";  
+      this.FilterKey="taskHeading";
       this.taskservice.Getprojects().subscribe(res => {
         if (res.errorCode == 0) {
           this.ProjectsList = res.dataObj;
@@ -58,7 +58,7 @@ export class TeamTaskComponent implements OnInit {
     $(this).parent().removeClass('open-slide');
     $('body').removeClass('gray-over');
   });
-  
+
   }
   InitialiseCreateTaskForm()
   {
@@ -74,8 +74,8 @@ export class TeamTaskComponent implements OnInit {
       taskAttachment:['',Validators.required],
       taskPriority:['',Validators.required],
       taskStatus:['',Validators.required]
-    }) 
-      
+    })
+
   }
   InitilizeEditTaskForm=function(data)
   {
@@ -92,7 +92,7 @@ export class TeamTaskComponent implements OnInit {
       taskAttachment:[data.taskAttachment],
       taskPriority:[data.taskPriority],
       taskStatus:[data.taskStatus]
-    }) 
+    })
     }
 
   createTask()
@@ -172,7 +172,7 @@ export class TeamTaskComponent implements OnInit {
     {
       if(res.errorCode==0)
       {
-       
+
       this.TaskList.splice(this.TaskList.indexOf(data),1);
       this.SearchResults = this.TaskList;
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Team deleted' });
@@ -186,7 +186,7 @@ export class TeamTaskComponent implements OnInit {
       this.messageService.add({ severity: 'error', summary: 'Failed', detail: "Something went wrong" });
     });
   }
-  
+
   editIconClicked(data)
   {
     console.log("snehan"+data)

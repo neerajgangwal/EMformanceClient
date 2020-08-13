@@ -20,7 +20,7 @@ export class UpdateCompanyComponent implements OnInit {
                this.ngOnInit();
              }
       });
-  
+
    }
 
   ngOnInit() {

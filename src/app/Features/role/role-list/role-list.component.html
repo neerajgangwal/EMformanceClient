@@ -24,9 +24,9 @@
                         <ul>
                             <li>{{role.designationName}}</li>
                             <li>
-                                <i class="icon-View" (click)="viewRoleClicked(role)"></i>
-                                <i class="icon-edit" (click)="editIconClicked(role.designationId)"></i>
-                                <i class="icon-Delete" (click)="deleteIconClicked(role)"></i>
+                                <i class="icon-View" *ngIf="userService.CheckPermission(userService.Elements.Role,userService.Operations.View)" (click)="viewRoleClicked(role)"></i>
+                                <i class="icon-edit" *ngIf="userService.CheckPermission(userService.Elements.Role,userService.Operations.Edit)" (click)="editIconClicked(role.designationId)"></i>
+                                <i class="icon-Delete" *ngIf="userService.CheckPermission(userService.Elements.Role,userService.Operations.Delete)" (click)="deleteIconClicked(role)"></i>
                             </li>
                         </ul>
                     </li>
@@ -42,7 +42,7 @@
     <div class="slide-content">
         <h3>Role Description</h3>
         <ul>
-            <li *ngFor="let element of ViewPermissions">{{GetElementName(element.elementId)}}
+            <li *ngFor="let element of ViewPermissions"><b>{{GetElementName(element.elementId)}}</b>
                 <ul>
                     <li *ngFor="let operation of element.roleElementOprationList">
                         {{GetOperationName(operation.operationId)}}</li>

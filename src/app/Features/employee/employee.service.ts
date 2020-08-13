@@ -6,7 +6,7 @@ import { UserService } from 'src/app/Services/user.service';
 export class EmployeeService {
 
   constructor(private httpClient:HttpClient,private userService:UserService) { }
-  
+
   GetEmployeeData=function()
   {
     return this.httpClient.get(this.userService.LoggedInUser.PortalName+environment.employeeData);
@@ -69,4 +69,11 @@ export class EmployeeService {
   {
     return this.httpClient.get(this.userService.LoggedInUser.PortalName+environment.getEmployeeElementsMapping+id);
   }
+  GetSkillsMappedToEmployee=function(employeeIdData)
+    {
+      return this.httpClient.post(this.userService.LoggedInUser.PortalName+ environment.getEmployeeSkill,{employeeId:employeeIdData});
+    }
+    GetAllTheSkills=function(){
+      return this.httpClient.post(this.userService.LoggedInUser.PortalName+ environment.getSkill,{});
+    }
 }

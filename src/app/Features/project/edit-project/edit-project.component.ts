@@ -34,11 +34,11 @@ export class EditProjectComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
+
     this.SearchService.SetSource(null);
     this.route.queryParamMap.subscribe(params => {
-      var id = params.get("id");     
-   
+      var id = params.get("id");
+
       this.projectservice.GetProjectListById(id).subscribe((res)=>
       {
         if(res.errorCode==0)
@@ -49,8 +49,8 @@ export class EditProjectComponent implements OnInit {
         }
       });
     });
-  
-  
+
+
 }
 
   initiliseProjectForm=function()
@@ -60,6 +60,7 @@ export class EditProjectComponent implements OnInit {
      projectId:[this.Details["projectId"],Validators.required],
      projectName:[this.Details["projectName"],Validators.required],
      projectPriority:[this.Details["projectPriority"],Validators.required],
+     projectStatus:[this.Details["projectStatus"],Validators.required],
      projectDescription:[this.Details["projectDescription"],Validators.required],
      projectAttachment:[this.Details["projectAttachment"],Validators.required],
      projectStartDate:[this.Details["projectStartDate"],Validators.required],
@@ -67,7 +68,7 @@ export class EditProjectComponent implements OnInit {
      projectCreatedBy:[this.Details["projectCreatedBy"],Validators.required],
      projectCreatedDate:[this.Details["projectCreatedDate"],Validators.required],
      projectUpdatedDate:[date,Validators.required],
-     
+
    })
   }
   public FilterData = function (event) {
@@ -90,7 +91,7 @@ export class EditProjectComponent implements OnInit {
     this.CreateProjectForm.reset();
   }
 
- 
+
   saveProjectClicked=function(data)
   {
     console.log("data "+data.projectId)
@@ -106,7 +107,7 @@ export class EditProjectComponent implements OnInit {
       console.log(error);
       this.messageservice.add({ severity: 'error', summary: "Error with the api , please try again" });
     });
-    
+
   }
 
 

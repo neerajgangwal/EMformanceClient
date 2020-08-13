@@ -10,22 +10,22 @@
                 </div>
                 <div class="dropdown pull-right">
                     <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by Status<b
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Filter by Status<b
                             class="caret"></b></button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="javascript:void(0);">Action</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Another action</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
+                        <a class="dropdown-item" href="javascript:void(0);" (click)="uiStatusFilter='Created'">Created</a>
+                        <a class="dropdown-item" href="javascript:void(0);" (click)="uiStatusFilter='Active'">Active</a>
+                        <a class="dropdown-item" href="javascript:void(0);" (click)="uiStatusFilter='Completed'">Completed</a>
                     </div>
                 </div>
                 <div class="dropdown pull-right" style="margin-right: 20px;">
                     <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by Priority<b
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Filter by Priority<b
                             class="caret"></b></button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="javascript:void(0);">Action</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Another action</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
+                        <a class="dropdown-item" href="javascript:void(0);" (click)="uiPriorityFilter='Low'">Low</a>
+                        <a class="dropdown-item" href="javascript:void(0);" (click)="uiPriorityFilter='Medium'">Medium</a>
+                        <a class="dropdown-item" href="javascript:void(0);" (click)="uiPriorityFilter='High'">High</a>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -51,7 +51,7 @@
                                     </tbody>
                                 </table>
                             </li>
-                            <li  *ngFor="let project of SearchResults">
+                            <li  *ngFor="let project of SearchResults | dataFilter:'projectPriority':uiPriorityFilter|dataFilter:'projectStatus':uiStatusFilter">
                                 <table class="table">
                                     <tbody>
                                         <tr>
@@ -73,15 +73,16 @@
                                             <td style="width: 92px;"><span
                                                     class="prioritybox completedcolor">{{project.projectPriority}}</span></td>
                                             <td style="width: 110px;">
-                                                <span class="statusbox greencolor">Completed</span>
+                                                <span class="statusbox greencolor">{{project.projectStatus}}</span>
                                             </td>
-                                            <td style="width: 180px;" class="gray-text act"> <i class="icon-View" (click)="ViewIconClicked(project)"></i>
-                                                <i class="icon-edit" (click)="editIconClicked(project.projectId)"></i>
-                                                <i class="icon-Delete" (click)="deleteIconClicked(project)"></i></td>
+                                            <td style="width: 180px;" class="gray-text act">
+                                                <i class="icon-View" *ngIf="userService.CheckPermission(userService.Elements.Project,userService.Operations.View)" (click)="ViewIconClicked(project)"></i>
+                                                <i class="icon-edit" *ngIf="userService.CheckPermission(userService.Elements.Project,userService.Operations.Edit)" (click)="editIconClicked(project.projectId)"></i>
+                                                <i class="icon-Delete" *ngIf="userService.CheckPermission(userService.Elements.Project,userService.Operations.Delete)" (click)="deleteIconClicked(project)"></i></td>
                                         </tr>
                                     </tbody>
                                 </table>
-                            </li>                     
+                            </li>
 
                         </ul>
                     </div>

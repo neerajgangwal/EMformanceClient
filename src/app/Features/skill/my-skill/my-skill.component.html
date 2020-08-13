@@ -10,8 +10,9 @@
                                 <ng-container [formGroup]="skill">
                                     <div class="col-md-4">
                                         <label for="">Enter you Skills</label>
-                                        <input type="text" class="form-control" placeholder="Skill Name e.g. HTML"
-                                            formControlName="skillName" [attr.disabled]="skill.controls.mode.value!='edit' ? '' : null" />
+                                             <p-autoComplete formControlName="skillName" placeholder="Skill Name e.g. HTML" [suggestions]="FilteredSkillsList" (completeMethod)="FilterSkills($event)" [disabled]="skill.controls.mode.value!='edit'" ></p-autoComplete>
+                                            <span class="error" *ngIf="!skill.controls['skillName'].valid&&(skill.controls['skillName'].dirty|| skill.controls['skillName'].touched)"><i
+                                              class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide skill name</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">Enter your Skills Proficiency</label><br><br>

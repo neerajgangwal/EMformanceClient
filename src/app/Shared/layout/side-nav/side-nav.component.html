@@ -1,14 +1,14 @@
 <div class="sidemenu">
     <a href="#" class="brand-logo"><img src="assets/img/logooo.png" alt=""></a>
     <ul class="nav navbar-sidemenu">
-        <li>
+        <li *ngIf="userService.CheckElementAvailability(userService.Elements.Department)">
             <a [routerLink]="['/department/create']">
                 <i class="icon-Department"></i>
                 Department
             </a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="userService.CheckElementAvailability(userService.Elements.Role)">
             <a class="nav-link" href="#">
                 <i class="icon-Feedback"></i>
                 Role
@@ -16,12 +16,12 @@
             </a>
             <div class="collapse">
                 <div class="collapse-inner">
-                    <a class="collapse-item" [routerLink]="['/role/create']">Create Role</a>
-                    <a class="collapse-item" [routerLink]="['/role/list']">Role List</a>
+                    <a class="collapse-item" *ngIf="userService.CheckPermission(userService.Elements.Role,userService.Operations.Create)" [routerLink]="['/role/create']">Create Role</a>
+                    <a class="collapse-item" *ngIf="userService.CheckPermission(userService.Elements.Role,userService.Operations.Delete)||userService.CheckPermission(userService.Elements.Role,userService.Operations.View)||userService.CheckPermission(userService.Elements.Role,userService.Operations.Edit)" [routerLink]="['/role/list']">Role List</a>
                 </div>
             </div>
         </li>
-		 <li class="nav-item">
+		 <li class="nav-item" *ngIf="userService.CheckElementAvailability(userService.Elements.Employee)">
             <a class="nav-link">
                 <i class="icon-Employee"></i>
                 Employee
@@ -29,8 +29,8 @@
             </a>
             <div class="collapse">
                 <div class="collapse-inner">
-                    <a class="collapse-item" [routerLink]="['/employee/create']">Create Employee</a>
-                    <a class="collapse-item" [routerLink]="['/employee/list']">Employee List</a>
+                    <a class="collapse-item" *ngIf="userService.CheckPermission(userService.Elements.Employee,userService.Operations.Create)" [routerLink]="['/employee/create']">Create Employee</a>
+                    <a class="collapse-item" *ngIf="userService.CheckPermission(userService.Elements.Employee,userService.Operations.Delete)||userService.CheckPermission(userService.Elements.Employee,userService.Operations.View)||userService.CheckPermission(userService.Elements.Employee,userService.Operations.Edit)" [routerLink]="['/employee/list']">Employee List</a>
                 </div>
             </div>
         </li>
@@ -40,7 +40,7 @@
                 Team
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="userService.CheckElementAvailability(userService.Elements.Project)">
             <a class="nav-link" href="#">
                 <i class="icon-Projects"></i>
                 Projects
@@ -48,12 +48,12 @@
             </a>
             <div class="collapse">
                 <div class="collapse-inner">
-                    <a class="collapse-item" [routerLink]="['/project/create']">Create Project</a>
-                    <a class="collapse-item" [routerLink]="['/project/list']">Project List</a>
+                    <a class="collapse-item" *ngIf="userService.CheckPermission(userService.Elements.Project,userService.Operations.Create)" [routerLink]="['/project/create']">Create Project</a>
+                    <a class="collapse-item" *ngIf="userService.CheckPermission(userService.Elements.Project,userService.Operations.Delete)||userService.CheckPermission(userService.Elements.Project,userService.Operations.View)||userService.CheckPermission(userService.Elements.Project,userService.Operations.Edit)"[routerLink]="['/project/list']">Project List</a>
                 </div>
             </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="userService.CheckElementAvailability(userService.Elements.Task)">
             <a class="nav-link" href="#">
                 <i class="icon-list"></i>
                 Tasks
@@ -62,11 +62,11 @@
             <div class="collapse">
                 <div class="collapse-inner">
                     <a class="collapse-item" [routerLink]="['/task/my-task']">My Task</a>
-                    <a class="collapse-item" [routerLink]="['/task/team-task']">Team Task</a>
+                    <a class="collapse-item"  [routerLink]="['/task/team-task']">Team Task</a>
                 </div>
             </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="userService.CheckElementAvailability(userService.Elements.Goals)">
             <a class="nav-link" href="#">
                 <i class="icon-Goals"></i>
                 Goals
@@ -79,7 +79,7 @@
                 </div>
             </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="userService.CheckElementAvailability(userService.Elements.Department)">
             <a class="nav-link" href="#">
                 <i class="icon-Evaluate"></i>
                 Evaluate Performance
@@ -92,7 +92,7 @@
                 </div>
             </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" class="nav-item" *ngIf="userService.CheckElementAvailability(userService.Elements.Feedback)" >
             <a class="nav-link" href="#">
                 <i class="icon-Feedback"></i>
                 Feedback
@@ -105,7 +105,7 @@
                 </div>
             </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="userService.CheckElementAvailability(userService.Elements.Skills)">
             <a class="nav-link" href="#">
                 <i class="icon-skill"></i>
                 Skills
@@ -118,7 +118,7 @@
                 </div>
             </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="userService.CheckElementAvailability(userService.Elements.Exit_Interview)">
             <a class="nav-link" href="#">
                 <i class="icon-list"></i>
                 Exit Interview

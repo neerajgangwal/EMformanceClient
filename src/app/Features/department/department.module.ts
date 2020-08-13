@@ -12,13 +12,15 @@ import {HttpClientModule} from '@angular/common/http';
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 @NgModule({
   declarations: [DepartmentComponent, CreateDepartmentComponent],
   imports: [
     CommonModule,
     DepartmentRoutingModule,
     ReactiveFormsModule,HttpClientModule,ToastModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    AutoCompleteModule
   ],
   providers:[DepartmentService,
     MessageService]

@@ -10,7 +10,7 @@ import { HttpClientModule } from "@angular/common/http";
 import {ReactiveFormsModule} from '@angular/forms';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { EditProjectComponent } from './edit-project/edit-project.component';
-
+import {PipesModule} from '../../Shared/pipes/pipes.module';
 
 
 
@@ -18,7 +18,7 @@ import { EditProjectComponent } from './edit-project/edit-project.component';
   declarations: [ProjectComponent, ProjectListComponent, CreateProjectComponent, EditProjectComponent],
   imports: [
     CommonModule,
-    ProjectRoutingModule,HttpClientModule,ReactiveFormsModule
+    ProjectRoutingModule,HttpClientModule,ReactiveFormsModule,PipesModule
   ],providers:[
     ProjectService
   ]

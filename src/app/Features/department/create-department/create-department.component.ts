@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DepartmentService } from '../department.service'
 import { LayoutService } from '../../../Services/layout.service'
 import { MessageService } from 'primeng/api';
+import { UserService } from 'src/app/Services/user.service';
 import * as $ from 'jquery';
 
 
@@ -19,11 +20,23 @@ export class CreateDepartmentComponent implements OnInit {
   loading: true;
   FilterKey: string;
   EditForm:FormGroup;
+  DepartmentsList:any[]=[{"departmentName":"IT Services"},
+  {"departmentName":"Human Resource"},
+  {"departmentName":"Finance"},
+  {"departmentName":"Production"},
+  {"departmentName":"Security"},
+  {"departmentName":"Talent Acquisition"},
+  {"departmentName":"Marketing"},
+  {"departmentName":"Sales"},
+  {"departmentName":"Business Development"}]
+
+  FilteredDepartmentsList:any[];
 
   constructor(private fb: FormBuilder,
     private AddDept: DepartmentService,
     private DeleteDept: DepartmentService,
     private messageService: MessageService,
+    public userService:UserService
   ) { }
 
   ngOnInit(): void {
@@ -43,6 +56,8 @@ export class CreateDepartmentComponent implements OnInit {
     });
 
   }
+
+
 
   initialiseEditForm=function(data)
   {
@@ -89,8 +104,9 @@ export class CreateDepartmentComponent implements OnInit {
   {
     this.initialiseEditForm(data);
     console.log("data "+data)
-    $('body').addClass('gray-over');
     $('#edit-team').addClass('open-slide');
+    $('body').addClass('gray-over');
+
   }
   editSaveButtonClicked=function(data)
   {
@@ -109,7 +125,7 @@ export class CreateDepartmentComponent implements OnInit {
           }
         }
         this.SearchResults = this.DepartmentList
-        this.messageService.add({ severity: 'success', summary: 'department updated', detail: 'department created successfully' });
+        this.messageService.add({ severity: 'success', summary: 'department updated', detail: 'department edited successfully' });
         this.ResetForm();
       }
       else {
@@ -154,5 +170,19 @@ export class CreateDepartmentComponent implements OnInit {
     }
     )
   }
+
+  FilterDepartments(event) {
+    let filtered : any[] = [];
+    let query = event.query;
+    for(let i = 0; i < this.DepartmentsList.length; i++) {
+        let department = this.DepartmentsList[i];
+        if (department.departmentName.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            filtered.push(department.departmentName);
+        }
+    }
+
+    this.FilteredDepartmentsList = filtered;
+}
+
 
 }

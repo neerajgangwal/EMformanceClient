@@ -1,154 +1,170 @@
 <div class="main-panel">
-    <div class="content" style="background-color:#DAEBEB;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-4 pull-right"><input type="submit" value="Create Feedback Request"  (click)="createButtonClicked()"
-                            class="team btn btn-primary add-feedback"></div>
-                </div>
-           </div>
-            <div class="form-container">
-                <div class="form-section">
-                    <div class="col-lg-12 permission-heading">
-                        <h4 style="font-size: 20px;font-weight:600">To see the project wise feedback select a project or
-                            simply select a date</h4>
-                    </div>
-                    <div class="oradd">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-
-                                <label style="font-size: 16px;" for="">Select Project</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="">Select Project</option>
-                                    <option value="">Project Manager</option>
-                                    <option value="">Designer</option>
-                                    <option value="">Designer</option>
-
-                                </select>
-
-
-                            </div>
-                        </div>
-                        <span>or</span>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-
-                                <label style="font-size: 16px;" for="">Select Date</label>
-                                <input type="date" class="form-control">
-
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-            <div id="requested-feedback" class="tab-pane fade active in">
-                <div class="table-full-width">
-                    <div class="clearfix">
-                        <ul class="team-member">
-                            <li class="feedback-width">
-                                <div class="team-thumb">
-                                </div>
-                                <h4>Amanda Kherr <strong>Designer</strong></h4>
-                                <a href="#">Request from : 1 Memeber</a>
-                                <a href="#">Project Name : Individual Project</a>
-                            </li>
-                        </ul>
-                    </div>
-
-
-                </div>
-            </div>
-            <div class="header">
-                <h4 class="title">Feedback Received to Amanda Kherr</h4>
-            </div>
-            <ul class="feedback-list">
-                <li>
-                    <div class="media">
-                        <div class="media-left">
-                            <a href="#">
-                                <img class="media-object" src="assets/img/faces/face-1.jpg" alt="...">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <h4 class="media-heading">Angel Johnson</h4>
-                                    <p class="gray-text">Director - HR</p>
-                                    <p><a href="mailto:angeljohnson@gmail.com">angeljohnson@gmail.com</a></p>
-                                </div>
-                                <div class="col-md-7">
-                                    <p>Arthur is a creative and result oriented designer. She meets
-                                        deadlines and learn things very fast. I hope she will achieve a great career in
-                                        UI-UX field and become an asset for any team/organisation. Best wishes for
-                                        future.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+  <div class="content" style="background-color: #daebeb;">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-4 pull-right">
+            <input type="submit" value="Create Feedback Request" (click)="createButtonClicked()"
+              class="team btn btn-primary add-feedback" />
+          </div>
         </div>
+      </div>
+      <div class="form-container">
+        <div class="form-section">
+          <div class="col-lg-12 permission-heading">
+            <h4 style="font-size: 20px; font-weight: 600;">
+              To see the project wise feedback select a project or simply select
+              a date
+            </h4>
+          </div>
+          <div class="oradd">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label style="font-size: 16px;" for="">Select Project</label>
+                <select class="form-control" (change)="ProjectFilterChange($event.target.value)">
+                  <option value="">Select project</option>
+                  <option *ngFor="let project of ProjectList" value="{{ project.projectId }}">{{ project.projectName }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <span>or</span>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label style="font-size: 16px;" for="">Select Date</label>
+                <input type="date" class="form-control" (change)="DateFilterChange($event.target.value)" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="requested-feedback" class="tab-pane fade active in" *ngIf="FeedbackListByParamDictionary">
+        <div class="table-full-width">
+          <div class="clearfix">
+            <ul class="team-member">
+              <li class="feedback-width" *ngFor="
+                  let feedbackData of FeedbackListByParamDictionary | keyvalue
+                " (click)="SelectedFeedbackFor = feedbackData.value">
+                <div class="team-thumb"></div>
+                <h4>
+                  {{ GetEmployeeNameBasedOnId(feedbackData.key)
+                  }}<strong>{{
+                    getDesignationNameForEmployee(feedbackData.key)
+                  }}</strong>
+                </h4>
+                <a href="#">Request from : {{ feedbackData.value.length }} Memeber</a>
+                <a href="#">Project Name :
+                  {{ getProjectName(feedbackData.value[0].projectId) }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="SelectedFeedbackFor">
+        <div class="header">
+          <h4 class="title">Feedback Received to {{GetEmployeeNameBasedOnId(SelectedFeedbackFor[0].feedbackForId)}}</h4>
+        </div>
+        <ul class="feedback-list">
+          <li *ngFor="let feedback of SelectedFeedbackFor">
+            <div class="media">
+              <div class="media-left">
+                <a href="#">
+                  <img class="media-object" src="assets/img/faces/face-1.jpg" alt="..." />
+                </a>
+              </div>
+              <div class="media-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <h4 class="media-heading">{{GetEmployeeNameBasedOnId(feedback.feedbackFromId)}}</h4>
+                    <p class="gray-text">{{ getDesignationNameForEmployee(feedback.feedbackFromId)}}</p>
+                    <p>
+                      <a href="mailto:angeljohnson@gmail.com">{{GetEmployeeEmailBasedOnId(feedback.feedbackFromId)}}</a>
+                    </p>
+                  </div>
+                  <div class="col-md-7">
+                    <p *ngIf="feedback.feedbackStatus=='2' ||feedback.feedbackStatus=='3' ">
+                      {{feedback.description}}
+                    </p>
+                    <h3 *ngIf="feedback.feedbackStatus=='1'">
+                      Feedback pending
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
+  </div>
 </div>
 <div class="slide-popup" id="add-task">
-    <div class="slide-close">
-        <i class="fa fa-angle-left" aria-hidden="true"></i>
-    </div>
-    <div class="slide-content">
-        <h3>Create Feedback Request</h3>
-        <form *ngIf="CreateForm!=null" [formGroup]="CreateForm">
-            <div class="form-group">
-                <label for="">Select Project</label>
-                <select name="" id="" class="form-control" formControlName="projectId">
-                    <option value="">Select Project</option>
-                    <option *ngFor="let project of ProjectList" value="{{project.projectId}}">
-                        {{project.projectName}}</option>
-                </select>
-            </div>
+  <div class="slide-close">
+    <i class="fa fa-angle-left" aria-hidden="true"></i>
+  </div>
+  <div class="slide-content">
+    <h3>Create Feedback Request</h3>
+    <form *ngIf="CreateForm != null" [formGroup]="CreateForm">
+      <div class="form-group">
+        <label for="">Select Project</label>
+        <select name="" id="" class="form-control" formControlName="projectId" (change)="SelectProjectChanged(CreateForm.controls['projectId'].value)">
+          <option value="">Select Project</option>
+          <option *ngFor="let project of ProjectList" value="{{ project.projectId }}">
+            {{ project.projectName }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="">Select Task</label>
+        <select name="" id="" class="form-control" formControlName="taskId">
+          <option value="">Select Task</option>
+          <option *ngFor="let task of TaskList" value="{{ task.taskId }}">
+            {{ task.taskHeading }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="">Feedback For Employee</label>
+        <select name="" id="" class="form-control" formControlName="feedbackForId">
+          <option value="">Select For Employee</option>
+          <option *ngFor="let employee of EmployeeList" value="{{ employee.employee.employeeId }}">
+            {{ employee.FullName }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="">Feedback From Employee</label>
+        <select name="" id="" class="form-control" formControlName="feedbackFromId">
+          <option value="">Select From Employee</option>
+          <option *ngFor="let employee of EmployeeList" value="{{ employee.employee.employeeId }}">
+            {{ employee.FullName }}</option>
+        </select>
+      </div>
 
-            <div class="form-group">
-                <label for="">Feedback For Employee</label>
-                <select name="" id="" class="form-control" formControlName="feedbackForId">
-                    <option value="">Select For Employee</option>
-                    <option *ngFor="let employee of EmployeeList" value="{{employee.employee.employeeId}}">
-                    {{employee.FullName}}</option>
-                </select>
-            </div>
+      <div class="selectwith-button removepad">
+        <div class="form-group" [formGroup]="ParameterForm">
+          <label for="">Select Criteria</label>
+          <select name="" id="" class="form-control" formControlName="paramId">
+            <option value="">Select From Employee</option>
+            <option *ngFor="let parameter of ParametersList" value="{{ parameter.paramId }}">
+              {{ parameter.description }}</option>
+          </select>
+          <button class="btn btn-primary" (click)="addToSelectList(ParameterForm.controls.paramId.value)">
+            ADD
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <ul class="selected-user">
+          <li *ngFor="let param of SelectedList">
+            <span class="user-thumb"></span>
+            <p>{{ param.description }}</p>
+            <i class="fa fa-times" (click)="RemoveParamFromSelectList(param)"></i>
+          </li>
+        </ul>
+      </div>
 
-            <div class="form-group">
-                <label for="">Feedback From Employee</label>
-                <select name="" id="" class="form-control" formControlName="feedbackFromId">
-                    <option value="">Select From Employee</option>
-                    <option *ngFor="let employee of EmployeeList" value="{{employee.employee.employeeId}}">
-                    {{employee.FullName}}</option>
-                </select>
-            </div>
 
-            <div class="selectwith-button removepad">
-                <div class="form-group" [formGroup]="ParameterForm">
-                    <label for="">Select Criteria</label>
-                    <select name="" id="" class="form-control" formControlName="paramId">
-                        <option value="">Select From Employee</option>
-                        <option *ngFor="let parameter of ParametersList" value="{{parameter.paramId}}">
-                        {{parameter.description}}</option>
-                    </select>
-                    <button class="btn btn-primary" (click)="addToSelectList(ParameterForm.controls.paramId.value)">ADD</button>
-                </div>
-            </div>
-            <div class="form-group">
-                <ul class="selected-user">
-                    <li *ngFor="let param of SelectedList"><span class="user-thumb"></span>
-                        <p>{{param.description}}</p><i class="fa fa-times" (click)="RemoveParamFromSelectList(param)"></i>
-                    </li>
-                </ul>
-            </div>
 
-         {{CreateForm.value|json}}
-
-            <input type="submit" value="Create Feedback Request" class="btn btn-primary" (click)="CreateButtonClicked(CreateForm.value)">
-        </form>
-    </div>
+      <input type="submit" value="Create Feedback Request" class="btn btn-primary"
+        (click)="CreateButtonClicked(CreateForm.value)" />
+    </form>
+  </div>
 </div>

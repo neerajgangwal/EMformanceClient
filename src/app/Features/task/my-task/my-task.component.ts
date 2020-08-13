@@ -26,11 +26,11 @@ export class MyTaskComponent implements OnInit {
   SearchResults: any[];
   loading: true;
   FilterKey: string;
-  
+
   constructor(private taskservice:TaskService,
     private layoutservice:LayoutService,
     public searchservice:SearchService,
-    private userservice:UserService,
+    public userservice:UserService,
     private messageService: MessageService,
     private fb:FormBuilder) { }
 
@@ -41,18 +41,18 @@ export class MyTaskComponent implements OnInit {
       this.TaskList=res.dataObj;
       console.log(this.TaskList);
       this.SearchResults=this.TaskList;
-      this.FilterKey="taskHeading";  
+      this.FilterKey="taskHeading";
     }
     else{
 
     }
   });
-           
+
   $('.slide-close').on('click', function() {
     $(this).parent().removeClass('open-slide');
     $('body').removeClass('gray-over');
   });
-   
+
    this.taskservice.Getprojects().subscribe(res => {
       if (res.errorCode == 0) {
         this.ProjectsList = res.dataObj;
@@ -61,7 +61,7 @@ export class MyTaskComponent implements OnInit {
 
       }
     });
-      
+
   }
 
   InitialiseCreateTaskForm()
@@ -75,11 +75,11 @@ export class MyTaskComponent implements OnInit {
       assignedToId:1,
       taskStartDate:['',Validators.required],
       taskDueDate:['',Validators.required],
-      taskAttachment:['',Validators.required],
+      taskAttachment:[''],
       taskPriority:['',Validators.required],
       taskStatus:['',Validators.required]
-    }) 
-  
+    })
+
 
   }
 
@@ -98,9 +98,9 @@ export class MyTaskComponent implements OnInit {
       taskAttachment:[data.taskAttachment],
       taskPriority:[data.taskPriority],
       taskStatus:[data.taskStatus]
-    }) 
+    })
     }
-  
+
 
   createTask()
   {
@@ -186,7 +186,7 @@ export class MyTaskComponent implements OnInit {
     {
       if(res.errorCode==0)
       {
-       
+
       this.TaskList.splice(this.TaskList.indexOf(data),1);
       this.SearchResults = this.TaskList;
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Team deleted' });

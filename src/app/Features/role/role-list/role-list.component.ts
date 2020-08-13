@@ -5,6 +5,7 @@ import { RoleService } from '../role.service';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import {UserService} from '../../../Services/user.service'
 import * as $ from 'jquery';
 
 @Component({
@@ -21,8 +22,8 @@ export class RoleListComponent implements OnInit {
   ViewPermissions: any[];
   Operations: any[];
   Elements: any[];
-
-  constructor(private roleservice: RoleService, private messageService: MessageService, private router: Router) { }
+  constructor(private roleservice: RoleService, private messageService: MessageService, private router: Router,public userService:UserService
+    ) { }
 
   ngOnInit(): void {
     this.roleservice.GetDesignations().subscribe((res) => {

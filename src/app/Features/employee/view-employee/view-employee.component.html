@@ -486,11 +486,10 @@
                                 <ul class="feedback-list">
                                     <li>
                                         <div class="row skill-list">
-
-                                            <div class="col-md-6">
+                                            <div class="col-md-6" *ngFor="let skill of EmployeeSkills">
 
                                                 <div class="skill-slider">
-                                                    <span>Design</span>
+                                                    <span>{{getSkillNameById(skill.skillId)}}</span>
                                                     <span id="ex1CurrentSliderValLabel" class="skill-value"><span
                                                             id="ex1SliderVal">67</span>%</span>
                                                     <div class="slider slider-horizontal" id="">
@@ -522,214 +521,12 @@
                                                             aria-valuenow="0" tabindex="0" style="left: 0%;"></div>
                                                     </div><input id="ex1" type="text" data-slider-min="0"
                                                         data-slider-max="100" data-slider-step="1"
-                                                        data-slider-value="100" data-value="54" value="54"
+                                                        data-slider-value="100" [attr.data-value]="skill.skillProficiency" value="{{skill.skillProficiency}}"
                                                         style="display: none;">
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="skill-slider">
-                                                    <span>Marketing</span>
-                                                    <span id="ex1CurrentSliderValLabel" class="skill-value"><span
-                                                            id="ex1SliderVal">84</span>%</span>
-                                                    <div class="slider slider-horizontal" id="">
-                                                        <div class="slider-track">
-                                                            <div class="slider-track-low" style="left: 0px; width: 0%;">
-                                                            </div>
-                                                            <div class="slider-selection" style="left: 0%; width: 84%;">
-                                                            </div>
-                                                            <div class="slider-track-high"
-                                                                style="right: 0px; width: 46%;"></div>
-                                                        </div>
-                                                        <div class="tooltip tooltip-main top" role="presentation"
-                                                            style="left: 54%;">
-                                                            <div class="tooltip-arrow"></div>
-                                                            <div class="tooltip-inner">54</div>
-                                                        </div>
-                                                        <div class="tooltip tooltip-min top" role="presentation"
-                                                            style="display: none;">
-                                                            <div class="tooltip-arrow"></div>
-                                                            <div class="tooltip-inner"></div>
-                                                        </div>
-                                                        <div class="tooltip tooltip-max top" role="presentation"
-                                                            style="display: none;">
-                                                            <div class="tooltip-arrow"></div>
-                                                            <div class="tooltip-inner"></div>
-                                                        </div>
-                                                        <div class="slider-handle max-slider-handle round hide"
-                                                            role="slider" aria-valuemin="0" aria-valuemax="100"
-                                                            aria-valuenow="0" tabindex="0" style="left: 0%;"></div>
-                                                    </div><input id="ex1" type="text" data-slider-min="0"
-                                                        data-slider-max="100" data-slider-step="1"
-                                                        data-slider-value="100" data-value="54" value="54"
-                                                        style="display: none;">
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                        <div class="row skill-list">
-                                            <div class="col-md-6">
-
-                                                <div class="skill-slider">
-                                                    <span>Development</span>
-                                                    <span id="ex1CurrentSliderValLabel" class="skill-value"><span
-                                                            id="ex1SliderVal">67</span>%</span>
-                                                    <div class="slider slider-horizontal" id="">
-                                                        <div class="slider-track">
-                                                            <div class="slider-track-low" style="left: 0px; width: 0%;">
-                                                            </div>
-                                                            <div class="slider-selection" style="left: 0%; width: 67%;">
-                                                            </div>
-                                                            <div class="slider-track-high"
-                                                                style="right: 0px; width: 46%;"></div>
-                                                        </div>
-                                                        <div class="tooltip tooltip-main top" role="presentation"
-                                                            style="left: 54%;">
-                                                            <div class="tooltip-arrow"></div>
-                                                            <div class="tooltip-inner">54</div>
-                                                        </div>
-                                                        <div class="tooltip tooltip-min top" role="presentation"
-                                                            style="display: none;">
-                                                            <div class="tooltip-arrow"></div>
-                                                            <div class="tooltip-inner"></div>
-                                                        </div>
-                                                        <div class="tooltip tooltip-max top" role="presentation"
-                                                            style="display: none;">
-                                                            <div class="tooltip-arrow"></div>
-                                                            <div class="tooltip-inner"></div>
-                                                        </div>
-                                                        <div class="slider-handle max-slider-handle round hide"
-                                                            role="slider" aria-valuemin="0" aria-valuemax="100"
-                                                            aria-valuenow="0" tabindex="0" style="left: 0%;"></div>
-                                                    </div><input id="ex1" type="text" data-slider-min="0"
-                                                        data-slider-max="100" data-slider-step="1"
-                                                        data-slider-value="100" data-value="54" value="54"
-                                                        style="display: none;">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="skill-slider">
-                                                    <span>SEO</span>
-                                                    <span id="ex1CurrentSliderValLabel" class="skill-value"><span
-                                                            id="ex1SliderVal">84</span>%</span>
-                                                    <div class="slider slider-horizontal" id="">
-                                                        <div class="slider-track">
-                                                            <div class="slider-track-low" style="left: 0px; width: 0%;">
-                                                            </div>
-                                                            <div class="slider-selection" style="left: 0%; width: 84%;">
-                                                            </div>
-                                                            <div class="slider-track-high"
-                                                                style="right: 0px; width: 46%;"></div>
-                                                        </div>
-                                                        <div class="tooltip tooltip-main top" role="presentation"
-                                                            style="left: 54%;">
-                                                            <div class="tooltip-arrow"></div>
-                                                            <div class="tooltip-inner">54</div>
-                                                        </div>
-                                                        <div class="tooltip tooltip-min top" role="presentation"
-                                                            style="display: none;">
-                                                            <div class="tooltip-arrow"></div>
-                                                            <div class="tooltip-inner"></div>
-                                                        </div>
-                                                        <div class="tooltip tooltip-max top" role="presentation"
-                                                            style="display: none;">
-                                                            <div class="tooltip-arrow"></div>
-                                                            <div class="tooltip-inner"></div>
-                                                        </div>
-                                                        <div class="slider-handle max-slider-handle round hide"
-                                                            role="slider" aria-valuemin="0" aria-valuemax="100"
-                                                            aria-valuenow="0" tabindex="0" style="left: 0%;"></div>
-                                                    </div><input id="ex1" type="text" data-slider-min="0"
-                                                        data-slider-max="100" data-slider-step="1"
-                                                        data-slider-value="100" data-value="54" value="54"
-                                                        style="display: none;">
-                                                </div>
-                                            </div>
-
-
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-md-6">
-
-                                                <div class="skill-slider">
-                                                    <span>Branding</span>
-                                                    <span id="ex1CurrentSliderValLabel" class="skill-value"><span
-                                                            id="ex1SliderVal">67</span>%</span>
-                                                    <div class="slider slider-horizontal" id="">
-                                                        <div class="slider-track">
-                                                            <div class="slider-track-low" style="left: 0px; width: 0%;">
-                                                            </div>
-                                                            <div class="slider-selection" style="left: 0%; width: 67%;">
-                                                            </div>
-                                                            <div class="slider-track-high"
-                                                                style="right: 0px; width: 46%;"></div>
-                                                        </div>
-                                                        <div class="tooltip tooltip-main top" role="presentation"
-                                                            style="left: 54%;">
-                                                            <div class="tooltip-arrow"></div>
-                                                            <div class="tooltip-inner">54</div>
-                                                        </div>
-                                                        <div class="tooltip tooltip-min top" role="presentation"
-                                                            style="display: none;">
-                                                            <div class="tooltip-arrow"></div>
-                                                            <div class="tooltip-inner"></div>
-                                                        </div>
-                                                        <div class="tooltip tooltip-max top" role="presentation"
-                                                            style="display: none;">
-                                                            <div class="tooltip-arrow"></div>
-                                                            <div class="tooltip-inner"></div>
-                                                        </div>
-                                                        <div class="slider-handle max-slider-handle round hide"
-                                                            role="slider" aria-valuemin="0" aria-valuemax="100"
-                                                            aria-valuenow="0" tabindex="0" style="left: 0%;"></div>
-                                                    </div><input id="ex1" type="text" data-slider-min="0"
-                                                        data-slider-max="100" data-slider-step="1"
-                                                        data-slider-value="100" data-value="54" value="54"
-                                                        style="display: none;">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="skill-slider">
-                                                    <span>Jquery</span>
-                                                    <span id="ex1CurrentSliderValLabel" class="skill-value"><span
-                                                            id="ex1SliderVal">84</span>%</span>
-                                                    <div class="slider slider-horizontal" id="">
-                                                        <div class="slider-track">
-                                                            <div class="slider-track-low" style="left: 0px; width: 0%;">
-                                                            </div>
-                                                            <div class="slider-selection" style="left: 0%; width: 84%;">
-                                                            </div>
-                                                            <div class="slider-track-high"
-                                                                style="right: 0px; width: 46%;"></div>
-                                                        </div>
-                                                        <div class="tooltip tooltip-main top" role="presentation"
-                                                            style="left: 54%;">
-                                                            <div class="tooltip-arrow"></div>
-                                                            <div class="tooltip-inner">54</div>
-                                                        </div>
-                                                        <div class="tooltip tooltip-min top" role="presentation"
-                                                            style="display: none;">
-                                                            <div class="tooltip-arrow"></div>
-                                                            <div class="tooltip-inner"></div>
-                                                        </div>
-                                                        <div class="tooltip tooltip-max top" role="presentation"
-                                                            style="display: none;">
-                                                            <div class="tooltip-arrow"></div>
-                                                            <div class="tooltip-inner"></div>
-                                                        </div>
-                                                        <div class="slider-handle max-slider-handle round hide"
-                                                            role="slider" aria-valuemin="0" aria-valuemax="100"
-                                                            aria-valuenow="0" tabindex="0" style="left: 0%;"></div>
-                                                    </div><input id="ex1" type="text" data-slider-min="0"
-                                                        data-slider-max="100" data-slider-step="1"
-                                                        data-slider-value="100" data-value="54" value="54"
-                                                        style="display: none;">
-                                                </div>
-                                            </div>
-
-
-                                        </div>
                                     </li>
 
                                 </ul>

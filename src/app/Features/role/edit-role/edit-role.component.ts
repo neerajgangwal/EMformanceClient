@@ -24,6 +24,23 @@ export class EditRoleComponent implements OnInit {
   RoleForm: FormGroup;
   RoleData;
   PermissionsData: Map<number, number[]>
+  RoleList:any[]=[{"designationName":"CEO"},
+  {"designationName":"CTO"},
+  {"designationName":"COO"},
+  {"designationName":"CFO"},
+  {"designationName":"President"},
+  {"designationName":"VP"},
+  {"designationName":"Talent Acquisition Head"},
+  {"designationName":"HR Manager"},
+  {"designationName":"HR executive"},
+  {"designationName":"HR Trainer"},
+  {"designationName":"Project Manager"},
+  {"designationName":"Team Head"},
+  {"designationName":"UI/UX Developer"},
+  {"designationName":"UI/UX Designer"},
+  {"designationName":"Developer"},
+  {"designationName":"QA Engineer"}];
+  FilteredRoleList:any[];
   ngOnInit(): void {
 
     this.route.queryParamMap.subscribe(params => {
@@ -166,5 +183,17 @@ export class EditRoleComponent implements OnInit {
     console.log(Roleobj);
   }
 
+  FilterRoles(event) {
+    let filtered : any[] = [];
+    let query = event.query;
+    for(let i = 0; i < this.RoleList.length; i++) {
+        let role = this.RoleList[i];
+        if (role.designationName.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            filtered.push(role.designationName);
+        }
+    }
+
+    this.FilteredRoleList = filtered;
+}
 
 }

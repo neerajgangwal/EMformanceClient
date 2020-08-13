@@ -10,6 +10,8 @@ export class FeedbackComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
+
   }
 
 }

@@ -39,4 +39,19 @@ export class ProjectService {
     return this.httpClient.post(this.userService.LoggedInUser.PortalName+environment.updateProject,data);
 
   }
+  getTeamList=function()
+  {
+    return this.httpClient.post(this.userService.LoggedInUser.PortalName+environment.getTeam,{})
+  }
+
+  updateTeamWithProject(data)
+  {
+    return this.httpClient.post(this.userService.LoggedInUser.PortalName+environment.updateTeam,data)
+  }
+
+  getDepartment=function()
+  {
+    return this.httpClient.get(this.userService.LoggedInUser.PortalName+environment.getDepartment);
+  }
+
 }

@@ -4,6 +4,7 @@ import { LayoutService } from '../../../Services/layout.service';
 import { SearchService } from '../../../Services/search.service';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import {UserService} from '../../../Services/user.service'
 
 @Component({
   selector: 'app-employee-list',
@@ -21,6 +22,7 @@ export class EmployeeListComponent implements OnInit {
     private layoutservice: LayoutService,
     public searchSerrvice: SearchService,
     private messageService: MessageService,
+    public  userService:UserService,
     private router:Router
     ) { }
 

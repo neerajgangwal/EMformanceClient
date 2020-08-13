@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import {AutoCompleteModule} from 'primeng/autocomplete';
 import { SkillRoutingModule } from './skill-routing.module';
 import { SkillComponent } from './skill.component';
 import { MySkillComponent } from './my-skill/my-skill.component';
@@ -17,7 +17,8 @@ import {ToastModule} from 'primeng/toast';
     ReactiveFormsModule,
     HttpClientModule,
     SliderModule,
-    ToastModule
+    ToastModule,
+    AutoCompleteModule
   ]
 })
 export class SkillModule { }

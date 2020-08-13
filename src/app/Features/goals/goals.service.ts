@@ -12,9 +12,9 @@ export class GoalsService {
   {
     return this.httpclient.post(this.userService.LoggedInUser.PortalName+environment.addGoal,data);
   }
-  getGoal=function()
+  getGoal=function(id)
   {
-    return this.httpclient.post(this.userService.LoggedInUser.PortalName+environment.getGoal,{});
+    return this.httpclient.post(this.userService.LoggedInUser.PortalName+environment.getGoal,{employeeId:id});
   }
   deleteGoal=function(data)
   {
@@ -23,5 +23,10 @@ export class GoalsService {
   updateGoal=function(data)
   {
     return this.httpclient.post(this.userService.LoggedInUser.PortalName+environment.updateGoal,data)
+  }
+
+  getTeamGoals=function(id)
+  {
+    return this.httpclient.get(this.userService.LoggedInUser.PortalName+environment.getTeamGoals+id);
   }
 }

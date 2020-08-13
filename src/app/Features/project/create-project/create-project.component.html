@@ -31,13 +31,36 @@
                                                         <label for="">Select Priority*</label>
                                                         <select name="" id="" class="form-control" formControlName="projectPriority">
                                                             <option value="" selected>Select Priority</option>
-                                                            <option value="Low  (Low,Medium,High)">Low</option> 
-                                                            <option value="Medium  (Low,Medium,High)">Medium</option> 
-                                                            <option value="High  (Low,Medium,High)">High</option>                                                           
+                                                            <option value="Low">Low</option>
+                                                            <option value="Medium">Medium</option>
+                                                            <option value="High">High</option>
                                                         </select>
-                                                       
+
                                                     </div>
                                                 </div>
+                                                <div class="col-lg-6">
+                                                  <div class="form-group">
+                                                      <label for="">Select Department*</label>
+                                                      <select name="" id="" class="form-control" formControlName="departmentId">
+                                                          <option value="" selected>Select Department</option>
+                                                          <option *ngFor="let department of DepartmentList" value="{{department.departmentId}}">{{department.departmentName}}</option>
+
+                                                      </select>
+
+                                                  </div>
+                                              </div>
+                                                <div class="col-lg-6">
+                                                  <div class="form-group">
+                                                      <label for="">Select Status*</label>
+                                                      <select name="" id="" class="form-control" formControlName="projectStatus">
+                                                          <option value="" selected>Select Project</option>
+                                                          <option value="Created">Created</option>
+                                                          <option value="Active">Active</option>
+                                                          <option value="Completed">Completed</option>
+                                                      </select>
+
+                                                  </div>
+                                               </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group" formControlName="projectDescription">
                                                         <label for="">Project Description*</label>
@@ -121,7 +144,7 @@
                                         <div class="container-fluid">
                                             <div class="row">
                                                 <div class="col-md-3">
-                                                    <h4 class="top-heading">Employee List </h4>
+                                                    <h4 class="top-heading">Team List </h4>
 
                                                 </div>
                                                 <div class="col-md-4">
@@ -175,30 +198,27 @@
                                                 <li class="employee-add-heading">
                                                     <ul>
                                                         <li>
-                                                            Employee Name
+                                                            Team Name
                                                         </li>
-                                                        <li>Department</li>
-                                                        <li>Designation </li>
-                                                        <li>Actions </li>
+
                                                     </ul>
 
 
                                                 </li>
 
-                                                <li class="employee-add-heading list-content" *ngFor="let element of SearchResults">
+                                                <li class="employee-add-heading list-content" *ngFor="let element of SearchResults|dataFilter:'projectId':-1">
                                                     <ul>
                                                         <li>
                                                             <div class="team-thumb"></div>
-                                                            <h4>{{element.employee.employeeFname+" "+element.employee.employeeMname}}
-                                                                <a href="#">{{element.employee.employeeEmail}}</a></h4>
+                                                            <h4>{{element.teamName}}</h4>
                                                         </li>
-                                                        <li>{{element.department.departmentName}}</li>
-                                                        <li>{{element.designation.designationName}}</li>
                                                         <li>
-                                                            <button class="btn btn-success response">Add to
-                                                                team</button>
-                                                            <button class="btn btn-success response">Assign
-                                                                task</button>
+                                                        </li>
+                                                        <li>
+                                                        </li>
+                                                        <li>
+                                                            <button class="btn btn-success response" (click)="AddTeamToProject(element)">Add to
+                                                                Project</button>
                                                         </li>
                                                     </ul>
 

@@ -32,12 +32,12 @@
 								{{data.teamName}}
 
 							</li>
-							
+
 							<li>
-								<i class="icon-View team" (click)="ViewIconClicked(data.teamId)"></i>
-								<i class="icon-edit" (click)="editIconClicked(data)"></i>
+								<i class="icon-View team" *ngIf="userService.CheckPermission(userService.Elements.Team,userService.Operations.View)" (click)="ViewIconClicked(data.teamId)"></i>
+								<i class="icon-edit" *ngIf="userService.CheckPermission(userService.Elements.Team,userService.Operations.Edit)" (click)="editIconClicked(data)"></i>
 								<i id="addteam1" class="icon-Team" (click)="AddTeamIcon(data.teamId)"></i>
-								<i class="icon-Delete" (click)="DeleteTeamIcon(data)"></i>
+								<i class="icon-Delete" *ngIf="userService.CheckPermission(userService.Elements.Team,userService.Operations.Delete)" (click)="DeleteTeamIcon(data)"></i>
 							</li>
 						</ul>
 
@@ -69,12 +69,12 @@
 					<ul *ngFor="let member of ViewTeamMemberList">
 						 <li>
 					   		<div class="team-thumb"></div> <h4>{{member.employeeName}}</h4>
-						</li>				
-						 <li> 
-					  		<a href="#">{{member.employeeEmail}}</a>			   
+						</li>
+						 <li>
+					  		<a href="#">{{member.employeeEmail}}</a>
 						</li>
 					</ul>
-				   
+
 			   </li>
 			</ul>
 		</div>
@@ -88,7 +88,7 @@
 		<div class="slide-content" *ngIf="CreateTeamForm!=null">
 
 			<h3>Create Team</h3>
-			<form [formGroup]="CreateTeamForm">			
+			<form [formGroup]="CreateTeamForm">
 				<div class="form-group">
 					<label for="">Team Name</label>
 					<input type="text" class="form-control" placeholder="Enter Team Name" formControlName="teamName">
@@ -118,7 +118,7 @@
 		<div class="slide-content">
 
 			<h3>Edit Team</h3>
-			<form [formGroup]="EditTeamForm" *ngIf="EditTeamForm!=null">			
+			<form [formGroup]="EditTeamForm" *ngIf="EditTeamForm!=null">
 				<div class="form-group">
 					<label for="">Team Name</label>
 					<input type="text" class="form-control" placeholder="Enter Team Name" formControlName="teamName">
@@ -148,7 +148,7 @@
 	<div class="slide-wrapper">
 		<div class="slide-content">
 			<h3>Add Team Members</h3>
-			<form [formGroup]="AddTeamForm" *ngIf="AddTeamForm!=null"> 
+			<form [formGroup]="AddTeamForm" *ngIf="AddTeamForm!=null">
 				<div class="form-group" >
 					<label for="">Select team member</label>
 					<div class="selectwith-button">

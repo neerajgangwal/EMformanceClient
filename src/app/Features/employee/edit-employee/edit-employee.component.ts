@@ -3,9 +3,9 @@ import { LayoutService } from '../../../Services/layout.service'
 import { EmployeeService } from '../employee.service';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { EmployeePermissions } from 'src/app/Entities/EmployeePermissions';
-import { EmployeeRoleElement } from 'src/app/Entities/EmployeeRoleElement';
-import { ElementOperation } from 'src/app/Entities/ElementOperation';
+import { EmployeePermissions } from 'src/app/Entities/UpdateEmployeePermissions';
+import { EmployeeRoleElement } from 'src/app/Entities/UpdateEmployeeRoleElement';
+import { ElementOperation } from 'src/app/Entities/UpdateElementOperation';
 import { RolePermissions } from 'src/app/Entities/RolePermissions';
 import { RoleElement } from 'src/app/Entities/RoleElement';
 import { ActivatedRoute } from '@angular/router';
@@ -23,6 +23,8 @@ export class EditEmployeeComponent implements OnInit {
   ElementsData: any[];
   RolePermissions: RoleElement[] = [];
   PermissionsData: Map<number, number[]>
+  ElementIdMapping:Map<number,number>
+  OPerationIdMapping:Map<string,number>
 
   constructor(private layoutService: LayoutService, private employeeService: EmployeeService, private fb: FormBuilder, private messageService: MessageService, private route: ActivatedRoute) { }
 
@@ -71,13 +73,13 @@ export class EditEmployeeComponent implements OnInit {
         gender: [employee.gender, Validators.required],
         employeeElementMappingList: this.Elements
       });
-    
+
 
     this.employeeService.GetDepartments().subscribe((res) => {
       this.DepartmentList = res.dataObj;
       console.log(this.DepartmentList);
     });
-    
+
     this.SelectDepartmentChanged(employee.departmentId);
   }
 
@@ -87,11 +89,15 @@ export class EditEmployeeComponent implements OnInit {
 
   CreateHashMap(data) {
     this.PermissionsData = new Map<number, number[]>();
+    this.ElementIdMapping=new Map<number,number>();
+    this.OPerationIdMapping=new Map<string,number>();
     for (let index = 0; index < data.length; index++) {
       const element = data[index];
+      this.ElementIdMapping.set(element.elementId,element.employeeElementMpgId);
       var operations = [];
       for (let index2 = 0; index2 < element.employeeElementOprationList.length; index2++) {
         const operation = element.employeeElementOprationList[index2];
+        this.OPerationIdMapping.set(element.elementId+'-'+operation.operationId,operation.employeeElementOperationId);
         operations.push(operation.operationId);
       }
       this.PermissionsData.set(element.elementId, operations);
@@ -194,11 +200,13 @@ export class EditEmployeeComponent implements OnInit {
     data.employeeElementMappingList.forEach(elementdata => {
       var element = new EmployeeRoleElement();
       element.elementId = elementdata.elementId;
+      element.employeeElementMpgId=this.ElementIdMapping.get(elementdata.elementId);
       element.employeeElementOprationList = [];
       elementdata.employeeElementOperationList.forEach(operationData => {
         if (operationData.value == true) {
           var opertaion = new ElementOperation();
           opertaion.operationId = operationData.operationId;
+          opertaion.employeeElementOperationId=this.OPerationIdMapping.get(elementdata.elementId+'-'+operationData.operationId);
           element.employeeElementOprationList.push(opertaion);
         }
       });

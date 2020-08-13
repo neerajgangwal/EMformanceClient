@@ -1,3 +1,5 @@
+import { EmployeePermissions } from './EmployeePermissions';
+
 export class User
 {
     Id:number;
@@ -5,4 +7,5 @@ export class User
     EmailId:string;
     CompanyId:number;
     PortalName:string;
+    Permissions:any[];
 }

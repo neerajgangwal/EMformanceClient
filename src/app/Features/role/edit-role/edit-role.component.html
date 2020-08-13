@@ -1,7 +1,7 @@
 <div class="main-panel">
     <div class="content" style="background-color:#DAEBEB;">
         <div class="container-fluid">
-          
+
             <div *ngIf="RoleForm" class="form-container" [formGroup]="RoleForm">
                 <div class="form-section">
                     <div class="col-lg-6">
@@ -10,15 +10,18 @@
                             <select  class="form-control" formControlName="departmentId">
                                 <option value="">Select Department</option>
                                 <option *ngFor="let department of DepartmentList" value="{{department.departmentId}}">
-                                    {{department.departmentName}}</option>
+                                    {{department.departmentName}} </option>
+
                             </select>
+
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="">Add Role</label>
-                            <input type="text" class="form-control" formControlName="designationName"
-                                placeholder="Enter Role Name">
+
+                                <p-autoComplete formControlName="designationName"  placeholder="Enter Role Name" [suggestions]="FilteredRoleList" (completeMethod)="FilterRoles($event)"></p-autoComplete>
+
                         </div>
                     </div>
 

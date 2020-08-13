@@ -19,9 +19,12 @@ export class ViewEmployeeComponent implements OnInit {
   Operations: any[];
   Elements: any[];
   Permissions: any[];
+  EmployeeSkills:any[];
+  Skills:any[];
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(params => {
       var id = params.get("id");
+
       this.employeeService.GetEmployeeById(id).subscribe((res) => {
         if (res.errorCode == 0) {
           this.Employee = res.dataObj[0];
@@ -36,6 +39,8 @@ export class ViewEmployeeComponent implements OnInit {
                   this.employeeService.getEmployeeElementMapping(id).subscribe(res => {
                     if (res.errorCode == 0) {
                       this.Permissions = res.dataObj.employeeElementMappingList;
+                      this.getEmployeeSkills(id);
+                      this.getAllEmployeeSkills();
                       //MapPermissionsList(res.dataObj.employeeElementMappingList);
                     }
                   });
@@ -60,6 +65,45 @@ export class ViewEmployeeComponent implements OnInit {
     }
   }
 
+  getEmployeeSkills(id){
+    console.log("skill called");
+    this.employeeService.GetSkillsMappedToEmployee(id)
+    .subscribe(res => {
+      if (res.errorCode == 0) {
+        console.log(res.dataObj);
+        this.EmployeeSkills = res.dataObj;
+      }
+      else {
+
+      }
+    });
+  }
+
+  getAllEmployeeSkills()
+  {
+    this.employeeService.GetAllTheSkills()
+    .subscribe(res => {
+      if (res.errorCode == 0) {
+        console.log(res.dataObj);
+        this.Skills = res.dataObj;
+      }
+      else {
+
+      }
+    });
+  }
+
+  getSkillNameById(id)
+  {
+    for (let index = 0; index < this.Skills.length; index++) {
+      const element = this.Skills[index];
+      if(element.skillId==id)
+      {
+        return element.skillName;
+      }
+    }
+  }
+
   GetOperationName(id) {
     for (let index = 0; index < this.Operations.length; index++) {
       const operation = this.Operations[index];
@@ -75,7 +119,7 @@ export class ViewEmployeeComponent implements OnInit {
       if (element.elementId == id) {
         return element.elementName;
       }
-    } 
+    }
   }
 
   GetDesignationById(id)

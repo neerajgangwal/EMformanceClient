@@ -35,7 +35,7 @@ export class TeamListComponent implements OnInit {
     private teamservice: TeamService,
     private messageService: MessageService,
     private fb: FormBuilder,
-    private userService: UserService
+    public userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -89,7 +89,7 @@ export class TeamListComponent implements OnInit {
   {
       this.EditTeamForm = this.fb.group({
       teamId:[data.teamId],
-      projectId: [data.projectId],   
+      projectId: [data.projectId],
       teamName: [data.teamName,Validators.required],
       departmentId: [1],
       teamCreatedBy: [this.userService.LoggedInUser.Id],
@@ -273,7 +273,7 @@ export class TeamListComponent implements OnInit {
       (err) => { console.log("outside error") });
 
   }
- 
+
   DeleteTeamIcon(data)
   {
     this.teamservice.deleteTeam(data).subscribe((res)=>

@@ -2856,9 +2856,9 @@ input.btn.btn-primary.pro-del {
 	box-shadow: 0 0 10px rgba(0, 0, 0, .1);
     border-radius: 6px;
 
-   
+
 }
-.card.wizard-card{box-shadow:none;} 
+.card.wizard-card{box-shadow:none;}
 .card .image {
     position: relative;
 
@@ -5205,7 +5205,7 @@ input.btn.btn-primary.pro-del {
 .feedback-area textarea,
 .feedback-area textarea:focus {
     min-height: 140px;
-    padding: 15px;
+    padding: 20px;
 
     resize: none;
 
@@ -5248,12 +5248,12 @@ color:#fff;
 .feedback-list .icon-pencil {
     margin-left: 15px;
     cursor: pointer;
-   
+
 }
 
 .feedback-list .icon-success {
     cursor: pointer;
-   
+
 }
 
 .table-full-width .btn-danger {
@@ -5287,7 +5287,7 @@ color:#fff;
     color: #fff;
     border-radius: 8px;
 	border: 1px solid #c4c4c4;
-   
+
 }
 
 .card-outer h4 {
@@ -5434,6 +5434,22 @@ color:#fff;
 
 #task-description.open-slide {
     right: 0;
+}
+
+#edit-team.open-slide {
+  right: 0;
+}
+
+#edit-task.open-slide {
+  right: 0;
+}
+
+#add-team-task.open-slide {
+  right: 0;
+}
+
+#addteam-member.open-slide {
+  right: 0;
 }
 
 #requestfeedback.open-slide {
@@ -5691,12 +5707,12 @@ color:#fff;
 	border-radius: 6px;
 	height: 106px;
     margin-bottom: 4%;
-	
+
 }
 .row.exact-interview{margin-left: 0px; margin-right: 0px;}
 .exact-section ul{
 	margin: 0px;
-	
+
 }
 
 /* notification */
@@ -6579,7 +6595,7 @@ margin-right: 26px;}
 .smily-section{width: 32.3%; display: inline-block; margin-right: 10px; margin-bottom: 10px;}
 .smily-section.nonmar{margin-right: 0px;}
 .material-switch > input[type="checkbox"] {
-    display: none;   
+    display: none;
 }
 .permission-heading{
 margin-top:0px;}
@@ -6592,8 +6608,8 @@ margin-top:0px;}
 .material-switch > label {
     cursor: pointer;
     height: 0px;
-    position: relative; 
-    width: 40px;  
+    position: relative;
+    width: 40px;
 }
 
 .material-switch > label::before {
@@ -6636,7 +6652,7 @@ margin-top:0px;}
 .rolesection{background-color: #F4F6F7;
 	border-radius: 6px;
 	border:1px solid #C0C0C0;
-	padding:15px 0 0 20px; 
+	padding:15px 0 0 20px;
     width: 100%;
 
 }
@@ -6650,13 +6666,13 @@ border-radius: 6px;}
 
 .team-listvew.team-member > li:first-child{
  border-bottom:none;
-	
+
 }
 .team-listvew.team-member {
     padding: 20px;
     overflow: hidden;
     border-radius: 6px;
-   
+
 }
 .team-listvew.team-member > li.list-heading{
 	background-color:#E9EFF3;
@@ -7030,7 +7046,7 @@ fiddle.net/Wc4xt/1052 */
 .welcome-heading img{width:24%;}
 /* Project list */
 .prioritybox{width: 64px;
-height: 26px; 
+height: 26px;
 line-height: 26px;
 text-align: center;
 display: block;
@@ -7039,7 +7055,7 @@ color:#fff;
 font-size:12px;}
 
 .statusbox{width: 104px;
-height: 26px; 
+height: 26px;
 line-height: 26px;
 text-align: center;
 display: block;
@@ -7190,7 +7206,7 @@ color:#FFA200;}
 
 
 button#dropdownMenuButton {
-   
+
 	background-color: aqua !important;
 }
 .btn-primary{
@@ -7407,11 +7423,11 @@ padding: 0px;}
     content: '★ ';
 }
 .rate > input:checked ~ label {
-    color: #FA6A19;    
+    color: #FA6A19;
 }
 .rate:not(:checked) > label:hover,
 .rate:not(:checked) > label:hover ~ label {
-    color: #FA6A19;  
+    color: #FA6A19;
 }
 .rate > input:checked + label:hover,
 .rate > input:checked + label:hover ~ label,
@@ -7607,7 +7623,7 @@ padding: 0px;}
 }
 .fb-profile img.fb-image-lg{
     z-index: 0;
-    width: 100%;  
+    width: 100%;
     margin-bottom: 10px;
 	max-height: 300px;
 }
@@ -7617,7 +7633,7 @@ padding: 0px;}
 {
     margin: -90px 10px 0px 50px;
     z-index: 9;
-    width: 12%; 
+    width: 12%;
 	border-radius: 50%;
 }
 .profile-name{font-size:32px;}
@@ -7643,7 +7659,7 @@ padding: 0px;}
 }
 
 @media (max-width: 991px) {
-	
+
 	.list-heading ul li:first-child{width: calc(100% - 638px);}
 	.list-heading ul li:first-child + li{width: calc(100% - 820px);}
 .list-heading ul li:first-child + li + li{width: calc(100% - 865px);}

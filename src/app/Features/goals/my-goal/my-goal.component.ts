@@ -23,13 +23,13 @@ export class MyGoalComponent implements OnInit {
     private goalservice: GoalsService,
     private layoutservice: LayoutService,
     private fb: FormBuilder,
-    private userService: UserService,
+   public userService: UserService,
     private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
 
-    this.goalservice.getGoal().subscribe((res) => {
+    this.goalservice.getGoal(this.userService.LoggedInUser.Id).subscribe((res) => {
       if (res.errorCode == 0) {
 
         this.goallist = res.dataObj;
@@ -77,7 +77,7 @@ export class MyGoalComponent implements OnInit {
   }
 
 
- 
+
 
   initialiseCreateForm = function () {
     $('#add-task').addClass('open-slide');
@@ -137,7 +137,7 @@ export class MyGoalComponent implements OnInit {
       goalStartDate:[data.goalStartDate, Validators.required],
       goalEndDate:[data.goalEndDate, Validators.required],
     });
-    
+
     console.log("edit goal form "+this.editGoalForm.value);
   }
 
@@ -171,7 +171,7 @@ export class MyGoalComponent implements OnInit {
   }
 
   EditIconClicked(data) {
-    $('#add-description').addClass('open-slide');
+    $('#edit-task').addClass('open-slide');
     $('body').addClass('gray-over');
     console.log("edit icon clicked");
     console.log("data "+data);
@@ -236,7 +236,7 @@ export class MyGoalComponent implements OnInit {
     {
       return "#d1efda"
     }
-    else 
+    else
     {
       return "#ffeccc"
     }

@@ -68,10 +68,11 @@ export const environment = {
   getMyfeedback:"getMyFeedback?employeeId=",
   getRequestedFeedback:"getRequestedFeedback?employeeId=",
   getMyFeedback:"getMyFeedback?employeeId=",
+  UpdateFeedback:"updateFeedbackRequest",
+  getFeedbackByParam:"getFeedbackByParam",
+  getCompany:"getCompany",
 
-  getCompany:"getCompany"
-
-
+  getTeamGoals:"getMyTeamGoals?projectId=-1&createdBy="
 
 };
 

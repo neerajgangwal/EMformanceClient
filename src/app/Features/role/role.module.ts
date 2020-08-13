@@ -9,12 +9,14 @@ import {RoleService} from './role.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import { RoleListComponent } from './role-list/role-list.component';
 import { EditRoleComponent } from './edit-role/edit-role.component';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+
 
 @NgModule({
   declarations: [RoleComponent, CreateRoleComponent, RoleListComponent, EditRoleComponent],
   imports: [
     CommonModule,HttpClientModule,
-    RoleRoutingModule,ReactiveFormsModule
+    RoleRoutingModule,ReactiveFormsModule,AutoCompleteModule
   ],
   providers:[RoleService]
 })

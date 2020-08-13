@@ -6,20 +6,20 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="">Department Name</label>
-                            <input type="text" class="form-control" placeholder="Enter Department Name"
-                                formControlName="departmentName">
+                             <p-autoComplete formControlName="departmentName"  placeholder="Enter Department Name" [suggestions]="FilteredDepartmentsList" (completeMethod)="FilterDepartments($event)" ></p-autoComplete>
+
                                 <span class="error"
                                 *ngIf="!DepartmentForm.controls['departmentName'].valid&&(DepartmentForm.controls['departmentName'].dirty|| DepartmentForm.controls['departmentName'].touched)"><i
                                     class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide department name
                                 </span>
                         </div>
-                       
+
                     </div>
                     <div class="col-lg-3 pull-left">
                         <button  class="subbtn btn btn-primary"
                         (click)="CreateButtonClicked(DepartmentForm.value)" [disabled]="!DepartmentForm.valid">Create Department
                         <!-- <p-progressSpinner [style]="{width: '20px', height: '20px'}" strokeWidth="8" animationDuration=".5s"></p-progressSpinner> -->
-                    
+
                     </button>
                     </div>
                 </div>
@@ -49,10 +49,8 @@
 
                             <li class="dpname">{{dept.departmentName}}</li>
                             <li class="dpname">
-
-                                <i class="icon-edit" (click)="editIconClicked(dept)"></i>
-                                <i class="icon-Delete" (click)="deleteIconClicked(dept)"></i>
-
+                                <i class="icon-edit" *ngIf="userService.CheckPermission(userService.Elements.Department,userService.Operations.Edit)" (click)="editIconClicked(dept)"></i>
+                                <i class="icon-Delete" *ngIf="userService.CheckPermission(userService.Elements.Department,userService.Operations.Delete)" (click)="deleteIconClicked(dept)"></i>
                             </li>
                         </ul>
 
@@ -76,10 +74,12 @@
 		<div class="slide-content">
 
 			<h3>Edit Department</h3>
-			<form [formGroup]="EditForm" *ngIf="EditForm!=null" >			
+			<form [formGroup]="EditForm" *ngIf="EditForm!=null" >
 				<div class="form-group">
 					<label for="">Department Name</label>
-                    <input type="text" class="form-control" placeholder="Enter department Name" formControlName="departmentName">
+
+                    <p-autoComplete formControlName="departmentName"  placeholder="Enter Department Name" [suggestions]="FilteredDepartmentsList" (completeMethod)="FilterDepartments($event)"></p-autoComplete>
+
                     <span class="error"
                     *ngIf="!EditForm.controls['departmentName'].valid&&(EditForm.controls['departmentName'].dirty|| EditForm.controls['departmentName'].touched)"><i
                         class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide department name

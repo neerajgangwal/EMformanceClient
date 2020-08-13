@@ -3,6 +3,7 @@ import { ProjectService} from '../project.service';
 import {LayoutService} from '../../../Services/layout.service'
 import {SearchService} from '../../../Services/search.service';
 import { MessageService } from 'primeng/api';
+import {UserService} from '../../../Services/user.service'
 import * as $ from 'jquery' ;
 import { Router } from '@angular/router';
 
@@ -13,25 +14,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./project-list.component.css']
 })
 export class ProjectListComponent implements OnInit {
-  
+
   projectList:any[];
   viewList:any[]=[];
   SearchResults: any[];
   loading: true;
   FilterKey: string;
-
+  uiStatusFilter:string="";
+  uiPriorityFilter:string="";
   constructor(private projectservice:ProjectService,
     private layoutservice:LayoutService,
     public searchservice:SearchService,
     private messageService: MessageService,
-    private router:Router
-    
+    private router:Router,
+    public userService:UserService
+
     ) {}
 
   ngOnInit(): void {
     var id=-1;
      this.layoutservice.UpdateLayout(true,true,true,true);
-     this.projectservice.GetProjectList(id).subscribe((res)=>{    
+     this.projectservice.GetProjectList(id).subscribe((res)=>{
       console.log(res);
       this.projectList=res.dataObj;
       console.log(this.projectList);
@@ -42,7 +45,7 @@ export class ProjectListComponent implements OnInit {
       $(this).parent().removeClass('open-slide');
       $('body').removeClass('gray-over');
   });
-  
+
   }
 
 

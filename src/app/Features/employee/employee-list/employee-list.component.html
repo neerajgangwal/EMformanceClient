@@ -34,9 +34,10 @@
 							<li>{{data.department.departmentName}}</li>
 							<li>{{data.designation.designationName}}</li>
 							<li>
-								<i class="icon-View" (click)="viewIconClicked(data.employee.employeeId)"></i>
-								<i class="icon-edit" (click)="editEmployeeIconClicked(data.employee.employeeId)"></i>
-								<i class="icon-Delete" (click)="deleteIconClicked(data)"></i>
+
+								<i class="icon-View" *ngIf="userService.CheckPermission(userService.Elements.Employee,userService.Operations.View)" (click)="viewIconClicked(data.employee.employeeId)"></i>
+								<i class="icon-edit" *ngIf="userService.CheckPermission(userService.Elements.Employee,userService.Operations.Edit)" (click)="editEmployeeIconClicked(data.employee.employeeId)"></i>
+								<i class="icon-Delete" *ngIf="userService.CheckPermission(userService.Elements.Employee,userService.Operations.Delete)" (click)="deleteIconClicked(data)"></i>
 							</li>
 						</ul>
 					</li>

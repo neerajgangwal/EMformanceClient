@@ -14,11 +14,12 @@ export class MySkillComponent implements OnInit {
   SkillsFormGroup: FormGroup;
   EmployeeSkills: any[];
   SkillsList: any[];
+  FilteredSkillsList:any[];
 
   constructor(
     private fb: FormBuilder,
     private skillService: SkillService,
-    private userService: UserService,
+    public userService: UserService,
     private messageService: MessageService
   ) { }
   ngOnInit(): void {
@@ -178,7 +179,7 @@ export class MySkillComponent implements OnInit {
         if (res.errorCode == 0) {
           for (let index = 0; index < this.SkillsList.length; index++) {
             const element = this.SkillsList[index];
-           
+
             if (element.skillId == res.dataObj.skillId) {
               this.SkillsList[index] = res.dataObj;
             }
@@ -193,7 +194,7 @@ export class MySkillComponent implements OnInit {
         this.messageService.add({ severity: 'error', summary: 'Failed', detail: 'Something went wrong please try after some time' });
       });
     }
-   
+
   }
 
 
@@ -256,5 +257,17 @@ export class MySkillComponent implements OnInit {
     });
   }
 
+  FilterSkills(event) {
+    let filtered : any[] = [];
+    let query = event.query;
+    for(let i = 0; i < this.SkillsList.length; i++) {
+        let skill = this.SkillsList[i];
+        if (skill.skillName.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            filtered.push(skill.skillName);
+        }
+    }
+
+    this.FilteredSkillsList = filtered;
+}
 
 }

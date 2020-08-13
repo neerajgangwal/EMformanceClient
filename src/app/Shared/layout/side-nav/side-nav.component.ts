@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
+import { UserService } from 'src/app/Services/user.service';
+import {ElementsEnum} from '../../../Entities/ElementsEnum';
+import {OperationsEnum} from '../../../Entities/OperationsEnum';
 
 @Component({
   selector: 'app-side-nav',
@@ -8,7 +11,7 @@ import * as $ from 'jquery';
 })
 export class SideNavComponent implements OnInit {
 
-  constructor() { }
+  constructor(public userService:UserService) { }
 
   ngOnInit() {
     $(document).ready(function () {
