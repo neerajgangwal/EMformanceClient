@@ -73,6 +73,15 @@
                 select Industy type</span>
             </div>
             <div class="form-group">
+              <label for="">Company Size*</label>
+              <input type="text" class="form-control" placeholder="Enter Your Company Size"
+                formControlName="companySize">
+              <span
+                *ngIf="!SignupForm.controls['companySize'].valid&&(SignupForm.controls['companySize'].dirty|| SignupForm.controls['companySize'].touched)"
+                class="error"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
+                provide Company Size</span>
+            </div>
+            <div class="form-group">
               <label for="">Office Phone No *</label>
               <input type="text" class="form-control" placeholder="Enter Your Mobile Number"
                 formControlName="adminMobile">

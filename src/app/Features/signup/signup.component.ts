@@ -35,6 +35,7 @@ export class SignupComponent implements OnInit {
       companyName: ['', Validators.required],
       portalName: ['', [Validators.required, Validators.pattern('(https?.//)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
       industryType: ['', Validators.required],
+      companySize:['', Validators.compose([Validators.required, Validators.max(1000),Validators.min(0), Validators.pattern('[0-9]+')])],
       adminMobile: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.pattern('[0-9]+')])],
       termsCheckBox: [false]
     });
@@ -65,6 +66,7 @@ export class SignupComponent implements OnInit {
           companyDomain: '',
           contactPerson: res.dataObj.userId,
           apiURLPrefix: data.portalName,
+          companySize:data.companySize
         }
 
         this.signupService.addCompany(company).subscribe((res) => {

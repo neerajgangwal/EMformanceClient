@@ -1320,6 +1320,7 @@ fieldset[disabled] .btn-neutral.active {
 label {
     display: inline-block;
 	/*float: left;*/
+	width:100%;
     max-width: 100%;
     margin-bottom: 5px;
     font-weight: 500;
@@ -5812,7 +5813,7 @@ color:#fff;
     line-height: 32px;
     text-align: center;
 }
-.slide-content ul li{line-height: 26px;}
+.slide-content ul li{line-height: 26px; margin-right:15px;}
 .slide-content ul{padding: 0 0 0 15px;}
 input.team.btn.btn-primary.add-feedback {
     margin-bottom: 8%;
@@ -6613,7 +6614,7 @@ margin-top:0px;}
     display: inline-block;
     width: 100%;
 	padding: 0px;
-	margin: 15px;
+
 }
 .material-switch > label {
     cursor: pointer;
@@ -6664,6 +6665,7 @@ margin-top:0px;}
 	border:1px solid #C0C0C0;
 	padding:15px 0 0 20px;
     width: 100%;
+	margin-bottom:15px;
 
 }
 .slide-wrapper{background-color: #D8ECEB; padding: 20px;}
@@ -7652,6 +7654,29 @@ padding: 0px;}
 #feedback-request h4{font-weight: 600;}
 .permission-list ul li{font-size: 16px; padding: 4px 0;}
 .feedback-list .skill-list{margin-bottom: 40px;}
+.ui-autocomplete.ui-widget {
+    border: none;
+	    width: 100%;
+}
+.ui-autocomplete-input.ng-star-inserted {
+    height: 46px;
+    padding: 10px 10px 10px 16px;
+    color: #57586E;
+    border: 1px solid #607D8B;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 16px;
+    background-color: #fff;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+body .ui-autocomplete .ui-autocomplete-input {
+    width: 100% !important;
+}
+.ui-autocomplete {
+    width: 100% important;
+}
 /* multiselect*/
 @media (max-width: 1280px) {
 	.list-heading ul li:first-child{width: calc(100% - 638px);}
