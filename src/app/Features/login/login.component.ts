@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
                         'access_token',
                         JSON.stringify(user)
                       );
-                      this.router.navigateByUrl('/department/create');
+                      this.router.navigateByUrl('/dashboard');
                     }
                   });
               } else {

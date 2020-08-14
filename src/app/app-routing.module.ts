@@ -4,7 +4,7 @@ import {AuthGuard} from './Shared/auth.guard';
 import { EditProjectComponent } from './Features/project/edit-project/edit-project.component';
 
 const routes: Routes = [
-{ path: 'login', loadChildren: () => import('./Features/login/login.module').then(m => m.LoginModule) }, 
+{ path: 'login', loadChildren: () => import('./Features/login/login.module').then(m => m.LoginModule) },
 { path: 'company', loadChildren: () => import('./Features/company/company.module').then(m => m.CompanyModule) },
 { path: 'employee', loadChildren: () => import('./Features/employee/employee.module').then(m => m.EmployeeModule) ,canActivate:[AuthGuard]},
 { path: '', loadChildren: () => import('./Features/signup/signup.module').then(m => m.SignupModule) },
@@ -24,6 +24,7 @@ const routes: Routes = [
 { path: 'admin/Billing', loadChildren: () => import('./Features/admin/admin-billing/admin-billing.module').then(m => m.AdminBillingModule) },
 { path: 'admin/role', loadChildren: () => import('./Features/admin/admin-role/admin-role.module').then(m => m.AdminRoleModule) },
 { path: 'admin/user', loadChildren: () => import('./Features/admin/admin-user-list/admin-user-list.module').then(m => m.AdminUserListModule) },
+{ path: 'dashboard', loadChildren: () => import('./Features/dashboard/dashboard.module').then(m => m.DashboardModule),canActivate:[AuthGuard] },
 ]
 
 @NgModule({

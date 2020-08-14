@@ -167,9 +167,9 @@
                 <label for="">Select Priority</label>
                 <select name="" id="" class="form-control" formControlName="taskPriority">
                     <option value="" selected>Select Priority</option>
-                    <option value="Low  (Low,Medium,High)">Low</option> 
-                    <option value="Medium  (Low,Medium,High)">Medium</option> 
-                    <option value="High  (Low,Medium,High)">High</option>                                                           
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
 
                 </select>
             </div>
@@ -217,11 +217,11 @@
                     <option *ngFor="let project of ProjectsList" value="{{project.projectId}}">
                         {{project.projectName}}</option>
                 </select>
-            </div>           
+            </div>
             <div class="form-group">
                 <label for="">Task title</label>
                 <input type="text" class="form-control" placeholder="Enter task title here" formControlName="taskHeading">
-               
+
             </div>
             <div class="form-group">
                 <label for="">Task Description</label>
@@ -230,9 +230,9 @@
             <div class="form-group">
                 <label for="">Select Priority</label>
                 <select name="" id="" class="form-control" formControlName="taskPriority">
-                    <option value="Low  (Low,Medium,High)">Low</option> 
-                    <option value="Medium  (Low,Medium,High)">Medium</option> 
-                    <option value="High  (Low,Medium,High)">High</option>                                                           
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
 
                 </select>
             </div>
@@ -253,7 +253,7 @@
                     <div class="col-md-5">
                         <label for="">date</label>
                         <input type="date" class="form-control" formControlName="taskStartDate">
-                       
+
                     </div>
                     <div class="col-md-2 text-center">
                         <span class="to-padding">to</span>
@@ -261,7 +261,7 @@
                     <div class="col-md-5">
                         <label for="">due Date</label>
                         <input type="date" class="form-control" formControlName="taskDueDate">
-                        
+
                     </div>
                 </div>
             </div>

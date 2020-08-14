@@ -84,7 +84,7 @@
                             </div>
                         </div>
                         <div id="my-feedback" class="tab-pane fade">
-                            <div class="table-full-width">
+                            <!-- <div class="table-full-width">
                                 <ul class="checkbox-list">
                                     <li>
                                         <table class="table">
@@ -338,11 +338,12 @@
                             </div>
                             <div class="table-full-width">
 
-                            </div>
+                            </div> -->
+                            <h3 style="text-align: center;padding-top: 20%;">Not tagged to any project</h3>
 
                         </div>
                         <div id="team-feedback" class="tab-pane fade">
-                            <div class="table-full-width">
+                            <!-- <div class="table-full-width">
                                 <div class="emlist">
                                     <ul class="team-member team-listvew">
                                         <li class="team-heading">
@@ -477,12 +478,13 @@
 
                                     </ul>
                                 </div>
-                            </div>
+                            </div> -->
+                            <h3 style="text-align: center;padding-top: 20%;">Not tagged to any team</h3>
 
                         </div>
 
                         <div id="skill-feedback" class="tab-pane fade">
-                            <div class="table-full-width">
+                            <div class="table-full-width" *ngIf="EmployeeSkills && EmployeeSkills.length>0">
                                 <ul class="feedback-list">
                                     <li>
                                         <div class="row skill-list">
@@ -531,6 +533,7 @@
 
                                 </ul>
                             </div>
+                            <h3 *ngIf="!EmployeeSkills || EmployeeSkills.length==0" style="text-align: center;padding-top: 20%;">No skills mapped</h3>
 
                         </div>
                     </div>
