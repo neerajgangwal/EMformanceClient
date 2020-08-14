@@ -74,8 +74,8 @@ export const environment = {
   getFeedbackByParam:"getFeedbackByParam",
   getCompany:"getCompany",
 
-  getTeamGoals:"getMyTeamGoals?projectId=-1&createdBy="
-
+  getTeamGoals:"getMyTeamGoals?projectId=-1&createdBy=",
+  validatePortalName:"checkPortalName?portalName="
 };
 
 /*

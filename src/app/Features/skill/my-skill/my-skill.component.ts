@@ -212,7 +212,7 @@ export class MySkillComponent implements OnInit {
       if (res.errorCode == 0) {
         skillForm.patchValue({
           mode: "view",
-          skillProficiency:res.skillProficiency
+          skillProficiency:res.dataObj.skillProficiency
         });
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Successfully mapped skill' });
 
