@@ -18,6 +18,7 @@ export class ProjectListComponent implements OnInit {
   projectList:any[];
   viewList:any[]=[];
   SearchResults: any[];
+  teamList:any[];
   loading: true;
   FilterKey: string;
   uiStatusFilter:string="";
@@ -52,9 +53,24 @@ export class ProjectListComponent implements OnInit {
   ViewIconClicked(data)
   {  $('#add-task').addClass('open-slide');
      $('body').addClass('gray-over');
+     console.log("=======")
       console.log(data);
+      this.projectservice.getTeam(data.projectId).subscribe((res)=>
+      {
+        if(res.errorCode==0)
+        {
+           this.teamList=res.dataObj;
+           console.log(this.teamList);
+
+        }
+        else{
+
+        }
+
+      })
       this.viewList=data;
       console.log(this.viewList);
+
   }
 
   editIconClicked(id){

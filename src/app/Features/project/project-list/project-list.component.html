@@ -1,159 +1,168 @@
 <div class="main-panel">
-    <div class="content" style="background-color:#DAEBEB;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="search-form">
-                        <i class="fa fa-search"></i>
-                        <input type="text" class="form-control" placeholder="Search by name" (input)="FilterData($event)">
-                    </div>
-                </div>
-                <div class="dropdown pull-right">
-                    <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Filter by Status<b
-                            class="caret"></b></button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="javascript:void(0);" (click)="uiStatusFilter='Created'">Created</a><br>
-                        <a class="dropdown-item" href="javascript:void(0);" (click)="uiStatusFilter='Active'">Active</a><br>
-                        <a class="dropdown-item" href="javascript:void(0);" (click)="uiStatusFilter='Completed'">Completed</a>
-                    </div>
-                </div>
-                <div class="dropdown pull-right" style="margin-right: 20px;">
-                    <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Filter by Priority<b
-                            class="caret"></b></button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="javascript:void(0);" (click)="uiPriorityFilter='Low'">Low</a><br>
-                        <a class="dropdown-item" href="javascript:void(0);" (click)="uiPriorityFilter='Medium'">Medium</a><br>
-                        <a class="dropdown-item" href="javascript:void(0);" (click)="uiPriorityFilter='High'">High</a>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="table-full-width">
-                        <ul class="checkbox-list">
-                            <li>
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width: 50px;">
-                                                #
-                                            </td>
-                                            <td style="width:280px;"> Projects Name</td>
-                                            <td style="width: 150px;" class="gray-text">Start Date</td>
-                                            <td style="width: 150px;" class="gray-text">Due Date</td>
-                                            <td style="width: 140px;" class="gray-text">Team</td>
-                                            <td style="width: 104px;">Priorities</td>
-                                            <td style="width: 110px;">
-                                                Status
-                                            </td>
-                                            <td style="width: 180px;" class="gray-text"> Action</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </li>
-                            <li  *ngFor="let project of SearchResults | dataFilter:'projectPriority':uiPriorityFilter|dataFilter:'projectStatus':uiStatusFilter">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width: 50px;">
-                                                <div class="checkbox">
-                                                    <input id="checkbox11" type="checkbox">
-                                                    <label for="checkbox11"></label>
-                                                </div>
-                                            </td>
-                                            <td style="width:292px;">{{project.projectName}}</td>
-                                            <td style="width: 150px;" class="gray-text">{{project.projectStartDate}}</td>
-                                            <td style="width: 150px;" class="gray-text">{{project.projectDueDate}}</td>
-                                            <td style="width: 140px;" class="gray-text projectthumb">
-                                                <div class="team-thumb"></div>
-                                                <div class="team-thumb"></div>
-                                                <div class="more-thumb">
-                                                    3+</div>
-                                            </td>
-                                            <td style="width: 92px;"><span
-                                                    class="prioritybox completedcolor">{{project.projectPriority}}</span></td>
-                                            <td style="width: 110px;">
-                                                <span class="statusbox greencolor">{{project.projectStatus}}</span>
-                                            </td>
-                                            <td style="width: 180px;" class="gray-text act">
-                                                <i class="icon-View" *ngIf="userService.CheckPermission(userService.Elements.Project,userService.Operations.View)" (click)="ViewIconClicked(project)"></i>
-                                                <i class="icon-edit" *ngIf="userService.CheckPermission(userService.Elements.Project,userService.Operations.Edit)" (click)="editIconClicked(project.projectId)"></i>
-                                                <i class="icon-Delete" *ngIf="userService.CheckPermission(userService.Elements.Project,userService.Operations.Delete)" (click)="deleteIconClicked(project)"></i></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
+  <div class="content" style="background-color:#DAEBEB;">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="search-form">
+            <i class="fa fa-search"></i>
+            <input type="text" class="form-control" placeholder="Search by name" (input)="FilterData($event)">
+          </div>
         </div>
-
+        <div class="dropdown pull-right">
+          <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">Filter by Status<b class="caret"></b></button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="javascript:void(0);" (click)="uiStatusFilter='In Progress'">In Progress</a><br>
+            <a class="dropdown-item" href="javascript:void(0);" (click)="uiStatusFilter='Delayed'">Delayed</a><br>
+            <a class="dropdown-item" href="javascript:void(0);" (click)="uiStatusFilter='Completed'">Completed</a>
+          </div>
+        </div>
+        <div class="dropdown pull-right" style="margin-right: 20px;">
+          <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">Filter by Priority<b class="caret"></b></button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="javascript:void(0);" (click)="uiPriorityFilter='Low'">Low</a><br>
+            <a class="dropdown-item" href="javascript:void(0);" (click)="uiPriorityFilter='Medium'">Medium</a><br>
+            <a class="dropdown-item" href="javascript:void(0);" (click)="uiPriorityFilter='High'">High</a>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="table-full-width">
+            <ul class="checkbox-list">
+              <li>
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td style="width:280px;"> Projects Name</td>
+                      <td style="width: 150px;" class="gray-text">Start Date</td>
+                      <td style="width: 150px;" class="gray-text">Due Date</td>
+                      <td style="width: 140px;" class="gray-text">Team</td>
+                      <td style="width: 104px;">Priorities</td>
+                      <td style="width: 110px;">
+                        Status
+                      </td>
+                      <td style="width: 180px;" class="gray-text"> Action</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+              <li
+                *ngFor="let project of SearchResults | dataFilter:'projectPriority':uiPriorityFilter|dataFilter:'projectStatus':uiStatusFilter">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td style="width:292px;">{{project.projectName}}</td>
+                      <td style="width: 150px;" class="gray-text">{{project.projectStartDate}}</td>
+                      <td style="width: 150px;" class="gray-text">{{project.projectDueDate}}</td>
+                      <td style="width: 140px;" class="gray-text projectthumb">
+                        <div class="team-thumb"></div>
+                        <div class="team-thumb"></div>
+                        <div class="more-thumb">
+                          3+</div>
+                      </td>
+                      <td style="width: 92px;"><span class="prioritybox"
+                          [ngClass]="{'completedcolor':project.projectStatus=='Completed',
+                          'yellowcolor':project.projectStatus!='Completed' && project.projectPriority=='Low',
+                          'purplecolor':project.projectStatus!='Completed' && project.projectPriority=='Medium',
+                          'redcolor':project.projectStatus!='Completed' && project.projectPriority=='High'}">{{project.projectPriority}}</span>
+                      </td>
+                      <td style="width: 110px;">
+                        <span class="statusbox" [ngClass]="{
+                        'redcolor':project.projectStatus=='Delayed',
+                        'greencolor':project.projectStatus=='Completed',
+                        'purplecolor':project.projectStatus=='In Progress'}">{{project.projectStatus}}</span>
+                      </td>
+                      <td style="width: 180px;" class="gray-text act">
+                        <i class="icon-View"
+                          *ngIf="userService.CheckPermission(userService.Elements.Project,userService.Operations.View)"
+                          (click)="ViewIconClicked(project)"></i>
+                        <i class="icon-edit"
+                          *ngIf="userService.CheckPermission(userService.Elements.Project,userService.Operations.Edit)"
+                          (click)="editIconClicked(project.projectId)"></i>
+                        <i class="icon-Delete"
+                          *ngIf="userService.CheckPermission(userService.Elements.Project,userService.Operations.Delete)"
+                          (click)="deleteIconClicked(project)"></i></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
+
+  </div>
 </div>
 <div class="slide-popup" id="add-task">
-    <div class="slide-close">
-        <i class="fa fa-angle-left" aria-hidden="true" ></i>
-    </div>
-    <div class="slide-content">
-        <h3>Project Description</h3>
-        <p><strong>{{viewList["projectName"]}}</strong></p>
-        <div class="row">
-            <div class="col-md-3 col-xs-6">
-                <span><i class="fa fa-clock-o"></i>{{viewList["projectStartDate"]}}</span>
-            </div>
-            <div class="col-md-3 col-xs-6">
-                <span class="color-red"><i class="fa fa-clock-o"></i>{{viewList["projectDueDate"]}}</span>
-            </div>
-            <div class="col-md-6 col-xs-12">
-                <div class="skill-slider">
-                    <span id="ex3CurrentSliderValLabel" class="skill-value"><span id="ex3SliderVal">100</span>%</span>
-                    <input id="ex3" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1"
-                        data-slider-value="100" />
-                </div>
-            </div>
+  <div class="slide-close">
+    <i class="fa fa-angle-left" aria-hidden="true"></i>
+  </div>
+  <div class="slide-content">
+    <h3>Project Description</h3>
+    <p><strong>{{viewList["projectName"]}}</strong></p>
+    <div class="row">
+      <div class="col-md-3 col-xs-6">
+        <span><i class="fa fa-clock-o"></i>{{viewList["projectStartDate"]}}</span>
+      </div>
+      <div class="col-md-3 col-xs-6">
+        <span class="color-red"><i class="fa fa-clock-o"></i>{{viewList["projectDueDate"]}}</span>
+      </div>
+      <div class="col-md-6 col-xs-12">
+        <div class="skill-slider">
+          <span id="ex3CurrentSliderValLabel" class="skill-value"><span id="ex3SliderVal">100</span>%</span>
+          <input id="ex3" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1"
+            data-slider-value="100" />
         </div>
-        <h4><i class="icon-comment"></i> description</h4>
-        <p>{{viewList["projectDescription"]}}
-        </p>
-        <h4><i class="icon-attachment"></i>ATTACHMENT</h4>
-        <div class="attachment">
-            <img src="assets/img/img.png" alt="">
-            <span>{{viewList["projectAttachment"]}}</span>
-        </div>
+      </div>
     </div>
+    <h4><i class="icon-comment"></i> description</h4>
+    <p>{{viewList["projectDescription"]}}
+    </p>
+    <h4><i class="icon-attachment"></i>ATTACHMENT</h4>
+    <div class="attachment">
+      <img src="assets/img/img.png" alt="">
+      <span>{{viewList["projectAttachment"]}}</span>
+    </div>
+    <h4>Teams</h4>
+    <ul>
+      <li *ngFor="let team of teamList">{{team.teamName}}</li>
+    </ul>
+  </div>
 </div>
 <div class="slide-popup" id="task-description">
-    <div class="slide-close">
-        <i class="fa fa-angle-left" aria-hidden="true" ></i>
-    </div>
-    <div class="slide-content">
-        <h3>Project Description</h3>
-        <p><strong>Create dashboard of ProgressBar Helps you organize, assign, tasks, all from one central
-                platform</strong></p>
-        <div class="row">
-            <div class="col-md-3 col-xs-6">
-                <span><i class="fa fa-clock-o"></i>{{viewList["projectStartDate"]}}</span>
-            </div>
-            <div class="col-md-3 col-xs-6">
-                <span class="color-red"><i class="fa fa-clock-o"></i>{{viewList["projectDueDate"]}}</span>
-            </div>
-            <div class="col-md-6 col-xs-12">
-                <div class="skill-slider">
-                    <span id="ex3CurrentSliderValLabel" class="skill-value"><span id="ex3SliderVal">100</span>%</span>
-                    <input id="ex3" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1"
-                        data-slider-value="100" />
-                </div>
-            </div>
+  <div class="slide-close">
+    <i class="fa fa-angle-left" aria-hidden="true"></i>
+  </div>
+  <div class="slide-content">
+    <h3>Project Description</h3>
+    <p><strong>Create dashboard of ProgressBar Helps you organize, assign, tasks, all from one central
+        platform</strong></p>
+    <p>TEAM NAME</p>
+
+    <div class="row">
+      <div class="col-md-3 col-xs-6">
+        <span><i class="fa fa-clock-o"></i>{{viewList["projectStartDate"]}}</span>
+      </div>
+      <div class="col-md-3 col-xs-6">
+        <span class="color-red"><i class="fa fa-clock-o"></i>{{viewList["projectDueDate"]}}</span>
+      </div>
+      <div class="col-md-6 col-xs-12">
+        <div class="skill-slider">
+          <span id="ex3CurrentSliderValLabel" class="skill-value"><span id="ex3SliderVal">100</span>%</span>
+          <input id="ex3" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1"
+            data-slider-value="100" />
         </div>
-        <h4><i class="icon-comment"></i> description</h4>
-        <p>{{viewList["projectDescription"]}}
-        </p>
-        <h4><i class="icon-attachment"></i>ATTACHMENT</h4>
-        <div class="attachment">
-            <img src="assets/img/img.png" alt="">
-            <span>{{viewList["projectAttachment"]}}</span>
-        </div>
+      </div>
     </div>
+    <h4><i class="icon-comment"></i> description</h4>
+    <p>{{viewList["projectDescription"]}}
+    </p>
+    <h4><i class="icon-attachment"></i>ATTACHMENT</h4>
+    <div class="attachment">
+      <img src="assets/img/img.png" alt="">
+      <span>{{viewList["projectAttachment"]}}</span>
+      {{teamList|json}}
+    </div>
+  </div>
 </div>

@@ -5,7 +5,7 @@ import {ProjectService} from '../project.service'
 import {MessageService} from 'primeng/api';
 import {UserService} from '../../../../app/Services/user.service';
 import {SearchService} from '../../../Services/search.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -22,6 +22,7 @@ export class EditProjectComponent implements OnInit {
     private userService:UserService,
     private SearchService:SearchService,
     private route: ActivatedRoute,
+    private router:Router
 
     ) { }
 
@@ -110,7 +111,8 @@ getDepartment=function()
     this.projectservice.updateProject(data).subscribe((res) => {
       if (res.errorCode == 0) {
         this.messageservice.add({ severity: 'success', summary: 'Project Updated successfully', detail: '' });
-        this.ResetForm()
+        this.CancelButtonClick()
+        this.ResetForm();
       }
       else {
         this.messageservice.add({ severity: 'error', summary: res.errorMsg, detail: '' });
@@ -121,6 +123,10 @@ getDepartment=function()
     });
 
   }
+
+  CancelButtonClick(){
+    this.router.navigateByUrl("/project/list");
+   }
 
 
 }

@@ -270,4 +270,5 @@ export class MySkillComponent implements OnInit {
     this.FilteredSkillsList = filtered;
 }
 
+
 }

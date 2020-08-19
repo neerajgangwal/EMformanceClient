@@ -1,84 +1,81 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 import { UserService } from 'src/app/Services/user.service';
 @Injectable()
 export class EmployeeService {
 
-  constructor(private httpClient:HttpClient,private userService:UserService) { }
+  constructor(private httpClient: HttpClient, private userService: UserService) { }
 
-  GetEmployeeData=function()
-  {
-    return this.httpClient.get(this.userService.LoggedInUser.PortalName+environment.employeeData);
+  GetEmployeeData = function () {
+    return this.httpClient.get(this.userService.LoggedInUser.PortalName + environment.employeeData);
   }
 
-  GetEmployeeById=function(id){
-    return this.httpClient.post(this.userService.LoggedInUser.PortalName+environment.getEmployeeData,{employeeId:id});
+  GetEmployeeById = function (id) {
+    return this.httpClient.post(this.userService.LoggedInUser.PortalName + environment.getEmployeeData, { employeeId: id });
   }
 
-  GetDepartments=function()
-  {
-    return this.httpClient.get(this.userService.LoggedInUser.PortalName+environment.getDepartment);
+  GetDepartments = function () {
+    return this.httpClient.get(this.userService.LoggedInUser.PortalName + environment.getDepartment);
   }
 
-  GetDepartment=function(id)
-  {
-    return this.httpClient.get(this.userService.LoggedInUser.PortalName+environment.getDepartmentById+id);
+  GetDepartment = function (id) {
+    return this.httpClient.get(this.userService.LoggedInUser.PortalName + environment.getDepartmentById + id);
   }
 
-  GetDesignation=function(id)
-  {
-    return this.httpClient.post(this.userService.LoggedInUser.PortalName+environment.GetDesignations,{designationId:id});
+  GetDesignation = function (id) {
+    return this.httpClient.post(this.userService.LoggedInUser.PortalName + environment.GetDesignations, { designationId: id });
   }
 
-  GetRolesForDepartmentId=function(id)
-  {
-    return this.httpClient.post(this.userService.LoggedInUser.PortalName+environment.GetDesignations,{departmentId:id});
+  GetRolesForDepartmentId = function (id) {
+    return this.httpClient.post(this.userService.LoggedInUser.PortalName + environment.GetDesignations, { departmentId: id });
   }
 
-  CreateEmployee=function(data)
-  {
-    return this.httpClient.post(this.userService.LoggedInUser.PortalName+environment.AddEmployee,data);
+  CreateEmployee = function (data) {
+    return this.httpClient.post(this.userService.LoggedInUser.PortalName + environment.AddEmployee, data);
   }
 
-  UpdateEmployee=function(data)
-  {
-    return this.httpClient.post(this.userService.LoggedInUser.PortalName+environment.updateEmployee,data);
+  UpdateEmployee = function (data) {
+    return this.httpClient.post(this.userService.LoggedInUser.PortalName + environment.updateEmployee, data);
   }
-  getOperations=function()
-  {
-    return this.httpClient.get(this.userService.LoggedInUser.PortalName+environment.getOperations);
+  getOperations = function () {
+    return this.httpClient.get(this.userService.LoggedInUser.PortalName + environment.getOperations);
   }
 
-  getElements=function()
-  {
-    return this.httpClient.get(this.userService.LoggedInUser.PortalName+environment.getElements);
+  getElements = function () {
+    return this.httpClient.get(this.userService.LoggedInUser.PortalName + environment.getElements);
   }
 
-  getRolePermissions=function(id)
-  {
-    return this.httpClient.get(this.userService.LoggedInUser.PortalName+environment.getDesignationElementMapping+id);
+  getRolePermissions = function (id) {
+    return this.httpClient.get(this.userService.LoggedInUser.PortalName + environment.getDesignationElementMapping + id);
   }
 
-  deleteEmployee=function(id)
-  {
-    return this.httpClient.post(this.userService.LoggedInUser.PortalName+environment.deleteEmployee,{employeeId:id})
+  deleteEmployee = function (id) {
+    return this.httpClient.post(this.userService.LoggedInUser.PortalName + environment.deleteEmployee, { employeeId: id })
   }
 
-  getEmployeeElementMapping=function(id)
-  {
-    return this.httpClient.get(this.userService.LoggedInUser.PortalName+environment.getEmployeeElementsMapping+id);
+  getEmployeeElementMapping = function (id) {
+    return this.httpClient.get(this.userService.LoggedInUser.PortalName + environment.getEmployeeElementsMapping + id);
   }
-  GetSkillsMappedToEmployee=function(employeeIdData)
-    {
-      return this.httpClient.post(this.userService.LoggedInUser.PortalName+ environment.getEmployeeSkill,{employeeId:employeeIdData});
-    }
-    GetAllTheSkills=function(){
-      return this.httpClient.post(this.userService.LoggedInUser.PortalName+ environment.getSkill,{});
-    }
+  GetSkillsMappedToEmployee = function (employeeIdData) {
+    return this.httpClient.post(this.userService.LoggedInUser.PortalName + environment.getEmployeeSkill, { employeeId: employeeIdData });
+  }
+  GetAllTheSkills = function () {
+    return this.httpClient.post(this.userService.LoggedInUser.PortalName + environment.getSkill, {});
+  }
 
-    CreateSignUp=function(data)
-    {
-        return this.httpClient.post(environment.url+environment.signup,data);
-    }
+  CreateSignUp = function (data) {
+    return this.httpClient.post(environment.url + environment.signup, data);
+  }
+
+  GetProjectListById = function (id) {
+    return this.httpClient.get(this.userService.LoggedInUser.PortalName + environment.ProjectList + id);
+  }
+
+  getTeam = function () {
+
+    return this.httpClient.post(this.userService.LoggedInUser.PortalName + environment.getTeam,{});
+  }
+
+
 }

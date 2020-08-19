@@ -1,548 +1,216 @@
 <div class="main-panel">
+  <div class="content" style="background-color:#DAEBEB;">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#feedback-request">Employee Details</a></li>
+            <li><a data-toggle="tab" (click)="getProjectList()" href="#my-feedback">Projects</a></li>
+            <li><a data-toggle="tab" (click)="getTeamList()"href="#team-feedback">Teams</a></li>
+            <li><a data-toggle="tab" href="#skill-feedback">Skills</a></li>
+          </ul>
+          <div class="tab-content">
+            <div id="feedback-request" class="tab-pane fade in active">
+              <div class="table-full-width">
 
-
-
-    <div class="content" style="background-color:#DAEBEB;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#feedback-request">Employee Details</a></li>
-                        <li><a data-toggle="tab" href="#my-feedback">Projects</a></li>
-                        <li><a data-toggle="tab" href="#team-feedback">Teams</a></li>
-                        <li><a data-toggle="tab" href="#skill-feedback">Skills</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="feedback-request" class="tab-pane fade in active">
-                            <div class="table-full-width">
-
-                                <ul class="feedback-list" style="margin-bottom: 0px;">
-                                    <li>
-                                        <div class="media">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object" src="assets/img/faces/face-1.jpg"
-                                                        alt="...">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading">{{Employee.employeeFname+" "+Employee.employeeMname}} </h4>
-                                                <p class="gray-text">{{DepartmentName}} . {{DesignationName}}</p>
-                                                <p><a href="'mailto:'+{{Employee.employeeEmail}}">{{Employee.employeeEmail}}</a>
-                                                </p>
-                                                <p>{{Employee.employeeMobileNo}}</p>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                </ul>
-                            </div>
-                            <div class="row">
-
-                                <div class="col-md-12 col-xs-12">
-                                    <h4>Employee Permission</h4>
-                                    <div class="panel-group" id="accordion">
-
-
-                                        <div class="panel panel-default" id="panel2"
-                                            [attr.data-toggle]="'collapse'+element.elementId"
-                                            *ngFor="let element of Permissions"
-                                            [attr.data-target]="'#collapse'+element.elementId">
-                                            <div class="panel-heading" data-toggle="collapse"
-                                                [attr.data-target]="'#collapse'+element.elementId">
-                                                <h4 class="panel-title"><a style="font-weight:bold"
-                                                        data-toggle="collapse"
-                                                        [attr.data-target]="'#collapse'+element.elementId"
-                                                        class="collapsed">{{GetElementName(element.elementId)}}</a></h4>
-                                            </div>
-                                            <div [attr.id]="'collapse'+element.elementId"
-                                                class="panel-collapse collapse fade">
-                                                <div class="panel-body">
-                                                    <div class="content">
-                                                        <div class="permission-list">
-                                                            <ul>
-                                                                <li
-                                                                    *ngFor="let operation of element.employeeElementOprationList">
-                                                                    {{GetOperationName(operation.operationId)}}</li>
-                                                            </ul>
-
-                                                        </div>
-
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- panel3 -->
-
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                        <div id="my-feedback" class="tab-pane fade">
-                            <!-- <div class="table-full-width">
-                                <ul class="checkbox-list">
-                                    <li>
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td style="width: 50px;">
-                                                        #
-                                                    </td>
-                                                    <td style="width:280px;"> Projects Name</td>
-                                                    <td style="width: 150px;" class="gray-text">Start Date</td>
-                                                    <td style="width: 150px;" class="gray-text">Due Date</td>
-                                                    <td style="width: 140px;" class="gray-text">Team</td>
-                                                    <td style="width: 104px;">Priorities</td>
-                                                    <td style="width: 110px;">
-                                                        Status
-                                                    </td>
-                                                    <td style="width: 180px;" class="gray-text"> Action</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </li>
-                                    <li>
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td style="width: 50px;">
-                                                        <div class="checkbox">
-                                                            <input id="checkbox11" type="checkbox">
-                                                            <label for="checkbox11"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td style="width:292px;"> Guest Tracker and Hospitality ...</td>
-                                                    <td style="width: 150px;" class="gray-text">15 Sep , 2020</td>
-                                                    <td style="width: 150px;" class="gray-text">15 Oct , 2020</td>
-                                                    <td style="width: 140px;" class="gray-text projectthumb">
-                                                        <div class="team-thumb"></div>
-                                                        <div class="team-thumb"></div>
-                                                        <div class="more-thumb">
-                                                            3+</div>
-                                                    </td>
-                                                    <td style="width: 92px;"><span
-                                                            class="prioritybox completedcolor">High</span></td>
-                                                    <td style="width: 110px;">
-                                                        <span class="statusbox greencolor">Completed</span>
-                                                    </td>
-                                                    <td style="width: 180px;" class="gray-text act"> <i
-                                                            class="icon-View project-description"></i>
-
-                                                        <i class="icon-Delete"></i></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </li>
-                                    <li>
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td style="width: 50px;">
-                                                        <div class="checkbox">
-                                                            <input id="checkbox11" type="checkbox">
-                                                            <label for="checkbox11"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td style="width:292px;"> Guest Tracker and Hospitality ...</td>
-                                                    <td style="width: 150px;" class="gray-text">15 Sep , 2020</td>
-                                                    <td style="width: 150px;" class="gray-text">15 Oct , 2020</td>
-                                                    <td style="width: 140px;" class="gray-text projectthumb">
-                                                        <div class="team-thumb"></div>
-                                                        <div class="team-thumb"></div>
-                                                        <div class="more-thumb">
-                                                            3+</div>
-                                                    </td>
-                                                    <td style="width: 92px;"><span
-                                                            class="prioritybox yellowcolor">Low</span></td>
-                                                    <td style="width: 110px;">
-                                                        <span class="statusbox purplecolor">In Progress</span>
-                                                    </td>
-                                                    <td style="width: 180px;" class="gray-text act"> <i
-                                                            class="icon-View project-description"></i>
-
-                                                        <i class="icon-Delete"></i></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </li>
-
-                                    <li>
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td style="width: 50px;">
-                                                        <div class="checkbox">
-                                                            <input id="checkbox11" type="checkbox">
-                                                            <label for="checkbox11"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td style="width:292px;"> Guest Tracker and Hospitality ...</td>
-                                                    <td style="width: 150px;" class="gray-text">15 Sep , 2020</td>
-                                                    <td style="width: 150px;" class="gray-text">15 Oct , 2020</td>
-                                                    <td style="width: 140px;" class="gray-text projectthumb">
-                                                        <div class="team-thumb"></div>
-                                                        <div class="team-thumb"></div>
-                                                        <div class="more-thumb">
-                                                            3+</div>
-                                                    </td>
-                                                    <td style="width: 92px;"><span
-                                                            class="prioritybox redcolor">High</span></td>
-                                                    <td style="width: 110px;">
-                                                        <span class="statusbox purplecolor">In Progress</span>
-                                                    </td>
-                                                    <td style="width: 180px;" class="gray-text act"> <i
-                                                            class="icon-View project-description"></i>
-
-                                                        <i class="icon-Delete"></i></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </li>
-                                    <li>
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td style="width: 50px;">
-                                                        <div class="checkbox">
-                                                            <input id="checkbox11" type="checkbox">
-                                                            <label for="checkbox11"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td style="width:292px;"> Guest Tracker and Hospitality ...</td>
-                                                    <td style="width: 150px;" class="gray-text">15 Sep , 2020</td>
-                                                    <td style="width: 150px;" class="gray-text">15 Oct , 2020</td>
-                                                    <td style="width: 140px;" class="gray-text projectthumb">
-                                                        <div class="team-thumb"></div>
-                                                        <div class="team-thumb"></div>
-                                                        <div class="more-thumb">
-                                                            3+</div>
-                                                    </td>
-                                                    <td style="width: 92px;"><span
-                                                            class="prioritybox purplecolor">Medium</span></td>
-                                                    <td style="width: 110px;">
-                                                        <span class="statusbox redcolor">Delayed</span>
-                                                    </td>
-                                                    <td style="width: 180px;" class="gray-text act"> <i
-                                                            class="icon-View project-description"></i>
-
-                                                        <i class="icon-Delete"></i></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </li>
-                                    <li>
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td style="width: 50px;">
-                                                        <div class="checkbox">
-                                                            <input id="checkbox11" type="checkbox">
-                                                            <label for="checkbox11"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td style="width:292px;"> Guest Tracker and Hospitality ...</td>
-                                                    <td style="width: 150px;" class="gray-text">15 Sep , 2020</td>
-                                                    <td style="width: 150px;" class="gray-text">15 Oct , 2020</td>
-                                                    <td style="width: 140px;" class="gray-text projectthumb">
-                                                        <div class="team-thumb"></div>
-                                                        <div class="team-thumb"></div>
-                                                        <div class="more-thumb">
-                                                            3+</div>
-                                                    </td>
-                                                    <td style="width: 92px;"><span
-                                                            class="prioritybox completedcolor">High</span></td>
-                                                    <td style="width: 110px;">
-                                                        <span class="statusbox greencolor">Completed</span>
-                                                    </td>
-                                                    <td style="width: 180px;" class="gray-text act"> <i
-                                                            class="icon-View project-description"></i>
-
-                                                        <i class="icon-Delete"></i></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </li>
-
-
-                                    <li>
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td style="width: 50px;">
-                                                        <div class="checkbox">
-                                                            <input id="checkbox11" type="checkbox">
-                                                            <label for="checkbox11"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td style="width:292px;"> Guest Tracker and Hospitality ...</td>
-                                                    <td style="width: 150px;" class="gray-text">15 Sep , 2020</td>
-                                                    <td style="width: 150px;" class="gray-text">15 Oct , 2020</td>
-                                                    <td style="width: 140px;" class="gray-text projectthumb">
-                                                        <div class="team-thumb"></div>
-                                                        <div class="team-thumb"></div>
-                                                        <div class="more-thumb">
-                                                            3+</div>
-                                                    </td>
-                                                    <td style="width: 92px;"><span
-                                                            class="prioritybox redcolor">High</span></td>
-                                                    <td style="width: 110px;">
-                                                        <span class="statusbox purplecolor">In Progress</span>
-                                                    </td>
-                                                    <td style="width: 180px;" class="gray-text act"> <i
-                                                            class="icon-View project-description"></i>
-
-                                                        <i class="icon-Delete"></i></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </li>
-                                    <li>
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td style="width: 50px;">
-                                                        <div class="checkbox">
-                                                            <input id="checkbox11" type="checkbox">
-                                                            <label for="checkbox11"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td style="width:292px;"> Guest Tracker and Hospitality ...</td>
-                                                    <td style="width: 150px;" class="gray-text">15 Sep , 2020</td>
-                                                    <td style="width: 150px;" class="gray-text">15 Oct , 2020</td>
-                                                    <td style="width: 140px;" class="gray-text projectthumb">
-                                                        <div class="team-thumb"></div>
-                                                        <div class="team-thumb"></div>
-                                                        <div class="more-thumb">
-                                                            3+</div>
-                                                    </td>
-                                                    <td style="width: 92px;"><span
-                                                            class="prioritybox purplecolor">Medium</span></td>
-                                                    <td style="width: 110px;">
-                                                        <span class="statusbox redcolor">Delayed</span>
-                                                    </td>
-                                                    <td style="width: 180px;" class="gray-text act"> <i
-                                                            class="icon-View project-description"></i>
-
-                                                        <i class="icon-Delete"></i></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </li>
-
-                                </ul>
-                            </div>
-                            <div class="table-full-width">
-
-                            </div> -->
-                            <h3 style="text-align: center;padding-top: 20%;">Not tagged to any project</h3>
-
-                        </div>
-                        <div id="team-feedback" class="tab-pane fade">
-                            <!-- <div class="table-full-width">
-                                <div class="emlist">
-                                    <ul class="team-member team-listvew">
-                                        <li class="team-heading">
-                                            <ul>
-                                                <li>
-                                                    Team Name
-                                                </li>Actions
-                                            </ul>
-
-
-                                        </li>
-
-                                        <li class="team-heading list-content">
-                                            <ul>
-                                                <li>
-                                                    Team 1
-                                                </li>
-                                                <li>
-                                                    <i class="icon-View team"></i>
-                                                    <i class="icon-Delete"></i>
-
-                                                </li>
-                                            </ul>
-
-                                        </li>
-                                        <li class="team-heading list-content">
-                                            <ul>
-                                                <li>
-                                                    Team 2
-                                                </li>
-                                                <li>
-                                                    <i class="icon-View"></i>
-                                                    <i class="icon-Delete"></i>
-
-                                                </li>
-                                            </ul>
-
-                                        </li>
-                                        <li class="team-heading list-content">
-                                            <ul>
-                                                <li>
-                                                    Team 3
-                                                </li>
-                                                <li>
-                                                    <i class="icon-View"></i>
-                                                    <i class="icon-Delete"></i>
-
-                                                </li>
-                                            </ul>
-
-                                        </li>
-                                        <li class="team-heading list-content">
-                                            <ul>
-                                                <li>
-                                                    Team 3
-                                                </li>
-                                                <li>
-                                                    <i class="icon-View"></i>
-                                                    <i class="icon-Delete"></i>
-
-                                                </li>
-                                            </ul>
-
-                                        </li>
-                                        <li class="team-heading list-content">
-                                            <ul>
-                                                <li>
-                                                    Team 4
-                                                </li>
-                                                <li>
-                                                    <i class="icon-View"></i>
-                                                    <i class="icon-Delete"></i>
-
-                                                </li>
-                                            </ul>
-
-                                        </li>
-                                        <li class="team-heading list-content">
-                                            <ul>
-                                                <li>
-                                                    Team 5
-                                                </li>
-                                                <li>
-                                                    <i class="icon-View"></i>
-                                                    <i class="icon-Delete"></i>
-
-                                                </li>
-                                            </ul>
-
-                                        </li>
-                                        <li class="team-heading list-content">
-                                            <ul>
-                                                <li>
-                                                    Team 5
-                                                </li>
-                                                <li>
-                                                    <i class="icon-View"></i>
-                                                    <i class="icon-Delete"></i>
-
-                                                </li>
-                                            </ul>
-
-                                        </li>
-                                        <li class="team-heading list-content">
-                                            <ul>
-                                                <li>
-                                                    Team 6
-                                                </li>
-
-                                                <li>
-                                                    <i class="icon-View"></i>
-                                                    <i class="icon-Delete"></i>
-
-                                                </li>
-                                            </ul>
-
-                                        </li>
-                                        <li class="team-heading list-content">
-                                            <ul>
-                                                <li>
-                                                    Team 6
-                                                </li>
-                                                <li>
-                                                    <i class="icon-View"></i>
-                                                    <i class="icon-Delete"></i>
-
-                                                </li>
-                                            </ul>
-
-                                        </li>
-
-
-                                    </ul>
-                                </div>
-                            </div> -->
-                            <h3 style="text-align: center;padding-top: 20%;">Not tagged to any team</h3>
-
-                        </div>
-
-                        <div id="skill-feedback" class="tab-pane fade">
-                            <div class="table-full-width" *ngIf="EmployeeSkills && EmployeeSkills.length>0">
-                                <ul class="feedback-list">
-                                    <li>
-                                        <div class="row skill-list">
-                                            <div class="col-md-6" *ngFor="let skill of EmployeeSkills">
-
-                                                <div class="skill-slider">
-                                                    <span>{{getSkillNameById(skill.skillId)}}</span>
-                                                    <span id="ex1CurrentSliderValLabel" class="skill-value"><span
-                                                            id="ex1SliderVal">67</span>%</span>
-                                                    <div class="slider slider-horizontal" id="">
-                                                        <div class="slider-track">
-                                                            <div class="slider-track-low" style="left: 0px; width: 0%;">
-                                                            </div>
-                                                            <div class="slider-selection" style="left: 0%; width: 67%;">
-                                                            </div>
-                                                            <div class="slider-track-high"
-                                                                style="right: 0px; width: 46%;"></div>
-                                                        </div>
-                                                        <div class="tooltip tooltip-main top" role="presentation"
-                                                            style="left: 54%;">
-                                                            <div class="tooltip-arrow"></div>
-                                                            <div class="tooltip-inner">54</div>
-                                                        </div>
-                                                        <div class="tooltip tooltip-min top" role="presentation"
-                                                            style="display: none;">
-                                                            <div class="tooltip-arrow"></div>
-                                                            <div class="tooltip-inner"></div>
-                                                        </div>
-                                                        <div class="tooltip tooltip-max top" role="presentation"
-                                                            style="display: none;">
-                                                            <div class="tooltip-arrow"></div>
-                                                            <div class="tooltip-inner"></div>
-                                                        </div>
-                                                        <div class="slider-handle max-slider-handle round hide"
-                                                            role="slider" aria-valuemin="0" aria-valuemax="100"
-                                                            aria-valuenow="0" tabindex="0" style="left: 0%;"></div>
-                                                    </div><input id="ex1" type="text" data-slider-min="0"
-                                                        data-slider-max="100" data-slider-step="1"
-                                                        data-slider-value="100" [attr.data-value]="skill.skillProficiency" value="{{skill.skillProficiency}}"
-                                                        style="display: none;">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </li>
-
-                                </ul>
-                            </div>
-                            <h3 *ngIf="!EmployeeSkills || EmployeeSkills.length==0" style="text-align: center;padding-top: 20%;">No skills mapped</h3>
-
-                        </div>
+                <ul class="feedback-list" style="margin-bottom: 0px;">
+                  <li>
+                    <div class="media">
+                      <div class="media-left">
+                        <a href="#">
+                          <img class="media-object" src="assets/img/faces/face-1.jpg" alt="...">
+                        </a>
+                      </div>
+                      <div class="media-body">
+                        <h4 class="media-heading">{{Employee.employeeFname+" "+Employee.employeeMname}} </h4>
+                        <p class="gray-text">{{DepartmentName}} . {{DesignationName}}</p>
+                        <p><a href="'mailto:'+{{Employee.employeeEmail}}">{{Employee.employeeEmail}}</a>
+                        </p>
+                        <p>{{Employee.employeeMobileNo}}</p>
+                      </div>
                     </div>
+                  </li>
 
+                </ul>
+              </div>
+              <div class="row">
+
+                <div class="col-md-12 col-xs-12">
+                  <h4>Employee Permission</h4>
+                  <div class="panel-group" id="accordion">
+
+
+                    <div class="panel panel-default" id="panel2" [attr.data-toggle]="'collapse'+element.elementId"
+                      *ngFor="let element of Permissions" [attr.data-target]="'#collapse'+element.elementId">
+                      <div class="panel-heading" data-toggle="collapse"
+                        [attr.data-target]="'#collapse'+element.elementId">
+                        <h4 class="panel-title"><a style="font-weight:bold" data-toggle="collapse"
+                            [attr.data-target]="'#collapse'+element.elementId"
+                            class="collapsed">{{GetElementName(element.elementId)}}</a></h4>
+                      </div>
+                      <div [attr.id]="'collapse'+element.elementId" class="panel-collapse collapse fade">
+                        <div class="panel-body">
+                          <div class="content">
+                            <div class="permission-list">
+                              <ul>
+                                <li *ngFor="let operation of element.employeeElementOprationList">
+                                  {{GetOperationName(operation.operationId)}}</li>
+                              </ul>
+
+                            </div>
+
+
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- panel3 -->
+
+
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+            <div id="my-feedback" class="tab-pane fade">
+              <div class="table-full-width">
+                <ul class="checkbox-list">
+                  <li>
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <td style="width:280px;"> Projects Name</td>
+                          <td style="width: 150px;" class="gray-text">Start Date</td>
+                          <td style="width: 150px;" class="gray-text">Due Date</td>
+                          <td style="width: 140px;" class="gray-text">Team</td>
+                          <td style="width: 104px;">Priorities</td>
+                          <td style="width: 110px;">
+                            Status
+                          </td>
+                          <td style="width: 180px;" class="gray-text"> Action</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </li>
+                  <li *ngFor="let project of projectList">
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <td style="width:292px;">{{project.projectName}}</td>
+                          <td style="width: 150px;" class="gray-text">{{project.projectStartDate}}</td>
+                          <td style="width: 150px;" class="gray-text">{{project.projectDueDate}}</td>
+                          <td style="width: 140px;" class="gray-text projectthumb">
+                            <div class="team-thumb"></div>
+                            <div class="team-thumb"></div>
+                            <div class="more-thumb">
+                              3+</div>
+                          </td>
+                          <td style="width: 92px;"><span class="prioritybox"
+                              [ngClass]="{'completedcolor':project.projectStatus=='Completed',
+                                              'yellowcolor':project.projectStatus!='Completed' && project.projectPriority=='Low',
+                                              'purplecolor':project.projectStatus!='Completed' && project.projectPriority=='Medium',
+                                              'redcolor':project.projectStatus!='Completed' && project.projectPriority=='High'}">{{project.projectPriority}}</span>
+                          </td>
+                          <td style="width: 110px;">
+                            <span class="statusbox"
+                              [ngClass]="{
+                                            'redcolor':project.projectStatus=='Delayed',
+                                            'greencolor':project.projectStatus=='Completed',
+                                            'purplecolor':project.projectStatus=='In Progress'}">{{project.projectStatus}}</span>
+                          </td>
+
+                        </tr>
+                      </tbody>
+                    </table>
+                  </li>
+                </ul>
+              </div>
+              <div class="table-full-width">
+
+              </div>
+            </div>
+            <div id="team-feedback" class="tab-pane fade">
+              <div class="table-full-width" *ngIf="TeamList && TeamList.length>0">
+                <div class="emlist">
+                  <ul class="team-member team-listvew">
+                    <li class="team-heading">
+                      <ul>
+                        <li>
+                          Team Name
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="team-heading list-content" *ngFor="let data of TeamList">
+
+                      <ul>
+                        <li>
+                          {{data.teamName}}
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
 
                 </div>
+              </div>
+              <h3 style="text-align: center;padding-top: 20%;" *ngIf="!TeamList || TeamList.length==0">Not tagged to any team</h3>
+
             </div>
-            <div class="col-md-3">
+            <div id="skill-feedback" class="tab-pane fade">
+              <div class="table-full-width" *ngIf="EmployeeSkills && EmployeeSkills.length>0">
+                <ul class="feedback-list">
+                  <li>
+                    <div class="row skill-list">
+                      <div class="col-md-6" *ngFor="let skill of EmployeeSkills">
+
+                        <div class="skill-slider">
+                          <span>{{getSkillNameById(skill.skillId)}}</span>
+                          <span id="ex1CurrentSliderValLabel" class="skill-value"><span
+                              id="ex1SliderVal">67</span>%</span>
+                          <div class="slider slider-horizontal" id="">
+                            <div class="slider-track">
+                              <div class="slider-track-low" style="left: 0px; width: 0%;">
+                              </div>
+                              <div class="slider-selection" style="left: 0%; width: 67%;">
+                              </div>
+                              <div class="slider-track-high" style="right: 0px; width: 46%;"></div>
+                            </div>
+                            <div class="tooltip tooltip-main top" role="presentation" style="left: 54%;">
+                              <div class="tooltip-arrow"></div>
+                              <div class="tooltip-inner">54</div>
+                            </div>
+                            <div class="tooltip tooltip-min top" role="presentation" style="display: none;">
+                              <div class="tooltip-arrow"></div>
+                              <div class="tooltip-inner"></div>
+                            </div>
+                            <div class="tooltip tooltip-max top" role="presentation" style="display: none;">
+                              <div class="tooltip-arrow"></div>
+                              <div class="tooltip-inner"></div>
+                            </div>
+                            <div class="slider-handle max-slider-handle round hide" role="slider" aria-valuemin="0"
+                              aria-valuemax="100" aria-valuenow="0" tabindex="0" style="left: 0%;"></div>
+                          </div><input id="ex1" type="text" data-slider-min="0" data-slider-max="100"
+                            data-slider-step="1" data-slider-value="100" [attr.data-value]="skill.skillProficiency"
+                            value="{{skill.skillProficiency}}" style="display: none;">
+                        </div>
+                      </div>
+                    </div>
+
+                  </li>
+
+                </ul>
+              </div>
+              <h3 *ngIf="!EmployeeSkills || EmployeeSkills.length==0" style="text-align: center;padding-top: 20%;">No
+                skills mapped</h3>
             </div>
+          </div>
+
+
         </div>
+      </div>
+      <div class="col-md-3">
+      </div>
     </div>
+  </div>
 </div>

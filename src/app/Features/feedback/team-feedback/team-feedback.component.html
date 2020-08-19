@@ -107,7 +107,8 @@
     <form *ngIf="CreateForm != null" [formGroup]="CreateForm">
       <div class="form-group">
         <label for="">Select Project</label>
-        <select name="" id="" class="form-control" formControlName="projectId" (change)="SelectProjectChanged(CreateForm.controls['projectId'].value)">
+        <select name="" id="" class="form-control" formControlName="projectId"
+          (change)="SelectProjectChanged(CreateForm.controls['projectId'].value)">
           <option value="">Select Project</option>
           <option *ngFor="let project of ProjectList" value="{{ project.projectId }}">
             {{ project.projectName }}</option>
@@ -162,9 +163,11 @@
       </div>
 
 
-
-      <input type="submit" value="Create Feedback Request" class="btn btn-primary"
-        (click)="CreateButtonClicked(CreateForm.value)" />
+      <div class="row">
+        <input class="col-sm-3" type="submit" value="Create Feedback Request" class="btn btn-primary"
+          (click)="CreateButtonClicked(CreateForm.value)" />
+        <input class="col-sm-3" type="button" value="Cancel" class="btn btn-primary" (click)="CancelButtonClick()" />
+      </div>
     </form>
   </div>
 </div>

@@ -43,20 +43,33 @@
             </div>
             <div class="form-group">
               <label for="">Company Name *</label>
-              <input type="text" class="form-control" placeholder="Enter Your Company Name" formControlName="companyName">
+              <input type="text" class="form-control" placeholder="Enter Your Company Name"
+                formControlName="companyName">
               <span class="error"
                 *ngIf="!SignupForm.controls['companyName'].valid&&(SignupForm.controls['companyName'].dirty || SignupForm.controls['companyName'].touched)"><i
                   class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
                 provide company name</span>
             </div>
+
             <div class="form-group">
               <label for="">Company Website *</label>
-              <input type="text" class="form-control" placeholder="Enter Your Portal Name" formControlName="portalName">
+              <input type="text" class="form-control" placeholder="Enter Your Company Website"
+                formControlName="companyWebsite">
+            </div>
+
+            <div class="form-group">
+              <label for="">Unique Portal Name*</label>
+              <input type="text" id="portal" class="form-control" placeholder="ex. gomapIndia"
+                formControlName="portalName" (blur)="checkPortalName(SignupForm.controls['portalName'].value)">
               <span class="error"
-                *ngIf="!SignupForm.controls['portalName'].valid&&(SignupForm.controls['portalName'].dirty || SignupForm.controls['portalName'].touched)"><i
+                *ngIf="!ShowCompanyValidationMessage && !SignupForm.controls['portalName'].valid&&(SignupForm.controls['portalName'].dirty || SignupForm.controls['portalName'].touched)"><i
                   class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
                 provide valid Portal Name</span>
+              <span class="error"
+                *ngIf="ShowCompanyValidationMessage"><i
+                  class="fa fa-exclamation-triangle" aria-hidden="true"></i>Portal name already exists, please enter a different name</span>
             </div>
+
             <div class="form-group">
               <label for="">Industry *</label>
               <select class="form-control" formControlName="industryType">
@@ -74,8 +87,14 @@
             </div>
             <div class="form-group">
               <label for="">Company Size*</label>
-              <input type="text" class="form-control" placeholder="Enter Your Company Size"
-                formControlName="companySize">
+              <select class="form-control" formControlName="companySize">
+                <option value="">Select Team Size</option>
+                <option value="1-50">1-50</option>
+                <option value="51-150">51-150</option>
+                <option value="151-250">151-250</option>
+                <option value="251-500">251-500</option>
+                <option value="500 and more">500 and more</option>
+              </select>
               <span
                 *ngIf="!SignupForm.controls['companySize'].valid&&(SignupForm.controls['companySize'].dirty|| SignupForm.controls['companySize'].touched)"
                 class="error"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please
@@ -92,12 +111,13 @@
             </div>
             <div class="form-group">
               <div class="checkbox">
-                <input id="checkbox1" type="checkbox" formControlName="termsCheckBox" >
+                <input id="checkbox1" type="checkbox" formControlName="termsCheckBox">
                 <label for="checkbox1">I agree to the <a href="#">Terms of services</a> and <a href="#">Privacy
                     Policy.</a>
                 </label>
               </div><br>
-              <input type="submit" name="submit" class="btn btn-primary" [disabled]="!SignupForm.valid || !SignupForm.controls['termsCheckBox'].value">
+              <input type="submit" name="submit" class="btn btn-primary"
+                [disabled]="!SignupForm.valid || !SignupForm.controls['termsCheckBox'].value">
             </div>
             <div class="frpass">I already have an account <a [routerLink]="['/login']">Login</a></div>
           </form>

@@ -36,7 +36,7 @@
 							<li>
 								<i class="icon-View team" *ngIf="userService.CheckPermission(userService.Elements.Team,userService.Operations.View)" (click)="ViewIconClicked(data.teamId)"></i>
 								<i class="icon-edit" *ngIf="userService.CheckPermission(userService.Elements.Team,userService.Operations.Edit)" (click)="editIconClicked(data)"></i>
-								<i id="addteam1" class="icon-Team" (click)="AddTeamIcon(data.teamId)"></i>
+								<i id="addteam1" *ngIf="userService.CheckPermission(userService.Elements.Team,userService.Operations.Edit)" class="icon-Team" (click)="AddTeamIcon(data.teamId)"></i>
 								<i class="icon-Delete" *ngIf="userService.CheckPermission(userService.Elements.Team,userService.Operations.Delete)" (click)="DeleteTeamIcon(data)"></i>
 							</li>
 						</ul>
@@ -61,7 +61,8 @@
 				<li class="team-pop-view">
 					<ul>
 						<li>Employee Name </li>
-						<li> Email </li>
+            <li>Email </li>
+            <li>Option</li>
 					</ul>
 				</li>
 
@@ -72,7 +73,11 @@
 						</li>
 						 <li>
 					  		<a href="#">{{member.employeeEmail}}</a>
-						</li>
+            </li>
+            <li>
+              <i class="icon-Delete" *ngIf="userService.CheckPermission(userService.Elements.Team,userService.Operations.Delete)" (click)="DeleteMemberIcon(member)"></i>
+
+            </li>
 					</ul>
 
 			   </li>
@@ -103,7 +108,9 @@
 						<option *ngFor="let project of ProjectsList" value="{{project.projectId}}">
 							{{project.projectName}}</option>
 						</select>
-				</div>
+        </div>
+        <input type="button" value="Cancel" class="btn btn-primary" (click)="CancelButtonClick()">
+
 				<input type="submit" value="Create Team" class="btn btn-primary"
 					(click)="CreateButtonClicked(CreateTeamForm.value)" [disabled]="!CreateTeamForm.valid">
 			</form>
@@ -134,6 +141,7 @@
 							{{project.projectName}}</option>
 					</select>
 				</div>
+        <input type="button" value="Cancel" class="btn btn-primary" (click)="CancelButtonClick()">
 
 				<input type="submit" value="Edit Team" class="btn btn-primary"
 					(click)="editSaveButtonClicked(EditTeamForm.value)" [disabled]="!EditTeamForm.valid">
@@ -169,7 +177,9 @@
 							<p>{{member.employee.employeeFname}} {{member.employee.employeeMname}} <b>{{member.designation.designationName}}</b></p><i class="fa fa-times" (click)="RemoveMemberFromTeamList(member)"></i>
 						</li>
 					</ul>
-				</div>
+        </div>
+        <input type="button" value="Cancel" class="btn btn-primary" (click)="CancelButtonClick()">
+
 				<input type="submit" value="Add Team Members" class="btn btn-primary" (click)="SaveTeamMembers(AddTeamForm.value)" [disabled]="TeamMemberList.length==0" >
 			</form>
 		</div>

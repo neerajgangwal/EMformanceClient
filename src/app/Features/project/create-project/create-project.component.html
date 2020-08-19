@@ -1,161 +1,172 @@
 <div class="main-panel">
-    <div class="content" style="background-color:#DAEBEB;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12 col-xs-12">
-                    <div class="panel-group" id="accordion">
-                        <!-- panel1  -->
-                        <div class="panel panel-default" id="panel1">
-                            <div class="panel-heading" data-toggle="collapse" data-target="#collapse1">
-                                <h4 class="panel-title"><a style="font-weight:bold" data-toggle="collapse"
-                                        data-target="#collapse1" href="#collapse1">Create new Project</a></h4>
-                            </div>
-                            <div id="collapse1" class="panel-collapse collapse in fade">
-                                <div class="panel-body">
-                                    <div class="content">
-                                        <div class="container-fluid">
-                                            <div class="form-section"  [formGroup]="CreateProjectForm">
-                                                <div class="col-lg-12">
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label for="">Project Name*</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter Project Name" formControlName="projectName">
-                                                            <span class="error" *ngIf="!CreateProjectForm.controls['projectName'].valid&&(CreateProjectForm.controls['projectName'].dirty|| CreateProjectForm.controls['projectName'].touched)"><i
-                                                                class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide Project name</span>
-                                                     </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label for="">Select Priority*</label>
-                                                        <select name="" id="" class="form-control" formControlName="projectPriority">
-                                                            <option value="" selected>Select Priority</option>
-                                                            <option value="Low">Low</option>
-                                                            <option value="Medium">Medium</option>
-                                                            <option value="High">High</option>
-                                                        </select>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                  <div class="form-group">
-                                                      <label for="">Select Department*</label>
-                                                      <select name="" id="" class="form-control" formControlName="departmentId">
-                                                          <option value="" selected>Select Department</option>
-                                                          <option *ngFor="let department of DepartmentList" value="{{department.departmentId}}">{{department.departmentName}}</option>
-
-                                                      </select>
-
-                                                  </div>
-                                              </div>
-                                                <div class="col-lg-6">
-                                                  <div class="form-group">
-                                                      <label for="">Select Status*</label>
-                                                      <select name="" id="" class="form-control" formControlName="projectStatus">
-                                                          <option value="" selected>Select Project</option>
-                                                          <option value="Created">Created</option>
-                                                          <option value="Active">Active</option>
-                                                          <option value="Completed">Completed</option>
-                                                      </select>
-
-                                                  </div>
-                                               </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group" formControlName="projectDescription">
-                                                        <label for="">Project Description*</label>
-                                                        <textarea class="form-control" rows="4" cols="50" placeholder="Enter Project details here" formControlName="projectDescription"></textarea>
-                                                        <span class="error" *ngIf="!CreateProjectForm.controls['projectDescription'].valid&&(CreateProjectForm.controls['projectDescription'].dirty|| CreateProjectForm.controls['projectDescription'].touched)"><i
-                                                            class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide project description</span>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <div class="col-md-5">
-                                                                <label for="">Project Timeline*</label>
-                                                                <input type="date" class="form-control" formControlName="projectStartDate">
-                                                                <span class="error" *ngIf="!CreateProjectForm.controls['projectStartDate'].valid&&(CreateProjectForm.controls['projectStartDate'].dirty|| CreateProjectForm.controls['projectStartDate'].touched)"><i
-                                                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please select start date</span>
-                                                            </div>
-                                                            <div class="col-md-2 text-center">
-                                                                <span class="to-padding">to</span>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <label for="">&nbsp;</label>
-                                                                <input type="date" class="form-control" formControlName="projectDueDate">
-                                                                <span class="error" *ngIf="!CreateProjectForm.controls['projectDueDate'].valid&&(CreateProjectForm.controls['projectDueDate'].dirty|| CreateProjectForm.controls['projectDueDate'].touched)"><i
-                                                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please select start date</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-
-                                                        <label for="">Upload file</label>
-                                                        <div class="file-upload">
-                                                            <button class="file-upload-btn" type="button"
-                                                                onclick="$('.file-upload-input').trigger( 'click' )">Click
-                                                                here to upload</button>
-
-                                                            <div class="image-upload-wrap">
-                                                                <input class="file-upload-input" type='file'
-                                                                    onchange="readURL(this);" accept="image/*" />
-                                                                <div class="drag-text">
-                                                                    <span>Drop files here or Click to upload</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="file-upload-content">
-                                                                <img class="file-upload-image" src="#"
-                                                                    alt="your image" />
-                                                                <div class="image-title-wrap">
-                                                                    <button type="button" onclick="removeUpload()"
-                                                                        class="remove-image">Remove <span
-                                                                            class="image-title">Uploaded
-                                                                            Image</span></button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3 pull-right">
-                                                    <input type="submit" value="Create Project" (click)="CreateProjectClicked(CreateProjectForm.value)"
-                                                        class="subbtn btn btn-primary" [disabled]="!CreateProjectForm.valid">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+  <div class="content" style="background-color:#DAEBEB;">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 col-xs-12">
+          <div class="panel-group" id="accordion">
+            <!-- panel1  -->
+            <div class="panel panel-default" id="panel1">
+              <div class="panel-heading" data-toggle="collapse" data-target="#collapse1">
+                <h4 class="panel-title"><a style="font-weight:bold" data-toggle="collapse" data-target="#collapse1"
+                    >Create new Project</a></h4>
+              </div>
+              <div id="collapse1" class="panel-collapse collapse in fade">
+                <div class="panel-body">
+                  <div class="content">
+                    <div class="container-fluid">
+                      <div class="form-section" [formGroup]="CreateProjectForm">
+                        <div class="col-lg-12">
                         </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="">Project Name*</label>
+                            <input type="text" class="form-control" placeholder="Enter Project Name"
+                              formControlName="projectName">
+                            <span class="error"
+                              *ngIf="!CreateProjectForm.controls['projectName'].valid&&(CreateProjectForm.controls['projectName'].dirty|| CreateProjectForm.controls['projectName'].touched)"><i
+                                class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide Project
+                              name</span>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="">Select Priority*</label>
+                            <select name="" id="" class="form-control" formControlName="projectPriority">
+                              <option value="" selected>Select Priority</option>
+                              <option value="Low">Low</option>
+                              <option value="Medium">Medium</option>
+                              <option value="High">High</option>
+                            </select>
 
-                        <!-- panel2 -->
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="">Select Department*</label>
+                            <select name="" id="" class="form-control" formControlName="departmentId">
+                              <option value="" selected>Select Department</option>
+                              <option *ngFor="let department of DepartmentList" value="{{department.departmentId}}">
+                                {{department.departmentName}}</option>
 
-                        <div class="panel panel-default" id="panel2">
-                            <div class="panel-heading" data-toggle="collapse" data-target="#collapse2">
-                                <h4 class="panel-title"><a style="font-weight:bold" data-toggle="collapse"
-                                        data-target="#collapse2"  href="#collapse2"class="collapsed">Add team to
-                                        Project</a></h4>
+                            </select>
+
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="">Select Status*</label>
+                            <select name="" id="" class="form-control" formControlName="projectStatus">
+                              <option value="" selected>Select Project Status</option>
+                              <option value="In Progress">In Progress</option>
+                              <option value="Delayed">Delayed</option>
+                              <option value="Completed">Completed</option>
+                            </select>
+
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group" formControlName="projectDescription">
+                            <label for="">Project Description*</label>
+                            <textarea class="form-control" rows="4" cols="50" placeholder="Enter Project details here"
+                              formControlName="projectDescription"></textarea>
+                            <span class="error"
+                              *ngIf="!CreateProjectForm.controls['projectDescription'].valid&&(CreateProjectForm.controls['projectDescription'].dirty|| CreateProjectForm.controls['projectDescription'].touched)"><i
+                                class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide project
+                              description</span>
+                          </div>
+
+                          <div class="form-group">
+                            <div class="row">
+                              <div class="col-md-5">
+                                <label for="">Project Timeline*</label>
+                                <input type="date" class="form-control" formControlName="projectStartDate">
+                                <span class="error"
+                                  *ngIf="!CreateProjectForm.controls['projectStartDate'].valid&&(CreateProjectForm.controls['projectStartDate'].dirty|| CreateProjectForm.controls['projectStartDate'].touched)"><i
+                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please select start
+                                  date</span>
+                              </div>
+                              <div class="col-md-2 text-center">
+                                <span class="to-padding">to</span>
+                              </div>
+                              <div class="col-md-5">
+                                <label for="">&nbsp;</label>
+                                <input type="date" class="form-control" formControlName="projectDueDate">
+                                <span class="error"
+                                  *ngIf="!CreateProjectForm.controls['projectDueDate'].valid&&(CreateProjectForm.controls['projectDueDate'].dirty|| CreateProjectForm.controls['projectDueDate'].touched)"><i
+                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please select start
+                                  date</span>
+                              </div>
                             </div>
-                            <div id="collapse2" class="panel-collapse collapse fade">
-                                <div class="panel-body">
-                                    <div class="content">
-                                        <div class="container-fluid">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <h4 class="top-heading">Team List </h4>
+                          </div>
 
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="search-form">
-                                                        <i class="fa fa-search"></i>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Search by name" (input)="FilterData($event)">
-                                                    </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
 
-                                                </div>
-                                                <!-- <div class="col-md-2 toglebtn">
+                            <label for="">Upload file</label>
+                            <div class="file-upload">
+                              <button class="file-upload-btn" type="button"
+                                onclick="$('.file-upload-input').trigger( 'click' )">Click
+                                here to upload</button>
+
+                              <div class="image-upload-wrap">
+                                <input class="file-upload-input" type='file' onchange="readURL(this);"
+                                  accept="image/*" />
+                                <div class="drag-text">
+                                  <span>Drop files here or Click to upload</span>
+                                </div>
+                              </div>
+                              <div class="file-upload-content">
+                                <img class="file-upload-image" src="#" alt="your image" />
+                                <div class="image-title-wrap">
+                                  <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
+                                      class="image-title">Uploaded
+                                      Image</span></button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 pull-right">
+                          <input type="button" value="Cancel" class="btn btn-primary" (click)="CancelButtonClick()">
+
+                          <input type="submit" value="Create Project"
+                            (click)="CreateProjectClicked(CreateProjectForm.value)" class="subbtn btn btn-primary"
+                            [disabled]="!CreateProjectForm.valid">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- panel2 -->
+
+            <div class="panel panel-default" id="panel2" *ngIf="LastProject">
+              <div class="panel-heading" data-toggle="collapse" data-target="#collapse2">
+                <h4 class="panel-title"><a style="font-weight:bold" data-toggle="collapse" data-target="#collapse2"
+                     class="collapsed">Add team to
+                    Project</a></h4>
+              </div>
+              <div id="collapse2" class="panel-collapse collapse fade">
+                <div class="panel-body">
+                  <div class="content">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <h4 class="top-heading">Team List </h4>
+
+                        </div>
+                        <div class="col-md-4">
+                          <div class="search-form">
+                            <i class="fa fa-search"></i>
+                            <input type="text" class="form-control" placeholder="Search by name"
+                              (input)="FilterData($event)">
+                          </div>
+
+                        </div>
+                        <!-- <div class="col-md-2 toglebtn">
                                                     <div class="dropdown">
                                                         <button class="btn btn-primary dropdown-toggle"
                                                             id="dropdownMenuButton" type="button" data-toggle="dropdown"
@@ -191,53 +202,54 @@
                                                     </div>
 
                                                 </div> -->
-                                            </div>
-                                            <ul class="team-member team-listvew">
-                                                <li class="employee-add-heading">
-                                                    <ul>
-                                                        <li>
-                                                            Team Name
-                                                        </li>
+                      </div>
+                      <ul class="team-member team-listvew">
+                        <li class="employee-add-heading">
+                          <ul>
+                            <li>
+                              Team Name
+                            </li>
 
-                                                    </ul>
-
-
-                                                </li>
-
-                                                <li class="employee-add-heading list-content" *ngFor="let element of SearchResults|dataFilter:'projectId':-1">
-                                                    <ul>
-                                                        <li>
-                                                            <div class="team-thumb"></div>
-                                                            <h4>{{element.teamName}}</h4>
-                                                        </li>
-                                                        <li>
-                                                        </li>
-                                                        <li>
-                                                        </li>
-                                                        <li>
-                                                            <button class="btn btn-success response" (click)="AddTeamToProject(element)">Add to
-                                                                Project</button>
-                                                        </li>
-                                                    </ul>
-
-                                                </li>
-
-                                            </ul>
+                          </ul>
 
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        </li>
 
-                            <!-- panel3 -->
+                        <li class="employee-add-heading list-content"
+                          *ngFor="let element of SearchResults|dataFilter:'projectId':-1">
+                          <ul>
+                            <li>
+                              <div class="team-thumb"></div>
+                              <h4>{{element.teamName}}</h4>
+                            </li>
+                            <li>
+                            </li>
+                            <li>
+                            </li>
+                            <li>
+                              <button class="btn btn-success response" (click)="AddTeamToProject(element)">Add to
+                                Project</button>
+                            </li>
+                          </ul>
+
+                        </li>
+
+                      </ul>
 
 
-                        </div>
                     </div>
+                  </div>
                 </div>
+              </div>
+
+              <!-- panel3 -->
 
 
             </div>
-
+          </div>
         </div>
+
+
+      </div>
+
+    </div>

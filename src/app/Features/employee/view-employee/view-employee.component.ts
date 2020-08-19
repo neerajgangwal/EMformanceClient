@@ -19,8 +19,10 @@ export class ViewEmployeeComponent implements OnInit {
   Operations: any[];
   Elements: any[];
   Permissions: any[];
-  EmployeeSkills:any[];
-  Skills:any[];
+  EmployeeSkills: any[];
+  projectList: any[];
+  TeamList: any[];
+  Skills: any[];
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(params => {
       var id = params.get("id");
@@ -65,43 +67,67 @@ export class ViewEmployeeComponent implements OnInit {
     }
   }
 
-  getEmployeeSkills(id){
+  getEmployeeSkills(id) {
     console.log("skill called");
     this.employeeService.GetSkillsMappedToEmployee(id)
-    .subscribe(res => {
-      if (res.errorCode == 0) {
-        console.log(res.dataObj);
-        this.EmployeeSkills = res.dataObj;
-      }
-      else {
+      .subscribe(res => {
+        if (res.errorCode == 0) {
+          console.log(res.dataObj);
+          this.EmployeeSkills = res.dataObj;
+        }
+        else {
 
-      }
-    });
+        }
+      });
   }
 
-  getAllEmployeeSkills()
-  {
+  getAllEmployeeSkills() {
     this.employeeService.GetAllTheSkills()
-    .subscribe(res => {
-      if (res.errorCode == 0) {
-        console.log(res.dataObj);
-        this.Skills = res.dataObj;
-      }
-      else {
+      .subscribe(res => {
+        if (res.errorCode == 0) {
+          console.log(res.dataObj);
+          this.Skills = res.dataObj;
+        }
+        else {
 
-      }
-    });
+        }
+      });
   }
 
-  getSkillNameById(id)
-  {
-    for (let index = 0; index < this.Skills.length; index++) {
-      const element = this.Skills[index];
-      if(element.skillId==id)
-      {
-        return element.skillName;
+  getSkillNameById(id) {
+    if (this.Skills) {
+      for (let index = 0; index < this.Skills.length; index++) {
+        const element = this.Skills[index];
+        if (element.skillId == id) {
+          return element.skillName;
+        }
       }
     }
+    return "";
+  }
+
+  getProjectList() {
+    var id = -1;
+    this.employeeService.GetProjectListById(id).subscribe((res) => {
+      console.log(res);
+      this.projectList = res.dataObj;
+      console.log(this.projectList);
+
+    });
+
+  }
+
+  getTeamList() {
+    this.employeeService.getTeam().subscribe((res) => {
+      if (res.errorCode == 0) {
+        this.TeamList = res.dataObj;
+        console.log(this.TeamList);
+
+      }
+      else {
+
+      }
+    })
   }
 
   GetOperationName(id) {
@@ -122,18 +148,16 @@ export class ViewEmployeeComponent implements OnInit {
     }
   }
 
-  GetDesignationById(id)
-  {
-      this.employeeService.GetDesignation(id).subscribe(res=>{
-        this.DepartmentName=res.dataObj[0].departmentName;
-      })
+  GetDesignationById(id) {
+    this.employeeService.GetDesignation(id).subscribe(res => {
+      this.DepartmentName = res.dataObj[0].departmentName;
+    })
   }
 
-  GetDepartmentById(id)
-  {
-      this.employeeService.GetDepartment(id).subscribe(res=>{
-        this.DesignationName=res.dataObj[0].designationName;
-      })
+  GetDepartmentById(id) {
+    this.employeeService.GetDepartment(id).subscribe(res => {
+      this.DesignationName = res.dataObj[0].designationName;
+    })
   }
 
 }

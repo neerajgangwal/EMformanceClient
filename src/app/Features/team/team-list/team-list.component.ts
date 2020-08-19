@@ -39,6 +39,7 @@ export class TeamListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.teamservice.getTeam().subscribe((res) => {
       if (res.errorCode == 0) {
         this.TeamList = res.dataObj;
@@ -144,6 +145,7 @@ export class TeamListComponent implements OnInit {
         this.TeamList.push(res.dataObj);
         this.SearchResults = this.TeamList
         this.messageService.add({ severity: 'success', summary: 'Team Created', detail: 'Team created successfully' });
+        this.CancelButtonClick();
         this.ResetForm();
       }
       else {
@@ -170,6 +172,7 @@ export class TeamListComponent implements OnInit {
         this.messageService.add({ severity: 'success', summary: 'Team Created', detail: 'Via MessageService' });
         this.TeamMemberList = [];
         this.AddTeamForm.reset();
+        this.CancelButtonClick();
       }
       else {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: res.errorMsg });
@@ -242,8 +245,10 @@ export class TeamListComponent implements OnInit {
           }
         }
         this.SearchResults = this.TeamList
-        this.messageService.add({ severity: 'success', summary: 'Team updated', detail: 'Team created successfully' });
+        this.messageService.add({ severity: 'success', summary: 'Team updated', detail: 'Team Edited successfully' });
+        this. CancelButtonClick();
         this.ResetForm();
+        this.CancelButtonClick()
       }
       else {
         this.messageService.add({ severity: 'error', summary: 'Failed', detail: res.errorMsg });
@@ -308,5 +313,31 @@ export class TeamListComponent implements OnInit {
       return item[this.FilterKey].toLowerCase().includes(data.toLowerCase());
     }
     )
+  }
+
+  CancelButtonClick(){
+    $('.slide-close').parent().removeClass('open-slide');
+    $('body').removeClass('gray-over');
+  }
+
+  DeleteMemberIcon(data)
+  {
+    this.teamservice.deleteTeam(data.employeeId).subscribe((res)=>
+    {
+      if(res.errorCode==0)
+      {
+      this.TeamList.splice(this.TeamList.indexOf(data),1);
+      this.SearchResults = this.TeamList;
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Team deleted' });
+      }
+      else{
+        this.messageService.add({ severity: 'error', summary: 'Failed', detail: res.errorMsg });
+      }
+    }
+    ,(err)=>{
+      console.log(err);
+      this.messageService.add({ severity: 'error', summary: 'Failed', detail: "Something went wrong" });
+    });
+
   }
 }

@@ -7,6 +7,7 @@ import { UserService } from 'src/app/Services/user.service';
 export class TeamService {
 
   constructor(private httpclient:HttpClient,private userService:UserService) { }
+
   getTeam=function()
   {
     return this.httpclient.post(this.userService.LoggedInUser.PortalName+environment.getTeam,{});

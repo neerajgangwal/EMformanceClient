@@ -6,6 +6,7 @@ import { RolePermissions } from '../../../../app/Entities/RolePermissions';
 import { ElementOperation } from '../../../../app/Entities/ElementOperation';
 import { RoleElement } from '../../../../app/Entities/RoleElement';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-role',
@@ -35,7 +36,9 @@ export class CreateRoleComponent implements OnInit {
 
   FilteredRoleList:any[];
 
-  constructor(private roleService: RoleService, private layoutService: LayoutService, private fb: FormBuilder,private messageService: MessageService) { }
+  constructor(private roleService: RoleService, private layoutService: LayoutService,
+     private fb: FormBuilder,private messageService: MessageService
+     ,private router:Router) { }
   RoleForm: FormGroup;
   ngOnInit(): void {
     this.layoutService.UpdateLayout(true, true, true, false);
@@ -134,6 +137,7 @@ export class CreateRoleComponent implements OnInit {
       {
         this.messageService.add({ severity: 'success', summary: 'Role created successfully', detail: '' });
         this.ResetForm()
+        this.router.navigateByUrl("/role/list");
       }
       else{
         this.messageService.add({ severity: 'error', summary: res.errorMsg, detail: '' });
@@ -158,5 +162,7 @@ export class CreateRoleComponent implements OnInit {
     this.FilteredRoleList = filtered;
 }
 
-
+CancelButtonClick(){
+  this.router.navigateByUrl("/role/list");
+ }
 }

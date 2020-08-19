@@ -210,4 +210,10 @@ export class TeamTaskComponent implements OnInit {
     }
     )
   }
+
+  CancelButtonClick(){
+    $('.slide-close').parent().removeClass('open-slide');
+    $('body').removeClass('gray-over');
+  }
+
 }

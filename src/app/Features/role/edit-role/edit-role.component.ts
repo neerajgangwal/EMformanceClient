@@ -171,7 +171,8 @@ export class EditRoleComponent implements OnInit {
       if (res.errorCode == 0) {
         this.messageService.add({ severity: 'success', summary: 'Role Updated successfully', detail: '' });
         this.router.navigate(['role', 'list']);
-        this.ResetForm()
+        this.ResetForm();
+        this.router.navigateByUrl("/role/list");
       }
       else {
         this.messageService.add({ severity: 'error', summary: res.errorMsg, detail: '' });
@@ -194,6 +195,10 @@ export class EditRoleComponent implements OnInit {
     }
 
     this.FilteredRoleList = filtered;
+}
+
+CancelButtonClick(){
+ this.router.navigateByUrl("/role/list");
 }
 
 }

@@ -18,12 +18,12 @@ export class MyGoalComponent implements OnInit {
   editGoalForm: FormGroup;
   SearchResults: any[];
   FilterKey: string;
-  progressData:number;
+  progressData: number;
   constructor(
     private goalservice: GoalsService,
     private layoutservice: LayoutService,
     private fb: FormBuilder,
-   public userService: UserService,
+    public userService: UserService,
     private messageService: MessageService
   ) { }
 
@@ -51,28 +51,26 @@ export class MyGoalComponent implements OnInit {
   }
 
 
-  UpdateDashboardFormsToList(data)
-  {
-      for (let index = 0; index < data.length; index++) {
-        const element = data[index];
-        data[index].formGroup=this.fb.group({
-          goalStatus:[element.goalStatus],
-          goalPercentage:[element.goalPercentage]
-        });
-      }
-      console.log(data);
+  UpdateDashboardFormsToList(data) {
+    for (let index = 0; index < data.length; index++) {
+      const element = data[index];
+      data[index].formGroup = this.fb.group({
+        goalStatus: [element.goalStatus],
+        goalPercentage: [element.goalPercentage]
+      });
+    }
+    console.log(data);
   }
-  RadioButtonClick = function (data,form) {
+  RadioButtonClick = function (data, form) {
     form.patchValue({
       goalStatus: data
     })
   }
 
-  SaveIconClicked(form,goal)
-  {
-    goal.goalStatus=form.value.goalStatus;
-    goal.goalPercentage=form.value.goalPercentage;
-    goal.formGroup=null;
+  SaveIconClicked(form, goal) {
+    goal.goalStatus = form.value.goalStatus;
+    goal.goalPercentage = form.value.goalPercentage;
+    goal.formGroup = null;
     this.editSaveButtonClicked(goal);
   }
 
@@ -87,15 +85,15 @@ export class MyGoalComponent implements OnInit {
       taskId: [1, Validators.required],
       departmentId: [2, Validators.required],
       employeeId: [this.userService.LoggedInUser.Id],
-      goalStatus: ['approved', Validators.required],
-      goalApprovedStatus: ['', Validators.required],
-      confirmNote: ['', Validators.required],
+      goalStatus: ['approved'],
+      goalApprovedStatus: [''],
+      confirmNote: [''],
       goalHeading: ['', Validators.required],
       goalDescription: ['', Validators.required],
-      goalAttachment: ['', Validators.required],
+      goalAttachment: [''],
       goalStartDate: ['', Validators.required],
       goalEndDate: ['', Validators.required],
-      statusLevel:[]
+      statusLevel: []
     });
   }
 
@@ -124,21 +122,21 @@ export class MyGoalComponent implements OnInit {
     console.log("edit");
     console.log(data.goalId);
     this.editGoalForm = this.fb.group({
-      goalId:[data.goalId,Validators.required],
-      taskId:[data.goalId, Validators.required],
-      departmentId:[data.departmentId, Validators.required],
-      employeeId:[this.userService.LoggedInUser.Id],
-      goalStatus:[data.goalStatus, Validators.required],
+      goalId: [data.goalId, Validators.required],
+      taskId: [data.goalId, Validators.required],
+      departmentId: [data.departmentId, Validators.required],
+      employeeId: [this.userService.LoggedInUser.Id],
+      goalStatus: [data.goalStatus, Validators.required],
       goalApprovedStatus: [data.goalApprovedStatus, Validators.required],
-      confirmNote:['', Validators.required],
-      goalHeading:[data.goalHeading, Validators.required],
-      goalDescription:[data.goalDescription, Validators.required],
-      goalAttachment:[data.goalAttachment, Validators.required],
-      goalStartDate:[data.goalStartDate, Validators.required],
-      goalEndDate:[data.goalEndDate, Validators.required],
+      confirmNote: ['', Validators.required],
+      goalHeading: [data.goalHeading, Validators.required],
+      goalDescription: [data.goalDescription, Validators.required],
+      goalAttachment: [data.goalAttachment, Validators.required],
+      goalStartDate: [data.goalStartDate, Validators.required],
+      goalEndDate: [data.goalEndDate, Validators.required],
     });
 
-    console.log("edit goal form "+this.editGoalForm.value);
+    console.log("edit goal form " + this.editGoalForm.value);
   }
 
   AddGoalClicked() {
@@ -152,20 +150,21 @@ export class MyGoalComponent implements OnInit {
     this.goalservice.addGoal(data).subscribe((res) => {
       console.log("res " + res);
       if (res.errorCode == 0) {
-       var resultData=res.dataObj;
-        resultData.formGroup=this.fb.group({
-          goalStatus:[resultData.goalStatus],
-          goalPercentage:[resultData.goalPercentage]
+        var resultData = res.dataObj;
+        resultData.formGroup = this.fb.group({
+          goalStatus: [resultData.goalStatus],
+          goalPercentage: [resultData.goalPercentage]
         });
         this.goallist.push(resultData);
         console.log("success");
         this.SearchResults = this.goallist
-        this.messageService.add({ severity: 'success', summary: 'Successfully created goal', detail: 'Via MessageService' });
+        this.messageService.add({ severity: 'success', summary: 'goal created', detail: 'Successfully created goal' });
+        this.CancelButtonClick();
         this.createGoalForm.reset();
 
       }
       else {
-        this.messageService.add({ severity: 'error', summary: 'creation failed', detail: 'Via MessageService' });
+        this.messageService.add({ severity: 'error', summary: 'creation failed', detail: 'Failed to create goal' });
       }
     })
   }
@@ -174,7 +173,7 @@ export class MyGoalComponent implements OnInit {
     $('#edit-task').addClass('open-slide');
     $('body').addClass('gray-over');
     console.log("edit icon clicked");
-    console.log("data "+data);
+    console.log("data " + data);
     this.initialiseEditForm(data);
   }
 
@@ -184,10 +183,10 @@ export class MyGoalComponent implements OnInit {
     this.goalservice.updateGoal(data).subscribe((res) => {
       if (res.errorCode == 0) {
         this.initialiseEditForm(res.dataObj);
-        var resultData=res.dataObj;
-        resultData.formGroup=this.fb.group({
-          goalStatus:[resultData.goalStatus],
-          goalPercentage:[resultData.goalPercentage]
+        var resultData = res.dataObj;
+        resultData.formGroup = this.fb.group({
+          goalStatus: [resultData.goalStatus],
+          goalPercentage: [resultData.goalPercentage]
         });
         for (let index = 0; index < this.goallist.length; index++) {
           const element = this.goallist[index];
@@ -199,6 +198,7 @@ export class MyGoalComponent implements OnInit {
         }
         this.SearchResults = this.goallist
         this.messageService.add({ severity: 'success', summary: 'Goal updated', detail: 'Goal updated successfully' });
+        this.CancelButtonClick();
         this.ResetForm();
       }
       else {
@@ -212,7 +212,7 @@ export class MyGoalComponent implements OnInit {
 
   DeleteIconClicked(data) {
     console.log("delete icon clicked");
-    console.log("data is "+data);
+    console.log("data is " + data);
     this.goalservice.deleteGoal(data.goalId).subscribe((res) => {
       if (res.errorCode == 0) {
         this.goallist.splice(this.goallist.indexOf(data), 1);
@@ -230,14 +230,11 @@ export class MyGoalComponent implements OnInit {
 
   }
 
-  setStyles(goalStatus)
-  {
-    if(goalStatus=="hold")
-    {
+  setStyles(goalStatus) {
+    if (goalStatus == "hold") {
       return "#d1efda"
     }
-    else
-    {
+    else {
       return "#ffeccc"
     }
   }
@@ -258,6 +255,11 @@ export class MyGoalComponent implements OnInit {
       return item[this.FilterKey].toLowerCase().includes(data.toLowerCase());
     }
     )
+  }
+
+  CancelButtonClick(){
+    $('.slide-close').parent().removeClass('open-slide');
+    $('body').removeClass('gray-over');
   }
 
 }

@@ -9,6 +9,7 @@ import { ElementOperation } from 'src/app/Entities/ElementOperation';
 import { RolePermissions } from 'src/app/Entities/RolePermissions';
 import { RoleElement } from 'src/app/Entities/RoleElement';
 import { UserService } from 'src/app/Services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-employee',
@@ -26,7 +27,8 @@ export class CreateEmployeeComponent implements OnInit {
 
   constructor(private layoutService: LayoutService, private employeeService: EmployeeService, private fb: FormBuilder,
     private messageService: MessageService,
-    private userService: UserService
+    private userService: UserService,
+    private router:Router
   ) { }
 
   CreateHashMap(data) {
@@ -56,6 +58,10 @@ export class CreateEmployeeComponent implements OnInit {
 
 
   ngOnInit() {
+    this.employeeService.GetDepartments().subscribe((res) => {
+      this.DepartmentList = res.dataObj;
+      console.log(this.DepartmentList);
+    });
     this.employeeService.getElements()
       .subscribe((res) => {
         if (res.errorCode == 0) {
@@ -105,10 +111,7 @@ export class CreateEmployeeComponent implements OnInit {
       });
     }
 
-    this.employeeService.GetDepartments().subscribe((res) => {
-      this.DepartmentList = res.dataObj;
-      console.log(this.DepartmentList);
-    });
+
   }
 
 
@@ -176,6 +179,7 @@ export class CreateEmployeeComponent implements OnInit {
         console.log("success");
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Successfully created employee' });
         this.resetForm();
+        this.CancelButtonClick();
         this.EmployeeForm.patchValue({
           gender: 'Male'
         });
@@ -242,5 +246,8 @@ export class CreateEmployeeComponent implements OnInit {
       gender: data
     })
   }
+  CancelButtonClick(){
+    this.router.navigateByUrl("/employee/list");
+   }
 
 }

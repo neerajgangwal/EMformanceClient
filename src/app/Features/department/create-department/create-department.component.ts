@@ -5,6 +5,7 @@ import { LayoutService } from '../../../Services/layout.service'
 import { MessageService } from 'primeng/api';
 import { UserService } from 'src/app/Services/user.service';
 import * as $ from 'jquery';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,24 +20,25 @@ export class CreateDepartmentComponent implements OnInit {
   SearchResults: any[];
   loading: true;
   FilterKey: string;
-  EditForm:FormGroup;
-  DepartmentsList:any[]=[{"departmentName":"IT Services"},
-  {"departmentName":"Human Resource"},
-  {"departmentName":"Finance"},
-  {"departmentName":"Production"},
-  {"departmentName":"Security"},
-  {"departmentName":"Talent Acquisition"},
-  {"departmentName":"Marketing"},
-  {"departmentName":"Sales"},
-  {"departmentName":"Business Development"}]
+  EditForm: FormGroup;
+  DepartmentsList: any[] = [{ "departmentName": "IT Services" },
+  { "departmentName": "Human Resource" },
+  { "departmentName": "Finance" },
+  { "departmentName": "Production" },
+  { "departmentName": "Security" },
+  { "departmentName": "Talent Acquisition" },
+  { "departmentName": "Marketing" },
+  { "departmentName": "Sales" },
+  { "departmentName": "Business Development" }]
 
-  FilteredDepartmentsList:any[];
+  FilteredDepartmentsList: any[];
 
   constructor(private fb: FormBuilder,
     private AddDept: DepartmentService,
     private DeleteDept: DepartmentService,
     private messageService: MessageService,
-    public userService:UserService
+    public userService: UserService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
@@ -59,17 +61,13 @@ export class CreateDepartmentComponent implements OnInit {
 
 
 
-  initialiseEditForm=function(data)
-  {
-    this.EditForm=this.fb.group({
-      departmentId:[data.departmentId,Validators.required],
+  initialiseEditForm = function (data) {
+    this.EditForm = this.fb.group({
+      departmentId: [data.departmentId, Validators.required],
       departmentName: [data.departmentName, Validators.required]
     })
-    console.log("departmentid "+data.departmentId);
-    console.log("departmentName "+data.departmentName);
-
-
-
+    console.log("departmentid " + data.departmentId);
+    console.log("departmentName " + data.departmentName);
   }
 
   ResetForm = function () {
@@ -82,51 +80,49 @@ export class CreateDepartmentComponent implements OnInit {
     this.AddDept.addDepartment(data)
       .subscribe((res) => {
         console.log(res);
-        if(res.errorCode==0)
-        {
-        this.DepartmentList.push(res.dataObj);
-        this.SearchResults = this.DepartmentList
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Department Created' });
-        this.loading = false;
-        this.ResetForm();
+        if (res.errorCode == 0) {
+          this.DepartmentList.push(res.dataObj);
+          this.SearchResults = this.DepartmentList
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Department Created' });
+          this.loading = false;
+          this.ResetForm();
+          this.CancelButtonClick();
         }
-        else{
+        else {
           this.messageService.add({ severity: 'error', summary: 'Failed', detail: res.errorMsg });
         }
-      },(err)=>{
+      }, (err) => {
         console.log(err)
         this.messageService.add({ severity: 'error', summary: 'Failed', detail: 'Something failed in api' });
 
       });
   }
 
-  editIconClicked=function(data)
-  {
+  editIconClicked = function (data) {
     this.initialiseEditForm(data);
-    console.log("data "+data)
+    console.log("data " + data)
     $('#edit-team').addClass('open-slide');
     $('body').addClass('gray-over');
 
   }
-  editSaveButtonClicked=function(data)
-  {
-    data.activateFlag=1;
-    console.log("save"+data.projectId);
+  editSaveButtonClicked = function (data) {
+    data.activateFlag = 1;
+    console.log("save" + data.projectId);
     this.AddDept.updateDepartment(data).subscribe((res) => {
       if (res.errorCode == 0) {
         this.initialiseEditForm(res.dataObj);
         for (let index = 0; index < this.DepartmentList.length; index++) {
           const element = this.DepartmentList[index];
-          console.log("element.departmentId"+element.departmentId);
-          console.log("data.departmentId"+data.departmentId);
-          if(element.departmentId==data.departmentId)
-          {
-            this.DepartmentList[index]=res.dataObj;
+          console.log("element.departmentId" + element.departmentId);
+          console.log("data.departmentId" + data.departmentId);
+          if (element.departmentId == data.departmentId) {
+            this.DepartmentList[index] = res.dataObj;
           }
         }
         this.SearchResults = this.DepartmentList
         this.messageService.add({ severity: 'success', summary: 'department updated', detail: 'department edited successfully' });
         this.ResetForm();
+        this.CancelButtonClick();
       }
       else {
         this.messageService.add({ severity: 'error', summary: 'Failed', detail: res.errorMsg });
@@ -139,17 +135,16 @@ export class CreateDepartmentComponent implements OnInit {
 
   deleteIconClicked = function (data) {
     this.DeleteDept.deleteDepartment(data.departmentId).subscribe((res => {
-      if(res.errorCode==0)
-      {
-      this.DepartmentList.splice(this.DepartmentList.indexOf(data), 1);
-      this.SearchResults = this.DepartmentList;
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Department deleted' });
+      if (res.errorCode == 0) {
+        this.DepartmentList.splice(this.DepartmentList.indexOf(data), 1);
+        this.SearchResults = this.DepartmentList;
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Department deleted' });
       }
-      else{
+      else {
         this.messageService.add({ severity: 'error', summary: 'Failed', detail: res.errorMsg });
       }
     }
-    ),(err)=>{
+    ), (err) => {
       console.log(err);
       this.messageService.add({ severity: 'error', summary: 'Failed', detail: "Something went wrong" });
     });
@@ -172,17 +167,21 @@ export class CreateDepartmentComponent implements OnInit {
   }
 
   FilterDepartments(event) {
-    let filtered : any[] = [];
+    let filtered: any[] = [];
     let query = event.query;
-    for(let i = 0; i < this.DepartmentsList.length; i++) {
-        let department = this.DepartmentsList[i];
-        if (department.departmentName.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-            filtered.push(department.departmentName);
-        }
+    for (let i = 0; i < this.DepartmentsList.length; i++) {
+      let department = this.DepartmentsList[i];
+      if (department.departmentName.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(department.departmentName);
+      }
     }
 
     this.FilteredDepartmentsList = filtered;
-}
+  }
 
+  CancelButtonClick(){
+    $('.slide-close').parent().removeClass('open-slide');
+    $('body').removeClass('gray-over');
+  }
 
 }

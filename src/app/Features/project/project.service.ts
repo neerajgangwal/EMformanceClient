@@ -54,4 +54,9 @@ export class ProjectService {
     return this.httpClient.get(this.userService.LoggedInUser.PortalName+environment.getDepartment);
   }
 
+  getTeam=function(projectId)
+  {
+    return this.httpClient.post(this.userService.LoggedInUser.PortalName+environment.getTeam,{projectId:projectId});
+  }
+
 }

@@ -5,6 +5,7 @@ import {ProjectService} from '../project.service'
 import {MessageService} from 'primeng/api';
 import {UserService} from '../../../../app/Services/user.service';
 import {SearchService} from '../../../Services/search.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-project',
@@ -18,7 +19,8 @@ export class CreateProjectComponent implements OnInit {
     private fb:FormBuilder,
     private messageservice:MessageService,
     private userService:UserService,
-    private SearchService:SearchService
+    private SearchService:SearchService,
+    private router:Router
     ) { }
 
     CreateProjectForm:FormGroup;
@@ -110,6 +112,7 @@ export class CreateProjectComponent implements OnInit {
       console.log("project created");
       this.LastProject=res.dataObj;
       this.messageservice.add({ severity: 'success', summary: 'project Created', detail: 'Via MessageService' });
+      this.CancelButtonClick();
       this.ResetForm();
       }
       else{
@@ -150,6 +153,10 @@ export class CreateProjectComponent implements OnInit {
       }
     }
   }
+
+  CancelButtonClick(){
+    this.router.navigateByUrl("/project/list");
+   }
 
 
 

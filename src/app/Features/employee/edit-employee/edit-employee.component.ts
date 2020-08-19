@@ -8,7 +8,7 @@ import { EmployeeRoleElement } from 'src/app/Entities/UpdateEmployeeRoleElement'
 import { ElementOperation } from 'src/app/Entities/UpdateElementOperation';
 import { RolePermissions } from 'src/app/Entities/RolePermissions';
 import { RoleElement } from 'src/app/Entities/RoleElement';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-employee',
@@ -26,7 +26,8 @@ export class EditEmployeeComponent implements OnInit {
   ElementIdMapping:Map<number,number>
   OPerationIdMapping:Map<string,number>
 
-  constructor(private layoutService: LayoutService, private employeeService: EmployeeService, private fb: FormBuilder, private messageService: MessageService, private route: ActivatedRoute) { }
+  constructor(private layoutService: LayoutService, private employeeService: EmployeeService,
+     private fb: FormBuilder, private messageService: MessageService, private route: ActivatedRoute, private router:Router) { }
 
 
 
@@ -168,10 +169,11 @@ export class EditEmployeeComponent implements OnInit {
       if (res.errorCode == 0) {
         console.log("success");
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Successfully created employee' });
-        this.resetForm();
+        this.router.navigate(['employee', 'list']); this.resetForm();
         this.EmployeeForm.patchValue({
           gender: 'Male'
         });
+        this.router.navigateByUrl("/employee/list");
       }
       else {
         this.messageService.add({ severity: 'error', summary: 'Failed', detail: res.errorMsg });
@@ -225,5 +227,9 @@ export class EditEmployeeComponent implements OnInit {
       gender: data
     })
   }
+
+  CancelButtonClick(){
+    this.router.navigateByUrl("/employee/list");
+   }
 
 }

@@ -9,34 +9,33 @@ import { UserService } from '../../Services/user.service';
 export class SignupService {
 
   url: string = environment.url;
-  constructor(private httpClient: HttpClient,private userService:UserService) { }
+  constructor(private httpClient: HttpClient, private userService: UserService) { }
 
   SignupFunction = function (data) {
-    return this.httpClient.post(this.url+environment.signup, data);
+    return this.httpClient.post(this.url + environment.signup, data);
   }
 
-  ValidateToken=function(token)
-  {
-    return this.httpClient.get(this.url+environment.emailVerification+token);
+  ValidateToken = function (token) {
+    return this.httpClient.get(this.url + environment.emailVerification + token);
   }
 
-  addCompany=function(data)
-  {
-    return this.httpClient.post(environment.url+environment.addCompany,data);
+  addCompany = function (data) {
+    return this.httpClient.post(environment.url + environment.addCompany, data);
   }
 
-  CreateEmployee=function(company,data)
-  {
-    return this.httpClient.post(environment.urlPrefix+company+environment.urlSuffix+environment.AddEmployee,data)
+  CreateEmployee = function (company, data) {
+    return this.httpClient.post(environment.urlPrefix + company + environment.urlSuffix + environment.AddEmployee, data)
   }
-  getOperations=function(company)
-  {
-    return this.httpClient.get(environment.urlPrefix+company+environment.urlSuffix+environment.getOperations);
+  getOperations = function (company) {
+    return this.httpClient.get(environment.urlPrefix + company + environment.urlSuffix + environment.getOperations);
   }
 
-  getElements=function(company)
-  {
-    return this.httpClient.get(environment.urlPrefix+company+environment.urlSuffix+environment.getElements);
+  getElements = function (company) {
+    return this.httpClient.get(environment.urlPrefix + company + environment.urlSuffix + environment.getElements);
+  }
+
+  CheckPortalName = function (name) {
+    return this.httpClient.get(environment.url+environment.validatePortalName+name)
   }
 
 }

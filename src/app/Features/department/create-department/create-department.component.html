@@ -1,93 +1,104 @@
 <div class="main-panel">
-<div class="content" style="background-color:#DAEBEB;">
-                <div class="container-fluid">
-            <div class="form-container" [formGroup]="DepartmentForm">
-                <div class="form-section">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="">Department Name</label>
-                             <p-autoComplete formControlName="departmentName"  placeholder="Enter Department Name" [suggestions]="FilteredDepartmentsList" (completeMethod)="FilterDepartments($event)" ></p-autoComplete>
-
-                                <span class="error"
-                                *ngIf="!DepartmentForm.controls['departmentName'].valid&&(DepartmentForm.controls['departmentName'].dirty|| DepartmentForm.controls['departmentName'].touched)"><i
-                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide department name
-                                </span>
-                        </div>
-
-                    </div>
-                    <div class="col-lg-3 pull-left">
-                        <button  class="subbtn btn btn-primary"
-                        (click)="CreateButtonClicked(DepartmentForm.value)" [disabled]="!DepartmentForm.valid">Create Department
-                        <!-- <p-progressSpinner [style]="{width: '20px', height: '20px'}" strokeWidth="8" animationDuration=".5s"></p-progressSpinner> -->
-
-                    </button>
-                    </div>
-                </div>
+  <div class="content" style="background-color:#DAEBEB;">
+    <div class="container-fluid">
+      <div class="form-container" *ngIf="userService.CheckPermission(userService.Elements.Department,userService.Operations.Create)" [formGroup]="DepartmentForm">
+        <div class="form-section">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="">Department Name</label>
+              <p-autoComplete formControlName="departmentName" placeholder="Enter Department Name"
+                [suggestions]="FilteredDepartmentsList" (completeMethod)="FilterDepartments($event)"></p-autoComplete>
+              <span class="error"
+                *ngIf="!DepartmentForm.controls['departmentName'].valid&&(DepartmentForm.controls['departmentName'].dirty|| DepartmentForm.controls['departmentName'].touched)"><i
+                  class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide department name
+              </span>
             </div>
-            <div class="emlist">
-					    <div class="row" style="margin-left: 0px;">
-						<div class="col-md-4" style="margin-top: 10px;">
-							 <div class="search-form">
-                                <i class="fa fa-search"></i>
-                                <input style="background-color: #e9eff3;" type="text" class="form-control" placeholder="Search by name" (input)="FilterData($event)">
-                            </div>
-                        </div>
-						</div>
-                <ul class="team-member team-listvew">
-                    <li class="list-heading">
-                        <ul>
 
-                            <li class="dpname">Department </li>
-                            <li class="dpname">Actions </li>
-                        </ul>
+          </div>
+          <div class="col-lg-3 pull-left">
+            <button class="subbtn btn btn-primary" (click)="CreateButtonClicked(DepartmentForm.value)"
+              [disabled]="!DepartmentForm.valid">Create Department
+              <!-- <p-progressSpinner [style]="{width: '20px', height: '20px'}" strokeWidth="8" animationDuration=".5s"></p-progressSpinner> -->
 
-
-                    </li>
-
-                    <li class="list-heading list-content" *ngFor="let dept of SearchResults">
-                        <ul>
-
-                            <li class="dpname">{{dept.departmentName}}</li>
-                            <li class="dpname">
-                                <i class="icon-edit" *ngIf="userService.CheckPermission(userService.Elements.Department,userService.Operations.Edit)" (click)="editIconClicked(dept)"></i>
-                                <i class="icon-Delete" *ngIf="userService.CheckPermission(userService.Elements.Department,userService.Operations.Delete)" (click)="deleteIconClicked(dept)"></i>
-                            </li>
-                        </ul>
-
-                    </li>
-
-
-                </ul>
-            </div>
+            </button>
+          </div>
         </div>
-</div>
+      </div>
+      <div class="emlist">
+        <div class="row" style="margin-left: 0px;">
+          <div class="col-md-4" style="margin-top: 10px;">
+            <div class="search-form">
+              <i class="fa fa-search"></i>
+              <input style="background-color: #e9eff3;" type="text" class="form-control" placeholder="Search by name"
+                (input)="FilterData($event)">
+            </div>
+          </div>
+        </div>
+        <ul class="team-member team-listvew">
+          <li class="list-heading">
+            <ul>
+
+              <li class="dpname">Department </li>
+              <li class="dpname">Actions </li>
+            </ul>
+
+
+          </li>
+
+          <li class="list-heading list-content" *ngFor="let dept of SearchResults">
+            <ul>
+
+              <li class="dpname">{{dept.departmentName}}</li>
+              <li class="dpname">
+                <i class="icon-edit"
+                  *ngIf="userService.CheckPermission(userService.Elements.Department,userService.Operations.Edit)"
+                  (click)="editIconClicked(dept)"></i>
+                <i class="icon-Delete"
+                  *ngIf="userService.CheckPermission(userService.Elements.Department,userService.Operations.Delete)"
+                  (click)="deleteIconClicked(dept)"></i>
+              </li>
+            </ul>
+
+          </li>
+
+
+        </ul>
+      </div>
+    </div>
+  </div>
 
 
 </div>
 <p-toast></p-toast>
 
 <div class="slide-popup" id="edit-team">
-	<div class="slide-close">
-		<i class="fa fa-angle-left" aria-hidden="true"></i>
-	</div>
-	<div class="slide-wrapper">
-		<div class="slide-content">
+  <div class="slide-close">
+    <i class="fa fa-angle-left" aria-hidden="true"></i>
+  </div>
+  <div class="slide-wrapper">
+    <div class="slide-content">
 
-			<h3>Edit Department</h3>
-			<form [formGroup]="EditForm" *ngIf="EditForm!=null" >
-				<div class="form-group">
-					<label for="">Department Name</label>
+      <h3>Edit Department</h3>
+      <form [formGroup]="EditForm" *ngIf="EditForm!=null">
+        <div class="form-group">
+          <label for="">Department Name</label>
 
-                    <p-autoComplete formControlName="departmentName"  placeholder="Enter Department Name" [suggestions]="FilteredDepartmentsList" (completeMethod)="FilterDepartments($event)"></p-autoComplete>
+          <p-autoComplete formControlName="departmentName" placeholder="Enter Department Name"
+            [suggestions]="FilteredDepartmentsList" (completeMethod)="FilterDepartments($event)"></p-autoComplete>
 
-                    <span class="error"
-                    *ngIf="!EditForm.controls['departmentName'].valid&&(EditForm.controls['departmentName'].dirty|| EditForm.controls['departmentName'].touched)"><i
-                        class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide department name
-                    </span>
-				</div>
+          <span class="error"
+            *ngIf="!EditForm.controls['departmentName'].valid&&(EditForm.controls['departmentName'].dirty|| EditForm.controls['departmentName'].touched)"><i
+              class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide department name
+          </span>
+        </div>
 
-				<input type="submit" value="Save Department" class="btn btn-primary" (click)="editSaveButtonClicked(EditForm.value)">
-			</form>
-		</div>
-	</div>
+        <div style="display: inline-block;">
+          <input type="button" value="Cancel" class="btn btn-primary"
+          (click)="CancelButtonClick()">
+        <input type="submit" value="Save Department" class="btn btn-primary"
+          (click)="editSaveButtonClicked(EditForm.value)">
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

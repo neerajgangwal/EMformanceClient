@@ -68,16 +68,16 @@ export class MyTaskComponent implements OnInit {
   {
     this.createTaskForm=this.fb.group({
       taskHeading:['',Validators.required],
-      departmentId:2,
+      departmentId:[2],
       taskDescription:['',Validators.required],
       projectId:[-1,Validators.required],
       assignedById:[this.userservice.LoggedInUser.Id],
-      assignedToId:1,
+      assignedToId:[1],
       taskStartDate:['',Validators.required],
       taskDueDate:['',Validators.required],
       taskAttachment:[''],
       taskPriority:['',Validators.required],
-      taskStatus:['',Validators.required]
+      taskStatus:['']
     })
 
 
@@ -117,6 +117,7 @@ export class MyTaskComponent implements OnInit {
         this.TaskList.push(res.dataObj);
         this.SearchResults = this.TaskList
         this.messageService.add({ severity: 'success', summary: 'Task Created', detail: 'Task created successfully' });
+        this.CancelButtonClick();
         this.ResetForm();
       }
       else {
@@ -163,6 +164,8 @@ export class MyTaskComponent implements OnInit {
         }
         this.SearchResults = this.TaskList
         this.messageService.add({ severity: 'success', summary: 'Task updated', detail: 'Task created successfully' });
+        $('.slide-close').parent().removeClass('open-slide');
+        $('body').removeClass('gray-over');
         this.ResetForm();
       }
       else {
@@ -189,7 +192,7 @@ export class MyTaskComponent implements OnInit {
 
       this.TaskList.splice(this.TaskList.indexOf(data),1);
       this.SearchResults = this.TaskList;
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Team deleted' });
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Task deleted' });
       }
       else{
         this.messageService.add({ severity: 'error', summary: 'Failed', detail: res.errorMsg });
@@ -225,5 +228,10 @@ export class MyTaskComponent implements OnInit {
       return item[this.FilterKey].toLowerCase().includes(data.toLowerCase());
     }
     )
+  }
+
+  CancelButtonClick(){
+    $('.slide-close').parent().removeClass('open-slide');
+    $('body').removeClass('gray-over');
   }
 }

@@ -1,247 +1,255 @@
 <div class="main-panel">
-    <div class="content" style="background-color:#DAEBEB;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="search-form">
-                        <i class="fa fa-search"></i>
-                        <input type="text" class="form-control" placeholder="Search by name"
-                            (input)="FilterData($event)">
-                    </div>
-                </div>
-
-                <div class="col-md-2 pull-right"><input type="submit" value="Add New Goal" (click)="AddGoalClicked()"
-                        class="team btn btn-primary">
-                </div>
-                <div class="dropdown pull-right">
-                    <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by Project<b
-                            class="caret"></b></button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="javascript:void(0);">Action</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Another action</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
-                    </div>
-                </div>
-            </div>
+  <div class="content" style="background-color:#DAEBEB;">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="search-form">
+            <i class="fa fa-search"></i>
+            <input type="text" class="form-control" placeholder="Search by name" (input)="FilterData($event)">
+          </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card-outer" *ngIf="SearchResults">
-                                <h4>Work in Progress</h4>
-                                <div *ngFor="let goal of GetGoalInprogressList" class="task-card"
-                                      [style.background-color]="setStyles(goal.goalStatus)">
 
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-9">
-                                                    <p><span>{{goal.goalHeading}}</span>
-                                                    </p>
-                                                </div>
-                                                <div class="col-md-3"><span
-                                                        class="statusbox" [class.greencolor]="goal.goalStatus=='hold'" [class.yellowcolorp]="goal.goalStatus=='delay'">{{goal.goalStatus}}</span>
-                                                </div>
-                                            </div>
-                                            <div class="date-section">{{goal.goalEndDate}}</div>
-                                            <p>{{goal.goalDescription}}</p>
-
-                                            <div class="goal-action">
-                                                <ul>
-
-                                                    <li>
-
-                                                        <i class="icon-edit" *ngIf="userService.CheckPermission(userService.Elements.Goals,userService.Operations.Edit)" (click)="EditIconClicked(goal)"></i>
-                                                        <i class="icon-Delete" *ngIf="userService.CheckPermission(userService.Elements.Goals,userService.Operations.Delete)" (click)="DeleteIconClicked(goal)"></i>
-                                                        <i class="icon-success" (click)="SaveIconClicked(goal.formGroup,goal)"></i>
-                                                        <i class="icon-comment managewidth"><span>14</span></i>
-                                                        <i class="icon-attachment managewidth"><span>14</span></i>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row card-footer">
-
-                                        <div class="col-md-12" *ngIf="goal.formGroup!=null" [formGroup]="goal.formGroup">
-                                            <div class="skill-slider">
-                                                <span id="ex3CurrentSliderValLabel" class="skill-value"><span
-                                                        id="ex3SliderVal">{{goal.formGroup.controls.goalPercentage.value}}</span>%</span>
-                                                <p-slider formControlName="goalPercentage" [min]="0" [max]="100">
-                                                </p-slider>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="fun" class="control-label text-right">Status</label>
-                                                <div class="input-group">
-                                                    <div id="radioBtn" class="btn-group">
-                                                        <a class="btn btn-primary gender btn-sm hold active"
-                                                            [class.active]="goal.formGroup.controls['goalStatus'].value=='hold'"
-                                                            [class.notActive]="goal.formGroup.controls['goalStatus'].value!='hold'"
-                                                            data-toggle="fun" data-title="Y"
-                                                            (click)="RadioButtonClick('hold',goal.formGroup)">Hold</a>
-                                                        <a class="btn btn-primary gender btn-sm delay notActive"
-                                                            [class.active]="goal.formGroup.controls['goalStatus'].value=='delay'"
-                                                            [class.notActive]="goal.formGroup.controls['goalStatus'].value!='delay'"
-                                                            data-toggle="fun" data-title="X"
-                                                            (click)="RadioButtonClick('delay',goal.formGroup)">Delay</a>
-                                                        <a class="btn btn-primary btn-sm gender due notActive"
-                                                            [class.active]="goal.formGroup.controls['goalStatus'].value=='completed'"
-                                                            [class.notActive]="goal.formGroup.controls['goalStatus'].value!='completed'"
-                                                            data-toggle="fun" data-title="N"
-                                                            (click)="RadioButtonClick('completed',goal.formGroup)">Completed</a>
-                                                    </div>
-                                                    <input type="hidden" name="fun" id="fun"
-                                                        formControlName="goalStatus">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card-outer" *ngIf="SearchResults">
-                                <h4>Completed</h4>
-                                <div class="task-card" *ngFor="let goal of GetGoalCompletedList">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-9">
-                                                    <p><span>{{goal.goalHeading}}</span>
-                                                    </p>
-                                                </div>
-                                                <div class="col-md-3"><span
-                                                        class="statusbox greencolor">{{goal.goalStatus}}</span>
-                                                </div>
-                                            </div>
-                                            <div class="date-section">{{goal.goalEndDate}}</div>
-                                            <p>{{goal.goalDescription}}</p>
-
-                                            <div class="goal-action">
-                                                <ul>
-                                                    <li>
-                                                        <i class="icon-edit" (click)="EditIconClicked(goal)"></i>
-                                                        <i class="icon-Delete" (click)="DeleteIconClicked(goal)"></i>
-                                                        <i class="icon-comment managewidth"><span>14</span></i>
-                                                        <i class="icon-attachment managewidth"><span>14</span></i>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-md-2 pull-right"><input type="submit" value="Add New Goal" (click)="AddGoalClicked()"
+            class="team btn btn-primary">
         </div>
+        <div class="dropdown pull-right">
+          <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">Filter by Project<b class="caret"></b></button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="javascript:void(0);">Action</a>
+            <a class="dropdown-item" href="javascript:void(0);">Another action</a>
+            <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card-outer" *ngIf="SearchResults">
+                <h4>Work in Progress</h4>
+                <div *ngFor="let goal of GetGoalInprogressList" class="task-card"
+                  [style.background-color]="setStyles(goal.goalStatus)">
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-9">
+                          <p><span>{{goal.goalHeading}}</span>
+                          </p>
+                        </div>
+                        <div class="col-md-3"><span class="statusbox" [class.greencolor]="goal.goalStatus=='hold'"
+                            [class.yellowcolorp]="goal.goalStatus=='delay'">{{goal.goalStatus}}</span>
+                        </div>
+                      </div>
+                      <div class="date-section">{{goal.goalEndDate}}</div>
+                      <p>{{goal.goalDescription}}</p>
+
+                      <div class="goal-action">
+                        <ul>
+
+                          <li>
+
+                            <i class="icon-edit"
+                              *ngIf="userService.CheckPermission(userService.Elements.Goals,userService.Operations.Edit)"
+                              (click)="EditIconClicked(goal)"></i>
+                            <i class="icon-Delete"
+                              *ngIf="userService.CheckPermission(userService.Elements.Goals,userService.Operations.Delete)"
+                              (click)="DeleteIconClicked(goal)"></i>
+                            <i class="icon-success" (click)="SaveIconClicked(goal.formGroup,goal)"></i>
+                            <i class="icon-comment managewidth"><span>14</span></i>
+                            <i class="icon-attachment managewidth"><span>14</span></i>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row card-footer">
+
+                    <div class="col-md-12" *ngIf="goal.formGroup!=null" [formGroup]="goal.formGroup">
+                      <div class="skill-slider">
+                        <span id="ex3CurrentSliderValLabel" class="skill-value"><span
+                            id="ex3SliderVal">{{goal.formGroup.controls.goalPercentage.value}}</span>%</span>
+                        <p-slider formControlName="goalPercentage" [min]="0" [max]="100">
+                        </p-slider>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="fun" class="control-label text-right">Status</label>
+                        <div class="input-group">
+                          <div id="radioBtn" class="btn-group">
+                            <a class="btn btn-primary gender btn-sm hold active"
+                              [class.active]="goal.formGroup.controls['goalStatus'].value=='hold'"
+                              [class.notActive]="goal.formGroup.controls['goalStatus'].value!='hold'" data-toggle="fun"
+                              data-title="Y" (click)="RadioButtonClick('hold',goal.formGroup)">Hold</a>
+                            <a class="btn btn-primary gender btn-sm delay notActive"
+                              [class.active]="goal.formGroup.controls['goalStatus'].value=='delay'"
+                              [class.notActive]="goal.formGroup.controls['goalStatus'].value!='delay'" data-toggle="fun"
+                              data-title="X" (click)="RadioButtonClick('delay',goal.formGroup)">Delay</a>
+                            <a class="btn btn-primary btn-sm gender due notActive"
+                              [class.active]="goal.formGroup.controls['goalStatus'].value=='completed'"
+                              [class.notActive]="goal.formGroup.controls['goalStatus'].value!='completed'"
+                              data-toggle="fun" data-title="N"
+                              (click)="RadioButtonClick('completed',goal.formGroup)">Completed</a>
+                          </div>
+                          <input type="hidden" name="fun" id="fun" formControlName="goalStatus">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card-outer" *ngIf="SearchResults">
+                <h4>Completed</h4>
+                <div class="task-card" *ngFor="let goal of GetGoalCompletedList">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-9">
+                          <p><span>{{goal.goalHeading}}</span>
+                          </p>
+                        </div>
+                        <div class="col-md-3"><span class="statusbox greencolor">{{goal.goalStatus}}</span>
+                        </div>
+                      </div>
+                      <div class="date-section">{{goal.goalEndDate}}</div>
+                      <p>{{goal.goalDescription}}</p>
+
+                      <div class="goal-action">
+                        <ul>
+                          <li>
+                            <i class="icon-edit" (click)="EditIconClicked(goal)"></i>
+                            <i class="icon-Delete" (click)="DeleteIconClicked(goal)"></i>
+                            <i class="icon-comment managewidth"><span>14</span></i>
+                            <i class="icon-attachment managewidth"><span>14</span></i>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="slide-popup" id="add-task">
-    <div class="slide-close">
-        <i class="fa fa-angle-left" aria-hidden="true"></i>
-    </div>
-    <div class="slide-content">
-        <h3>Create Goal</h3>
-        <form *ngIf="createGoalForm!=null" [formGroup]="createGoalForm">
-            <div class="form-group">
-                <label for="">Goal title</label>
-                <input type="text" class="form-control" placeholder="Enter goal title here"
-                    formControlName="goalHeading">
-            </div>
-            <div class="form-group">
-                <label for="">Goal Description</label>
-                <textarea Class="form-control" placeholder="Enter Goal details here" rows="4" cols="30"
-                    formControlName="goalDescription"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="">upload file</label>
-                <div class="file-upload">
-                    <input type="text" class="form-control" readonly placeholder="File details here"
-                        formControlName="goalAttachment">
-                    <div class="input-group-btn">
-                        <span class="file-upload btn btn-success">
-                            <span class="upl" id="upload">upload</span>
-                            <input type="file" class="upload up" id="up" />
-                        </span><!-- btn-orange -->
-                    </div><!-- btn -->
-                </div><!-- group -->
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-5">
-                        <label for="">date</label>
-                        <input type="date" class="form-control" formControlName="goalStartDate">
-                    </div>
-                    <div class="col-md-2 text-center">
-                        <span class="to-padding">to</span>
-                    </div>
-                    <div class="col-md-5">
-                        <label for="">due Date</label>
-                        <input type="date" class="form-control" formControlName="goalEndDate">
-                    </div>
+  <div class="slide-close">
+    <i class="fa fa-angle-left" aria-hidden="true"></i>
+  </div>
+  <div class="slide-content">
+    <h3>Create Goal</h3>
+    <form *ngIf="createGoalForm!=null" [formGroup]="createGoalForm">
+      <div class="form-group">
+        <label for="">Goal title</label>
+        <input type="text" class="form-control" placeholder="Enter goal title here" formControlName="goalHeading">
+        <span class="error"
+        *ngIf="!createGoalForm.controls['goalHeading'].valid&&(createGoalForm.controls['goalHeading'].dirty|| createGoalForm.controls['goalHeading'].touched)"><i
+          class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide goal name
+      </span>
+      </div>
+      <div class="form-group">
+        <label for="">Goal Description</label>
+        <textarea Class="form-control" placeholder="Enter Goal details here" rows="4" cols="30"
+          formControlName="goalDescription"></textarea>
+          <span class="error" *ngIf="!createGoalForm.controls['goalDescription'].valid&&(createGoalForm.controls['goalDescription'].dirty|| createGoalForm.controls['goalDescription'].touched)"><i
+            class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide Goal description
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="">upload file</label>
+        <div class="file-upload">
+          <input type="text" class="form-control" readonly placeholder="File details here"
+            formControlName="goalAttachment">
+          <div class="input-group-btn">
+            <span class="file-upload btn btn-success">
+              <span class="upl" id="upload">upload</span>
+              <input type="file" class="upload up" id="up" />
+            </span><!-- btn-orange -->
+          </div><!-- btn -->
+        </div><!-- group -->
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-5">
+            <label for="">date</label>
+            <input type="date" class="form-control" formControlName="goalStartDate">
+            <span class="error" *ngIf="!createGoalForm.controls['goalStartDate'].valid&&(createGoalForm.controls['goalStartDate'].dirty|| createGoalForm.controls['goalStartDate'].touched)"><i
+              class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please select Start date
+          </span>
+          </div>
+          <div class="col-md-2 text-center">
+            <span class="to-padding">to</span>
+          </div>
+          <div class="col-md-5">
+            <label for="">due Date</label>
+            <input type="date" class="form-control" formControlName="goalEndDate">
+          </div>
 
-                </div>
-            </div>
-
-            <input type="submit" value="CREATE Goal" (click)="CreateGoal(createGoalForm.value)"
-                class="team btn btn-primary">
-        </form>
-    </div>
+        </div>
+      </div>
+      <input type="submit" value="CREATE Goal" (click)="CreateGoal(createGoalForm.value)" class="team btn btn-primary" [disabled]="!createGoalForm.valid">
+      <input type="button" value="Cancel" class="btn btn-primary" (click)="CancelButtonClick()">
+    </form>
+  </div>
 </div>
 <div class="slide-popup" id="edit-task">
-    <div class="slide-close">
-        <i class="fa fa-angle-left" aria-hidden="true"></i>
-    </div>
-    <div class="slide-content">
-        <h3>Edit Goal</h3>
-        <form *ngIf="editGoalForm!=null" [formGroup]="editGoalForm">
-            <div class="form-group">
-                <label for="">Goal title</label>
-                <input type="text" class="form-control" placeholder="Enter task title here"
-                    formControlName="goalHeading">
-            </div>
-            <div class="form-group">
-                <label for="">Goal Description</label>
-                <textarea Class="form-control" placeholder="Enter Goal details here" formControlName="goalDescription"
-                    rows="4" cols="50"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="">upload file</label>
-                <div class="file-upload">
-                    <input type="text" class="form-control" readonly placeholder="File details here"
-                        formControlName="goalAttachment">
-                    <div class="input-group-btn">
-                        <span class="file-upload btn btn-success">
-                            <span class="upl" id="upload">upload</span>
-                            <input type="file" class="upload up" id="up" />
-                        </span><!-- btn-orange -->
-                    </div><!-- btn -->
-                </div><!-- group -->
-            </div><!-- form-group -->
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-5">
-                        <label for="">date</label>
-                        <input type="date" class="form-control" formControlName="goalStartDate">
-                    </div>
-                    <div class="col-md-2 text-center">
-                        <span class="to-padding">to</span>
-                    </div>
-                    <div class="col-md-5">
-                        <label for="">due Date</label>
-                        <input type="date" class="form-control" formControlName="goalEndDate">
-                    </div>
-                </div>
-            </div>
-            <input type="submit" value="Save Goal" (click)="editSaveButtonClicked(editGoalForm.value)"
-                class="team btn btn-primary">
-        </form>
-    </div>
+  <div class="slide-close">
+    <i class="fa fa-angle-left" aria-hidden="true"></i>
+  </div>
+  <div class="slide-content">
+    <h3>Edit Goal</h3>
+    <form *ngIf="editGoalForm!=null" [formGroup]="editGoalForm">
+      <div class="form-group">
+        <label for="">Goal title</label>
+        <input type="text" class="form-control" placeholder="Enter task title here" formControlName="goalHeading">
+      </div>
+      <div class="form-group">
+        <label for="">Goal Description</label>
+        <textarea Class="form-control" placeholder="Enter Goal details here" formControlName="goalDescription" rows="4"
+          cols="50"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="">upload file</label>
+        <div class="file-upload">
+          <input type="text" class="form-control" readonly placeholder="File details here"
+            formControlName="goalAttachment">
+          <div class="input-group-btn">
+            <span class="file-upload btn btn-success">
+              <span class="upl" id="upload">upload</span>
+              <input type="file" class="upload up" id="up" />
+            </span><!-- btn-orange -->
+          </div><!-- btn -->
+        </div><!-- group -->
+      </div><!-- form-group -->
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-5">
+            <label for="">date</label>
+            <input type="date" class="form-control" formControlName="goalStartDate">
+          </div>
+          <div class="col-md-2 text-center">
+            <span class="to-padding">to</span>
+          </div>
+          <div class="col-md-5">
+            <label for="">due Date</label>
+            <input type="date" class="form-control" formControlName="goalEndDate">
+          </div>
+        </div>
+      </div>
+      <div>
+          <input type="submit" value="Save Goal" (click)="editSaveButtonClicked(editGoalForm.value)"
+          class="team btn btn-primary">
+          <input type="button" value="Cancel" class="btn btn-primary" (click)="CancelButtonClick()">
+      </div>
+    </form>
+  </div>
 </div>

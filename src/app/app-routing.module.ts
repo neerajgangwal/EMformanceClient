@@ -25,6 +25,8 @@ const routes: Routes = [
 { path: 'admin/role', loadChildren: () => import('./Features/admin/admin-role/admin-role.module').then(m => m.AdminRoleModule) },
 { path: 'admin/user', loadChildren: () => import('./Features/admin/admin-user-list/admin-user-list.module').then(m => m.AdminUserListModule) },
 { path: 'dashboard', loadChildren: () => import('./Features/dashboard/dashboard.module').then(m => m.DashboardModule),canActivate:[AuthGuard] },
+{ path: 'audit', loadChildren: () => import('./Features/audit/audit.module').then(m => m.AuditModule),canActivate:[AuthGuard] },
+
 ]
 
 @NgModule({

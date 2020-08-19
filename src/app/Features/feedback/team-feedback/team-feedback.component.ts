@@ -151,6 +151,7 @@ export class TeamFeedbackComponent implements OnInit {
             detail: 'Feedback request Created successfully',
           });
           this.ResetForm();
+          this.CancelButtonClick();
         } else {
           this.messageService.add({
             severity: 'error',
@@ -311,5 +312,11 @@ export class TeamFeedbackComponent implements OnInit {
       },
       (error) => {}
     );
+  }
+
+  CancelButtonClick(){
+    this.ResetForm();
+    $('.slide-close').parent().removeClass('open-slide');
+    $('body').removeClass('gray-over');
   }
 }
