@@ -5,7 +5,7 @@
         <div class="col-md-4">
           <div class="search-form">
             <i class="fa fa-search"></i>
-            <input type="text" class="form-control" placeholder="Search by name">
+            <input type="text" class="form-control" placeholder="Search by name" (input)="FilterData($event)">
           </div>
         </div>
         <div class="dropdown pull-right">
@@ -50,18 +50,17 @@
               <li>
                 <table class="table">
                   <tbody>
-                    <tr>
+                    <tr *ngFor="let data of SearchResults">
                       <td style="width: 50px;">
                         <div class="checkbox">
                           <input id="checkbox11" type="checkbox">
                           <label for="checkbox11"></label>
                         </div>
                       </td>
-                      <td style="width:292px;"> Employee Name</td>
-                      <td style="width: 150px;">Department</td>
-                      <td style="width: 150px;">Delete</td>
-
-                      <td style="width: 92px;" class="gray-text">15 Sep , 2020</td>
+                      <td style="width:292px;">{{data.employeeName}}</td>
+                      <td style="width: 150px;">{{data.actionType}}</td>
+                      <td style="width: 150px;">{{data.action}}</td>
+                      <td style="width: 92px;" class="gray-text">{{data.createdDate}}</td>
 
                       <td style="width: 180px;" class="gray-text act"> <i class="icon-View project-description"></i>
 

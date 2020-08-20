@@ -54,7 +54,7 @@
           </div>
           <div class="col-lg-3 pull-right">
             <input type="button" value="Cancel" class="btn btn-primary" (click)="CancelButtonClick()">
-            <input type="submit" value="Create Role" class="subbtn btn btn-primary"
+            <input type="submit" value="Create Role" class="subbtn btn btn-primary" [disabled]="!RoleForm.valid"
               (click)="CreateRole(RoleForm.value)">
           </div>
         </div>

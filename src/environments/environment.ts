@@ -66,6 +66,7 @@ export const environment = {
   updateSkill:"updateSkill",
 
 
+
   addFeedabck:"addFeedabck",
   getMyfeedback:"getMyFeedback?employeeId=",
   getRequestedFeedback:"getRequestedFeedback?employeeId=",
@@ -73,6 +74,8 @@ export const environment = {
   UpdateFeedback:"updateFeedbackRequest",
   getFeedbackByParam:"getFeedbackByParam",
   getCompany:"getCompany",
+
+  getAuditLog:"getAuditLog",
 
   getTeamGoals:"getMyTeamGoals?projectId=-1&createdBy=",
   validatePortalName:"checkPortalName?portalName="
