@@ -1,1 +1,85 @@
+<div class="content" style="background-color:#DAEBEB;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+          <div class="inner">
+            <h3>150</h3>
 
+            <p>Number of projects</p>
+          </div>
+          <div class="icon">
+            <i class="ion icon-Projects"></i>
+          </div>
+          <a href="#" class="small-box-footer">More info</a>
+        </div>
+      </div>
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+            <p>No of teams</p>
+          </div>
+          <div class="icon">
+            <i class="ion icon-Team"></i>
+          </div>
+          <a href="#" class="small-box-footer">More info</a>
+        </div>
+      </div>
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+          <div class="inner">
+            <h3>44</h3>
+
+            <p>No of goals</p>
+          </div>
+          <div class="icon">
+            <i class="ion icon-Goals"></i>
+          </div>
+          <a href="#" class="small-box-footer">More info</a>
+        </div>
+      </div>
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+          <div class="inner">
+            <h3>65</h3>
+
+            <p>No of tasks</p>
+          </div>
+          <div class="icon">
+            <i class="ion icon-list"></i>
+          </div>
+          <a href="#" class="small-box-footer">More info</a>
+        </div>
+      </div>
+      <!-- ./col -->
+    </div>
+
+
+    <div class="emlist">
+      <div class="col-lg-6 chart-box">
+        <h4>Chart.js — Pie Chart Demo</h4>
+        <div>
+          <p-chart type="pie" [data]="pieData"  height="269"></p-chart>
+        </div>
+      </div>
+      <div class="col-lg-6 chart-box pull-right">
+        <h4>Chart.js — Pie Chart Demo</h4>
+        <p-chart type="line" [data]="lineChartData" [options]="lineChartOptions" height="269"></p-chart>
+
+      </div>
+      <div class="col-lg-6 chart-box">
+        <h4>Chart.js — Pie Chart Demo</h4>
+        <p-chart type="bar" [data]="barChartData" [options]="barChartOptions" height="269"></p-chart>
+      </div>
+    </div>
+  </div>
+</div>

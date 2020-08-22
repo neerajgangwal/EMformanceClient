@@ -17,14 +17,16 @@ export class AppComponent implements OnInit {
   public ShowFooter: boolean;
   public ShowNavBar: boolean;
   public ShowSearchBox: boolean;
+  public ShowDashboardIcons: boolean;
   constructor(public searchService: SearchService, public layoutService: LayoutService, public userService: UserService, private activatedRoute: ActivatedRoute, private router: Router) { }
   ngOnInit() {
     this.router.events.pipe(filter(event => event instanceof ActivationStart)).subscribe(event => {
       console.log(event);
       var routeData = event['snapshot'].data;
       this.Title = routeData.Title;
-      this.ShowHeader=routeData.ShowHeader;
-      this.ShowNavBar=routeData.ShowNavBar;
+      this.ShowHeader = routeData.ShowHeader;
+      this.ShowNavBar = routeData.ShowNavBar;
+      this.ShowDashboardIcons = routeData.ShowDashboardIcons;
     });
   }
   title = 'EnformanceWeb';
