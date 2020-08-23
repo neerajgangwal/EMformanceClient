@@ -14,7 +14,7 @@ export class SkillService {
     }
 
     CreateSkill=function(skillNamedata){
-      return this.httpclient.post(this.userService.LoggedInUser.PortalName+ environment.addSkill,{skillName: skillNamedata});
+      return this.httpclient.post(this.userService.LoggedInUser.PortalName+ environment.addSkill,{skillName: skillNamedata,createdBy:this.userService.LoggedInUser.Id});
     }
 
     RemoveMappingForSkill=function(data){

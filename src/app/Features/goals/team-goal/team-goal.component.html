@@ -12,16 +12,6 @@
 
                 <div class="col-md-2 pull-right">
                 </div>
-                <div class="dropdown pull-right">
-                    <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by Project<b
-                            class="caret"></b></button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="javascript:void(0);">Action</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Another action</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="row">
@@ -42,11 +32,13 @@
                                                     </p>
                                                 </div>
                                                 <div class="col-md-3"><span
-                                                        class="statusbox" [class.greencolor]="goal.goalStatus=='hold'" [class.yellowcolorp]="goal.goalStatus=='delay'">{{goal.goalStatus}}</span>
+                                                        class="statusbox" [class.redcolor]="goal.goalStatus=='delay'"
+                                                        [class.yellowcolorp]="goal.goalStatus=='hold'">{{goal.goalStatus}}</span>
                                                 </div>
                                             </div>
                                             <div class="date-section">{{goal.goalEndDate}}</div>
-                                            <p>{{goal.goalDescription}}</p>
+                                            <p (click)="getGoalDescription(goal.goalId)">{{goal.goalDescription}}</p>
+                                            <p><b>Created BY :</b>{{getEmployeeById(goal.employeeId)}}</p>
 
                                         </div>
                                     </div>
@@ -69,7 +61,12 @@
                                                 </div>
                                             </div>
                                             <div class="date-section">{{goal.goalEndDate}}</div>
-                                            <p>{{goal.goalDescription}}</p>
+                                            <p (click)="getGoalDescription(goal.goalId)">{{goal.goalDescription}}</p>
+                                            <p><b>Created BY :</b>{{getEmployeeById(goal.employeeId)}}</p>
+                                            <div class="row" *ngIf="goal.goalStatus == 'submitted'">
+                                              <div class="col-sm-6"><button (click)="ApproveGoal(goal)" class="btn btn-primary" >Approve</button></div>
+                                              <div class="col-sm-6"><button (click)="DeclineGoal(goal)" class="btn btn-danger">Decline</button></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -80,4 +77,40 @@
             </div>
         </div>
     </div>
+</div>
+<div class="slide-popup" id="task-description">
+  <div class="slide-close">
+      <i class="fa fa-angle-left" aria-hidden="true"></i>
+  </div>
+  <div class="slide-content" *ngFor="let data of SpecificGoal">
+      <h3>{{data.goalHeading}}</h3>
+      <span class="color-red"><i class="fa fa-clock-o"></i>{{data.goalEndDate}}</span>
+      <h4><i class="icon-discription"></i> description</h4>
+      <p>{{data.goalDescription}}</p>
+      <h4><i class="icon-attachment"></i> Attachment</h4>
+      <div class="attachment">
+          <img src="assets/img/img.png" alt="">
+          <span>attachments.png<b>10 KB</b></span>
+      </div>
+  </div>
+  <hr>
+  <div class="slide-content">
+      <div class="comment-item">
+          <div class="pro-thumb" style="background-image: url('assets/img/face-3.jpg');"></div>
+          <h5>Amanda Kherr</h5>
+          <strong>Designer</strong>
+          <p>Loream provides you with intelligently crafted filler text with decent and simple UI. The
+              loream text itself is specifically created to be appealing to eyes. Creating a positive
+              placebo for your project. Making your project attractive and irresistible even at
+              production phase. Try loream now!</p>
+          <a href="#" class="reply">reply</a>
+      </div>
+  </div>
+  <hr>
+  <div class="slide-content">
+      <div class="comment-item">
+          <div class="pro-thumb"></div>
+          <input type="text" class="form-control" placeholder="Write a comment">
+      </div>
+  </div>
 </div>

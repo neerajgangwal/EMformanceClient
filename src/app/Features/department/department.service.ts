@@ -10,15 +10,16 @@ export class DepartmentService {
 
   addDepartment=function(data)
   {
+    data.createdBy=this.userService.LoggedInUser.Id;
     return this.httpClient.post(this.userService.LoggedInUser.PortalName+environment.CreateDepartment,data);
   }
-  
+
   getDepartment=function()
   {
     console.log("Loading/........")
     return this.httpClient.get(this.userService.LoggedInUser.PortalName+environment.getDepartment);
   }
-  
+
   updateDepartment=function(data)
   {
     return this.httpClient.post(this.userService.LoggedInUser.PortalName+environment.updateDepartment,data)

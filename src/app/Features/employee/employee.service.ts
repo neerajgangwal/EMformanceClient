@@ -32,6 +32,7 @@ export class EmployeeService {
   }
 
   CreateEmployee = function (data) {
+    data.createdBy=this.userService.LoggedInUser.Id;
     return this.httpClient.post(this.userService.LoggedInUser.PortalName + environment.AddEmployee, data);
   }
 

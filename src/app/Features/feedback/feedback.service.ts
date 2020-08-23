@@ -13,6 +13,7 @@ export class FeedbackService {
 
    createFeedback=function(data)
    {
+    data.createdBy=this.userService.LoggedInUser.Id;
      return this.httpclient.post(this.userService.LoggedInUser.PortalName +environment.addFeedabck,data);
    }
 

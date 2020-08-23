@@ -7036,13 +7036,13 @@ padding: 10px 0 0 0;
     margin-top: 0px;
 }
 a.btn.btn-primary.gender.btn-sm.hold.active {
-    background: #268B8A;
+    background: #FFA200;
 }
 a.btn.btn-primary.gender.btn-sm.delay.active{
-	 background:#FFA200;
+	background:#FF5265;
 }
 a.btn.btn-primary.gender.btn-sm.due.active{
-	 background:#FF5265;
+  background:#FF5265;
 }
 
 /* From https://js

@@ -1,4 +1,12 @@
 <div class="main-panel">
+  <p-dialog header="Confirm Note" [(visible)]="displayConfirmationDialog" [style]="{width: '50vw'}" [baseZIndex]="10000">
+        <textarea [(ngModel)]="confirmationNote" style="width: 100%;height: 200px;"></textarea>
+    <p-footer>
+      <button  (click)="SubmitConfirmationDialog()" type="button"  Class="btn">Confirm</button>
+      <button  (click)="ResetConfirmationDialog()"  type="button" Class="btn btn-danger">Cancel</button>
+  </p-footer>
+</p-dialog>
+
   <div class="content" style="background-color:#DAEBEB;">
     <div class="container-fluid">
       <div class="row">
@@ -12,15 +20,6 @@
         <div class="col-md-2 pull-right"><input type="submit" value="Add New Goal" (click)="AddGoalClicked()"
             class="team btn btn-primary">
         </div>
-        <div class="dropdown pull-right">
-          <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">Filter by Project<b class="caret"></b></button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="javascript:void(0);">Action</a>
-            <a class="dropdown-item" href="javascript:void(0);">Another action</a>
-            <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
-          </div>
-        </div>
       </div>
     </div>
     <div class="row">
@@ -30,8 +29,7 @@
             <div class="col-md-6">
               <div class="card-outer" *ngIf="SearchResults">
                 <h4>Work in Progress</h4>
-                <div *ngFor="let goal of GetGoalInprogressList" class="task-card"
-                  [style.background-color]="setStyles(goal.goalStatus)">
+                <div *ngFor="let goal of GetGoalInprogressList" [style.background-color]="setStyles(goal.goalStatus)" class="task-card">
 
                   <div class="row">
                     <div class="col-md-12">
@@ -40,12 +38,12 @@
                           <p><span>{{goal.goalHeading}}</span>
                           </p>
                         </div>
-                        <div class="col-md-3"><span class="statusbox" [class.greencolor]="goal.goalStatus=='hold'"
-                            [class.yellowcolorp]="goal.goalStatus=='delay'">{{goal.goalStatus}}</span>
+                        <div class="col-md-3"><span class="statusbox" [class.redcolor]="goal.goalStatus=='delay'"
+                            [class.yellowcolorp]="goal.goalStatus=='hold'">{{goal.goalStatus}}</span>
                         </div>
                       </div>
                       <div class="date-section">{{goal.goalEndDate}}</div>
-                      <p>{{goal.goalDescription}}</p>
+                      <p (click)="getGoalDescription(goal.goalId)">{{goal.goalDescription}}</p>
 
                       <div class="goal-action">
                         <ul>
@@ -83,16 +81,16 @@
                             <a class="btn btn-primary gender btn-sm hold active"
                               [class.active]="goal.formGroup.controls['goalStatus'].value=='hold'"
                               [class.notActive]="goal.formGroup.controls['goalStatus'].value!='hold'" data-toggle="fun"
-                              data-title="Y" (click)="RadioButtonClick('hold',goal.formGroup)">Hold</a>
+                              data-title="Y" (click)="RadioButtonClick('hold',goal.formGroup,goal)">Hold</a>
                             <a class="btn btn-primary gender btn-sm delay notActive"
                               [class.active]="goal.formGroup.controls['goalStatus'].value=='delay'"
                               [class.notActive]="goal.formGroup.controls['goalStatus'].value!='delay'" data-toggle="fun"
-                              data-title="X" (click)="RadioButtonClick('delay',goal.formGroup)">Delay</a>
+                              data-title="X" (click)="RadioButtonClick('delay',goal.formGroup,goal)">Delay</a>
                             <a class="btn btn-primary btn-sm gender due notActive"
                               [class.active]="goal.formGroup.controls['goalStatus'].value=='completed'"
                               [class.notActive]="goal.formGroup.controls['goalStatus'].value!='completed'"
                               data-toggle="fun" data-title="N"
-                              (click)="RadioButtonClick('completed',goal.formGroup)">Completed</a>
+                              (click)="RadioButtonClick('completed',goal.formGroup,goal)">Completed</a>
                           </div>
                           <input type="hidden" name="fun" id="fun" formControlName="goalStatus">
                         </div>
@@ -118,7 +116,7 @@
                         </div>
                       </div>
                       <div class="date-section">{{goal.goalEndDate}}</div>
-                      <p>{{goal.goalDescription}}</p>
+                      <p (click)="getGoalDescription(goal.goalId)">{{goal.goalDescription}}</p>
 
                       <div class="goal-action">
                         <ul>
@@ -128,6 +126,7 @@
                             <i class="icon-comment managewidth"><span>14</span></i>
                             <i class="icon-attachment managewidth"><span>14</span></i>
                           </li>
+                          <button class="btn btn-primary" *ngIf="goal.goalStatus == 'completed'" (click)="confirmationDialogOpen(goal)" >Submit</button>
                         </ul>
                       </div>
                     </div>
@@ -251,5 +250,41 @@
           <input type="button" value="Cancel" class="btn btn-primary" (click)="CancelButtonClick()">
       </div>
     </form>
+  </div>
+</div>
+<div class="slide-popup" id="task-description">
+  <div class="slide-close">
+      <i class="fa fa-angle-left" aria-hidden="true"></i>
+  </div>
+  <div class="slide-content" *ngFor="let data of SpecificGoal">
+      <h3>{{data.goalHeading}}</h3>
+      <span class="color-red"><i class="fa fa-clock-o"></i>{{data.goalEndDate}}</span>
+      <h4><i class="icon-discription"></i> description</h4>
+      <p>{{data.goalDescription}}</p>
+      <h4><i class="icon-attachment"></i> Attachment</h4>
+      <div class="attachment">
+          <img src="assets/img/img.png" alt="">
+          <span>attachments.png<b>10 KB</b></span>
+      </div>
+  </div>
+  <hr>
+  <div class="slide-content">
+      <div class="comment-item">
+          <div class="pro-thumb" style="background-image: url('assets/img/face-3.jpg');"></div>
+          <h5>Amanda Kherr</h5>
+          <strong>Designer</strong>
+          <p>Loream provides you with intelligently crafted filler text with decent and simple UI. The
+              loream text itself is specifically created to be appealing to eyes. Creating a positive
+              placebo for your project. Making your project attractive and irresistible even at
+              production phase. Try loream now!</p>
+          <a href="#" class="reply">reply</a>
+      </div>
+  </div>
+  <hr>
+  <div class="slide-content">
+      <div class="comment-item">
+          <div class="pro-thumb"></div>
+          <input type="text" class="form-control" placeholder="Write a comment">
+      </div>
   </div>
 </div>

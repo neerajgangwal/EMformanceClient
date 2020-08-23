@@ -21,6 +21,7 @@ export class ProjectService {
 
   CreateProject=function(data)
   {
+    data.createdBy=this.userService.LoggedInUser.Id;
     return this.httpClient.post(this.userService.LoggedInUser.PortalName+environment.CreateProject,data);
   }
 

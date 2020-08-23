@@ -14,11 +14,15 @@ import { MessageService } from 'primeng/api';
 export class MyGoalComponent implements OnInit {
 
   goallist: any[];
+  SpecificGoal:any[];
   createGoalForm: FormGroup;
   editGoalForm: FormGroup;
   SearchResults: any[];
   FilterKey: string;
   progressData: number;
+  displayConfirmationDialog: boolean = false;
+  confirmationNote: string = '';
+  confirmationDialogSelectedGoal = null;
   constructor(
     private goalservice: GoalsService,
     private layoutservice: LayoutService,
@@ -61,10 +65,11 @@ export class MyGoalComponent implements OnInit {
     }
     console.log(data);
   }
-  RadioButtonClick = function (data, form) {
+  RadioButtonClick = function (data, form, goal) {
     form.patchValue({
       goalStatus: data
     })
+    this.SaveIconClicked(form, goal)
   }
 
   SaveIconClicked(form, goal) {
@@ -74,7 +79,9 @@ export class MyGoalComponent implements OnInit {
     this.editSaveButtonClicked(goal);
   }
 
+  ComformationDialog() {
 
+  }
 
 
   initialiseCreateForm = function () {
@@ -85,8 +92,8 @@ export class MyGoalComponent implements OnInit {
       taskId: [1, Validators.required],
       departmentId: [2, Validators.required],
       employeeId: [this.userService.LoggedInUser.Id],
-      goalStatus: ['approved'],
-      goalApprovedStatus: [''],
+      goalStatus: ['Inprogress'],
+      goalApprovedStatus: ['Inprogress'],
       confirmNote: [''],
       goalHeading: ['', Validators.required],
       goalDescription: ['', Validators.required],
@@ -101,7 +108,7 @@ export class MyGoalComponent implements OnInit {
   get GetGoalCompletedList() {
     var list: any[] = [];
     this.SearchResults.forEach(element => {
-      if (element.goalStatus == "completed") {
+      if (element.goalStatus == "completed" || element.goalStatus == "submitted" || element.goalStatus == "approved") {
         list.push(element);
       }
     });
@@ -111,7 +118,7 @@ export class MyGoalComponent implements OnInit {
   get GetGoalInprogressList() {
     var list: any[] = [];
     this.SearchResults.forEach(element => {
-      if (element.goalStatus != "completed") {
+      if (element.goalStatus != "completed" && element.goalStatus != "submitted" && element.goalStatus != "approved") {
         list.push(element);
       }
     });
@@ -232,10 +239,14 @@ export class MyGoalComponent implements OnInit {
 
   setStyles(goalStatus) {
     if (goalStatus == "hold") {
-      return "#d1efda"
+      return "#ffeccc"
+    }
+    else if(goalStatus=='delay')
+    {
+      return "#ffd3d8"
     }
     else {
-      return "#ffeccc"
+      return 'white'
     }
   }
 
@@ -257,9 +268,45 @@ export class MyGoalComponent implements OnInit {
     )
   }
 
-  CancelButtonClick(){
+  CancelButtonClick() {
     $('.slide-close').parent().removeClass('open-slide');
     $('body').removeClass('gray-over');
   }
+
+  SubmitConfirmationDialog() {
+    var goal = this.confirmationDialogSelectedGoal;
+    goal.confirmNote = this.confirmationNote;
+    goal.goalStatus = "submitted";
+    goal.formGroup = null;
+
+    this.editSaveButtonClicked(goal);
+    this.ResetConfirmationDialog();
+  }
+
+  confirmationDialogOpen(goal) {
+    this.confirmationDialogSelectedGoal = goal;
+    this.displayConfirmationDialog = true;
+  }
+
+  ResetConfirmationDialog() {
+    this.confirmationNote = '';
+    this.displayConfirmationDialog = false;
+  }
+
+  getGoalDescription=function(id)
+  {
+    $('#task-description').addClass('open-slide');
+    $('body').addClass('gray-over');
+
+    this.goalservice.getGoalById(id).subscribe((res)=>{
+     if(res.errorCode==0)
+     {
+        this.SpecificGoal=res.dataObj;
+     }
+
+   })
+  }
+
+
 
 }

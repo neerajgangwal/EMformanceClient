@@ -10,6 +10,7 @@ export class RoleService {
 
   addRole=function(data)
   {
+    data.createdBy=this.userService.LoggedInUser.Id;
     return this.httpClient.post(this.userService.LoggedInUser.PortalName+environment.CreateRole,data);
   }
 

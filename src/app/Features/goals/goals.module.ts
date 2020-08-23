@@ -11,6 +11,7 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {GoalsService} from './goals.service';
 import { TeamGoalComponent } from './team-goal/team-goal.component';
 import {SliderModule} from 'primeng/slider';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   declarations: [GoalsComponent, MyGoalComponent, TeamGoalComponent],
@@ -20,7 +21,8 @@ import {SliderModule} from 'primeng/slider';
     HttpClientModule,
     ReactiveFormsModule,
     SliderModule,
-    FormsModule
+    FormsModule,
+    DialogModule
   ],
   providers:[
     GoalsService

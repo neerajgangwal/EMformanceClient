@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {LayoutService} from '../../../Services/layout.service';
-import {GoalsService} from '../goals.service';
-import {FormBuilder,FormGroup,Validators} from '@angular/forms';
+import { LayoutService } from '../../../Services/layout.service';
+import { GoalsService } from '../goals.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as $ from 'jquery';
 import { UserService } from 'src/app/Services/user.service';
 import { MessageService } from 'primeng/api';
@@ -13,11 +13,14 @@ import { MessageService } from 'primeng/api';
 })
 export class TeamGoalComponent implements OnInit {
   goallist: any[];
+  employeeList: any[];
   createGoalForm: FormGroup;
   editGoalForm: FormGroup;
   SearchResults: any[];
+  SpecificGoal: any[];
+  employeeDetails: any[];
   FilterKey: string;
-  progressData:number;
+  progressData: number;
   constructor(
     private goalservice: GoalsService,
     private layoutservice: LayoutService,
@@ -30,8 +33,13 @@ export class TeamGoalComponent implements OnInit {
 
     this.goalservice.getTeamGoals(this.userService.LoggedInUser.Id).subscribe((res) => {
       if (res.errorCode == 0) {
-
+        var id;
         this.goallist = res.dataObj;
+        this.goalservice.getEmployeeList().subscribe((res) => {
+          this.employeeList = res.dataObj;
+          console.log("employee lsit" + this.employeeList);
+        })
+        console.log("id of emolyee " + this.employeeDetails);
         this.UpdateDashboardFormsToList(this.goallist);
         console.log(this.goallist);
         this.SearchResults = this.goallist;
@@ -50,28 +58,26 @@ export class TeamGoalComponent implements OnInit {
   }
 
 
-  UpdateDashboardFormsToList(data)
-  {
-      for (let index = 0; index < data.length; index++) {
-        const element = data[index];
-        data[index].formGroup=this.fb.group({
-          goalStatus:[element.goalStatus],
-          goalPercentage:[element.goalPercentage]
-        });
-      }
-      console.log(data);
+  UpdateDashboardFormsToList(data) {
+    for (let index = 0; index < data.length; index++) {
+      const element = data[index];
+      data[index].formGroup = this.fb.group({
+        goalStatus: [element.goalStatus],
+        goalPercentage: [element.goalPercentage]
+      });
+    }
+    console.log(data);
   }
-  RadioButtonClick = function (data,form) {
+  RadioButtonClick = function (data, form) {
     form.patchValue({
       goalStatus: data
     })
   }
 
-  SaveIconClicked(form,goal)
-  {
-    goal.goalStatus=form.value.goalStatus;
-    goal.goalPercentage=form.value.goalPercentage;
-    goal.formGroup=null;
+  SaveIconClicked(form, goal) {
+    goal.goalStatus = form.value.goalStatus;
+    goal.goalPercentage = form.value.goalPercentage;
+    goal.formGroup = null;
     this.editSaveButtonClicked(goal);
   }
 
@@ -94,7 +100,7 @@ export class TeamGoalComponent implements OnInit {
       goalAttachment: ['', Validators.required],
       goalStartDate: ['', Validators.required],
       goalEndDate: ['', Validators.required],
-      statusLevel:[]
+      statusLevel: []
     });
   }
 
@@ -102,7 +108,7 @@ export class TeamGoalComponent implements OnInit {
   get GetGoalCompletedList() {
     var list: any[] = [];
     this.SearchResults.forEach(element => {
-      if (element.goalStatus == "completed") {
+      if (element.goalStatus == "completed" || element.goalStatus == "submitted" || element.goalStatus == "approved") {
         list.push(element);
       }
     });
@@ -112,7 +118,7 @@ export class TeamGoalComponent implements OnInit {
   get GetGoalInprogressList() {
     var list: any[] = [];
     this.SearchResults.forEach(element => {
-      if (element.goalStatus != "completed") {
+      if (element.goalStatus != "completed" && element.goalStatus != "submitted" && element.goalStatus != "approved") {
         list.push(element);
       }
     });
@@ -123,21 +129,21 @@ export class TeamGoalComponent implements OnInit {
     console.log("edit");
     console.log(data.goalId);
     this.editGoalForm = this.fb.group({
-      goalId:[data.goalId,Validators.required],
-      taskId:[data.goalId, Validators.required],
-      departmentId:[data.departmentId, Validators.required],
-      employeeId:[this.userService.LoggedInUser.Id],
-      goalStatus:[data.goalStatus, Validators.required],
+      goalId: [data.goalId, Validators.required],
+      taskId: [data.goalId, Validators.required],
+      departmentId: [data.departmentId, Validators.required],
+      employeeId: [this.userService.LoggedInUser.Id],
+      goalStatus: [data.goalStatus, Validators.required],
       goalApprovedStatus: [data.goalApprovedStatus, Validators.required],
-      confirmNote:['', Validators.required],
-      goalHeading:[data.goalHeading, Validators.required],
-      goalDescription:[data.goalDescription, Validators.required],
-      goalAttachment:[data.goalAttachment, Validators.required],
-      goalStartDate:[data.goalStartDate, Validators.required],
-      goalEndDate:[data.goalEndDate, Validators.required],
+      confirmNote: ['', Validators.required],
+      goalHeading: [data.goalHeading, Validators.required],
+      goalDescription: [data.goalDescription, Validators.required],
+      goalAttachment: [data.goalAttachment, Validators.required],
+      goalStartDate: [data.goalStartDate, Validators.required],
+      goalEndDate: [data.goalEndDate, Validators.required],
     });
 
-    console.log("edit goal form "+this.editGoalForm.value);
+    console.log("edit goal form " + this.editGoalForm.value);
   }
 
   AddGoalClicked() {
@@ -151,10 +157,10 @@ export class TeamGoalComponent implements OnInit {
     this.goalservice.addGoal(data).subscribe((res) => {
       console.log("res " + res);
       if (res.errorCode == 0) {
-       var resultData=res.dataObj;
-        resultData.formGroup=this.fb.group({
-          goalStatus:[resultData.goalStatus],
-          goalPercentage:[resultData.goalPercentage]
+        var resultData = res.dataObj;
+        resultData.formGroup = this.fb.group({
+          goalStatus: [resultData.goalStatus],
+          goalPercentage: [resultData.goalPercentage]
         });
         this.goallist.push(resultData);
         console.log("success");
@@ -173,7 +179,7 @@ export class TeamGoalComponent implements OnInit {
     $('#edit-task').addClass('open-slide');
     $('body').addClass('gray-over');
     console.log("edit icon clicked");
-    console.log("data "+data);
+    console.log("data " + data);
     this.initialiseEditForm(data);
   }
 
@@ -183,10 +189,10 @@ export class TeamGoalComponent implements OnInit {
     this.goalservice.updateGoal(data).subscribe((res) => {
       if (res.errorCode == 0) {
         this.initialiseEditForm(res.dataObj);
-        var resultData=res.dataObj;
-        resultData.formGroup=this.fb.group({
-          goalStatus:[resultData.goalStatus],
-          goalPercentage:[resultData.goalPercentage]
+        var resultData = res.dataObj;
+        resultData.formGroup = this.fb.group({
+          goalStatus: [resultData.goalStatus],
+          goalPercentage: [resultData.goalPercentage]
         });
         for (let index = 0; index < this.goallist.length; index++) {
           const element = this.goallist[index];
@@ -211,7 +217,7 @@ export class TeamGoalComponent implements OnInit {
 
   DeleteIconClicked(data) {
     console.log("delete icon clicked");
-    console.log("data is "+data);
+    console.log("data is " + data);
     this.goalservice.deleteGoal(data.goalId).subscribe((res) => {
       if (res.errorCode == 0) {
         this.goallist.splice(this.goallist.indexOf(data), 1);
@@ -229,15 +235,16 @@ export class TeamGoalComponent implements OnInit {
 
   }
 
-  setStyles(goalStatus)
-  {
-    if(goalStatus=="hold")
-    {
-      return "#d1efda"
-    }
-    else
-    {
+  setStyles(goalStatus) {
+    if (goalStatus == "hold") {
       return "#ffeccc"
+    }
+    else if(goalStatus=='delay')
+    {
+      return "#ffd3d8"
+    }
+    else {
+      return 'white'
     }
   }
 
@@ -258,10 +265,43 @@ export class TeamGoalComponent implements OnInit {
     }
     )
   }
-  CancelButtonClick(){
+  CancelButtonClick() {
     $('.slide-close').parent().removeClass('open-slide');
     $('body').removeClass('gray-over');
   }
 
+  getGoalDescription = function (id) {
+    $('#task-description').addClass('open-slide');
+    $('body').addClass('gray-over');
+    this.goalservice.getGoalById(id).subscribe((res) => {
+      if (res.errorCode == 0) {
+        this.SpecificGoal = res.dataObj;
+      }
 
+    })
+  }
+
+  getEmployeeById(id) {
+
+    for (let index = 0; index < this.employeeList.length; index++) {
+      const element = this.employeeList[index];
+      if (element.employeeId == id) {
+        return element.employeeFname + " " + element.employeeMname;
+      }
+    }
+    return "";
+  }
+
+  ApproveGoal(goal) {
+    goal.goalStatus = "approved";
+    goal.formGroup = null;
+    this.editSaveButtonClicked(goal);
+  }
+
+  DeclineGoal(goal)
+  {
+    goal.goalStatus = "declined";
+    goal.formGroup = null;
+    this.editSaveButtonClicked(goal);
+  }
 }
