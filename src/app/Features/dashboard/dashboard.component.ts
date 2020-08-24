@@ -7,7 +7,9 @@ import * as $ from 'jquery';
 })
 export class DashboardComponent implements OnInit {
 
-  pieData;
+  projectData;
+  taskData;
+  goalData;
   lineChartData;
   barChartData;
   barChartOptions;
@@ -19,19 +21,46 @@ export class DashboardComponent implements OnInit {
     var colors = ['#007bff', '#28a745', '#333333', '#c3e6cb', '#dc3545', '#6c757d'];
 
 
-    this.pieData = {
-      labels: ["Green", "Blue", "Black"],
+    this.projectData = {
+      labels: ["Completed", "Created" ,"InProgress", "Due"],
       datasets: [{
         backgroundColor: [
           "#2ecc71",
-          "#e74c3c",
-          "#34495e"
+		  "#3475A9",
+          "#F2F74E",
+          "#E22724"
         ],
-        data: [12, 19, 7]
+        data: [12, 19, 5,2]
+      }]
+    }
+	
+	this.taskData = {
+      labels: ["Completed", "Created" ,"InProgress", "Due"],
+      datasets: [{
+        backgroundColor: [
+          "#2ecc71",
+		  "#3475A9",
+          "#F2F74E",
+          "#E22724"
+        ],
+        data: [4, 8, 2,2]
+      }]
+    }
+	
+	this.goalData = {
+      labels: ["Completed", "Created" ,"InProgress", "Due"],
+      datasets: [{
+        backgroundColor: [
+          "#2ecc71",
+		  "#3475A9",
+          "#F2F74E",
+          "#E22724"
+        ],
+        data: [7, 12, 4,1]
       }]
     }
 
-    this.lineChartData = {
+    /* this.lineChartData = {
       labels: ["S", "M", "T", "W", "T", "F", "S"],
       datasets: [{
         data: [589, 445, 483, 503, 689, 692, 634],
@@ -48,7 +77,7 @@ export class DashboardComponent implements OnInit {
         pointBackgroundColor: colors[1]
       }]
     };
-
+ */
 
     this.barChartOptions = {
       scales: {
@@ -58,7 +87,7 @@ export class DashboardComponent implements OnInit {
         }],
         yAxes: [{
           ticks: {
-            beginAtZero: false
+            beginAtZero: true
           }
         }]
       },
@@ -81,12 +110,12 @@ export class DashboardComponent implements OnInit {
     }
 
     this.barChartData = {
-      labels: ["S", "M", "T", "W", "T", "F", "S"],
+      labels: ["Bad", "Ok", "Good", "Very Good", "Excellent"],
       datasets: [{
-        data: [589, 445, 483, 503, 689, 692, 634],
+        data: [1, 2, 4, 5, 3],
         backgroundColor: colors[0]
       },
-      {
+      /* {
         data: [209, 245, 383, 403, 589, 692, 580],
         backgroundColor: colors[1]
       },
@@ -97,7 +126,8 @@ export class DashboardComponent implements OnInit {
       {
         data: [639, 465, 493, 478, 589, 632, 674],
         backgroundColor: colors[4]
-      }]
+      } */
+	  ]
     };
   }
 }

@@ -25,22 +25,32 @@
         <div class="col-md-2"><input type="submit" value="Create Task" class="team btn btn-primary"
             (click)="createTask()"></div>
       </div>
-      <div class="emlist">
-        <ul class="team-member team-listvew">
-          <li class="mytask-heading">
-            <ul>
+      <div class="table-full-width">
+		<ul class="checkbox-list">
+          <li >
+           <!-- <ul>
               <li>
                 Task Name
               </li>
               <li>Priority</li>
               <li>Created Date</li>
               <li>Actions </li>
-            </ul>
-
+            </ul>-->
+						<table class="table">
+						  <tbody>
+							<tr>
+							  <td>Tasks Name</td>
+							  <td>Priorities</td>
+							  <td>Status</td>
+							  <td>Due Date</td>
+							  <td>Action</td>
+							</tr>
+						  </tbody>
+						</table>
 
           </li>
-          <li class="mytask-heading list-content" *ngFor="let data of SearchResults">
-            <ul>
+          <li  *ngFor="let data of SearchResults">
+          <!--  <ul>
               <li>{{data.taskHeading}}</li>
               <li><span class="prioritybox redcolor">{{data.taskPriority}}</span></li>
               <li>{{data.taskCreatedDate}}</li>
@@ -55,8 +65,28 @@
                   *ngIf="userservice.CheckPermission(userservice.Elements.Task,userservice.Operations.Delete)"
                   (click)="DeleteTeamIcon(data)"></i>
               </li>
-            </ul>
-
+            </ul>-->
+				<table class="table">
+					<tbody>
+						<tr>
+								  <td >{{data.taskHeading}}</td>
+								  <td >{{data.taskPriority}}</td>
+								  <td >{{data.taskStatus}}</td>
+								  <td >{{data.taskCreatedDate}}}</td>
+								  <td>
+								    <i class="icon-View"
+									  *ngIf="userservice.CheckPermission(userservice.Elements.Task,userservice.Operations.View)"
+									  (click)="viewIconClicked(data.taskId)"></i>
+									<i class="icon-edit"
+									  *ngIf="userservice.CheckPermission(userservice.Elements.Task,userservice.Operations.Edit)"
+									  (click)="editIconClicked(data)"></i>
+									<i style="background-color: #f7d0d0;color: #f90000;" class="icon-Delete"
+									  *ngIf="userservice.CheckPermission(userservice.Elements.Task,userservice.Operations.Delete)"
+									  (click)="DeleteTeamIcon(data)"></i>
+								  </td>
+						</tr>
+					</tbody>
+				</table>
           </li>
         </ul>
       </div>

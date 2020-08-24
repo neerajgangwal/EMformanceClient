@@ -33,19 +33,19 @@
                                                             <div class="rolesection">
                                                                 <label for="" class="pull-left headtxtsimily">{{GetFeedbackParameterNames(param.paramId)}}</label>
                                                                 <div class="material-switch marright">
-                                                                    <span><img src="assets/img/Bed.png" (click)="param.rating=1" [style.opacity]="param.rating!=null && param.rating!=1?'20%':'100%'" ></span>
+                                                                    <span><img src="assets/img/angryred.png" (click)="param.rating=1" [style.opacity]="param.rating!=null && param.rating!=1?'20%':'100%'" ></span>
                                                                 </div>
                                                                 <div class="material-switch marright">
-                                                                    <span><img src="assets/img/can-improve.png" (click)="param.rating=2" [style.opacity]="param.rating!=null && param.rating!=2?'20%':'100%'"></span>
+                                                                    <span><img src="assets/img/thumbsdown.png" (click)="param.rating=2" [style.opacity]="param.rating!=null && param.rating!=2?'20%':'100%'"></span>
                                                                 </div>
                                                                 <div class="material-switch marright">
-                                                                    <span><img src="assets/img/Good.png" (click)="param.rating=3" [style.opacity]="param.rating!=null && param.rating!=3?'20%':'100%'"></span>
+                                                                    <span><img src="assets/img/thumbsup.png" (click)="param.rating=3" [style.opacity]="param.rating!=null && param.rating!=3?'20%':'100%'"></span>
                                                                 </div>
                                                                 <div class="material-switch marright">
-                                                                    <span><img src="assets/img/very-good.png" (click)="param.rating=4" [style.opacity]="param.rating!=null && param.rating!=4?'20%':'100%'"></span>
+                                                                    <span><img src="assets/img/ok.png" (click)="param.rating=4" [style.opacity]="param.rating!=null && param.rating!=4?'20%':'100%'"></span>
                                                                 </div>
                                                                 <div class="material-switch marright">
-                                                                    <span><img src="assets/img/Excellent.png" (click)="param.rating=5" [style.opacity]="param.rating!=null && param.rating!=5?'20%':'100%'"></span>
+                                                                    <span><img src="assets/img/applause.png" (click)="param.rating=5" [style.opacity]="param.rating!=null && param.rating!=5?'20%':'100%'"></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -92,19 +92,19 @@
                                                           <div class="rolesection">
                                                               <label for="" class="pull-left headtxtsimily">{{GetFeedbackParameterNames(param.paramId)}}</label>
                                                               <div class="material-switch marright">
-                                                                  <span><img src="assets/img/Bed.png" *ngIf="param.rating==1" ></span>
+                                                                  <span><img src="assets/img/angryred.png" *ngIf="param.rating==1" ></span>
                                                               </div>
                                                               <div class="material-switch marright">
-                                                                  <span><img src="assets/img/can-improve.png" *ngIf="param.rating==2"></span>
+                                                                  <span><img src="assets/img/thumbsdown.png" *ngIf="param.rating==2"></span>
                                                               </div>
                                                               <div class="material-switch marright">
-                                                                  <span><img src="assets/img/Good.png" *ngIf="param.rating==3"></span>
+                                                                  <span><img src="assets/img/thumbsup.png" *ngIf="param.rating==3"></span>
                                                               </div>
                                                               <div class="material-switch marright">
-                                                                  <span><img src="assets/img/very-good.png" *ngIf="param.rating==4"></span>
+                                                                  <span><img src="assets/img/ok.png" *ngIf="param.rating==4"></span>
                                                               </div>
                                                               <div class="material-switch marright">
-                                                                  <span><img src="assets/img/Excellent.png" *ngIf="param.rating==5"></span>
+                                                                  <span><img src="assets/img/applause.png" *ngIf="param.rating==5"></span>
                                                               </div>
                                                           </div>
                                                       </div>
@@ -152,19 +152,19 @@
                                                         <div class="rolesection">
                                                             <label for="" class="pull-left headtxtsimily">{{GetFeedbackParameterNames(param.paramId)}}</label>
                                                             <div class="material-switch marright">
-                                                                <span><img src="assets/img/Bed.png" *ngIf="param.rating==1" ></span>
+                                                                <span><img src="assets/img/angryred.png" *ngIf="param.rating==1" ></span>
                                                             </div>
                                                             <div class="material-switch marright">
-                                                                <span><img src="assets/img/can-improve.png" *ngIf="param.rating==2"></span>
+                                                                <span><img src="assets/img/thumbsdown.png" *ngIf="param.rating==2"></span>
                                                             </div>
                                                             <div class="material-switch marright">
-                                                                <span><img src="assets/img/Good.png" *ngIf="param.rating==3"></span>
+                                                                <span><img src="assets/img/thumbsup.png" *ngIf="param.rating==3"></span>
                                                             </div>
                                                             <div class="material-switch marright">
-                                                                <span><img src="assets/img/very-good.png" *ngIf="param.rating==4"></span>
+                                                                <span><img src="assets/img/ok.png" *ngIf="param.rating==4"></span>
                                                             </div>
                                                             <div class="material-switch marright">
-                                                                <span><img src="assets/img/Excellent.png" *ngIf="param.rating==5"></span>
+                                                                <span><img src="assets/img/applause.png" *ngIf="param.rating==5"></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -207,6 +207,12 @@
                                                         alt="...">
                                                 </a>
                                             </div>
+											<div class="media-left" *ngIf="data.blindRequest==true">
+                                                <a href="#">
+                                                    <img class="media-object" src="assets/img/faces/face-0.jpg"
+                                                        alt="...">
+                                                </a>
+                                            </div>
                                             <div class="media-body">
                                                 <div class="row">
                                                     <div class="col-md-4" *ngIf="data.blindRequest==false">
@@ -220,7 +226,9 @@
                                                       <h4 class="media-heading">Anonymous</h4>
                                                   </div>
                                                     <div class="col-md-7">
-                                                        <p>{{data.description}}</p>
+													 <textarea class="form-control"
+                                                         >{{data.description}}</textarea>
+                                                       <!-- <p>{{data.description}}</p>-->
                                                     </div>
                                                     <div class="permission-section">
                                                         <div class="smily-section" *ngFor="let element of data.feedbackParameteres">
@@ -228,20 +236,20 @@
                                                                 <label for="" class="pull-left headtxtsimily">{{GetFeedbackParameterNames(element.paramId)}}</label>
 
                                                                     <div class="material-switch marright">
-                                                                      <span><img src="assets/img/Bed.png"  *ngIf="element.rating==1"></span>
+                                                                      <span><img src="assets/img/angryred.png"  *ngIf="element.rating==1"></span>
                                                                   </div>
                                                                   <div class="material-switch marright">
-                                                                      <span><img src="assets/img/can-improve.png" *ngIf="element.rating==2"></span>
+                                                                      <span><img src="assets/img/thumbsdown.png" *ngIf="element.rating==2"></span>
                                                                   </div>
                                                                   <div class="material-switch marright">
-                                                                      <span><img src="assets/img/Good.png" *ngIf="element.rating==3"></span>
+                                                                      <span><img src="assets/img/thumbsup.png" *ngIf="element.rating==3"></span>
                                                                   </div>
 
                                                                   <div class="material-switch marright">
-                                                                      <span><img src="assets/img/very-good.png" *ngIf="element.rating==4"></span>
+                                                                      <span><img src="assets/img/ok.png" *ngIf="element.rating==4"></span>
                                                                   </div>
                                                                   <div class="material-switch marright">
-                                                                      <span><img src="assets/img/Excellent.png" *ngIf="element.rating==5"></span>
+                                                                      <span><img src="assets/img/applause.png" *ngIf="element.rating==5"></span>
                                                                   </div>
                                                             </div>
                                                         </div>

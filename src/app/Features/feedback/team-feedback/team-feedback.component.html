@@ -85,9 +85,9 @@
                     <p *ngIf="feedback.feedbackStatus=='2' ||feedback.feedbackStatus=='3' ">
                       {{feedback.description}}
                     </p>
-                    <h3 *ngIf="feedback.feedbackStatus=='1'">
-                      Feedback pending
-                    </h3>
+                    <h5 style="color:red;font-weight=500;" *ngIf="feedback.feedbackStatus=='1'">
+                      Feedback Pending!!
+                    </h5>
                   </div>
                 </div>
               </div>
@@ -155,7 +155,7 @@
       <div class="form-group">
         <ul class="selected-user">
           <li *ngFor="let param of SelectedList">
-            <span class="user-thumb"></span>
+           <!-- <span class="user-thumb"></span>-->
             <p>{{ param.description }}</p>
             <i class="fa fa-times" (click)="RemoveParamFromSelectList(param)"></i>
           </li>

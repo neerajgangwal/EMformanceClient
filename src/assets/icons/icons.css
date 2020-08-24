@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('icomoon.eot?he81fr');
-  src:  url('icomoon.eot?he81fr#iefix') format('embedded-opentype'),
-    url('icomoon.ttf?he81fr') format('truetype'),
-    url('icomoon.woff?he81fr') format('woff'),
-    url('icomoon.svg?he81fr#icomoon') format('svg');
+  src:  url('icomoon.eot?gxvh2e');
+  src:  url('icomoon.eot?gxvh2e#iefix') format('embedded-opentype'),
+    url('icomoon.ttf?gxvh2e') format('truetype'),
+    url('icomoon.woff?gxvh2e') format('woff'),
+    url('icomoon.svg?gxvh2e#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,63 +25,66 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-delete:before {
-  content: "\e911";
-}
-.icon-success:before {
-  content: "\e912";
-}
-.icon-feedback-sent:before {
-  content: "\e913";
-}
-.icon-interview:before {
-  content: "\e910";
-}
-.icon-star:before {
-  content: "\e90f";
-}
-.icon-attachment:before {
-  content: "\e90d";
-}
-.icon-comment:before {
-  content: "\e90e";
-}
-.icon-Delete:before {
+.icon-plus:before {
   content: "\e900";
 }
-.icon-Department:before {
+.icon-Delete:before {
   content: "\e901";
 }
-.icon-edit:before {
+.icon-Department:before {
   content: "\e902";
 }
-.icon-Employee:before {
+.icon-edit:before {
   content: "\e903";
 }
-.icon-Evaluate:before {
+.icon-Employee:before {
   content: "\e904";
 }
-.icon-Feedback:before {
+.icon-Evaluate:before {
   content: "\e905";
 }
-.icon-Goals:before {
+.icon-Feedback:before {
   content: "\e906";
 }
-.icon-list:before {
+.icon-Goals:before {
   content: "\e907";
 }
-.icon-Projects:before {
+.icon-list:before {
   content: "\e908";
 }
-.icon-Roles:before {
+.icon-Projects:before {
   content: "\e909";
 }
-.icon-skill:before {
+.icon-Roles:before {
   content: "\e90a";
 }
-.icon-Team:before {
+.icon-skill:before {
   content: "\e90b";
 }
-.icon-View:before {
+.icon-Team:before {
   content: "\e90c";
+}
+.icon-View:before {
+  content: "\e90d";
+}
+.icon-attachment:before {
+  content: "\e90e";
+}
+.icon-comment:before {
+  content: "\e90f";
+}
+.icon-star:before {
+  content: "\e910";
+}
+.icon-interview:before {
+  content: "\e911";
+}
+.icon-delete:before {
+  content: "\e912";
+}
+.icon-success:before {
+  content: "\e913";
+}
+.icon-feedback-sent:before {
+  content: "\e914";
 }

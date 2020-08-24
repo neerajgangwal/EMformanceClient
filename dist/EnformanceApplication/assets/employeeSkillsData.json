@@ -1,0 +1,65 @@
+[
+    {
+        "skillMpgId": 1,
+        "skillId": 1,
+        "skillProficiency": 0,
+        "employeeId": 2,
+        "createdDate": "2020-05-15",
+        "updatedDate": "2020-05-15",
+        "activateFlag": 0
+    },
+    {
+        "skillMpgId": 3,
+        "skillId": 1,
+        "skillProficiency": 0,
+        "employeeId": 2,
+        "createdDate": "2020-05-15",
+        "updatedDate": "2020-05-15",
+        "activateFlag": 1
+    },
+    {
+        "skillMpgId": 5,
+        "skillId": 1,
+        "skillProficiency": 0,
+        "employeeId": 4,
+        "createdDate": "2020-05-15",
+        "updatedDate": "2020-05-15",
+        "activateFlag": 1
+    },
+    {
+        "skillMpgId": 6,
+        "skillId": 1,
+        "skillProficiency": 0,
+        "employeeId": 4,
+        "createdDate": "2020-05-15",
+        "updatedDate": "2020-05-15",
+        "activateFlag": 1
+    },
+    {
+        "skillMpgId": 7,
+        "skillId": 1,
+        "skillProficiency": 0,
+        "employeeId": 2,
+        "createdDate": "2020-05-15",
+        "updatedDate": null,
+        "activateFlag": 1
+    },
+    {
+        "skillMpgId": 8,
+        "skillId": 1,
+        "skillProficiency": 0,
+        "employeeId": 2,
+        "createdDate": "2020-05-15",
+        "updatedDate": null,
+        "activateFlag": 1
+    },
+    {
+        "skillMpgId": 9,
+        "skillId": 1,
+        "skillProficiency": 0,
+        "employeeId": 2,
+        "createdDate": "2020-05-15",
+        "updatedDate": null,
+        "activateFlag": 1
+    }
+]

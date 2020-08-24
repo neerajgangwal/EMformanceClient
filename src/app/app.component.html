@@ -11,38 +11,50 @@
                 </button>
             </div>
             <div class="collapse navbar-collapse">
-                <div class="top-heading" *ngIf="ShowDashboardIcons!=true">
+              <!--  <div class="top-heading" *ngIf="ShowDashboardIcons!=true">
                     <div class="col-md-12">
                         <h3 class="top-heading">{{Title}}</h3>
                     </div>
-                </div>
-                <div class="top-heading" *ngIf="ShowDashboardIcons==true">
-                  <div class="col-md-6">
+                </div>-->
+                <div class="top-heading" >   <!--*ngIf="ShowDashboardIcons==true"    We need to show top icons everywhere-->
+                  <div class="col-md-3">
                       <h3 class="top-heading">{{Title}}</h3>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-9">
                     <div class="collapse navbar-collapse">
                       <ul class="nav navbar-nav navbar-center">
-                        <li class="active">
-                          <a href="feedback.html">
+                        <li>
+                          <a [routerLink]="['Feedback/MyFeedback']">
                             <i class="icon-Feedback"></i>
-                            My Permission
+                            My Feedbacks
+                          </a>
+                        </li>
+						<li class="active">
+                          <a [routerLink]="['/project/list']">
+                            <i class="icon-Projects"></i>
+                            My Projects
                           </a>
                         </li>
                         <li>
-                          <a href="index.html">
+                          <a [routerLink]="['/goal/mygoal']">
                             <i class="icon-Goals"></i>
-                            my goal
+                            My Goals
+                          </a>
+                        </li>
+						<li>
+                          <a [routerLink]="['/task/my-task']">
+                            <i class="icon-list"></i>
+                            My Tasks
                           </a>
                         </li>
                         <li>
-                          <a href="skill.html">
+                          <a [routerLink]="['Skill/MySkill']">
                             <i class="icon-skill"></i>
                             My Skills
                           </a>
                         </li>
                         <li>
-                          <a href="#">
+                          <a [routerLink]="['/team/list']">
                             <i class="icon-Team"></i>
                             My Team
                           </a>
@@ -55,7 +67,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="notification-li">
                         <a href="#">
-                            <i class="icon-notification"></i>
+                            <i class="icon-bell"></i>
                         </a>
                     </li>
                     <li class="dropdown profile-dropdown">

@@ -36,8 +36,8 @@
 							<li>
 								<i class="icon-View team" *ngIf="userService.CheckPermission(userService.Elements.Team,userService.Operations.View)" (click)="ViewIconClicked(data.teamId)"></i>
 								<i class="icon-edit" *ngIf="userService.CheckPermission(userService.Elements.Team,userService.Operations.Edit)" (click)="editIconClicked(data)"></i>
-								<i id="addteam1" *ngIf="userService.CheckPermission(userService.Elements.Team,userService.Operations.Edit)" class="icon-Team" (click)="AddTeamIcon(data.teamId)"></i>
-								<i class="icon-Delete" *ngIf="userService.CheckPermission(userService.Elements.Team,userService.Operations.Delete)" (click)="DeleteTeamIcon(data)"></i>
+								<i id="addteam1" *ngIf="userService.CheckPermission(userService.Elements.Team,userService.Operations.Edit)" class="icon-plus" (click)="AddTeamIcon(data.teamId)"></i>
+								<i style="background-color: #f7d0d0;color: #f90000;" class="icon-Delete" *ngIf="userService.CheckPermission(userService.Elements.Team,userService.Operations.Delete)" (click)="DeleteTeamIcon(data)"></i>
 							</li>
 						</ul>
 

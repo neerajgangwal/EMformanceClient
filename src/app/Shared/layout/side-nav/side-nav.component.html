@@ -1,5 +1,5 @@
 <div class="sidemenu">
-  <a href="#" class="brand-logo"><img src="assets/img/logooo.png" alt=""></a>
+  <a href="#" style="background-color: #DAEBEB;" class="brand-logo"><img src="assets/img/login-logo.png" alt=""></a>
   <ul class="nav navbar-sidemenu">
     <li>
       <a [routerLink]="['/dashboard']">
@@ -80,7 +80,7 @@
       <div class="collapse">
         <div class="collapse-inner">
           <a class="collapse-item" [routerLink]="['/task/my-task']">My Task</a>
-          <a class="collapse-item">Team Task</a>
+          <a class="collapse-item" [routerLink]="['/task/team-task']">Team Task</a>
         </div>
       </div>
     </li>
@@ -151,7 +151,7 @@
       </div>
     </li>
     <li>
-      <a [routerLink]="['/audit']"><i class="icon-Department"></i>Audit</a>
+      <a [routerLink]="['/audit']"><i class="icon-Department"></i>Audit Trail</a>
     </li>
   </ul>
 </div>

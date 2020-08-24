@@ -26,7 +26,7 @@
                             <li>
                                 <i class="icon-View" *ngIf="userService.CheckPermission(userService.Elements.Role,userService.Operations.View)" (click)="viewRoleClicked(role)"></i>
                                 <i class="icon-edit" *ngIf="userService.CheckPermission(userService.Elements.Role,userService.Operations.Edit)" (click)="editIconClicked(role.designationId)"></i>
-                                <i class="icon-Delete" *ngIf="userService.CheckPermission(userService.Elements.Role,userService.Operations.Delete)" (click)="deleteIconClicked(role)"></i>
+                                <i style="background-color: #f7d0d0;color: #f90000;" class="icon-Delete" *ngIf="userService.CheckPermission(userService.Elements.Role,userService.Operations.Delete)" (click)="deleteIconClicked(role)"></i>
                             </li>
                         </ul>
                     </li>

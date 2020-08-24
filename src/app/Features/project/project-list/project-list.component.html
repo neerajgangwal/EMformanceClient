@@ -79,7 +79,7 @@
                         <i class="icon-edit"
                           *ngIf="userService.CheckPermission(userService.Elements.Project,userService.Operations.Edit)"
                           (click)="editIconClicked(project.projectId)"></i>
-                        <i class="icon-Delete"
+                        <i style="background-color: #f7d0d0;color: #f90000;" class="icon-Delete"
                           *ngIf="userService.CheckPermission(userService.Elements.Project,userService.Operations.Delete)"
                           (click)="deleteIconClicked(project)"></i></td>
                     </tr>

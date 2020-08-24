@@ -66,18 +66,30 @@
 
     <div class="emlist">
       <div class="col-lg-6 chart-box">
-        <h4>Chart.js — Pie Chart Demo</h4>
+        <h4>Projects Status Data </h4>
         <div>
-          <p-chart type="pie" [data]="pieData"  height="269"></p-chart>
+          <p-chart type="pie" [data]="projectData"  height="269"></p-chart>
         </div>
       </div>
-      <div class="col-lg-6 chart-box pull-right">
+	   <div class="col-lg-6 chart-box">
+        <h4>Tasks Status Data</h4>
+        <div>
+          <p-chart type="pie" [data]="taskData"  height="269"></p-chart>
+        </div>
+      </div>
+	   <div class="col-lg-6 chart-box">
+        <h4>Goals Status Data</h4>
+        <div>
+          <p-chart type="pie" [data]="goalData"  height="269"></p-chart>
+        </div>
+      </div>
+    <!--  <div class="col-lg-6 chart-box pull-right">
         <h4>Chart.js — Pie Chart Demo</h4>
         <p-chart type="line" [data]="lineChartData" [options]="lineChartOptions" height="269"></p-chart>
 
-      </div>
+      </div>-->
       <div class="col-lg-6 chart-box">
-        <h4>Chart.js — Pie Chart Demo</h4>
+        <h4>Feedback Analysis</h4>
         <p-chart type="bar" [data]="barChartData" [options]="barChartOptions" height="269"></p-chart>
       </div>
     </div>

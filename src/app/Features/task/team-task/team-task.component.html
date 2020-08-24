@@ -11,35 +11,48 @@
                 <div class="col-md-2">
                     <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by Project<b
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by Status<b
                                 class="caret"></b></button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="javascript:void(0);">Action</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Another action</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Created</a><br>
+                            <a class="dropdown-item" href="javascript:void(0);">In Progress</a><br>
+                            <a class="dropdown-item" href="javascript:void(0);">Due</a><br>
+							<a class="dropdown-item" href="javascript:void(0);">Completed</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-2"><input type="submit" value="Create Task" class="team btn btn-primary" (click)="createTask()"></div>
             </div>
-            <div class="col-md-9">
-                <div class="emlist">
-
-                    <ul class="team-member team-listvew">
-                        <li class="mytask-heading">
-                            <ul>
+            <div class="col-md-12">
+                <div class="table-full-width">
+					<ul class="checkbox-list">
+                        <li>
+                           <!-- <ul>
+							
                                 <li>
                                     Task Name
                                 </li>
                                 <li>Priority</li>
                                 <li>Created Date</li>
                                 <li>Actions </li>
-                            </ul>
+                            </ul>-->
 
-
+						<table class="table">
+						  <tbody>
+							<tr>
+							  <td>Tasks Name</td>
+							  <td>Priorities</td>
+							  <td>Status</td>
+							  <td>Due Date</td>
+							  <td>Action</td>
+							</tr>
+						  </tbody>
+						</table>
                         </li>
-
-                    <li class="mytask-heading list-content" *ngFor="let data of SearchResults">  <ul>
+					<!-- li class="mytask-heading list-content"-->
+                    <li  *ngFor="let data of SearchResults">  
+							<!--<ul>    
+								
                                 <li>{{data.taskHeading}}</li>
 
                                 <li><span class="prioritybox redcolor">{{data.taskPriority}}</span></li>
@@ -52,15 +65,28 @@
 
 
                                 </li>
-                            </ul>
-
+                            </ul>-->
+							<table class="table">
+							  <tbody>
+							    <tr colspan="5">Team Name</tr>
+								<tr>
+								  <td >{{data.taskHeading}}</td>
+								  <td >{{data.taskPriority}}</td>
+								  <td >{{data.taskStatus}}</td>
+								  <td >{{data.taskCreatedDate}}}</td>
+								  <td>
+								    <i class="icon-View" (click)="viewIconClicked(data.taskId)"></i>
+									<i class="icon-edit" (click)="editIconClicked(data)"></i>
+									<i style="background-color: #f7d0d0;color: #f90000;" class="icon-Delete" (click)="DeleteTeamIcon(data)"></i>
+								  </td>
+								</tr>
+							  </tbody>
+							 </table>
                         </li>
-
-
-                    </ul>
+					</ul>
                 </div>
             </div>
-            <div class="col-md-3">
+       <!--   <div class="col-md-3">
 
                 <div class="card">
                     <div class="header">
@@ -135,7 +161,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
 
     </div>
@@ -173,8 +199,40 @@
 
                 </select>
             </div>
+			 <div class="form-group">
+                <label for="">Select Status</label>
+                <select name="" id="" class="form-control" formControlName="taskStatus">
+                    <option value="" selected>Select Status</option>
+                    <option value="Low">Created</option>
+                    <option value="Medium">In Progress</option>
+                    <option value="High">Pending</option>
+					<option value="High">Completed</option>
+                </select>
+            </div>
+			<div class="selectwith-button removepad">
+				<div class="form-group">
+					<label for="">Assign Task To</label>
+					<select name="" id="" class="form-control" formControlName="paramId">
+					<option value="">Select Employee</option>
+					<!--<option *ngFor="let parameter of ParametersList" value="{{ parameter.paramId }}">
+						{{ parameter.description }}</option>--> <!--was creating error-->
+					</select>
+					<button class="btn btn-primary" >
+						ADD
+					</button>
+				</div>
+			</div>
+		  <div class="form-group">
+			<ul class="selected-user">
+			  <li >
+				<span class="user-thumb"></span>
+				<p></p>
+				<i class="fa fa-times" ></i>
+			  </li>
+			</ul>
+		  </div>
             <div class="form-group">
-                <label for="">upload file</label>
+                <label for="">Upload file</label>
                 <div class="file-upload">
                     <input type="text" class="form-control" readonly placeholder="File details here" formControlName="taskAttachment">
                     <div class="input-group-btn">
@@ -188,14 +246,14 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-5">
-                        <label for="">date</label>
+                        <label for="">Date</label>
                         <input type="date" class="form-control" formControlName="taskStartDate">
                     </div>
                     <div class="col-md-2 text-center">
                         <span class="to-padding">to</span>
                     </div>
                     <div class="col-md-5">
-                        <label for="">due Date</label>
+                        <label for="">Due Date</label>
                         <input type="date" class="form-control" formControlName="taskDueDate">
                     </div>
                 </div>
@@ -238,8 +296,30 @@
 
                 </select>
             </div>
+			<div class="selectwith-button removepad">
+				<div class="form-group" >
+					<label for="">Assign Task To</label>
+					<select name="" id="" class="form-control" formControlName="paramId">
+					<option value="">Select Employee</option>
+					<!--<option *ngFor="let parameter of ParametersList" value="{{ parameter.paramId }}">
+						{{ parameter.description }}</option>--> <!--was creating error-->
+					</select>
+					<button class="btn btn-primary" >
+						ADD
+					</button>
+				</div>
+			</div>
+		  <div class="form-group">
+			<ul class="selected-user">
+			  <li >
+				<span class="user-thumb"></span>
+				<p></p>
+				<i class="fa fa-times"></i>
+			  </li>
+			</ul>
+		  </div>
             <div class="form-group">
-                <label for="">upload file</label>
+                <label for="">Upload file</label>
                 <div class="file-upload">
                     <input type="text" class="form-control" readonly placeholder="File details here" formControlName="taskAttachment">
                     <div class="input-group-btn">
@@ -253,7 +333,7 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-5">
-                        <label for="">date</label>
+                        <label for="">Date</label>
                         <input type="date" class="form-control" formControlName="taskStartDate">
 
                     </div>
@@ -261,7 +341,7 @@
                         <span class="to-padding">to</span>
                     </div>
                     <div class="col-md-5">
-                        <label for="">due Date</label>
+                        <label for="">Due Date</label>
                         <input type="date" class="form-control" formControlName="taskDueDate">
 
                     </div>
@@ -281,7 +361,7 @@
         <h3>Task Description</h3>
         <p><strong>Create dashboard of ProgressBar Helps you organize, assign, tasks, all from one central platform</strong></p>
         <span class="color-red"><i class="fa fa-clock-o"></i>Due: {{viewTask["taskDueDate"]}}</span>
-        <h4><i class="icon-comment"></i>description</h4>
+        <h4><i class="icon-comment"></i>Description</h4>
         <p>{{viewTask["taskDescription"]}}</p>
         <h4><i class="icon-attachment"></i> Attachment</h4>
         <div class="attachment">
