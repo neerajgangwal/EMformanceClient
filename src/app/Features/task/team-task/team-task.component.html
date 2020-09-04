@@ -1,392 +1,320 @@
 <div class="main-panel">
-    <div class="content" style="background-color:#DAEBEB;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="search-form">
-                        <i class="fa fa-search"></i>
-                        <input type="text" class="form-control" placeholder="Search by name" (input)="FilterData($event)">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by Status<b
-                                class="caret"></b></button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="javascript:void(0);">Created</a><br>
-                            <a class="dropdown-item" href="javascript:void(0);">In Progress</a><br>
-                            <a class="dropdown-item" href="javascript:void(0);">Due</a><br>
-							<a class="dropdown-item" href="javascript:void(0);">Completed</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2"><input type="submit" value="Create Task" class="team btn btn-primary" (click)="createTask()"></div>
-            </div>
-            <div class="col-md-12">
-                <div class="table-full-width">
-					<ul class="checkbox-list">
-                        <li>
-                           <!-- <ul>
-							
-                                <li>
-                                    Task Name
-                                </li>
-                                <li>Priority</li>
-                                <li>Created Date</li>
-                                <li>Actions </li>
-                            </ul>-->
 
-						<table class="table">
-						  <tbody>
-							<tr>
-							  <td>Tasks Name</td>
-							  <td>Priorities</td>
-							  <td>Status</td>
-							  <td>Due Date</td>
-							  <td>Action</td>
-							</tr>
-						  </tbody>
-						</table>
-                        </li>
-					<!-- li class="mytask-heading list-content"-->
-                    <li  *ngFor="let data of SearchResults">  
-							<!--<ul>    
-								
-                                <li>{{data.taskHeading}}</li>
+  <div class="content" style="background-color:#DAEBEB;">
+    <div class="container-fluid">
+      <div class="row">
 
-                                <li><span class="prioritybox redcolor">{{data.taskPriority}}</span></li>
-                                <li>{{data.taskCreatedDate}}</li>
-                                <li>
-
-                                <i class="icon-View" (click)="viewIconClicked(data.taskId)"></i>
-                                <i class="icon-edit" (click)="editIconClicked(data)"></i>
-                                <i class="icon-Delete" (click)="DeleteTeamIcon(data)"></i>
-
-
-                                </li>
-                            </ul>-->
-							<table class="table">
-							  <tbody>
-							    <tr colspan="5">Team Name</tr>
-								<tr>
-								  <td >{{data.taskHeading}}</td>
-								  <td >{{data.taskPriority}}</td>
-								  <td >{{data.taskStatus}}</td>
-								  <td >{{data.taskCreatedDate}}}</td>
-								  <td>
-								    <i class="icon-View" (click)="viewIconClicked(data.taskId)"></i>
-									<i class="icon-edit" (click)="editIconClicked(data)"></i>
-									<i style="background-color: #f7d0d0;color: #f90000;" class="icon-Delete" (click)="DeleteTeamIcon(data)"></i>
-								  </td>
-								</tr>
-							  </tbody>
-							 </table>
-                        </li>
-					</ul>
-                </div>
-            </div>
-       <!--   <div class="col-md-3">
-
-                <div class="card">
-                    <div class="header">
-                        <h4 class="title">My Team</h4>
-                    </div>
-                    <div class="content team-list">
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src="assets/img/faces/face-1.jpg" alt="...">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Amanda Kherr</h4>
-                                <p>Designer</p>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src="assets/img/faces/face-2.jpg" alt="...">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Angel Johnson</h4>
-                                <p>Designer</p>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src="assets/img/faces/face-3.jpg" alt="...">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Babak Kherr</h4>
-                                <p>Designer</p>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src="assets/img/faces/face-4.jpg" alt="...">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Baha Johnson</h4>
-                                <p>Designer</p>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src="assets/img/faces/face-5.jpg" alt="...">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Angel Johnson</h4>
-                                <p>Designer</p>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src="assets/img/faces/face-6.jpg" alt="...">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Babak Kherr</h4>
-                                <p>Designer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
+        <div class="col-md-4">
+          <div class="search-form">
+            <i class="fa fa-search"></i>
+            <input type="text" class="form-control" placeholder="Search by name" [(ngModel)]="searchText">
+          </div>
         </div>
 
+        <div class="col-md-2  pull-right"><input type="submit" value="Create Task" (click)="createTask()"
+            class="team btn btn-primary"></div>
+        <div class="col-md-2 pull-right">
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">Filter by Status<b class="caret"></b></button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" (click)="taskStatusFilter='Created'" href="javascript:void(0);">Created</a><br>
+              <a class="dropdown-item" (click)="taskStatusFilter='In Progress'" href="javascript:void(0);">In Progress</a><br>
+              <a class="dropdown-item" (click)="taskStatusFilter='Due'" href="javascript:void(0);">Due</a><br>
+              <a class="dropdown-item" (click)="taskStatusFilter='Completed'" href="javascript:void(0);">Completed</a>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="emlist">
+
+          <ul class="team-member team-listvew">
+            <li class="mytask-heading">
+              <ul>
+                <li>
+                  Task Name
+                </li>
+                <li>Priority</li>
+                <li>Status</li>
+                <li>Created Date</li>
+                <li>Assigned To</li>
+                <li>Actions </li>
+              </ul>
+            </li>
+            <ul *ngFor="let team of SearchResults">
+              <li>{{team.teamName}}</li>
+              <li *ngFor="let task of team.teamTaskList|dataFilter:'employeeTaskStatus':taskStatusFilter|dataFilter:'taskName':searchText">
+                <ul>
+                  <li>{{task.taskName}}</li>
+                  <li><span class="prioritybox"
+                      [ngClass]="{'completedcolor':task.employeeTaskStatus=='Completed',
+                    'yellowcolor':task.employeeTaskStatus!='Completed' && task.taskPriority=='Low',
+                    'purplecolor':task.employeeTaskStatus!='Completed' && task.taskPriority=='Medium',
+                    'redcolor':task.employeeTaskStatus!='Completed' && task.taskPriority=='High'}">{{task.taskPriority}}</span></li>
+                  <li><span class="statusbox" [ngClass]="{
+                    'redcolor':task.employeeTaskStatus=='Delayed',
+                    'greencolor':task.employeeTaskStatus=='Completed',
+                    'purplecolor':task.employeeTaskStatus=='In Progress'}">{{task.employeeTaskStatus}}</span></li>
+                  <li>{{task.taskCreatedDate}}</li>
+                  <li>{{task.employeeFName+' '+task.employeeMName}}</li>
+                  <li>
+                    <i class="icon-View" (click)="viewIconClicked(task)"></i>
+                    <i class="icon-Delete" (click)="DeleteAssignedTaskIcon(task)"></i>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </ul>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 <div class="slide-popup" id="add-team-task">
-    <div class="slide-close">
-        <i class="fa fa-angle-left" aria-hidden="true"></i>
-    </div>
-    <div class="slide-content" *ngIf="createTaskForm!=null">
-        <h3>Create Task</h3>
-        <form [formGroup]="createTaskForm">
-            <div class="form-group">
-                <label for="">Select Project</label>
-                <select class="form-control" formControlName="projectId">
-                    <option value=-1 selected>Select Project</option>
-                    <option *ngFor="let project of ProjectsList" value="{{project.projectId}}">
-                        {{project.projectName}}</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="">Task title</label>
-                <input type="text" class="form-control" placeholder="Enter task title here" formControlName="taskHeading">
-            </div>
-            <div class="form-group">
-                <label for="">Task Description</label>
-                <textarea Class="form-control" rows="4" cols="50" formControlName="taskDescription" placeholder="Enter Task details here"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="">Select Priority</label>
-                <select name="" id="" class="form-control" formControlName="taskPriority">
-                    <option value="" selected>Select Priority</option>
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
+  <div class="slide-close">
+    <i class="fa fa-angle-left" aria-hidden="true"></i>
+  </div>
+  <div class="slide-content" *ngIf="createTaskForm!=null">
+    <h3>Create Task</h3>
+    <form [formGroup]="createTaskForm">
+      <div class="form-group">
+        <label for="">Select Project</label>
+        <select class="form-control" formControlName="projectId">
+          <option value=-1 selected>Select Project</option>
+          <option *ngFor="let project of ProjectsList" value="{{project.projectId}}">
+            {{project.projectName}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="">Task title</label>
+        <input type="text" class="form-control" placeholder="Enter task title here" formControlName="taskHeading">
+        <span class="error"
+          *ngIf="!createTaskForm.controls['taskHeading'].valid&&(createTaskForm.controls['taskHeading'].dirty|| createTaskForm.controls['taskHeading'].touched)"><i
+            class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide Task Heading </span>
+      </div>
+      <div class="form-group">
+        <label for="">Task Description</label>
+        <textarea Class="form-control" rows="4" cols="50" formControlName="taskDescription"
+          placeholder="Enter Task details here"></textarea>
+        <span class="error"
+          *ngIf="!createTaskForm.controls['taskDescription'].valid&&(createTaskForm.controls['taskDescription'].dirty|| createTaskForm.controls['taskDescription'].touched)"><i
+            class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide Task description</span>
+      </div>
+      <div class="form-group">
+        <label for="">Select Priority</label>
+        <select name="" id="" class="form-control" formControlName="taskPriority">
+          <option value="" selected>Select Priority</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
 
-                </select>
-            </div>
-			 <div class="form-group">
-                <label for="">Select Status</label>
-                <select name="" id="" class="form-control" formControlName="taskStatus">
-                    <option value="" selected>Select Status</option>
-                    <option value="Low">Created</option>
-                    <option value="Medium">In Progress</option>
-                    <option value="High">Pending</option>
-					<option value="High">Completed</option>
-                </select>
-            </div>
-			<div class="selectwith-button removepad">
-				<div class="form-group">
-					<label for="">Assign Task To</label>
-					<select name="" id="" class="form-control" formControlName="paramId">
-					<option value="">Select Employee</option>
-					<!--<option *ngFor="let parameter of ParametersList" value="{{ parameter.paramId }}">
-						{{ parameter.description }}</option>--> <!--was creating error-->
-					</select>
-					<button class="btn btn-primary" >
-						ADD
-					</button>
-				</div>
-			</div>
-		  <div class="form-group">
-			<ul class="selected-user">
-			  <li >
-				<span class="user-thumb"></span>
-				<p></p>
-				<i class="fa fa-times" ></i>
-			  </li>
-			</ul>
-		  </div>
-            <div class="form-group">
-                <label for="">Upload file</label>
-                <div class="file-upload">
-                    <input type="text" class="form-control" readonly placeholder="File details here" formControlName="taskAttachment">
-                    <div class="input-group-btn">
-                        <span class="file-upload btn btn-success">
-                            <span class="upl" id="upload">upload</span>
-                            <input type="file" class="upload up" id="up" />
-                        </span><!-- btn-orange -->
-                    </div><!-- btn -->
-                </div><!-- group -->
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-5">
-                        <label for="">Date</label>
-                        <input type="date" class="form-control" formControlName="taskStartDate">
-                    </div>
-                    <div class="col-md-2 text-center">
-                        <span class="to-padding">to</span>
-                    </div>
-                    <div class="col-md-5">
-                        <label for="">Due Date</label>
-                        <input type="date" class="form-control" formControlName="taskDueDate">
-                    </div>
-                </div>
-            </div>
-        <input type="button" value="Cancel" class="btn btn-primary" (click)="CancelButtonClick()">
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="">Select Status</label>
+        <select name="" id="" class="form-control" formControlName="taskStatus">
+          <option value="" selected>Select Status</option>
+          <option value="Created">Created</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Pending">Pending</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </div>
+      <div class="selectwith-button removepad">
+        <div class="form-group">
+          <label for="">Assign Task To</label>
+          <select class="form-control" formControlName="assignedToId">
+            <option value="">Select Employee</option>
+            <option *ngFor="let employee of EmployeeList" value="{{ employee.employeeId }}">
+              {{ employee.employeeFname+" "+employee.employeeMname}}</option>
+          </select>
+          <button class="btn btn-primary" (click)="AddMemberToTaskList(createTaskForm.get('assignedToId').value)">
+            ADD
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <ul class="selected-user">
+          <li *ngFor="let member of TaskMemberList"><span class="user-thumb"></span>
+            <p>{{member.employeeFname}} {{member.employeeMname}}</p><i class="fa fa-times"
+              (click)="RemoveMemberFromTaskList(member)"></i>
+          </li>
+        </ul>
+      </div>
+      <div class="form-group">
+        <label for="">Upload file</label>
+        <div class="file-upload">
+          <input type="text" class="form-control" readonly placeholder="File details here"
+            formControlName="taskAttachment">
+          <div class="input-group-btn">
+            <span class="file-upload btn btn-success">
+              <span class="upl" id="upload">upload</span>
+              <input type="file" class="upload up" id="up" />
+            </span><!-- btn-orange -->
+          </div><!-- btn -->
+        </div><!-- group -->
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-5">
+            <label for="">Date</label>
+            <input type="date" class="form-control" formControlName="taskStartDate">
+            <span class="error"
+              *ngIf="!createTaskForm.controls['taskStartDate'].valid&&(createTaskForm.controls['taskStartDate'].dirty|| createTaskForm.controls['taskStartDate'].touched)"><i
+                class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please select start date</span>
 
-            <input type="submit" value="CREATE TASK" class="team btn btn-primary" (click)="createTaskSave(createTaskForm.value)">
-        </form>
-    </div>
+          </div>
+          <div class="col-md-2 text-center">
+            <span class="to-padding">to</span>
+          </div>
+          <div class="col-md-5">
+            <label for="">Due Date</label>
+            <input type="date" class="form-control" formControlName="taskDueDate">
+            <span class="error"
+              *ngIf="!createTaskForm.controls['taskDueDate'].valid&&(createTaskForm.controls['taskDueDate'].dirty|| createTaskForm.controls['taskDueDate'].touched)"><i
+                class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please select due date</span>
+
+          </div>
+        </div>
+      </div>
+      <input type="button" value="Cancel" class="btn btn-primary" (click)="CancelButtonClick()">
+
+      <input type="submit" value="CREATE TASK" class="team btn btn-primary"
+        (click)="createTaskSave(createTaskForm.value)" [disabled]="!createTaskForm.valid">
+    </form>
+  </div>
 </div>
 <div class="slide-popup" id="edit-team-task">
-    <div class="slide-close">
-        <i class="fa fa-angle-left" aria-hidden="true"></i>
-    </div>
-    <div class="slide-content" *ngIf="EditTaskForm!=null">
-        <h3>Edit Task</h3>
-        <form [formGroup]="EditTaskForm">
-            <div class="form-group">
-                <label for="">Select Project</label>
-                <select class="form-control" formControlName="projectId">
-                    <option *ngFor="let project of ProjectsList" value="{{project.projectId}}">
-                        {{project.projectName}}</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="">Task title</label>
-                <input type="text" class="form-control" placeholder="Enter task title here" formControlName="taskHeading">
+  <div class="slide-close">
+    <i class="fa fa-angle-left" aria-hidden="true"></i>
+  </div>
+  <div class="slide-content" *ngIf="EditTaskForm!=null">
+    <h3>Edit Task</h3>
+    <form [formGroup]="EditTaskForm">
+      <div class="form-group">
+        <label for="">Select Project</label>
+        <select class="form-control" formControlName="projectId">
+          <option *ngFor="let project of ProjectsList" value="{{project.projectId}}">
+            {{project.projectName}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="">Task title</label>
+        <input type="text" class="form-control" placeholder="Enter task title here" formControlName="taskHeading">
+        <span class="error"
+          *ngIf="!EditTaskForm.controls['taskHeading'].valid&&(EditTaskForm.controls['taskHeading'].dirty|| EditTaskForm.controls['taskHeading'].touched)"><i
+            class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide Task Heading</span>
 
-            </div>
-            <div class="form-group">
-                <label for="">Task Description</label>
-                <textarea Class="form-control" rows="4" cols="50" formControlName="taskDescription" placeholder="Enter Task details here"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="">Select Priority</label>
-                <select name="" id="" class="form-control" formControlName="taskPriority">
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
+      </div>
+      <div class="form-group">
+        <label for="">Task Description</label>
+        <textarea Class="form-control" rows="4" cols="50" formControlName="taskDescription"
+          placeholder="Enter Task details here"></textarea>
+        <span class="error"
+          *ngIf="!EditTaskForm.controls['taskDescription'].valid&&(EditTaskForm.controls['taskDescription'].dirty|| EditTaskForm.controls['taskDescription'].touched)"><i
+            class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide Task description</span>
 
-                </select>
-            </div>
-			<div class="selectwith-button removepad">
-				<div class="form-group" >
-					<label for="">Assign Task To</label>
-					<select name="" id="" class="form-control" formControlName="paramId">
-					<option value="">Select Employee</option>
-					<!--<option *ngFor="let parameter of ParametersList" value="{{ parameter.paramId }}">
-						{{ parameter.description }}</option>--> <!--was creating error-->
-					</select>
-					<button class="btn btn-primary" >
-						ADD
-					</button>
-				</div>
-			</div>
-		  <div class="form-group">
-			<ul class="selected-user">
-			  <li >
-				<span class="user-thumb"></span>
-				<p></p>
-				<i class="fa fa-times"></i>
-			  </li>
-			</ul>
-		  </div>
-            <div class="form-group">
-                <label for="">Upload file</label>
-                <div class="file-upload">
-                    <input type="text" class="form-control" readonly placeholder="File details here" formControlName="taskAttachment">
-                    <div class="input-group-btn">
-                        <span class="file-upload btn btn-success">
-                            <span class="upl" id="upload">upload</span>
-                            <input type="file" class="upload up" id="up" />
-                        </span><!-- btn-orange -->
-                    </div><!-- btn -->
-                </div><!-- group -->
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-5">
-                        <label for="">Date</label>
-                        <input type="date" class="form-control" formControlName="taskStartDate">
+      </div>
+      <div class="form-group">
+        <label for="">Select Priority</label>
+        <select name="" id="" class="form-control" formControlName="taskPriority">
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
 
-                    </div>
-                    <div class="col-md-2 text-center">
-                        <span class="to-padding">to</span>
-                    </div>
-                    <div class="col-md-5">
-                        <label for="">Due Date</label>
-                        <input type="date" class="form-control" formControlName="taskDueDate">
+        </select>
+      </div>
+      <div class="selectwith-button removepad">
+        <div class="form-group">
+          <label for="">Assign Task To</label>
+          <select name="" id="" class="form-control" formControlName="paramId">
+            <option value="">Select Employee</option>
+            <!--<option *ngFor="let parameter of ParametersList" value="{{ parameter.paramId }}">
+						{{ parameter.description }}</option>-->
+            <!--was creating error-->
+          </select>
+          <button class="btn btn-primary">
+            ADD
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <ul class="selected-user">
+          <li>
+            <span class="user-thumb"></span>
+            <p></p>
+            <i class="fa fa-times"></i>
+          </li>
+        </ul>
+      </div>
+      <div class="form-group">
+        <label for="">Upload file</label>
+        <div class="file-upload">
+          <input type="text" class="form-control" readonly placeholder="File details here"
+            formControlName="taskAttachment">
+          <div class="input-group-btn">
+            <span class="file-upload btn btn-success">
+              <span class="upl" id="upload">upload</span>
+              <input type="file" class="upload up" id="up" />
+            </span><!-- btn-orange -->
+          </div><!-- btn -->
+        </div><!-- group -->
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-5">
+            <label for="">Date</label>
+            <input type="date" class="form-control" formControlName="taskStartDate">
 
-                    </div>
-                </div>
-            </div>
-        <input type="button" value="Cancel" class="btn btn-primary" (click)="CancelButtonClick()">
+          </div>
+          <div class="col-md-2 text-center">
+            <span class="to-padding">to</span>
+          </div>
+          <div class="col-md-5">
+            <label for="">Due Date</label>
+            <input type="date" class="form-control" formControlName="taskDueDate">
+          </div>
+        </div>
+      </div>
+      <input type="button" value="Cancel" class="btn btn-primary" (click)="CancelButtonClick()">
 
-            <input type="submit" value="EDIT TASK" class="team btn btn-primary" (click)="editSaveButtonClicked(EditTaskForm.value)">
-        </form>
-    </div>
+      <input type="submit" value="EDIT TASK" class="team btn btn-primary"
+        (click)="editSaveButtonClicked(EditTaskForm.value)">
+    </form>
+  </div>
 </div>
-<div class="slide-popup" id="task-team-description">
+<div class="slide-popup" id="team-task-description">
+
     <div class="slide-close">
-        <i class="fa fa-angle-left" aria-hidden="true"></i>
+      <i class="fa fa-angle-left" aria-hidden="true"></i>
     </div>
+    <div *ngIf="ViewTasks">
     <div class="slide-content">
-        <h3>Task Description</h3>
-        <p><strong>Create dashboard of ProgressBar Helps you organize, assign, tasks, all from one central platform</strong></p>
-        <span class="color-red"><i class="fa fa-clock-o"></i>Due: {{viewTask["taskDueDate"]}}</span>
-        <h4><i class="icon-comment"></i>Description</h4>
-        <p>{{viewTask["taskDescription"]}}</p>
-        <h4><i class="icon-attachment"></i> Attachment</h4>
-        <div class="attachment">
-            <img src="assets/img/img.png" alt="">
-            <span>{{viewTask["taskAttachment"]}}</span>
-        </div>
+      <h3>Task Description</h3>
+      <p><strong>{{ViewTasks.taskName}}</strong>
+      </p>
+      <span class="color-red"><i class="fa fa-clock-o"></i>Due: {{ ViewTasks.taskDueDate}}</span>
+      <h4><i class="icon-comment"></i>Description</h4>
+      <p>{{ViewTasks.taskDescription}}</p>
+      <h4><i class="icon-attachment"></i> Attachment</h4>
+      <div class="attachment">
+        <img src="assets/img/img.png" alt="">
+        <span>{{ViewTasks.taskAttachment}}</span>
+      </div>
     </div>
     <hr>
-    <div class="slide-content">
-        <div class="comment-item">
-            <div class="pro-thumb" style="background-image: url('assets/img/face-3.jpg');"></div>
-            <h5>Amanda Kherr</h5>
-            <strong>Designer</strong>
-            <p>Loream provides you with intelligently crafted filler text with decent and simple UI. The
-                loream text itself is specifically created to be appealing to eyes. Creating a positive
-                placebo for your project. Making your project attractive and irresistible even at
-                production phase. Try loream now!</p>
-            <a href="#" class="reply">reply</a>
-        </div>
+    <div class="slide-content" *ngIf="ViewTasks.comment">
+      <div class="comment-item">
+        <div class="pro-thumb" style="background-image: url('assets/img/face-3.jpg');"></div>
+        <h5>{{ViewTasks.employeeFName+" "+ViewTasks.employeeMName}}</h5>
+        <p>{{ViewTasks.comment}}</p>
+        <a href="#" class="reply">reply</a>
+        <input type="text" class="form-control" placeholder="Write a comment" [(ngModel)]="ViewTasks.reply">
+        <input type="button" value="SAVE"  (click)="SaveReply(ViewTasks)" class="btn btn-primary">
+      </div>
     </div>
-    <hr>
-    <div class="slide-content">
-        <div class="comment-item">
-            <div class="pro-thumb"></div>
-            <input type="text" class="form-control" placeholder="Write a comment">
-        </div>
-    </div>
+  </div>
 </div>

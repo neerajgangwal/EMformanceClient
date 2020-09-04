@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {TaskService} from '../task.service';
-import {LayoutService} from '../../../Services/layout.service';
-import {SearchService} from '../../../Services/search.service';
-import {FormBuilder,FormGroup,Validators, RequiredValidator} from '@angular/forms';
+import { TaskService } from '../task.service';
+import { LayoutService } from '../../../Services/layout.service';
+import { SearchService } from '../../../Services/search.service';
+import { FormBuilder, FormGroup, Validators, RequiredValidator } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import {UserService} from '../../../Services/user.service'
+import { UserService } from '../../../Services/user.service'
 import * as $ from 'jquery';
 
 
@@ -16,101 +16,139 @@ import * as $ from 'jquery';
 })
 export class TeamTaskComponent implements OnInit {
 
-  TaskList:any[];
+  TaskList: any[];
+  EmployeeList: any[];
+  TaskMemberList: any[] = [];
   ProjectsList: any[];
-  editTask:any[]=[];
-  viewTask:any[]=[];
-  createTaskForm:FormGroup;
-  editform:FormGroup;
-  EditTaskForm:FormGroup;
+  editTask: any[] = [];
+  viewTask: any[] = [];
+  teamTasks: any[] = [];
+  createTaskForm: FormGroup;
+  EditAssignedform: FormGroup;
+  EditTaskForm: FormGroup;
+  ViewTasks;
+  taskStatusFilter="";
+  searchText:'';
 
-  SearchResults: any[];
+  SearchResults: any[]=[];
   loading: true;
   FilterKey: string;
-  constructor(private taskservice:TaskService,
-    private layoutservice:LayoutService,
-    public searchservice:SearchService,
-    private userservice:UserService,
+  constructor(private taskservice: TaskService,
+    private layoutservice: LayoutService,
+    public searchservice: SearchService,
+    private userservice: UserService,
     private messageService: MessageService,
-    private fb:FormBuilder) { }
+    private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.searchservice.SetSource(null);
-    this.taskservice.getTask().subscribe((res)=>{
+    this.GetTeamTasks();
+    $('.slide-close').on('click', function () {
+      $(this).parent().removeClass('open-slide');
+      $('body').removeClass('gray-over');
+    });
+
+    this.taskservice.Getprojects().subscribe(res => {
       if (res.errorCode == 0) {
-      this.TaskList=res.dataObj;
+        this.ProjectsList = res.dataObj;
+      }
+      else {
 
-      console.log(this.TaskList);
-      this.SearchResults=this.TaskList;
-      this.FilterKey="taskHeading";
-      this.taskservice.Getprojects().subscribe(res => {
-        if (res.errorCode == 0) {
-          this.ProjectsList = res.dataObj;
-        }
-        else {
-        }
-      });
-    }
-    else{
-    }
-  });
-  $('.slide-close').on('click', function() {
-    $(this).parent().removeClass('open-slide');
-    $('body').removeClass('gray-over');
-  });
+      }
+    });
 
+    this.taskservice.getEmployeeData().subscribe(res => {
+      if (res.errorCode == 0) {
+        this.EmployeeList = res.dataObj;
+      }
+      else {
+
+      }
+    });
+    this.TaskMemberList = [];
   }
-  InitialiseCreateTaskForm()
-  {
-    this.createTaskForm=this.fb.group({
-      taskHeading:['',Validators.required],
-      departmentId:2,
-      taskDescription:['',Validators.required],
-      projectId:[-1,Validators.required],
-      assignedById:[this.userservice.LoggedInUser.Id],
-      assignedToId:1,
-      taskStartDate:['',Validators.required],
-      taskDueDate:['',Validators.required],
-      taskAttachment:['',Validators.required],
-      taskPriority:['',Validators.required],
-      taskStatus:['',Validators.required]
+
+
+  GetTeamTasks = function () {
+    this.taskservice.getMyTeamTask(this.userservice.LoggedInUser.Id).subscribe((res) => {
+      this.teamTasks = res.dataObj;
+      this.SearchResults=this.teamTasks;
+      console.log("test");
+      console.log(this.SearchResults);
+    }, (err) => {
+    });
+  }
+
+  InitialiseCreateTaskForm() {
+    this.createTaskForm = this.fb.group({
+      taskHeading: ['', Validators.required],
+      departmentId: 2,
+      taskDescription: ['', Validators.required],
+      projectId: [-1, Validators.required],
+      assignedById: [this.userservice.LoggedInUser.Id],
+      assignedToId: ['', Validators.required],
+      taskStartDate: ['', Validators.required],
+      taskDueDate: ['', Validators.required],
+      taskAttachment: [''],
+      taskPriority: ['', Validators.required],
+      taskStatus: ['', Validators.required],
     })
 
   }
-  InitilizeEditTaskForm=function(data)
-  {
-    this.EditTaskForm=this.fb.group({
-      taskId:[data.taskId],
-      taskHeading:[data.taskHeading],
-      departmentId:[2],
-      taskDescription:[data.taskDescription],
-      projectId:[data.projectId],
-      assignedById:[this.userservice.LoggedInUser.Id],
-      assignedToId:[1],
-      taskStartDate:[data.taskStartDate],
-      taskDueDate:[data.taskDueDate],
-      taskAttachment:[data.taskAttachment],
-      taskPriority:[data.taskPriority],
-      taskStatus:[data.taskStatus]
-    })
-    }
 
-  createTask()
-  {
+  InitilizeEditTaskForm = function (data) {
+    this.EditTaskForm = this.fb.group({
+      taskId: [data.taskId],
+      taskHeading: [data.taskHeading],
+      departmentId: [2],
+      taskDescription: [data.taskDescription],
+      projectId: [data.projectId],
+      assignedById: [this.userservice.LoggedInUser.Id],
+      assignedToId: [1],
+      taskStartDate: [data.taskStartDate],
+      taskDueDate: [data.taskDueDate],
+      taskAttachment: [data.taskAttachment],
+      taskPriority: [data.taskPriority],
+      taskStatus: [data.taskStatus]
+    })
+  }
+
+  InitilizeEditAssignedTaskForm = function (data) {
+    this.EditAssignedform = this.fb.group({
+      employeeTaskId: [data.employeeTaskId],
+      employeeId: [data.employeeId],
+      activateFlag: [1],
+      employeeTaskStatus: [data.employeeTaskStatus],
+      createdDate: [data.createdDate]
+
+    })
+  }
+
+  createTask() {
     this.InitialiseCreateTaskForm()
-      $('#add-team-task').addClass('open-slide');
-      $('body').addClass('gray-over');
+    $('#add-team-task').addClass('open-slide');
+    $('body').addClass('gray-over');
   }
 
   createTaskSave = function (data) {
     console.log(data);
-    this.taskservice.CreateTask(data).subscribe((res)=>{
+    data.assignedToId = -1;
+    this.taskservice.CreateTask(data).subscribe((res) => {
       if (res.errorCode == 0) {
-      console.log(res);
-        this.TaskList.push(res.dataObj);
-        this.SearchResults = this.TaskList
-        this.messageService.add({ severity: 'success', summary: 'Task Created', detail: 'Task created successfully' });
-        this.ResetForm();
+
+        var requestData = this.ConvertDataForAssignEmployees(res.dataObj);
+        console.log("requested data", requestData);
+        console.log("++++++++");
+
+        this.taskservice.manageEmployeeTask(requestData).subscribe((res) => {
+          if (res.errorCode == 0) {
+            this.messageService.add({ severity: 'success', summary: 'Task Created', detail: 'Task created successfully' });
+            this.ResetForm();
+            this.TaskMemberList=[];
+            this.GetTeamTasks();
+            this.CancelButtonClick();
+          }
+        })
       }
       else {
         this.messageService.add({ severity: 'error', summary: 'Failed', detail: res.errorMsg });
@@ -120,34 +158,27 @@ export class TeamTaskComponent implements OnInit {
       this.messageService.add({ severity: 'error', summary: 'Failed', detail: 'Something went wrong please try after some time' });
     });
   }
-  viewIconClicked=function(id)
-  {
-      console.log("id"+id);
-      $('#task-team-description').addClass('open-slide');
-      $('body').addClass('gray-over');
-      this.taskservice.getTaskForView(id).subscribe((res)=>
-      {
-        if (res.errorCode == 0) {
-        this.viewTask = res.dataObj[0];
-        console.log(this.viewTask);
-      }
-      else {
-      }
-      });
+
+  viewIconClicked = function (data) {
+    $('#team-task-description').addClass('open-slide');
+    $('body').addClass('gray-over');
+    console.log(data);
+    this.ViewTasks=data;
+    console.log(this.ViewTasks);
+
   }
-  editSaveButtonClicked=function(data)
-  {
-    data.activateFlag=1;
+
+  editSaveButtonClicked = function (data) {
+    data.activateFlag = 1;
     this.taskservice.editTask(data).subscribe((res) => {
       if (res.errorCode == 0) {
         this.InitilizeEditTaskForm(res.dataObj);
         for (let index = 0; index < this.TaskList.length; index++) {
           const element = this.TaskList[index];
-          console.log("element.taskId"+element.taskId);
-          console.log("data.taskId"+data.taskId);
-          if(element.taskId==data.taskId)
-          {
-            this.TaskList[index]=res.dataObj;
+          console.log("element.taskId" + element.taskId);
+          console.log("data.taskId" + data.taskId);
+          if (element.taskId == data.taskId) {
+            this.TaskList[index] = res.dataObj;
           }
         }
         this.SearchResults = this.TaskList
@@ -162,40 +193,93 @@ export class TeamTaskComponent implements OnInit {
       this.messageService.add({ severity: 'error', summary: 'Failed', detail: 'Something went wrong please try after some time' });
     });
   }
-  ResetForm()
-  {
-    this.InitialiseCreateTaskForm();
-  }
-  DeleteTeamIcon(data)
-  {
-    this.taskservice.deteleTask(data).subscribe((res)=>
-    {
-      if(res.errorCode==0)
-      {
 
-      this.TaskList.splice(this.TaskList.indexOf(data),1);
-      this.SearchResults = this.TaskList;
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Team deleted' });
+
+
+
+  editAssignedTaskSaveButtonClicked = function (data) {
+    this.taskservice.manageEmployeeTask(data).subscribe((res) => {
+      if (res.errorCode == 0) {
+        this.InitilizeEditTaskForm(res.dataObj);
+        this.messageService.add({ severity: 'success', summary: 'Task updated', detail: 'Task edited successfully' });
+        this.ResetForm();
+        this.CancelButtonClick();
       }
-      else{
+      else {
         this.messageService.add({ severity: 'error', summary: 'Failed', detail: res.errorMsg });
       }
-    }
-    ,(err)=>{
-      console.log(err);
-      this.messageService.add({ severity: 'error', summary: 'Failed', detail: "Something went wrong" });
+    }, (error) => {
+      console.log(error);
+      this.messageService.add({ severity: 'error', summary: 'Failed', detail: 'Something went wrong please try after some time' });
     });
   }
 
-  editIconClicked(data)
-  {
-    console.log("snehan"+data)
+
+  ResetForm() {
+    this.InitialiseCreateTaskForm();
+    this.TaskMemberList = [];
+
+  }
+
+  DeleteTeamIcon(data) {
+    this.taskservice.deteleTask(data).subscribe((res) => {
+      if (res.errorCode == 0) {
+
+        this.TaskList.splice(this.TaskList.indexOf(data), 1);
+        this.SearchResults = this.TaskList;
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Team deleted' });
+      }
+      else {
+        this.messageService.add({ severity: 'error', summary: 'Failed', detail: res.errorMsg });
+      }
+    }
+      , (err) => {
+        console.log(err);
+        this.messageService.add({ severity: 'error', summary: 'Failed', detail: "Something went wrong" });
+      });
+  }
+
+  ConvertDataForAssignEmployees(data) {
+    var request = [];
+    this.TaskMemberList.forEach((element) => {
+      request.push({
+        employeeId: element.employeeId,
+        taskId: data.taskId,
+        comment: "",
+        reply: "",
+        assignedById: 3,
+        employeeTaskStatus: data.taskStatus,
+        completionDate: data.taskDueDate,
+        createdDate: new Date()
+      });
+    });
+    return request;
+  }
+
+  editIconClicked(data) {
     this.InitilizeEditTaskForm(data);
     $('#edit-team-task').addClass('open-slide');
     $('body').addClass('gray-over');
-    console.log("edit icon "+data);
   }
 
+  AddMemberToTaskList(id) {
+    console.log(id);
+    for (let member of this.TaskMemberList) {
+      if (member.employeeId == id) {
+        return;
+      }
+    }
+    this.EmployeeList.forEach((element) => {
+
+      if (element.employeeId == id) {
+        this.TaskMemberList.push(element);
+      }
+    })
+  }
+
+  RemoveMemberFromTaskList(element) {
+    this.TaskMemberList.splice(this.TaskMemberList.indexOf(element), 1);
+  }
 
   public FilterData = function (event) {
     var temp = this.TaskList
@@ -211,9 +295,57 @@ export class TeamTaskComponent implements OnInit {
     )
   }
 
-  CancelButtonClick(){
+  CancelButtonClick() {
     $('.slide-close').parent().removeClass('open-slide');
     $('body').removeClass('gray-over');
+  }
+
+  DeleteAssignedTaskIcon(data) {
+    var request={
+      employeeTaskId: data.employeeTaskId,
+     employeeId: data.employeeTaskId,
+     activateFlag: 0,
+     taskId: data.taskId,
+    }
+    data.activateFlag = 0;
+    this.taskservice.deleteManageEmployeeTask(request).subscribe((res) => {
+      if (res.errorCode == 0) {
+        this.GetTeamTasks();
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Task deleted' });
+      }
+      else {
+        this.messageService.add({ severity: 'error', summary: 'Failed', detail: res.errorMsg });
+      }
+    }
+      , (err) => {
+        console.log(err);
+        this.messageService.add({ severity: 'error', summary: 'Failed', detail: "Something went wrong" });
+      });
+  }
+
+  SaveReply = function(data)
+  {
+    var request={
+      employeeTaskId:data.employeeTaskId,
+      reply:data.reply,
+      taskId:data.taskId,
+      employeeId:data.employeeId
+    }
+    this.taskservice.updateAssignedTask(request).subscribe((res)=>
+    {
+      if(res.errorCode==0)
+      {
+        $('.slide-close').parent().removeClass('open-slide');
+        $('body').removeClass('gray-over');
+        this.messageService.add({ severity: 'success', summary: 'Task updated', detail: 'Replied successfully' });
+      }
+      else{
+        this.messageService.add({ severity: 'error', summary: 'Failed', detail: res.errorMsg });
+      }
+    }, (error) => {
+      console.log(error);
+      this.messageService.add({ severity: 'error', summary: 'Failed', detail: 'Something went wrong please try after some time' });
+    });
   }
 
 }

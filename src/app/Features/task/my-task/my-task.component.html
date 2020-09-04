@@ -2,93 +2,175 @@
   <div class="content" style="background-color:#DAEBEB;">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-4">
-          <div class="search-form">
-            <i class="fa fa-search"></i>
-            <input type="text" class="form-control" placeholder="Search by name" (input)="FilterData($event)">
-          </div>
+        <div class="col-md-12">
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#feedback-request">My Task</a></li>
+            <li><a data-toggle="tab" href="#my-feedback" (click)="GetTasksAssignedToMe()">My Assigned Task</a></li>
+          </ul>
+          <div class="tab-content">
+            <div id="feedback-request" class="tab-pane fade in active">
+              <div class="table-full-width">
+                <div class="content" style="background-color:#DAEBEB;">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="search-form">
+                          <i class="fa fa-search"></i>
+                          <input type="text" class="form-control" placeholder="Search by name"
+                            (input)="FilterData($event,'created')">
+                        </div>
+                      </div>
+                      <div class="col-md-2  pull-right">
+                        <input type="submit" value="Create Task" (click)="createTask()" class="team btn btn-primary">
+                      </div>
+                      <div class="col-md-2 pull-right">
+                        <div class="dropdown">
+                          <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by Priority<b
+                              class="caret"></b></button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="javascript:void(0);"
+                              (click)="priorityfilter='Low'">Low</a><br />
+                            <a class="dropdown-item" href="javascript:void(0);"
+                              (click)="priorityfilter='Medium'">Medium</a><br />
+                            <a class="dropdown-item" href="javascript:void(0);" (click)="priorityfilter='High'">High</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="emlist">
+                      <ul class="team-member team-listvew">
+                        <li class="mytask-heading">
+                          <ul>
+                            <li>Task Name</li>
+                            <li>Priority</li>
+                            <li>Status</li>
+                            <li>Created Date</li>
+                            <li>Actions </li>
+                          </ul>
+                        </li>
+                        <li class="mytask-heading list-content"
+                          *ngFor="let data of SearchResults | dataFilter:'taskPriority':priorityfilter">
+                          <ul>
+                            <li>{{data.taskHeading}}</li>
+                            <li><span class="prioritybox"
+                                [ngClass]="{'completedcolor':data.taskStatus=='Completed',
+                          'yellowcolor':data.taskStatus!='Completed' && data.taskPriority=='Low',
+                          'purplecolor':data.taskStatus!='Completed' && data.taskPriority=='Medium',
+                          'redcolor':data.taskStatus!='Completed' && data.taskPriority=='High'}">{{data.taskPriority}}</span></li>
+                            <li class="statusbox" [ngClass]="{
+                              'redcolor':data.taskStatus=='Delayed',
+                              'greencolor':data.taskStatus=='Completed',
+                              'purplecolor':data.taskStatus=='In Progress'}">{{data.taskStatus}}</li>
+                            <li>{{data.taskCreatedDate}}</li>
+                            <li>
+                              <i class="icon-View"
+                                *ngIf="userservice.CheckPermission(userservice.Elements.Task,userservice.Operations.View)"
+                                (click)="viewIconClicked(data.taskId)"></i>
+                              <i class="icon-edit"
+                                *ngIf="userservice.CheckPermission(userservice.Elements.Task,userservice.Operations.Edit)"
+                                (click)="editIconClicked(data)"></i>
+                              <i class="icon-Delete"
+                                *ngIf="userservice.CheckPermission(userservice.Elements.Task,userservice.Operations.Delete)"
+                                (click)="DeleteTeamIcon(data)"></i>
+                            </li>
+                          </ul>
 
-        </div>
-        <div class="col-md-2">
-          <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">Filter by Project<b class="caret"></b></button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="javascript:void(0);">Action</a>
-              <a class="dropdown-item" href="javascript:void(0);">Another action</a>
-              <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+            <div id="my-feedback" class="tab-pane fade">
+              <div class="table-full-width">
+                <div id="feedback-request" class="tab-pane fade in active">
+                  <div class="table-full-width">
+                    <div class="content" style="background-color:#DAEBEB;">
+                      <div class="container-fluid">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="search-form">
+                              <i class="fa fa-search"></i>
+                              <input type="text" class="form-control" placeholder="Search by name"
+                                (input)="FilterData($event,'assigned')">
+                            </div>
+                          </div>
+                          <div class="col-md-2  pull-right"><input type="submit" value="Create Task"
+                              (click)="createTask()" class="team btn btn-primary"></div>
+                          <div class="col-md-2 pull-right">
+                            <div class="dropdown">
+                              <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by
+                                Priority<b class="caret"></b></button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                  (click)="priorityfilter='Low'">Low</a><br />
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                  (click)="priorityfilter='Medium'">Medium</a><br />
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                  (click)="priorityfilter='High'">High</a>
+                              </div>
 
+                            </div>
+
+                          </div>
+                        </div>
+                        <div class="emlist">
+                          <ul class="team-member team-listvew">
+                            <li class="mytask-heading">
+                              <ul>
+                                <li>
+                                  Task Name
+                                </li>
+                                <li>Priority</li>
+                                <li>Status</li>
+                                <li>Created Date</li>
+                                <li>Actions </li>
+                              </ul>
+                            </li>
+
+                            <li class="mytask-heading list-content"
+                              *ngFor="let data of SearchResultsAssignedToMe | dataFilter:'taskPriority':priorityfilter">
+                              <ul>
+                                <li>{{data.taskHeading}}</li>
+                                <li><span class="prioritybox"
+                                    [ngClass]="{'completedcolor':data.employeeTaskStatus=='Completed',
+                                  'yellowcolor':data.employeeTaskStatus!='Completed' && data.taskPriority=='Low',
+                                  'purplecolor':data.employeeTaskStatus!='Completed' && data.taskPriority=='Medium',
+                                  'redcolor':data.employeeTaskStatus!='Completed' && data.taskPriority=='High'}">{{data.taskPriority}}</span>
+                                </li>
+                                <li class="statusbox" [ngClass]="{
+                                      'redcolor':data.employeeTaskStatus=='Delayed',
+                                      'greencolor':data.employeeTaskStatus=='Completed',
+                                      'purplecolor':data.employeeTaskStatus=='In Progress'}">
+                                  {{data.employeeTaskStatus}}</li>
+                                <li>{{data.CreatedDate}}</li>
+                                <li>
+                                  <i class="icon-View"
+                                    *ngIf="userservice.CheckPermission(userservice.Elements.Task,userservice.Operations.View)"
+                                    (click)="ViewAssignedTaskIconClicked(data)"></i>
+                                  <i class="icon-edit"
+                                    *ngIf="userservice.CheckPermission(userservice.Elements.Task,userservice.Operations.Edit)"
+                                    (click)="editAssignedIconClicked(data)"></i>
+                                  <i class="icon-Delete"
+                                    *ngIf="userservice.CheckPermission(userservice.Elements.Task,userservice.Operations.Delete)"
+                                    (click)="DeleteAssignedTaskIcon(data)"></i>
+                                </li>
+                              </ul>
+
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-
         </div>
-        <div class="col-md-2"><input type="submit" value="Create Task" class="team btn btn-primary"
-            (click)="createTask()"></div>
-      </div>
-      <div class="table-full-width">
-		<ul class="checkbox-list">
-          <li >
-           <!-- <ul>
-              <li>
-                Task Name
-              </li>
-              <li>Priority</li>
-              <li>Created Date</li>
-              <li>Actions </li>
-            </ul>-->
-						<table class="table">
-						  <tbody>
-							<tr>
-							  <td>Tasks Name</td>
-							  <td>Priorities</td>
-							  <td>Status</td>
-							  <td>Due Date</td>
-							  <td>Action</td>
-							</tr>
-						  </tbody>
-						</table>
-
-          </li>
-          <li  *ngFor="let data of SearchResults">
-          <!--  <ul>
-              <li>{{data.taskHeading}}</li>
-              <li><span class="prioritybox redcolor">{{data.taskPriority}}</span></li>
-              <li>{{data.taskCreatedDate}}</li>
-              <li>
-                <i class="icon-View"
-                  *ngIf="userservice.CheckPermission(userservice.Elements.Task,userservice.Operations.View)"
-                  (click)="viewIconClicked(data.taskId)"></i>
-                <i class="icon-edit"
-                  *ngIf="userservice.CheckPermission(userservice.Elements.Task,userservice.Operations.Edit)"
-                  (click)="editIconClicked(data)"></i>
-                <i class="icon-Delete"
-                  *ngIf="userservice.CheckPermission(userservice.Elements.Task,userservice.Operations.Delete)"
-                  (click)="DeleteTeamIcon(data)"></i>
-              </li>
-            </ul>-->
-				<table class="table">
-					<tbody>
-						<tr>
-								  <td >{{data.taskHeading}}</td>
-								  <td >{{data.taskPriority}}</td>
-								  <td >{{data.taskStatus}}</td>
-								  <td >{{data.taskCreatedDate}}}</td>
-								  <td>
-								    <i class="icon-View"
-									  *ngIf="userservice.CheckPermission(userservice.Elements.Task,userservice.Operations.View)"
-									  (click)="viewIconClicked(data.taskId)"></i>
-									<i class="icon-edit"
-									  *ngIf="userservice.CheckPermission(userservice.Elements.Task,userservice.Operations.Edit)"
-									  (click)="editIconClicked(data)"></i>
-									<i style="background-color: #f7d0d0;color: #f90000;" class="icon-Delete"
-									  *ngIf="userservice.CheckPermission(userservice.Elements.Task,userservice.Operations.Delete)"
-									  (click)="DeleteTeamIcon(data)"></i>
-								  </td>
-						</tr>
-					</tbody>
-				</table>
-          </li>
-        </ul>
       </div>
     </div>
   </div>
@@ -109,9 +191,9 @@
             {{project.projectName}}</option>
         </select>
         <span class="error"
-                *ngIf="!createTaskForm.controls['projectId'].valid&&(createTaskForm.controls['projectId'].dirty|| createTaskForm.controls['projectId'].touched)"><i
-                  class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide department name
-              </span>
+          *ngIf="!createTaskForm.controls['projectId'].valid&&(createTaskForm.controls['projectId'].dirty|| createTaskForm.controls['projectId'].touched)"><i
+            class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please provide department name
+        </span>
       </div>
       <div class="form-group">
         <label for="">Task title</label>
@@ -132,11 +214,21 @@
       </div>
       <div class="form-group">
         <label for="">Select Priority</label>
-        <select name="" id="" class="form-control" formControlName="taskPriority">
+        <select class="form-control" formControlName="taskPriority">
           <option value="" selected>Select Priority</option>
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
           <option value="High">High</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="">Select Status</label>
+        <select class="form-control" formControlName="taskStatus">
+          <option value="" selected>Select Status</option>
+          <option value="Created">Created</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Pending">Pending</option>
+          <option value="Completed">Completed</option>
         </select>
       </div>
       <div class="form-group">
@@ -174,7 +266,7 @@
             </span>
           </div>
         </div>
-      </div>
+      </div>{{createTaskForm.value|json}}
       <input type="submit" value="CREATE TASK" class="team btn btn-primary"
         (click)="createTaskSave(createTaskForm.value)" [disabled]="!createTaskForm.valid">
       <input type="button" value="Cancel" class="btn btn-primary" (click)="CancelButtonClick()">
@@ -214,6 +306,16 @@
         </select>
       </div>
       <div class="form-group">
+        <label for="">Select Status</label>
+        <select class="form-control" formControlName="taskStatus">
+          <option value="" selected>Select Status</option>
+          <option value="Created">Created</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Pending">Pending</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </div>
+      <div class="form-group">
         <label for="">upload file</label>
         <div class="file-upload">
           <input type="text" class="form-control" readonly placeholder="File details here"
@@ -248,6 +350,30 @@
     </form>
   </div>
 </div>
+<div class="slide-popup" id="edit-assigned-task">
+  <div class="slide-close">
+    <i class="fa fa-angle-left" aria-hidden="true"></i>
+  </div>
+  <div class="slide-content" *ngIf="EditAssignedTaskForm!=null">
+    <h3>Edit Task</h3>
+    <form [formGroup]="EditAssignedTaskForm">
+      <div class="form-group">
+        <label for="">Select Status</label>
+        <select name="" id="" class="form-control" formControlName="employeeTaskStatus">
+          <option value="" selected>Select Status</option>
+          <option value="Created">Created</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Pending">Pending</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </div>
+      <input type="button" value="Cancel" class="btn btn-primary" (click)="CancelButtonClick()">
+
+      <input type="submit" value="SAVE" class="team btn btn-primary"
+        (click)="updateStatusAssignedTask(EditAssignedTaskForm.value)">{{EditAssignedTaskForm.value|json}}
+    </form>
+  </div>
+</div>
 <div class="slide-popup" id="task-description">
   <div class="slide-close">
     <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -264,24 +390,36 @@
       <span>{{viewTask["taskAttachment"]}}</span>
     </div>
   </div>
-  <hr>
-  <div class="slide-content">
-    <div class="comment-item">
-      <div class="pro-thumb" style="background-image: url('assets/img/face-3.jpg');"></div>
-      <h5>Amanda Kherr</h5>
-      <strong>Designer</strong>
-      <p>Loream provides you with intelligently crafted filler text with decent and simple UI. The
-        loream text itself is specifically created to be appealing to eyes. Creating a positive
-        placebo for your project. Making your project attractive and irresistible even at
-        production phase. Try loream now!</p>
-      <a href="#" class="reply">reply</a>
-    </div>
+</div>
+<div class="slide-popup" id="test-description">
+  <div class="slide-close">
+    <i class="fa fa-angle-left" aria-hidden="true"></i>
   </div>
-  <hr>
-  <div class="slide-content">
-    <div class="comment-item">
-      <div class="pro-thumb"></div>
-      <input type="text" class="form-control" placeholder="Write a comment">
+  <div >
+    <div *ngIf="ViewAssignedtasks" class="slide-content">
+      <h3>Task Description</h3>
+      <p><strong>{{ViewAssignedtasks.taskHeading}}</strong></p>
+      <span class="color-red"><i class="fa fa-clock-o"></i>Due: {{ViewAssignedtasks.taskDueDate}}</span>
+      <h4><i class="icon-comment"></i>description</h4>
+      <p>{{ViewAssignedtasks.taskDescription}}</p>
+      <h4><i class="icon-attachment"></i> Attachment</h4>
+      <div class="attachment">
+        <img src="assets/img/img.png" alt="">
+        <span>{{ViewAssignedtasks.taskAttachment}}</span>
+      </div>
+    </div>
+    <hr>
+    <div  *ngIf="ViewAssignedtasks"class="slide-content">
+      <div class="comment-item">
+        <div class="pro-thumb"></div>
+        <input type="text" [(ngModel)]="ViewAssignedtasks.comment" class="form-control"
+          placeholder="Type your comment here">
+        <input type="button" value="SAVE" (click)="SaveComment(ViewAssignedtasks)" class="btn btn-primary">
+      </div>
+      <div *ngIf="ViewAssignedtasks.reply">
+        <h4>Reply</h4>
+        <div>{{ViewAssignedtasks.reply}}</div>
+      </div>
     </div>
   </div>
 </div>

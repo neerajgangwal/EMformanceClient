@@ -38,6 +38,7 @@ export const environment = {
   getEmployeeElementsMapping:"getEmployeeElements?employeeId=",
   //master-admin
   getUserList:"getCompany",
+  getDashboard:"getDashBoard?employeeId=-1",
 
   //delete
   deleteDepartment:"deleteDepartment",
@@ -78,7 +79,10 @@ export const environment = {
   getAuditLog:"getAuditLog",
 
   getTeamGoals:"getMyTeamGoals?projectId=-1&createdBy=",
-  validatePortalName:"checkPortalName?portalName="
+  validatePortalName:"checkPortalName?portalName=",
+  getEmployeeTask:"getEmployeeTask",
+  getMyTeamTask:"getMyTeamTask?projectId=-1&teamId=-1&assignToId=-1&asssignById=-1&createdBy=",
+  manageEmployeeTask:"manageEmployeeTask"
 };
 
 /*

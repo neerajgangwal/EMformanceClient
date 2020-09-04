@@ -5437,10 +5437,13 @@ color:#fff;
     right: 0;
 }
 
-#task-team-description.open-slide {
-  right: 0;
+#team-task-description.open-slide{
+  right:0;
 }
 
+#test-description.open-slide{
+  right:0;
+}
 
 #edit-team.open-slide {
   right: 0;
@@ -5455,7 +5458,15 @@ color:#fff;
   right: 0;
 }
 
+#edit-assigned-task.open-slide {
+  right: 0;
+}
+
 #add-team-task.open-slide {
+  right: 0;
+}
+
+#add-task.open-slide {
   right: 0;
 }
 

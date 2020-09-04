@@ -1,64 +1,51 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
+import { DashboardService } from './dashboard.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+  RawData;
   projectData;
   taskData;
   goalData;
-  lineChartData;
-  barChartData;
-  barChartOptions;
+  feedbackData;
+  feedbackOptions;
   lineChartOptions;
-  constructor() { }
+  colors = ['#007bff', '#28a745', '#333333', '#c3e6cb', '#dc3545', '#6c757d'];
+
+  constructor(private dashboardService:DashboardService) { }
 
   ngOnInit(): void {
 
-    var colors = ['#007bff', '#28a745', '#333333', '#c3e6cb', '#dc3545', '#6c757d'];
+    this.feedbackOptions = {
+      scales: {
+        xAxes: [{
+          barPercentage: 0.4,
+          categoryPercentage: 0.5
+        }],
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      },
+      legend: {
+        display: false
+      }
+    }
+
+    this.dashboardService.getDashboard().subscribe((res)=>{
+      if(res.errorCode==0)
+      {
+        this.RawData=res.dataObj;
+        this.UpdateCharts();
+      }
+    });
 
 
-    this.projectData = {
-      labels: ["Completed", "Created" ,"InProgress", "Due"],
-      datasets: [{
-        backgroundColor: [
-          "#2ecc71",
-		  "#3475A9",
-          "#F2F74E",
-          "#E22724"
-        ],
-        data: [12, 19, 5,2]
-      }]
-    }
-	
-	this.taskData = {
-      labels: ["Completed", "Created" ,"InProgress", "Due"],
-      datasets: [{
-        backgroundColor: [
-          "#2ecc71",
-		  "#3475A9",
-          "#F2F74E",
-          "#E22724"
-        ],
-        data: [4, 8, 2,2]
-      }]
-    }
-	
-	this.goalData = {
-      labels: ["Completed", "Created" ,"InProgress", "Due"],
-      datasets: [{
-        backgroundColor: [
-          "#2ecc71",
-		  "#3475A9",
-          "#F2F74E",
-          "#E22724"
-        ],
-        data: [7, 12, 4,1]
-      }]
-    }
 
     /* this.lineChartData = {
       labels: ["S", "M", "T", "W", "T", "F", "S"],
@@ -79,54 +66,72 @@ export class DashboardComponent implements OnInit {
     };
  */
 
-    this.barChartOptions = {
-      scales: {
-        xAxes: [{
-          barPercentage: 0.4,
-          categoryPercentage: 0.5
-        }],
-        yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }]
-      },
-      legend: {
-        display: false
-      }
+
+
+    // this.lineChartOptions = {
+    //   scales: {
+    //     yAxes: [{
+    //       ticks: {
+    //         beginAtZero: false
+    //       }
+    //     }]
+    //   },
+    //   legend: {
+    //     display: false
+    //   }
+    // }
+
+
+  }
+
+
+  UpdateCharts=function()
+  {
+    this.projectData = {
+      labels: ["Completed", "Created" ,"InProgress", "Due"],
+      datasets: [{
+        backgroundColor: [
+          "#2ecc71",
+		      "#3475A9",
+          "#F2F74E",
+          "#E22724"
+        ],
+        data: [this.RawData.completedProject, this.RawData.createdProject, this.RawData.inprogressProject,this.RawData.dueProjet]
+      }]
     }
 
-    this.lineChartOptions = {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: false
-          }
-        }]
-      },
-      legend: {
-        display: false
-      }
+    this.taskData = {
+      labels: ["Completed", "Created" ,"InProgress", "Due"],
+      datasets: [{
+        backgroundColor: [
+          "#2ecc71",
+		  "#3475A9",
+          "#F2F74E",
+          "#E22724"
+        ],
+        data: [this.RawData.completedTask, this.RawData.createdTask, this.RawData.inprogressTask,this.RawData.dueTask]
+      }]
     }
 
-    this.barChartData = {
+	this.goalData = {
+      labels: ["Completed", "Created" ,"InProgress", "Due"],
+      datasets: [{
+        backgroundColor: [
+          "#2ecc71",
+		  "#3475A9",
+          "#F2F74E",
+          "#E22724"
+        ],
+        data: [this.RawData.completedGoal, this.RawData.createdGoal, this.RawData.inprogressGoal,this.RawData.dueGoal]
+      }]
+    }
+
+    this.feedbackData = {
       labels: ["Bad", "Ok", "Good", "Very Good", "Excellent"],
       datasets: [{
-        data: [1, 2, 4, 5, 3],
-        backgroundColor: colors[0]
+        data: [this.RawData.feedbackBad, this.RawData.feedbackOk, this.RawData.feedbackGood, this.RawData.feedbackVeryGood, this.RawData.feedbackExcellent],
+        backgroundColor: this.colors[0]
       },
-      /* {
-        data: [209, 245, 383, 403, 589, 692, 580],
-        backgroundColor: colors[1]
-      },
-      {
-        data: [489, 135, 483, 290, 189, 603, 600],
-        backgroundColor: colors[2]
-      },
-      {
-        data: [639, 465, 493, 478, 589, 632, 674],
-        backgroundColor: colors[4]
-      } */
 	  ]
     };
   }

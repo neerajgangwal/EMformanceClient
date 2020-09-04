@@ -10,18 +10,21 @@ import { MyTaskComponent } from './my-task/my-task.component';
 import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import {TaskService} from './task.service';
-
+import {PipesModule} from '../../Shared/pipes/pipes.module'
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
   declarations: [TaskComponent,
-    TeamTaskComponent, 
+    TeamTaskComponent,
     MyTaskComponent],
   imports: [
     CommonModule,
     TaskRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PipesModule,
+    FormsModule
   ],
   providers:[TaskService]
 })
